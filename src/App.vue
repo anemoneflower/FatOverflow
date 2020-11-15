@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <Participate purchaseTitle="Welcome to Your Vue.js App"/>
+    <Participate purchaseTitle="Sample Purchase Title"/>
     <!-- <div class="view">
       <router-view />
     </div> -->

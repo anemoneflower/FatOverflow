@@ -16,9 +16,9 @@
         <div class="inputRows">
           <button
             v-on:click="search_food"
-            class="foodsearch inputBorder"
+            class="foodsearchBtn"
             style="padding: auto"
-          >"Click here to search food to purchase"</button>
+          >Click here to search food you want to purchase</button>
         </div>
         <div class="inputRows">
           <p class="tags">Quantity</p>
@@ -154,9 +154,23 @@ img {
   grid-template-columns: 100px 400px auto;
   /*grid-template-rows: repeat(4, 1fr);*/
 }
-.foodsearch {
-  width: 300px;
+.foodsearchBtn {
+  width: 350px;
   height: 40px;
+  margin-left: 10px;
+  background: none;
+  border-color: #48C964;
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  outline:none;
+  cursor: pointer;    
+  font-size: 15px;
+  box-shadow: none;
+}
+.foodsearchBtn:hover {
+  background-color: #48c96479;
+  
 }
 .quantityinput {
   width: 50px;
