@@ -3,22 +3,10 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-      <GroupPurchase _postId="aabcse1_123"/>
     </div>
-    <!-- <router-view/> -->
+    <router-view/>
   </div>
 </template>
-
-<script>
-import GroupPurchase from './pages/GroupPurchase.vue'
-
-export default {
-  name: 'App',
-  components: {
-    GroupPurchase
-  }
-}
-</script>
 
 <style>
 #app {
@@ -40,10 +28,5 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
-
-.view {
-  position: relative;
-  padding-top: 180px;
 }
 </style>
