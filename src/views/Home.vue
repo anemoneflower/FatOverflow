@@ -2,8 +2,8 @@
   <div class="home">
     <img class="lo" alt="Hey you can read it!" src="../assets/logo.png" />
     <search-bar></search-bar>
-    <img class="lb" alt="Group Purchase" src="../assets/main_left.png" />
-    <img class="rb" alt="Product" src="../assets/main_right.png" />
+    <img class="lb" alt="Group Purchase" src="../assets/main_left.png" @click="goPurchaseList"/>
+    <img class="rb" alt="Product" src="../assets/main_right.png" @click="goProductsList"/>
   </div>
 </template>
 
@@ -19,6 +19,14 @@ export default {
     bookKey: {
       type: String,
       default: "none"
+    }
+  },
+  methods: {
+    goPurchaseList(){
+
+    },
+    goProductsList(){
+
     }
   }
 };
@@ -42,6 +50,7 @@ export default {
   margin-bottom: 120px;
   margin-left: 20px;
   width: 225px;
+  cursor: pointer;
 }
 .lb {
   position: relative;
@@ -50,5 +59,6 @@ export default {
   margin-bottom: 120px;
   margin-right: 20px;
   width: 225px;
+  cursor: pointer;
 }
 </style>
