@@ -25,6 +25,7 @@ const routes = [
     component: function() {
       return import("../pages/GroupPurchaseList.vue");
       // return import("../components/GPCard.vue");
+    }
   },
   {
     path: "/participate",
