@@ -170,32 +170,40 @@ export default {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  background: none;
+  background: white;
   border-radius: 23px;
 }
 .popover {
   margin: 0 auto;
   padding: 0;
-  width: 720px;
-  border: none;
+  width: 575px;
+  border: 1px solid #dcdcdc;
   position: relative;
   left: 0;
   right: 0;
+  border-radius: 23px;
   list-style-type: none;
 }
+.popover:hover {
+  box-shadow: 1px 1px 8px 1px #dcdcdc;
+}
+.popover:focus-within {
+  box-shadow: 1px 1px 8px 1px #dcdcdc;
+  outline: none;
+}
 .glass {
-  height: 28px;
+  height: 20px;
   position: relative;
-  top: 1px;
+  top: 5px;
   left: 10px;
   cursor: pointer;
 }
 #input {
-  width: 650px;
+  width: 500px;
   outline: none;
   border: none;
   height: 45px;
-  font-size: 23px;
+  font-size: 16px;
 }
 .options {
   width: 520px;

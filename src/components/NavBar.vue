@@ -1,50 +1,8 @@
 <template>
-  <div
-    class="wrap"
-    :style="[
-      readNoteIsOpen || writeNoteIsOpen
-        ? { height: '200px', transition: 'all 0.1s ease' }
-        : { height: '100px', transition: 'all 0.3s ease' }
-    ]"
-  >
+  <div class="wrap">
     <div class="wrap2">
-      <img id="banner" src="../assets/logo.png" @click="goHome" />
-      <hr id="vertical-line">
-      <ul
-        class="main-menu"
-        id="booknote-read"
-        @mouseleave="readNoteIsOpen = false"
-        @click="goReadNote"
-        v-if="isBookSelected()"
-      >
-        <li>
-          <a @mouseover="readNoteIsOpen = true">Read Notes</a>
-          <img
-            v-if="readNoteIsOpen"
-            class="thumbnail"
-            :src="getSelectedBook()"
-            style="position: relative;"
-          />
-          <!-- <Book v-if="readNoteIsOpen" :book="getSelectedBook" /> -->
-        </li>
-      </ul>
-      <ul
-        class="main-menu"
-        id="booknote-write"
-        @mouseleave="writeNoteIsOpen = false"
-        @click="goWriteNote"
-        v-if="isSignIn && isBookSelected()"
-      >
-        <li>
-          <a @mouseover="writeNoteIsOpen = true">Write Note</a>
-          <img
-            v-if="writeNoteIsOpen"
-            class="thumbnail"
-            :src="getSelectedBook()"
-            style="position: relative;"
-          />
-        </li>
-      </ul>
+      <img id="banner" src="../assets/logo.png" @click="goHome" v-if="isNotHome() && isNotSignInPage()" />
+      <hr id="vertical-line" v-if="isNotHome() && isNotSignInPage()">
       <div class="certification">
         <img
           src="../assets/account.png"
@@ -54,13 +12,13 @@
           @click="goMyPage"
         >
         <router-link to="/sign-in"
-          ><button id="sign-in-button" @click="goSignIn" v-if="isSignIn == false">
+          ><button id="sign-in-button" @click="goSignIn" v-if="false">
             Sign In
           </button></router-link
         >
       </div>
     </div>
-    <hr id="bot-line">
+    <hr id="bot-line" v-if="isNotHome() && isNotSignInPage()">
   </div>
 </template>
 
@@ -138,7 +96,18 @@ export default {
           return bookList[i].img;
         }
       }
-    }
+    },
+    isNotHome() {
+      var curPath = this.$router.history.current["path"];
+      if (curPath === "/") return false;
+      var trim = curPath.split("/");
+      console.log(`select check - banner: ${trim[trim.length - 1]}`);
+      if (trim[trim.length - 2] === "selected-book") return false;
+      return true;
+    },
+    isNotSignInPage() {
+      return this.$router.history.current["path"] != "/sign-in";
+    },
   },
   computed: {
     // select(){
@@ -190,7 +159,7 @@ body {
 #banner {
   position: absolute;
   top: 12px;
-  left: 3.5%;
+  left: 7%;
   width: 100px;
   cursor: pointer;
 }
@@ -244,26 +213,23 @@ a:link {
   font-size: 20px;
   text-align: left;
 }
-.certification {
-  position: relative;
-}
 #my-page-button {
   position: absolute;
-  right: 0%;
-  top: 12px;
-  width: 48px;
+  right: 4%;
+  top: 11px;
+  width: 43px;
   cursor: pointer;
 }
 #sign-in-button {
-  background-color: #f37022;
+  background-color: #48C964;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 13px;
   border-width: 0px;
-  padding: 8px 15px 10px 15px;
+  padding: 6px 13px 8px 13px;
   font-size: 25px;
   position: absolute;
-  left: 95%;
-  top: 27px;
+  right: 3.5%;
+  top: 12px;
   cursor: pointer;
   outline: none;
 }
@@ -279,7 +245,7 @@ a:link {
 
 #vertical-line {
   position: relative;
-  margin-left: 70px;
+  margin-left: 130px;
   width:0;
   height: 36px;
   border: none;

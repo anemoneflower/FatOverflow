@@ -107,8 +107,8 @@ body {
 }
 .bar {
   position: absolute;
-  top: 25.5px;
-  left: 340px;
+  top: 23px;
+  left: 230px;
   z-index: 2;
 }
 .view {
