@@ -36,6 +36,7 @@ export default {
         display: grid;
         grid-template-columns: auto auto;
         justify-content: start;
+        margin-left: 50px;
     }
     #gpbtn {
         height: 40px;
@@ -44,9 +45,10 @@ export default {
         background-color: #48C964;
         color: white;
         border: 0px;
-        font-size: 15px;
+        font-size: 18px;
         margin-top: 10px;
-        font-weight: bold;
+        margin-right: 5px;
+        /* font-weight: bold; */
         cursor: pointer;
         outline: none;
         text-decoration: none;
@@ -58,9 +60,9 @@ export default {
         background-color: #adf5bc;
         color: #8B8B8B;
         border: 0px;
-        font-size: 15px;
+        font-size: 18px;
         margin-top: 10px;
-        font-weight: bold;
+        /* font-weight: bold; */
         cursor: pointer;
         outline: none;
         text-decoration: none;

@@ -17,6 +17,6 @@ export default {
         border-width: 1px;
         border-color: #48C964;
         color: #48C964;
-        width: 200px;
+        width: 180px;
     }
 </style>

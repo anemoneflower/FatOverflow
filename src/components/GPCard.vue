@@ -16,7 +16,9 @@
             <div class="hashtag">
                 <Hashtag></Hashtag>
             </div>
-            <Hashtag></Hashtag>
+            <div class="hashtag">
+                <Hashtag></Hashtag>
+            </div>
           <!-- <p class="content" v-html=AAAAAAAAAAAa></p> -->
         </div>
         </div>
@@ -176,4 +178,9 @@ a:link {
   text-decoration: none;
   color: #3a3a3a;
 }
+
+.hashtag {
+    margin-right: 1px;
+}
+
 </style>
