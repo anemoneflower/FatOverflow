@@ -39,7 +39,7 @@ export default {
 .lo {
   position: relative;
   margin: auto;
-  margin-top: 120px;
+  margin-top: 10px;
   margin-bottom: 20px;
   width: 575px;
 }

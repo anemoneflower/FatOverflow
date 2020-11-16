@@ -7,57 +7,60 @@
         : { height: '100px', transition: 'all 0.3s ease' }
     ]"
   >
-    <img id="banner" src="../assets/logo.png" @click="goHome" />
-    <ul
-      class="main-menu"
-      id="booknote-read"
-      @mouseleave="readNoteIsOpen = false"
-      @click="goReadNote"
-      v-if="isBookSelected()"
-    >
-      <li>
-        <a @mouseover="readNoteIsOpen = true">Read Notes</a>
-        <img
-          v-if="readNoteIsOpen"
-          class="thumbnail"
-          :src="getSelectedBook()"
-          style="position: relative;"
-        />
-        <!-- <Book v-if="readNoteIsOpen" :book="getSelectedBook" /> -->
-      </li>
-    </ul>
-    <ul
-      class="main-menu"
-      id="booknote-write"
-      @mouseleave="writeNoteIsOpen = false"
-      @click="goWriteNote"
-      v-if="isSignIn && isBookSelected()"
-    >
-      <li>
-        <a @mouseover="writeNoteIsOpen = true">Write Note</a>
-        <img
-          v-if="writeNoteIsOpen"
-          class="thumbnail"
-          :src="getSelectedBook()"
-          style="position: relative;"
-        />
-      </li>
-    </ul>
-    <div class="certification">
-      <button
-        id="my-page-button"
-        v-if="isSignIn"
-        title="go to mypage"
-        @click="goMyPage"
+    <div class="wrap2">
+      <img id="banner" src="../assets/logo.png" @click="goHome" />
+      <hr id="vertical-line">
+      <ul
+        class="main-menu"
+        id="booknote-read"
+        @mouseleave="readNoteIsOpen = false"
+        @click="goReadNote"
+        v-if="isBookSelected()"
       >
-        My Notes
-      </button>
-      <router-link to="/sign-in"
-        ><button id="sign-in-button" @click="goSignIn" v-if="isSignIn == false">
-          Sign In
-        </button></router-link
+        <li>
+          <a @mouseover="readNoteIsOpen = true">Read Notes</a>
+          <img
+            v-if="readNoteIsOpen"
+            class="thumbnail"
+            :src="getSelectedBook()"
+            style="position: relative;"
+          />
+          <!-- <Book v-if="readNoteIsOpen" :book="getSelectedBook" /> -->
+        </li>
+      </ul>
+      <ul
+        class="main-menu"
+        id="booknote-write"
+        @mouseleave="writeNoteIsOpen = false"
+        @click="goWriteNote"
+        v-if="isSignIn && isBookSelected()"
       >
+        <li>
+          <a @mouseover="writeNoteIsOpen = true">Write Note</a>
+          <img
+            v-if="writeNoteIsOpen"
+            class="thumbnail"
+            :src="getSelectedBook()"
+            style="position: relative;"
+          />
+        </li>
+      </ul>
+      <div class="certification">
+        <img
+          src="../assets/account.png"
+          id="my-page-button"
+          v-if="true"
+          title="go to mypage"
+          @click="goMyPage"
+        >
+        <router-link to="/sign-in"
+          ><button id="sign-in-button" @click="goSignIn" v-if="isSignIn == false">
+            Sign In
+          </button></router-link
+        >
+      </div>
     </div>
+    <hr id="bot-line">
   </div>
 </template>
 
@@ -178,13 +181,17 @@ body {
   height: 100px;
   text-align: center;
   white-space: nowrap;
-  margin: 0px 200px 0px 100px;
+  margin: 0px 0px 0px 0px;
   color: #3a3a3a;
+}
+.wrap2 {
+  margin: 0px 200px 0px 100px;
 }
 #banner {
   position: absolute;
   top: 12px;
-  left: 0%;
+  left: 3.5%;
+  width: 100px;
   cursor: pointer;
 }
 /* a:hover {
@@ -241,18 +248,10 @@ a:link {
   position: relative;
 }
 #my-page-button {
-  background-color: #f37022;
-  letter-spacing: 1px;
-  color: #fff;
   position: absolute;
-  font-size: 25px;
-  padding: 8px 15px 10px 15px;
-  top: 27px;
-  left: 95%;
-  border-radius: 20px;
-  border-width: 0px;
-  width: 180px;
-  outline: none;
+  right: 0%;
+  top: 12px;
+  width: 48px;
   cursor: pointer;
 }
 #sign-in-button {
@@ -267,5 +266,24 @@ a:link {
   top: 27px;
   cursor: pointer;
   outline: none;
+}
+
+#bot-line {
+  position: relative;
+  top: 30px;
+  width: max;
+  height: 0.5px;
+  border: none;
+  border-top: thin solid #48C964;
+}
+
+#vertical-line {
+  position: relative;
+  margin-left: 70px;
+  width:0;
+  height: 36px;
+  border: none;
+  border-right: thin solid #BBBBBB;
+  top: 12px;
 }
 </style>
