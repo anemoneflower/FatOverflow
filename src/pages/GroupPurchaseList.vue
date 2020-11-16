@@ -1,0 +1,72 @@
+<template>
+    <div>
+        <div class="head">
+            <div class = "gpbtn">
+                <button id="gpbtn">Group Purchase</button>
+            </div>
+            <div class = "reviewbtn">
+                 <button id="reviewbtn">Reviews</button>
+            </div>
+        </div>
+        <ul class="gpList">
+            <GPCard></GPCard>
+            <GPCard></GPCard>
+            <GPCard></GPCard>
+            <GPCard></GPCard>
+        </ul>
+        <!-- <p v-else>
+            Nothing left in the list.
+        </p> -->
+    </div>
+</template>
+
+<script>
+import GPCard from "../components/GPCard.vue"
+
+export default {
+    components: {
+        GPCard
+    }
+}
+</script>
+<style scoped>
+    .head{
+        width: 100%;
+        position: relative;
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: start;
+    }
+    #gpbtn {
+        height: 40px;
+        width: 150px;
+        border-radius: 15px;
+        background-color: #48C964;
+        color: white;
+        border: 0px;
+        font-size: 15px;
+        margin-top: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+    }
+    #reviewbtn{
+        height: 40px;
+        width: 150px;
+        border-radius: 15px;
+        background-color: #adf5bc;
+        color: #8B8B8B;
+        border: 0px;
+        font-size: 15px;
+        margin-top: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+    }
+    .gpList {
+        position: relative;
+        padding-top: 20px;
+    }
+</style>
