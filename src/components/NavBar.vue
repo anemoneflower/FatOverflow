@@ -1,63 +1,24 @@
 <template>
-  <div
-    class="wrap"
-    :style="[
-      readNoteIsOpen || writeNoteIsOpen
-        ? { height: '200px', transition: 'all 0.1s ease' }
-        : { height: '100px', transition: 'all 0.3s ease' }
-    ]"
-  >
-    <img id="banner" src="../assets/logo.png" @click="goHome" />
-    <ul
-      class="main-menu"
-      id="booknote-read"
-      @mouseleave="readNoteIsOpen = false"
-      @click="goReadNote"
-      v-if="isBookSelected()"
-    >
-      <li>
-        <a @mouseover="readNoteIsOpen = true">Read Notes</a>
+  <div class="wrap">
+    <div class="wrap2">
+      <img id="banner" src="../assets/logo.png" @click="goHome" v-if="isNotHome() && isNotSignInPage()" />
+      <hr id="vertical-line" v-if="isNotHome() && isNotSignInPage()">
+      <div class="certification">
         <img
-          v-if="readNoteIsOpen"
-          class="thumbnail"
-          :src="getSelectedBook()"
-          style="position: relative;"
-        />
-        <!-- <Book v-if="readNoteIsOpen" :book="getSelectedBook" /> -->
-      </li>
-    </ul>
-    <ul
-      class="main-menu"
-      id="booknote-write"
-      @mouseleave="writeNoteIsOpen = false"
-      @click="goWriteNote"
-      v-if="isSignIn && isBookSelected()"
-    >
-      <li>
-        <a @mouseover="writeNoteIsOpen = true">Write Note</a>
-        <img
-          v-if="writeNoteIsOpen"
-          class="thumbnail"
-          :src="getSelectedBook()"
-          style="position: relative;"
-        />
-      </li>
-    </ul>
-    <div class="certification">
-      <button
-        id="my-page-button"
-        v-if="isSignIn"
-        title="go to mypage"
-        @click="goMyPage"
-      >
-        My Notes
-      </button>
-      <router-link to="/sign-in"
-        ><button id="sign-in-button" @click="goSignIn" v-if="isSignIn == false">
-          Sign In
-        </button></router-link
-      >
+          src="../assets/account.png"
+          id="my-page-button"
+          v-if="true"
+          title="go to mypage"
+          @click="goMyPage"
+        >
+        <router-link to="/sign-in"
+          ><button id="sign-in-button" @click="goSignIn" v-if="false">
+            Sign In
+          </button></router-link
+        >
+      </div>
     </div>
+    <hr id="bot-line" v-if="isNotHome() && isNotSignInPage()">
   </div>
 </template>
 
@@ -135,7 +96,18 @@ export default {
           return bookList[i].img;
         }
       }
-    }
+    },
+    isNotHome() {
+      var curPath = this.$router.history.current["path"];
+      if (curPath === "/") return false;
+      var trim = curPath.split("/");
+      console.log(`select check - banner: ${trim[trim.length - 1]}`);
+      if (trim[trim.length - 2] === "selected-book") return false;
+      return true;
+    },
+    isNotSignInPage() {
+      return this.$router.history.current["path"] != "/sign-in";
+    },
   },
   computed: {
     // select(){
@@ -178,13 +150,17 @@ body {
   height: 100px;
   text-align: center;
   white-space: nowrap;
-  margin: 0px 200px 0px 100px;
+  margin: 0px 0px 0px 0px;
   color: #3a3a3a;
+}
+.wrap2 {
+  margin: 0px 200px 0px 100px;
 }
 #banner {
   position: absolute;
   top: 12px;
-  left: 0%;
+  left: 7%;
+  width: 100px;
   cursor: pointer;
 }
 /* a:hover {
@@ -237,35 +213,43 @@ a:link {
   font-size: 20px;
   text-align: left;
 }
-.certification {
-  position: relative;
-}
 #my-page-button {
-  background-color: #f37022;
-  letter-spacing: 1px;
-  color: #fff;
   position: absolute;
-  font-size: 25px;
-  padding: 8px 15px 10px 15px;
-  top: 27px;
-  left: 95%;
-  border-radius: 20px;
-  border-width: 0px;
-  width: 180px;
-  outline: none;
+  right: 4%;
+  top: 11px;
+  width: 43px;
   cursor: pointer;
 }
 #sign-in-button {
-  background-color: #f37022;
+  background-color: #48C964;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 13px;
   border-width: 0px;
-  padding: 8px 15px 10px 15px;
+  padding: 6px 13px 8px 13px;
   font-size: 25px;
   position: absolute;
-  left: 95%;
-  top: 27px;
+  right: 3.5%;
+  top: 12px;
   cursor: pointer;
   outline: none;
+}
+
+#bot-line {
+  position: relative;
+  top: 30px;
+  width: max;
+  height: 0.5px;
+  border: none;
+  border-top: thin solid #48C964;
+}
+
+#vertical-line {
+  position: relative;
+  margin-left: 130px;
+  width:0;
+  height: 36px;
+  border: none;
+  border-right: thin solid #BBBBBB;
+  top: 12px;
 }
 </style>

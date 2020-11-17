@@ -9,7 +9,7 @@
 
 <script>
 // @ is an alias to /src
-import SearchBar from "@/components/SearchBar.vue";
+import SearchBar from "@/components/SearchBar_Main.vue";
 export default {
   name: "Home",
   components: {
@@ -39,7 +39,7 @@ export default {
 .lo {
   position: relative;
   margin: auto;
-  margin-top: 120px;
+  margin-top: 10px;
   margin-bottom: 20px;
   width: 575px;
 }
