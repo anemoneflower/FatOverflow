@@ -30,7 +30,7 @@ const routes = [
   {
     path: "/participate",
     name: "Participate",
-    props: true,
+    props: { purchaseTitle: "Sample Purchase", options:[1, 2, 3, 4, 5] },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

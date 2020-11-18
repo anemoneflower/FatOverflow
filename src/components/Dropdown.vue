@@ -132,7 +132,7 @@ export default {
   left: 0;
   z-index: 1000;
   float: left;
-  min-width: 160px;
+  min-width: 400px;
   padding: 5px 0;
   margin: 2px 0 0;
   list-style: none;
