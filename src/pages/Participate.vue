@@ -6,19 +6,13 @@
     <div class="outer">
       <div class="inner"></div>
     </div>
-    
     <div style="display: flex; width: 900px; margin: auto">
-     <!-- justify-content: space-around"> -->
       <div class="foodImg">
-        <img src="../assets/logo.png" width="150" height="150">
+        <img src="../assets/logo.png" width="150px" height="150px" alt="">
       </div>
       <div class="inputLayout">
         <div class="inputRows">
-          <button
-            v-on:click="search_food"
-            class="foodsearchBtn"
-            style="padding: auto"
-          >Click here to search food you want to purchase</button>
+          <Dropdown :options="arrayOfObjects" :selected="object" v-on:updateOption="methodToRunOnSelect"></Dropdown>
         </div>
         <div class="inputRows">
           <p class="tags">Quantity</p>
@@ -55,40 +49,34 @@
 // import firebase from "firebase";
 // import { db } from "../main";
 // import { userKey, selectedBook, selectedBookNote } from "../main";
-
+import Dropdown from "../components/Dropdown";
 export default {
   name: "Participate",
+  components: {Dropdown},
   props: {
-    // _bookKey: String
-    purchaseTitle: String
+    purchaseTitle: String,
+    'dropdown': Dropdown,
   },
   data() {
     return {
       food:"",
       quantity:"",
-      note:""
+      note:"",
+      arrayOfObjects: ["1","2"],
+      object: 'Please select item you want to purchase.',
     };
   },
   methods: {
-    // check: function(e) {
-    //   console.log(this.isWholeBook, e);
-    //   // if (this.isWholeBook===true){
-    //   //   $(".rangeInput").disable();
-    //   // }
-    // },
-    search_food: function() {
-      console.log("open foodsearch popup!!");
-    },
     add_product: function() {
       //TODO: need to link with firebase here
-      // console.log(this.bookTitle);
-      // console.log(this.bookKey);
-      // console.log(this.userKey);
       // console.log(Date().toString());
       console.log("add_product!!");
     },
     submit_purchase: function() {
       console.log("submit_purchase!");
+    },
+    methodToRunOnSelect(payload) {
+      this.object = payload;
     }
   }
 };
@@ -154,24 +142,7 @@ img {
   grid-template-columns: 100px 400px auto;
   /*grid-template-rows: repeat(4, 1fr);*/
 }
-.foodsearchBtn {
-  width: 350px;
-  height: 40px;
-  margin-left: 10px;
-  background: none;
-  border-color: #48C964;
-  border-radius: 10px;
-  border-width: 1px;
-  border-style: solid;
-  outline:none;
-  cursor: pointer;    
-  font-size: 15px;
-  box-shadow: none;
-}
-.foodsearchBtn:hover {
-  background-color: #48c96479;
-  
-}
+
 .quantityinput {
   width: 50px;
   height: 40px;
@@ -214,11 +185,5 @@ img {
   margin-left: 210px;
   width: 100px;
   height: 40px;
-}
-#wholeRange {
-  cursor: pointer;
-}
-#share {
-  cursor: pointer;
 }
 </style>
