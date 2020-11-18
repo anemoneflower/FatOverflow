@@ -12,7 +12,7 @@
       </div>
       <div class="inputLayout">
         <div class="inputRows">
-          <Dropdown :options="arrayOfObjects" :selected="object" v-on:updateOption="methodToRunOnSelect"></Dropdown>
+          <Dropdown :options="itemArray" :selected="item" v-on:updateOption="methodToRunOnSelect"></Dropdown>
         </div>
         <div class="inputRows">
           <p class="tags">Quantity</p>
@@ -34,7 +34,7 @@
         </div>
         <div class="inputRows">
           <button v-on:click="add_product" class="addBtn btns">
-            Add Product +
+            Submit and Add Product +
           </button>
           <button v-on:click="submit_purchase" class="submitBtn btns">
             Submit
@@ -46,8 +46,7 @@
 </template>
 
 <script>
-// import firebase from "firebase";
-// import { db } from "../main";
+import { db } from "../main";
 // import { userKey, selectedBook, selectedBookNote } from "../main";
 import Dropdown from "../components/Dropdown";
 export default {
@@ -59,24 +58,53 @@ export default {
   },
   data() {
     return {
-      food:"",
       quantity:"",
       note:"",
-      arrayOfObjects: ["1","2"],
-      object: 'Please select item you want to purchase.',
+      itemArray: ["1","2"],
+      item: 'Please select item you want to purchase.',
     };
   },
   methods: {
     add_product: function() {
       //TODO: need to link with firebase here
-      // console.log(Date().toString());
       console.log("add_product!!");
     },
     submit_purchase: function() {
       console.log("submit_purchase!");
+      console.log(this.item);
+      console.log(this.quantity);
+      console.log(this.note);
+      this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
+
+      var date = Date().toString().split(" ");
+      date.splice(0, 1);
+      date.splice(0, 0, date[1]);
+      date.splice(2, 1);
+      date.splice(4);
+      console.log(date);
+
+      var purchase = {
+        date: date.join(" "),
+        // itemKey: this.itemKey,
+        item: this.item,
+        quantity: this.quantity,
+        note: this.note,
+        // userKey: this.userKey,
+        // userId: this.userId,
+      };
+
+      // TODO: change after applying group purchase DB
+      var ref = db.ref("groupPurchase/"+"-MMPFFDBm2EZw2-Wuwob"+"/participant");
+      var purchaseKey = ref.push(purchase).key;
+      ref.child(purchaseKey)
+              .update({
+                _key: purchaseKey
+              });
+
+
     },
     methodToRunOnSelect(payload) {
-      this.object = payload;
+      this.item = payload;
     }
   }
 };
@@ -176,7 +204,7 @@ img {
 .addBtn {
   margin: auto;
   margin-left: 50px;
-  width: 150px;
+  width: 250px;
   height: 40px;
 }
 
