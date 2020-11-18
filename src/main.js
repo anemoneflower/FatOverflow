@@ -6,12 +6,6 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
-
 // <!-- The core Firebase JS SDK is always required and must be listed first -->
 // <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
 
@@ -33,5 +27,49 @@ var firebaseConfig = {
   measurementId: "G-ZFTCZSSBRY"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+let app = firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
+
+var db = app.database();
+
+db;
+//
+// db.ref("food/").push().set({
+//   foodName : "KAI-breast",
+//   img : "url",
+//   website : "url"
+// })
+//
+// db.ref("groupPurchase/").push().set({
+//   username: "Userkey",
+//   title: "Ocook Chicken Breast Group Purchase",
+//   website:"www.ocook.com",
+//   picture : "Local로 할지 고민",
+//   content : "I am looking for people wou are wlling to buy lunch boxes and meal plans from this website. The products that slimcook provides are very calorie-friendly and always come with fresh ingredients, so I guarantee that you will enjoy them as much as I do.\n" +
+//       "\n" +
+//       "As this website requires at least 10 items for free shipping, I will wait until we have at least 10 items to order together.",
+//   foodTag : {
+//     food1 : "foodkey",
+//     food2 : "foodkey"
+//   },
+//   date : "20201115",
+//   participant: {
+//     username : "Userkey",
+//     isConfirmed : "true",
+//     food : {
+//       food1 : "foodkey",
+//       food2 : "foodkey"
+//     }
+//   },
+//   closedDate : "20201121",
+//   isClosed : "false"
+// });
+
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
+
+

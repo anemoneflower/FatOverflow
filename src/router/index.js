@@ -23,7 +23,7 @@ const routes = [
     name: "GroupPurchaseList",
     props: true,
     component: function() {
-      return import("../pages/GroupPurchaseList.vue");
+      return import("../views/GroupPurchaseList.vue");
       // return import("../components/GPCard.vue");
     }
   },
@@ -36,7 +36,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: function() {
       return import(
-        /* webpackChunkName: "about" */ "../pages/Participate.vue"
+        /* webpackChunkName: "about" */ "../views/Participate.vue"
       );
     }
   },
@@ -49,7 +49,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: function() {
       return import(
-        /* webpackChunkName: "about" */ "../pages/GroupPurchase.vue"
+        /* webpackChunkName: "about" */ "../views/GroupPurchase.vue"
       );
     }
   },

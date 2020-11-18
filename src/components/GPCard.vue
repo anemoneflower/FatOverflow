@@ -2,13 +2,13 @@
     <div class = 'card-post'>
         <div class="square">
             <div class="board-info">
-                <a class="entry" >Join me at successdiet!</a>
-                <a class="range" :range_text="rangeText">Due: 11. 03. 2020</a>
+                <a class="title" >{{gp.title}}</a>
+                <a class="cDate">{{gp.closedDate}}</a>
             </div>
         <div class="representative">
-            <div class="title">www.successdiet.com</div>
+            <div class="site">{{gp.website}}</div>
             <div class="post-info">
-                <a class="date">Shipping to: Sarang Building</a>
+                <a class="shipping">Shipping to: {{gp.shipping}}</a>
                 <br />
             </div>
         </div>
@@ -30,6 +30,12 @@ import Hashtag from "./Hashtag.vue"
 export default {
     components :{
         Hashtag
+    },
+    props: {
+        gp : {
+            type: Object
+        },
+        gpKey: String
     }
 }
 </script>
@@ -86,11 +92,11 @@ a:link {
   color: rgb(0, 0, 0);
 }
 
-.entry {
+.site {
   float: left;
 }
 
-.range {
+.cDate {
   float: right;
   font-size: 15px;
 }
@@ -157,7 +163,7 @@ a:link {
   justify-content: start;
 }
 
-.content {
+.shipping {
   text-align: justify;
   font-size: 15px;
   color: #cbcbcb;

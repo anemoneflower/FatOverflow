@@ -68,7 +68,11 @@ export default {
   },
   created() {
     this.selectAction = false;
-  },
+  }
+  // mounted(){
+  //
+  // }
+  ,
   methods: {
     bookSelected(index) {
       this.selectAction = true;
