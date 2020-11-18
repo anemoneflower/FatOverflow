@@ -33,5 +33,6 @@ var firebaseConfig = {
   measurementId: "G-ZFTCZSSBRY"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+var app = firebase.initializeApp(firebaseConfig);
+export const db = app.database();
 // firebase.analytics();
