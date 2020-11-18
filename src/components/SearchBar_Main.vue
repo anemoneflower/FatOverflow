@@ -19,7 +19,7 @@
           ><img
             class="glass"
             src="../assets/magnifying-glass.png"
-            @click="searchBook()"
+            @click="searchResult()"
             searchData="this is search bar"
         /></a>
       </li>
@@ -32,7 +32,7 @@
             @mousemove="keyDown = false"
             :key="index"
             v-for="(match, index) in matches"
-            @mousedown="bookSelected(index), (visibleOptions = true)"
+            @mousedown="foodSelected(index), (visibleOptions = true)"
             @mouseenter="hover(index)"
             :class="{ selected: selected == index }"
             v-text="match"
@@ -45,13 +45,12 @@
 </template>
 
 <script>
-import { bookList, searchedList } from "../main";
 import firebase from "firebase";
 export default {
   name: "Autocomplete",
   data() {
     return {
-      selectedBook: null,
+      selectedFood: null,
       searchData: "",
       visibleOptions: true,
       selected: 0,
@@ -86,48 +85,48 @@ export default {
     console.log(this.foods);
   },
   methods: {
-    bookSelected(index) {
+    foodSelected(index) {
       this.selectAction = true;
       this.selected = index;
       this.searchData = this.matches[index];
-      this.selectedBook = this.matches[index];
-      this.searchBook();
+      this.selectedFood = this.matches[index];
+      this.searchResult();
     },
-    searchBook() {
+    searchResult() {
       if(this.searchData==""){
         return [];
       }
-      searchedList.splice(0, searchedList.length);
-      var book = this.searchData;
-      var checkList = JSON.parse(JSON.stringify(bookList));
-      console.log(checkList);
-      var idx = 0;
-      for (var i = 0; i < bookList.length; i++) {
-        var searchData = bookList[i].searchData.toUpperCase();
-        var checkValue = searchData.indexOf(book.toUpperCase());
-        console.log(checkValue);
-        if (checkValue != -1) {
-          searchedList.push(bookList[i]);
-          checkList.splice(i + idx, 1);
-          idx--;
-        }
-      }
-      if (checkList.length != 14) {
-        for (var j = 0; j < checkList.length; j++) {
-          if (searchedList[0].series == checkList[j].series) {
-            searchedList.push(checkList[j]);
-          }
-        }
-      }
-      var curPath = this.$router.history.current["path"];
-      var trim = curPath.split("/");
-      console.log(`select check: ${trim[trim.length - 1]}`);
-      if (trim[trim.length - 1].length > 10)
-        this.$router.push("/book-list/" + trim[trim.length - 1]);
-      else this.$router.push("/book-list/none");
-      this.visibleOptions = false;
-      this.selectAction = false;
-      this.searchData = "";
+      // var book = this.searchData;
+      // var checkList = JSON.parse(JSON.stringify(bookList));
+      // console.log(checkList);
+      // var idx = 0;
+      // for (var i = 0; i < bookList.length; i++) {
+      //   var searchData = bookList[i].searchData.toUpperCase();
+      //   var checkValue = searchData.indexOf(book.toUpperCase());
+      //   console.log(checkValue);
+      //   if (checkValue != -1) {
+      //     searchedList.push(bookList[i]);
+      //     checkList.splice(i + idx, 1);
+      //     idx--;
+      //   }
+      // }
+      // if (checkList.length != 14) {
+      //   for (var j = 0; j < checkList.length; j++) {
+      //     if (searchedList[0].series == checkList[j].series) {
+      //       searchedList.push(checkList[j]);
+      //     }
+      //   }
+      // }
+      this.$router.push({path:'gplist',query:{result:this.searchData}})
+      // var curPath = this.$router.history.current["path"];
+      // var trim = curPath.split("/");
+      // console.log(`select check: ${trim[trim.length - 1]}`);
+      // if (trim[trim.length - 1].length > 10)
+      //   this.$router.push("/gpList/" + trim[trim.length - 1]);
+      // else this.$router.push("/gpList/none");
+      // this.visibleOptions = false;
+      // this.selectAction = false;
+      // this.searchData = "";
     },
     hover(index) {
       if (this.keyDown == false) {
@@ -156,8 +155,8 @@ export default {
     },
     enter() {
       this.searchData = this.matches[this.selected];
-      this.selectedBook = this.matches[this.selected];
-      this.searchBook();
+      this.selectedFood = this.matches[this.selected];
+      this.searchResult();
     },
     initialCount() {
       this.selected = 0;
