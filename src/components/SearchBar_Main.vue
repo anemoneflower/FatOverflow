@@ -6,7 +6,7 @@
           autocomplete="off"
           id="input"
           type="text"
-          v-model="title"
+          v-model="searchData"
           placeholder="Search what do you want to eat."
           @keydown.up="keyup"
           @keydown.down="keydown"
@@ -20,7 +20,7 @@
             class="glass"
             src="../assets/magnifying-glass.png"
             @click="searchBook()"
-            title="this is search bar"
+            searchData="this is search bar"
         /></a>
       </li>
       <!--      <li  v-if="visibleOptions" >-->
@@ -45,18 +45,19 @@
 </template>
 
 <script>
-import { bookList, bookTitle, searchedList } from "../main";
+import { bookList, searchedList } from "../main";
+import firebase from "firebase";
 export default {
   name: "Autocomplete",
   data() {
     return {
       selectedBook: null,
-      title: "",
-      books: bookTitle,
+      searchData: "",
       visibleOptions: true,
       selected: 0,
       keyDown: false,
-      selectAction: false
+      selectAction: false,
+      foods: []
     };
   },
   directives: {
@@ -70,28 +71,40 @@ export default {
     this.selectAction = false;
   },
   mounted() {
-
+    firebase
+            .database()
+            .ref("/food")
+            .once("value",snapshot => {
+              var myValue = snapshot.val();
+              var keyList = Object.keys(myValue);
+              for(var i = keyList.length; i>0; i--){
+                var myKey = keyList[i-1];
+                var gp = myValue[myKey];
+                (this.foods).push(gp.foodName);
+              }
+            })
+    console.log(this.foods);
   },
   methods: {
     bookSelected(index) {
       this.selectAction = true;
       this.selected = index;
-      this.title = this.matches[index];
+      this.searchData = this.matches[index];
       this.selectedBook = this.matches[index];
       this.searchBook();
     },
     searchBook() {
-      if(this.title==""){
+      if(this.searchData==""){
         return [];
       }
       searchedList.splice(0, searchedList.length);
-      var book = this.title;
+      var book = this.searchData;
       var checkList = JSON.parse(JSON.stringify(bookList));
       console.log(checkList);
       var idx = 0;
       for (var i = 0; i < bookList.length; i++) {
-        var title = bookList[i].title.toUpperCase();
-        var checkValue = title.indexOf(book.toUpperCase());
+        var searchData = bookList[i].searchData.toUpperCase();
+        var checkValue = searchData.indexOf(book.toUpperCase());
         console.log(checkValue);
         if (checkValue != -1) {
           searchedList.push(bookList[i]);
@@ -114,7 +127,7 @@ export default {
       else this.$router.push("/book-list/none");
       this.visibleOptions = false;
       this.selectAction = false;
-      this.title = "";
+      this.searchData = "";
     },
     hover(index) {
       if (this.keyDown == false) {
@@ -142,7 +155,7 @@ export default {
       this.$refs.optionsList.scrollTop = this.selected * 39;
     },
     enter() {
-      this.title = this.matches[this.selected];
+      this.searchData = this.matches[this.selected];
       this.selectedBook = this.matches[this.selected];
       this.searchBook();
     },
@@ -152,15 +165,15 @@ export default {
   },
   computed: {
     matches() {
-      if (this.title == "") {
+      if (this.searchData == "") {
         return [];
       }
       if (this.visibleOptions == false && this.selectAction == false) {
         return [];
       }
       this.initialCount();
-      return this.books.filter(book =>
-        book.toLowerCase().includes(this.title.toLowerCase())
+      return this.foods.filter(food =>
+        food.toLowerCase().includes(this.searchData.toLowerCase())
       );
     }
   }
