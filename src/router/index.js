@@ -52,7 +52,14 @@ const routes = [
         /* webpackChunkName: "about" */ "../pages/GroupPurchase.vue"
       );
     }
-  }
+  },
+  {
+    path: "/sign-in",
+    name: "SignIn",
+    component: function() {
+      return import("../pages/SignIn.vue");
+    }
+  },
 ]
 
 const router = new VueRouter({
