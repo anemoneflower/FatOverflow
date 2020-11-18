@@ -76,29 +76,34 @@ export default {
 
 <style scoped>
 
+
 .column_left {
   float: left;
-  width: 55%;
+  width: 40%;
+  margin-left: 100px;
 }
 
 .column_right {
-  float: left;
-  width: 35%;
+  float: right;
+  width: 33%;
   padding-left: 80px;
+  margin-right: 100px;
 }
 
 .participateButton {
   background-color: #48C964; /* Green */
   border: none;
   color: white;
-  padding: 10px 15px;
-  text-align: center;
+  padding: 8px 15px;
+  text-align: center center;
   text-decoration: none;
   display: inline-block;
-  border-radius: 5px;
+  border-radius: 13px;
   font-size: 20px;
   margin: 4px 2px;
   cursor: pointer;
+  float: right;
+  margin-right: 50px;
 }
 
 .participateButton:hover {
@@ -124,32 +129,41 @@ textarea {
 }
 
 .currentOrderTitle {
-  margin-top: 20px;
+  margin-top: 75px;
   text-align: center;
   font-size: 20px;
 }
 
 .website {
   text-align: left;
+  margin-top: 10px;
+  font-size: 13px;
   color: #9D9D9D
 }
 
 .due {
+  margin-top: 10px;
+  font-size: 13px;
   text-align: left;
 }
 
 .content {
+  margin-top: 20px;
   text-align: left;
+  font-size: 15px;
   white-space: pre-line;
 }
 
 .orderBlock {
   border-style: solid;
-  border-color: #000000;
+  border-color: #C4C4C4;
   border-width: 1px;
-  border-radius: 5px;
-  margin-top: 10px;
-  padding: 10px;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding: 15px 13px 15px 13px;
+  width: 400px;
+  float: right;
+  margin-right: 50px;
 }
 
 .orderLeft {
@@ -160,10 +174,15 @@ textarea {
 .orderLeftText {
   text-align: left;
   font-weight: bold;
+  margin-left: 15px;
 }
 
 .orderRightText {
-  text-align: left
+  text-align: right;
+  margin-right: 20px;
 }
 
+.row {
+  position: absolute;
+}
 </style>
