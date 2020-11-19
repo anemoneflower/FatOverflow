@@ -1,5 +1,5 @@
 <template>
-  <div class="main" style="margin-top: 150px">
+  <div class="main" style="margin-top: 70px">
     <a class="title" style="margin: auto; text-align: center;">
       participate in group purchase: {{ purchaseTitle }}
     </a>    
@@ -8,7 +8,7 @@
     </div>
     <div style="display: flex; width: 900px; margin: auto">
       <div class="foodImg">
-        <img src="../assets/logo.png" width="150px" height="150px" alt="">
+        <img src="../assets/placeholder.png" width="150px" height="150px" alt="">
       </div>
       <div class="inputLayout">
         <div class="inputRows">
