@@ -8,24 +8,50 @@
                  <button id="reviewbtn">Reviews</button>
             </div>
         </div>
-        <ul class="gpList">
-            <GPCard></GPCard>
-            <GPCard></GPCard>
-            <GPCard></GPCard>
-            <GPCard></GPCard>
+        <ul class="gpList" v-if="gpList.length">
+            <GPCard
+                    v-for="gp in gpList"
+                    :key = "gp in gpList"
+                    :gp = "gp"
+                    :gpKey = "gpKey"
+            ></GPCard>
+<!--            <GPCard></GPCard>-->
+<!--            <GPCard></GPCard>-->
+<!--            <GPCard></GPCard>-->
         </ul>
-        <!-- <p v-else>
+        <p v-else>
             Nothing left in the list.
-        </p> -->
+        </p>
     </div>
 </template>
 
 <script>
 import GPCard from "../components/GPCard.vue"
+import firebase from "firebase";
 
 export default {
     components: {
         GPCard
+    },
+    data(){
+        return{
+            gpList: []
+            // gp: selectedGp[0]
+        };
+    },
+    mounted() {
+        firebase
+        .database()
+        .ref("/groupPurchase")
+        .once("value",snapshot => {
+            var myValue = snapshot.val();
+            var keyList = Object.keys(myValue);
+            for(var i = keyList.length; i>0; i--){
+                var myKey = keyList[i-1];
+                var gp = myValue[myKey];
+                (this.gpList).push(gp);
+            }
+        })
     }
 }
 </script>
