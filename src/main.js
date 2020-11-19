@@ -32,10 +32,6 @@ var app = firebase.initializeApp(firebaseConfig);
 export const db = app.database();
 
 // firebase.analytics();
-
-var db = app.database();
-
-db;
 //
 // db.ref("food/").push().set({
 //   foodName : "KAI-breast",
