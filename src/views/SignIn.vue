@@ -1,6 +1,6 @@
 <template>
     <div class="container" @keyup.enter.up="keyPress">
-        <img id="banner" src="../assets/logo.png" @click="goHome" style="height: 80px; width: 150px"/>
+        <img id="banner" src="../assets/logo.png" @click="goHome" style="width: 160px; cursor: pointer;"/>
         <div class="id">
             <input
                     id="inputId"
