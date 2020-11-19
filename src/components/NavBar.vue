@@ -240,7 +240,7 @@ a:link {
   width: max;
   height: 0.5px;
   border: none;
-  border-top: thin solid #48C964;
+  border-bottom: thin solid #48C964;
 }
 
 #vertical-line {
