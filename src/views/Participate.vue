@@ -73,6 +73,7 @@
 
 <script>
 import { db } from "../main";
+import firebase from 'firebase';
 export default {
   name: "Participate",
   props: {
@@ -136,8 +137,7 @@ export default {
         item: this.selectedOption,
         quantity: this.quantity,
         note: this.note,
-        // userKey: this.userKey,
-        // userId: this.userId,
+        userKey: firebase.auth().currentUser.uid,
       };
 
       // TODO: change after applying group purchase DB
