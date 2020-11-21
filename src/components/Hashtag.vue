@@ -1,6 +1,8 @@
 <template>
-    <div class="hashtag">
-        {{food}}
+    <div>
+        <button class="hashtag">
+            {{food}}
+        </button>
     </div>
 </template>
 
@@ -16,12 +18,16 @@ export default {
 
 <style scoped>
     .hashtag {
+        float: left;
         border-radius: 30px;
         border-style: solid;
         border-width: 1px;
         border-color: #48C964;
         color: #48C964;
-        width: 180px;
+        background-color: #fff;
+        padding : 3px 12px 3px 12px;
+        font-size: 13px;
+        margin-right: 10px;
         /*height: 30px;*/
     }
 </style>

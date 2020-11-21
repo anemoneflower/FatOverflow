@@ -177,8 +177,9 @@ a:link {
   margin: auto;
   margin-top: 130px;
   position: absolute;
-  display: grid;
+/*  display: grid;
   grid-template-columns: auto auto;
+  grid-template-rows: repeat(1,18px); */
   justify-content: start;
 }
 
@@ -205,7 +206,7 @@ a:link {
 }
 
 .hashtag {
-    margin-right: 5px;
+  margin-left: -7px;
 }
 
 </style>
