@@ -1,12 +1,16 @@
 <template>
     <div class="hashtag">
-        Harim Chicken Breast
+        {{food}}
     </div>
 </template>
 
 <script>
 export default {
-    
+    props:{
+        food: {
+            type: String
+        }
+    }
 }
 </script>
 
@@ -18,5 +22,6 @@ export default {
         border-color: #48C964;
         color: #48C964;
         width: 180px;
+        /*height: 30px;*/
     }
 </style>
