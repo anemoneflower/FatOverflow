@@ -1,13 +1,28 @@
 <template>
   <div id="app">
     <div class="top">
-      <div class="nav" v-if="isNotSignInPage() && isBookSelected()">
+      <div class="nav" v-if="isNotSignInPage() && isNotHome()">
         <nav-bar :key="selected"></nav-bar>
       </div>
       <div class="bar" v-if="isNotHome() && isNotSignInPage()">
         <search-bar />
       </div>
+      <div class="certification" v-if="isNotSignInPage()">
+        <img
+                src="./assets/account.png"
+                id="my-page-button"
+                v-if="isSignin()"
+                title="go to mypage"
+                @click="goMyPage"
+        >
+        <router-link to="/sign-in"
+        ><button id="sign-in-button" @click="goSignIn" v-if="!isSignin()">
+          Sign In
+        </button></router-link
+        >
+      </div>
     </div>
+
     <div class="view">
       <router-view />
     </div>
@@ -17,7 +32,8 @@
 <script> 
 import NavBar from "@/components/NavBar.vue";
 import SearchBar from "@/components/SearchBar.vue";
-// import {selectedBook} from "./main";
+import current from "./main";
+import firebase from 'firebase';
 export default {
   components: {
     NavBar,
@@ -29,42 +45,29 @@ export default {
     };
   },
   methods: {
-    isBookSelected() {
+    isSignin() {
+      return firebase.auth().currentUser != null
+    },
+    goMyPage() {
       var curPath = this.$router.history.current["path"];
       var trim = curPath.split("/");
-      console.log(`select check -app: ${trim[trim.length - 1]}`);
-      this.selected = trim[trim.length - 1].length > 10;
-      return true;
+      if (trim[trim.length - 1].length > 10)
+        this.$router.push("/my-page/" + trim[trim.length - 1]);
+      else this.$router.push("/my-page/none");
+    },
+    goSignIn() {
+      var currentUrl = this.$router.history.current["path"];
+      // TODO: use vuex here
+      current.push(currentUrl);
     },
     isNotHome() {
-      var curPath = this.$router.history.current["path"];
-      if (curPath === "/") return false;
-      var trim = curPath.split("/");
-      console.log(`select check - banner: ${trim[trim.length - 1]}`);
-      if (trim[trim.length - 2] === "selected-book") return false;
-      return true;
+      console.log("isnothome: " + this.$router.history.current["path"]);
+      return this.$router.history.current["path"] !== "/";
     },
     isNotSignInPage() {
-      return this.$router.history.current["path"] != "/sign-in";
+      console.log("isNotSignInPage: " + this.$router.history.current["path"]);
+      return this.$router.history.current["path"] !== "/sign-in";
     },
-    isNotBoardPage() {
-      return this.$router.history.current["path"] != "/book-note-board";
-      // if(selectedBook.length!=0){
-      //   return true
-      // }
-      // else{
-      //   return false
-      // }
-    },
-    isBoardPage() {
-      return this.$router.history.current["path"] == "/book-note-board";
-      // if(selectedBook.length!=0){
-      //   return true
-      // }
-      // else{
-      //   return false
-      // }
-    }
   }
 };
 </script>
@@ -114,5 +117,27 @@ body {
 .view {
   position: relative;
   padding-top: 180px;
+}
+#my-page-button {
+  position: absolute;
+  right: 4%;
+  top: 11px;
+  width: 43px;
+  cursor: pointer;
+  z-index: 3;
+}
+#sign-in-button {
+  background-color: #48C964;
+  color: #fff;
+  border-radius: 13px;
+  border-width: 0px;
+  padding: 6px 13px 8px 13px;
+  font-size: 25px;
+  position: absolute;
+  right: 3.5%;
+  top: 12px;
+  cursor: pointer;
+  outline: none;
+  z-index: 3;
 }
 </style>
