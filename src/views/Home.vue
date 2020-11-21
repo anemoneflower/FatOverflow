@@ -66,6 +66,9 @@ export default {
   width: 225px;
   cursor: pointer;
 }
+.rb:hover {
+  content: url('../assets/main_right_hover.png')
+}
 .lb {
   position: relative;
   margin: auto;
@@ -74,5 +77,8 @@ export default {
   margin-right: 20px;
   width: 225px;
   cursor: pointer;
+}
+.lb:hover {
+  content: url('../assets/main_left_hover.png')
 }
 </style>
