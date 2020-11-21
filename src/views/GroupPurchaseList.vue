@@ -5,7 +5,7 @@
                 <button id="gpbtn">Group Purchase</button>
             </div>
             <div class = "reviewbtn">
-                 <button id="reviewbtn">Reviews</button>
+                 <button id="reviewbtn" @click="goProducts()">Reviews</button>
             </div>
         </div>
         <ul class="gpList" v-if="gpList.length">
@@ -40,19 +40,27 @@ export default {
         };
     },
     mounted() {
+        let query = this.$route.query.result;
+        console.log(query)
         firebase
         .database()
         .ref("/groupPurchase")
         .once("value",snapshot => {
-            var myValue = snapshot.val();
-            var keyList = Object.keys(myValue);
-            for(var i = keyList.length; i>0; i--){
-                var myKey = keyList[i-1];
-                var gp = myValue[myKey];
+            let myValue = snapshot.val();
+            let keyList = Object.keys(myValue);
+            for(let i = keyList.length; i>0; i--){
+                let myKey = keyList[i-1];
+                let gp = myValue[myKey];
                 (this.gpList).push(gp);
             }
         })
-    }
+    },
+    // methods : {
+    //     goProducts(){
+    //         let query = this.$route.query.result;
+    //         this.$router.push({path:'/products',query:{result:query}})
+    //     }
+    // }
 }
 </script>
 <style scoped>
