@@ -13,11 +13,13 @@
             </div>
         </div>
         <div class="content-box">
-            <div class="hashtag">
-                <Hashtag></Hashtag>
-            </div>
-            <div class="hashtag">
-                <Hashtag></Hashtag>
+            <div class="hashtag" v-if="registeredFood.length">
+                <div
+                        :key = "food.key"
+                        v-for="food in registeredFood"
+                >
+                    <Hashtag :food="food"></Hashtag>
+                </div>
             </div>
           <!-- <p class="content" v-html=AAAAAAAAAAAa></p> -->
         </div>
@@ -35,7 +37,20 @@ export default {
         gp : {
             type: Object
         },
-        gpKey: String
+        gpKey: String,
+        // registeredFoodKey: String
+    },
+    data(){
+        return{
+          registeredFood: []
+        };
+    },
+    mounted() {
+        for (var key in this.gp.registeredFood) {
+            console.log(this.gp.registeredFood[key].foodName);
+            (this.registeredFood).push(this.gp.registeredFood[key].foodName);
+            // console.log(obj[key]);
+        }
     }
 }
 </script>
