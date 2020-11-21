@@ -70,7 +70,8 @@ export default {
         display: grid;
         grid-template-columns: auto auto;
         justify-content: start;
-        margin-left: 50px;
+        margin-left: 180px;
+        margin-top: 20px;
     }
     #gpbtn {
         height: 40px;
@@ -81,7 +82,7 @@ export default {
         border: 0px;
         font-size: 18px;
         margin-top: 10px;
-        margin-right: 5px;
+        margin-right: 15px;
         /* font-weight: bold; */
         cursor: pointer;
         outline: none;
@@ -103,6 +104,6 @@ export default {
     }
     .gpList {
         position: relative;
-        padding-top: 20px;
+        padding-top: 5px;
     }
 </style>
