@@ -202,7 +202,7 @@ textarea {
 .outer {
   width: 800px;
   height: 3px;
-  margin: 5px auto 60px;
+  margin: 5px auto 30px;
   /* alignment: left; */
   overflow: hidden;
   position: relative;
@@ -367,6 +367,10 @@ img {
   border-right: 4px solid transparent;
   border-left: 4px solid transparent;
   right: 10px;
+}
+
+.inputLayout {
+  margin-top:0;
 }
 
 li {
