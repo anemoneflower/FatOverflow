@@ -37,10 +37,10 @@ export default {
   },
   methods: {
     goPurchaseList(){
-
+      this.$router.push("/gplist");
     },
     goProductsList(){
-
+      this.$router.push("/products");
     }
   }
 };
