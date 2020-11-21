@@ -69,10 +69,6 @@ export default {
     components: {Dropdown},
     props: {
         purchaseTitle: String,
-        closeOnOutsideClick: {
-            type: [Boolean],
-            default: true
-        },
         foodKey: {
             type: String,
             default: "sampleFood"
@@ -82,20 +78,51 @@ export default {
         return {
             quantity: "",
             note: "",
-            itemArray: ["1", "2"],
-            selectedOptions: [{item: 'Please select item you want to purchase.', quantity: 0}],
+            foods: ["-MMQkor-QFmKXKk3UqYm", "-MMQkwUqrMWADDerY5Yt"],
+            itemArray: [],
+            selectedOptions: [{key: "", item: 'Please select item you want to purchase.', quantity: 0}],
             showMenu: false,
             placeholderText: "Please select an item to purchase"
         };
     },
-    mounted() {
-        console.log(this.itemArray);
+    created() {
+        console.log("created: "+this.itemArray);
+        console.log("created: "+this.foods+" len: "+this.foods.length);
+        for (var i=0; i < this.foods.length; i++){
+            console.log("hoho: "+i+" "+this.foods[i]);
+            // var ref = db.ref("food/");
+            // function testing(req, resp, next) {
 
-        if (this.closeOnOutsideClick) {
-            document.addEventListener("click", this.clickHandler);
+            var l = db.ref('food').child(this.foods[i])
+                    .once('value')
+                    .then(function(snapshot) {
+                        var value = snapshot.val();
+                        console.log('name:', value.foodName);
+                        // this.itemArray.push(value.foodName);
+
+                        return value.foodName;
+                    });
+            console.log("l: "+l);
+            l.then((val) => {
+                console.log("val: " +val);
+                this.itemArray.push(val)
+            }
+        );
+            console.log("check: " +this.itemArray);
+            // }
+            // + this.foods[i]);
+            // ref.on("value")
+            // console.log("hoho: "+food.child("foodName"));
+            // this.itemArray.push(
+            //     food.child("foodName")
+            // )
         }
+
     },
     methods: {
+        test: function() {
+            console.log("test");
+        },
         submit_purchase: function () {
             this.submit();
             //TODO: this.$router.push({ path: `/read-note/${noteKey}/${this.bookKey}` });
@@ -116,31 +143,51 @@ export default {
             date.splice(4);
             console.log(date);
 
+            var foodObj = [];
+            for (var i=0; i<this.selectedOptions.length; i++){
+                if (this.selectedOptions[i].quantity !== 0) {
+                    var v = {
+                        key: this.selectedOptions[i].key,
+                        quantity: this.selectedOptions[i].quantity
+                    };
+                    console.log("v: "+v+"f: "+this.selectedOptions[i]);
+                    foodObj.push(v)
+                }
+            }
+            console.log("foodObj:" + foodObj);
             var purchase = {
                 date: date.join(" "),
-                //TODO: change this food type! => use foodKey
-                food: this.selectedOptions,
+                food: foodObj,
                 note: this.note,
                 userKey: firebase.auth().currentUser.uid,
                 isConfirmed: false
             };
 
             // TODO: change after applying group purchase DB
-            var ref = db.ref("groupPurchase/" + "-MMPFFDBm2EZw2-Wuwob" + "/participant");
-            var purchaseKey = ref.push(purchase).key;
+            var ref = db.ref("groupPurchase").child("-MMPFFDBm2EZw2-Wuwob").child("/participant");
+            console.log("ref: "+ ref);
+            var purchaseKey = ref.push().key;
+            console.log("purchasekey: "+ purchaseKey);
+            purchase['_key'] = purchaseKey;
+            console.log(purchase);
             ref.child(purchaseKey)
-                .update({
-                    _key: purchaseKey
-                });
+                .set(purchase);
         },
         add_dropdown() {
             console.log("add dropdown");
             console.log(this.selectedOptions);
-            this.selectedOptions.push({item: 'Please select item you want to purchase.', quantity: 0});
+            if (this.selectedOptions.length >= this.foods.length) {
+                alert("You already added enough element of foods!");
+                return
+            }
+            this.selectedOptions.push({key: "", item: 'Please select item you want to purchase.', quantity: 0});
             console.log(this.selectedOptions);
         },
         methodToRunOnSelect({index, payload}) {
             this.selectedOptions[index].item = payload;
+            var idx = this.itemArray.indexOf(payload);
+            this.selectedOptions[index].key = this.foods[idx];
+
             console.log("selected: ");
             console.log(this.selectedOptions);
         },
