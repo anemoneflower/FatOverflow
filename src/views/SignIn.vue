@@ -21,6 +21,7 @@
         <div class="submit">
             <button id="btn" @click="signIn">Sign In</button>
         </div>
+        <button @click="googleLogin">googleAuth</button>
     </div>
 </template>
 
@@ -110,6 +111,18 @@
                 } else {
                     alert("Sign in is invalid");
                 }
+            },
+            googleLogin() {
+                const provider = new firebase.auth.GoogleAuthProvider();
+
+                firebase.auth().signInWithPopup(provider).then((result) => {
+                    console.log(result);
+                    // result.user.email
+                    // TODO: 유저의 어떤 정보를 가지고 있을지 정해야함
+                    this.$router.replace('/');
+                }).catch((err)=>{
+                    alert('OOPS.. ' + err.message)
+                })
             }
         }
     };
