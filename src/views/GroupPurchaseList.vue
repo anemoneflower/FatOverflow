@@ -5,7 +5,7 @@
                 <button id="gpbtn">Group Purchase</button>
             </div>
             <div class = "reviewbtn">
-                 <button id="reviewbtn" @click="goProducts()">Reviews</button>
+                 <button id="reviewbtn" @click="goProducts()">Products</button>
             </div>
         </div>
         <ul class="gpList" v-if="gpList.length">
@@ -102,17 +102,25 @@ export default {
                 })
         }
 
+    },
+    methods: {
+        goProducts() {
+            
+        }
     }
 }
 </script>
 <style scoped>
     .head{
-        position: relative;
+        position: fixed;
         display: grid;
         grid-template-columns: auto auto;
         justify-content: start;
-        margin-left: 12%;
-        margin-top: 20px;
+        padding-left: 12%;
+        padding-top: 5px;
+        z-index:1;
+        background-color: #fff;
+        width:100%;
     }
     #gpbtn {
         height: 40px;
@@ -153,6 +161,6 @@ export default {
     }
     .gpList {
         position: relative;
-        padding-top: 5px;
+        padding-top: 80px;
     }
 </style>
