@@ -187,6 +187,8 @@ export default {
   margin-right: auto;
   background: white;
   border-radius: 23px;
+  margin-top: 240px;
+  z-index: 3;
 }
 .popover {
   margin: 0 auto;
