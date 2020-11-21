@@ -62,6 +62,7 @@ export default {
 
 <style scoped>
 .card-post {
+  width: 1200px;
   display: flex;
   justify-content: center;
   padding: 10px;
