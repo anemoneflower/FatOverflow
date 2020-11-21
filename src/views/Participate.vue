@@ -90,15 +90,12 @@ export default {
         console.log("created: "+this.foods+" len: "+this.foods.length);
         for (var i=0; i < this.foods.length; i++){
             console.log("hoho: "+i+" "+this.foods[i]);
-            // var ref = db.ref("food/");
-            // function testing(req, resp, next) {
 
             var l = db.ref('food').child(this.foods[i])
                     .once('value')
                     .then(function(snapshot) {
                         var value = snapshot.val();
                         console.log('name:', value.foodName);
-                        // this.itemArray.push(value.foodName);
 
                         return value.foodName;
                     });
@@ -109,13 +106,6 @@ export default {
             }
         );
             console.log("check: " +this.itemArray);
-            // }
-            // + this.foods[i]);
-            // ref.on("value")
-            // console.log("hoho: "+food.child("foodName"));
-            // this.itemArray.push(
-            //     food.child("foodName")
-            // )
         }
 
     },
