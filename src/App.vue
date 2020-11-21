@@ -66,7 +66,12 @@ export default {
       current.push(currentUrl);
     },
     goSignOut() {
-      
+      firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+      }).catch(function(error) {
+        alert(error)
+      });
+      window.location.reload();
     },
     isNotHome() {
       console.log("isnothome: " + this.$router.history.current["path"]);
