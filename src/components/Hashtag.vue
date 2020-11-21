@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <button class="hashtag">
-            {{food}}
-        </button>
+    <div class="hashtag">
+        {{food}}
     </div>
 </template>
 
@@ -26,8 +24,8 @@ export default {
         color: #48C964;
         background-color: #fff;
         padding : 3px 12px 3px 12px;
-        font-size: 13px;
-        margin-right: 10px;
+        font-size: 15px;
+        margin-right: 15px;
         /*height: 30px;*/
     }
 </style>

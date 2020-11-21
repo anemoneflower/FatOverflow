@@ -3,7 +3,7 @@
         <div class="square">
             <div class="board-info">
                 <a class="title" >{{gp.title}}</a>
-                <a class="cDate">Due: {{gp.closedDate}}</a>
+                <a class="cDate">Due: {{expressDate(gp.closedDate)}}</a>
             </div>
         <div class="representative">
             <div class="site">{{gp.website}}</div>
@@ -51,6 +51,11 @@ export default {
             (this.registeredFood).push(this.gp.registeredFood[key].foodName);
             // console.log(obj[key]);
         }
+    },
+    methods: {
+      expressDate(num) {
+        return num.slice(0,4) + "." + num.slice(4,6) + "." + num.slice(6);
+      }
     }
 }
 </script>
@@ -104,7 +109,6 @@ a:link {
 }
 
 .board-info > a {
-  font-size: 25px;
   color: rgb(0, 0, 0);
 }
 
@@ -117,7 +121,7 @@ a:link {
 
 .cDate {
   float: right;
-  font-size: 10px;
+  font-size: 23px;
 }
 
 .representative {
@@ -140,7 +144,7 @@ a:link {
 }
 
 .post-info > a {
-  font-size: 15px;
+  font-size: 18px;
   color: #cbcbcb;
 }
 
@@ -161,7 +165,7 @@ a:link {
 .title {
   float: left;
   text-align: left;
-  font-size: 20px;
+  font-size: 25px;
   width: 500px;
   color: #9D9D9D;
   text-decoration: none;
