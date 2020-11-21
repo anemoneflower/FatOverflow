@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="top">
-      <div class="nav" v-if="isNotSignInPage() && isBookSelected()">
+      <div class="nav" v-if="isNotSignInPage()">
         <nav-bar :key="selected"></nav-bar>
       </div>
       <div class="bar" v-if="isNotHome() && isNotSignInPage()">

@@ -1,36 +1,40 @@
 <template>
   <div class="main" style="margin-top: 70px">
     <a class="title" style="margin: auto; text-align: center;">
-      participate in group purchase: {{ purchaseTitle }}
+      Participate in Group Purchase: {{ purchaseTitle }}
     </a>    
     <div class="outer">
       <div class="inner"></div>
     </div>
-    <div style="display: flex; width: 900px; margin: auto">
-      <div class="foodImg">
-        <img src="../assets/placeholder.png" width="150px" height="150px" alt="">
-      </div>
+    <div style="display: flex; width: 900px;">
       <div class="inputLayout">
 <!--        <div class="inputRows">-->
           <table id="dropdown_table">
             <tr>
               <td>
-              <button v-on:click = "add_dropdown" class="addBtn">
+              <button v-on:click = "add_dropdown" class="addBtn btns">
                 Add!!
               </button>
               </td>
-            </tr>
-            <tr id="dropdown_group" v-for="(select, index) in selectedOptions" v-bind:key="index">
-              <td>
-              <Dropdown :itemArray="itemArray" :selected="select.item" :index="index" v-on:updateOption="methodToRunOnSelect"></Dropdown>
-              </td>
               <td>
                 <p class="tags">Quantity</p>
+              </td>
+            </tr>
+            <tr id="dropdown_group" v-for="(select, index) in selectedOptions" v-bind:key="index">
+              <td class="cell">
+              <Dropdown class="productinput" :itemArray="itemArray" :selected="select.item" :index="index" v-on:updateOption="methodToRunOnSelect"></Dropdown>
+              </td>
+              <td class="cell">
                 <input
                         class="quantityinput inputBorder"
                         v-model="select.quantity"
                         type="number"
                 />
+              </td>
+              <td class="cell">
+                <button class="delBtn">
+                  Delete
+                </button>
               </td>
             </tr>
           </table>
@@ -184,7 +188,7 @@ textarea {
   height: 100%;
   left: 30%;
   background: #48C964;
-  box-shadow: 0px 0px 10px 120px #48C964;
+  box-shadow: 0px 0px 10px 125px #48C964;
 }
 .outer {
   width: 800px;
@@ -200,12 +204,11 @@ img {
   border: 0.5px solid #3a3a3a;
 }
 .foodImg {
-  width: 150px;
-  height: 150px;
+  width: 50px;
+  height: 50px;
   margin: auto;
   margin-right: 0%;
   margin-left: 100px;
-  margin-top: 30px;
 }
 .inputRows {
   width: 700px;
@@ -218,10 +221,15 @@ img {
   /*grid-template-rows: repeat(4, 1fr);*/
 }
 
+.productinput {
+  width: 450px;
+}
+
 .quantityinput {
-  width: 50px;
-  height: 40px;
+  width: 35px;
+  height: 27px;
   outline: none;
+  margin-left: 10px;
 }
 
 .tags {
@@ -247,11 +255,25 @@ img {
 }
 .btns:hover {
   background-color: #2f8542;
+  color: #9C9C9C;
 }
 .addBtn {
   margin: auto auto auto 50px;
-  width: 250px;
-  height: 40px;
+  width: 100px;
+  height: 35px;
+}
+.delBtn {
+  background-color: #d83737;
+  color: #fff;
+  border-radius: 10px;
+  border-width: 0px;
+  cursor: pointer;
+  width: 70px;
+  height: 25px;
+}
+.delBtn:hover {
+  background-color: #942121;
+  color: #9C9C9C;
 }
 
 .submitBtn {
@@ -356,6 +378,18 @@ img {
 
 .inputLayout {
   margin-top:0;
+}
+
+#dropdown_group {
+  margin-top: 5px;
+}
+
+#dropdown_table {
+  margin-left: 30px;
+}
+
+.cell {
+  padding-right: 10px;
 }
 
 li {

@@ -1,8 +1,8 @@
 <template>
   <div class="wrap">
     <div class="wrap2">
-      <img id="banner" src="../assets/logo.png" @click="goHome" v-if="true" />
-      <hr id="vertical-line" v-if="true">
+      <img id="banner" src="../assets/logo.png" @click="goHome" v-if="isHome" />
+      <hr id="vertical-line" v-if="isHome">
       <div class="certification">
         <img
           src="../assets/account.png"
@@ -18,7 +18,7 @@
         >
       </div>
     </div>
-    <hr id="bot-line" v-if="true">
+    <hr id="bot-line" v-if="isHome">
   </div>
 </template>
 
@@ -38,6 +38,12 @@ export default {
     };
   },
   methods: {
+    isHome() {
+      var curPath = this.$router.history.current["path"];
+      var trim = curPath.split("/");
+      console.log(trim);
+      return trim.length == 1;
+    },
     isBookSelected() {
       var curPath = this.$router.history.current["path"];
       var trim = curPath.split("/");
