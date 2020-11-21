@@ -68,51 +68,66 @@ export default {
     name: "Participate",
     components: {Dropdown},
     props: {
-        purchaseTitle: String,
-        foodKey: {
-            type: String,
-            default: "sampleFood"
-        }
+        gpKey: String,
     },
     data() {
         return {
+            purchaseTitle: "",
             quantity: "",
             note: "",
-            foods: ["-MMQkor-QFmKXKk3UqYm", "-MMQkwUqrMWADDerY5Yt"],
+            foods: [],
             itemArray: [],
             selectedOptions: [{key: "", item: 'Please select item you want to purchase.', quantity: 0}],
             showMenu: false,
             placeholderText: "Please select an item to purchase"
         };
     },
-    created() {
+    mounted() {
+      console.log(this.gpKey);
+      db.ref('groupPurchase').child(this.gpKey).once('value').then(function (snapshot) {
+        var value = snapshot.val();
+        console.log("mounted: "+ value);
+        return [Object.keys(value.registeredFood), value.title]
+
+      }).then((info) => {
+        this.foods = info[0];
+        console.log("this.foods:: ", this.foods);
+        this.purchaseTitle = info[1];
+      }).then(()=>{
+
         console.log("created: "+this.itemArray);
         console.log("created: "+this.foods+" len: "+this.foods.length);
         for (var i=0; i < this.foods.length; i++){
             console.log("hoho: "+i+" "+this.foods[i]);
 
-            var l = db.ref('food').child(this.foods[i])
+            var l = db.ref('groupPurchase').child(this.gpKey).child('registeredFood').child(this.foods[i])
                     .once('value')
                     .then(function(snapshot) {
                         var value = snapshot.val();
-                        console.log('name:', value.foodName);
 
-                        return value.foodName;
+                        console.log('name:', value.foodKey);
+
+                      return value.foodKey
+
                     });
-            console.log("l: "+l);
-            l.then((val) => {
-                console.log("val: " +val);
+
+            l.then(function (val) {
+              console.log("val: "+val.toString());
+              return db.ref('food').child(val).once('value').then(function(snapshot){
+                console.log("val: "+snapshot.val().foodName);
+                return snapshot.val().foodName;
+              });
+            }).then((val) => {
+                console.log("val2: " +val);
                 this.itemArray.push(val)
             }
         );
             console.log("check: " +this.itemArray);
         }
+      });
 
     },
     methods: {
-        test: function() {
-            console.log("test");
-        },
         submit_purchase: function () {
             this.submit();
             //TODO: this.$router.push({ path: `/read-note/${noteKey}/${this.bookKey}` });

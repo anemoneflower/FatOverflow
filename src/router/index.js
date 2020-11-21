@@ -28,9 +28,9 @@ const routes = [
     }
   },
   {
-    path: "/participate",
+    path: "/participate/:gp",
     name: "Participate",
-    props: { purchaseTitle: "Sample Purchase", options:[1, 2, 3, 4, 5] },
+    props: route => ({gpKey: `${route.params.gp}`}),
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
