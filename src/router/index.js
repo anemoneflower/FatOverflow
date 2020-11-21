@@ -73,6 +73,13 @@ const routes = [
       return import("../views/SignIn.vue");
     }
   },
+  {
+    path: "/products",
+    name: "Products",
+    component: function() {
+      return import("../views/ProductList.vue");
+    }
+  },
 ]
 
 const router = new VueRouter({

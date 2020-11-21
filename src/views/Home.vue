@@ -2,8 +2,8 @@
   <div class="home">
     <img class="lo" alt="Hey you can read it!" src="../assets/logo.png" />
     <search-bar></search-bar>
-    <img class="lb" alt="Group Purchase" src="../assets/main_left.png" @click="goPurchaseList"/>
-    <img class="rb" alt="Product" src="../assets/main_right.png" @click="goProductsList"/>
+    <router-link to="/gplist" ><img class="lb" alt="Group Purchase" src="../assets/main_left.png" @click="goPurchaseList"/></router-link>
+    <router-link to="/products"><img class="rb" alt="Product" src="../assets/main_right.png" @click="goProductsList"/></router-link>
   </div>
 </template>
 
