@@ -21,6 +21,7 @@
         <div class="submit">
             <button id="btn" @click="signIn">Sign In</button>
         </div>
+        <button @click="googleLogin">googleAuth</button>
     </div>
 </template>
 
@@ -83,14 +84,7 @@
                 }
             },
             goHome() {
-                var curPath = current[0];
-                console.log(`curpath: ${curPath}`);
-                if (curPath === "/") return;
-                var trim = curPath.split("/");
-                console.log(`select check - banner: ${trim[trim.length - 1]}`);
-                if (trim[trim.length - 1].length > 10)
-                    this.$router.push("/selected-book/" + trim[trim.length - 1]);
-                else this.$router.push("/");
+                this.$router.push("/");
             },
             keyPress() {
                 var uid = this.userId;
@@ -110,6 +104,18 @@
                 } else {
                     alert("Sign in is invalid");
                 }
+            },
+            googleLogin() {
+                const provider = new firebase.auth.GoogleAuthProvider();
+
+                firebase.auth().signInWithPopup(provider).then((result) => {
+                    console.log(result);
+                    // result.user.email
+                    // TODO: 유저의 어떤 정보를 가지고 있을지 정해야함
+                    this.$router.replace('/');
+                }).catch((err)=>{
+                    alert('OOPS.. ' + err.message)
+                })
             }
         }
     };

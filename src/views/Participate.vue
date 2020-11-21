@@ -67,6 +67,7 @@
 
 <script>
 import { db } from "../main";
+import firebase from 'firebase';
 import Dropdown from "../components/Dropdown";
 export default {
   name: "Participate",
@@ -133,8 +134,8 @@ export default {
         //TODO: change this food type! => use foodKey
         food: this.selectedOptions,
         note: this.note,
-        // userKey: this.userKey,
-        // isConfirmed
+        userKey: firebase.auth().currentUser.uid,
+        isConfirmed: false
       };
 
       // TODO: change after applying group purchase DB
