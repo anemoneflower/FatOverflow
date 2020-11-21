@@ -129,7 +129,7 @@ export default {
         food: this.selectedOptions,
         note: this.note,
         userKey: firebase.auth().currentUser.uid,
-        // isConfirmed
+        isConfirmed: false
       };
 
       // TODO: change after applying group purchase DB
