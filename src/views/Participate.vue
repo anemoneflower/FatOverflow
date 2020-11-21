@@ -1,5 +1,5 @@
 <template>
-  <div class="main" style="margin-top: 150px">
+  <div class="main" style="margin-top: 70px">
     <a class="title" style="margin: auto; text-align: center;">
       participate in group purchase: {{ purchaseTitle }}
     </a>    
@@ -8,46 +8,34 @@
     </div>
     <div style="display: flex; width: 900px; margin: auto">
       <div class="foodImg">
-        <img src="../assets/logo.png" width="150px" height="150px" alt="">
+        <img src="../assets/placeholder.png" width="150px" height="150px" alt="">
       </div>
       <div class="inputLayout">
-        <div class="inputRows">
-          <div class="btn-group">
-            <li
-                    @click="toggleMenu()"
-                    class="dropdown-toggle"
-                    v-if="selectedOption !== undefined"
-            >
-              {{ selectedOption }}
-              <span class="caret"></span>
-            </li>
+<!--        <div class="inputRows">-->
+          <table id="dropdown_table">
+            <tr>
+              <td>
+              <button v-on:click = "add_dropdown" class="addBtn">
+                Add!!
+              </button>
+              </td>
+            </tr>
+            <tr id="dropdown_group" v-for="(select, index) in selectedOptions" v-bind:key="index">
+              <td>
+              <Dropdown :itemArray="itemArray" :selected="select.item" :index="index" v-on:updateOption="methodToRunOnSelect"></Dropdown>
+              </td>
+              <td>
+                <p class="tags">Quantity</p>
+                <input
+                        class="quantityinput inputBorder"
+                        v-model="select.quantity"
+                        type="number"
+                />
+              </td>
+            </tr>
+          </table>
+<!--        </div>-->
 
-            <li
-                    @click="toggleMenu()"
-                    class="dropdown-toggle dropdown-toggle-placeholder"
-                    v-if="selectedOption === undefined"
-            >
-              {{ placeholderText }}
-              <span class="caret"></span>
-            </li>
-
-            <ul class="dropdown-menu" v-if="showMenu">
-              <li v-for="(option, idx) in itemArray" :key="idx">
-                <a href="javascript:void(0)" @click="updateOption(option)">
-                  {{ option }}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="inputRows">
-          <p class="tags">Quantity</p>
-          <input
-            class="quantityinput inputBorder"
-            v-model="quantity"
-            type="number"
-          />
-        </div>
         <div class="inputRows" style="height: 200px">
           <p class="tags" style="vertical-align: top; margin-top: 0">Notes</p>
           <div>
@@ -59,9 +47,9 @@
           </div>
         </div>
         <div class="inputRows">
-          <button v-on:click="add_product" class="addBtn btns">
-            Submit and Add Product +
-          </button>
+<!--          <button v-on:click="add_product" class="addBtn btns">-->
+<!--            Submit and Add Product +-->
+<!--          </button>-->
           <button v-on:click="submit_purchase" class="submitBtn btns">
             Submit
           </button>
@@ -74,13 +62,19 @@
 <script>
 import { db } from "../main";
 import firebase from 'firebase';
+import Dropdown from "../components/Dropdown";
 export default {
   name: "Participate",
+  components: {Dropdown},
   props: {
     purchaseTitle: String,
     closeOnOutsideClick: {
       type: [Boolean],
       default: true
+    },
+    foodKey: {
+      type: String,
+      default: "sampleFood"
     }
   },
   mounted() {
@@ -91,35 +85,33 @@ export default {
     }
   },
 
-  beforeDestroy() {
-    document.removeEventListener("click", this.clickHandler);
-  },
+
   data() {
     return {
       quantity:"",
       note:"",
       itemArray: ["1","2"],
-      selectedOption: 'Please select item you want to purchase.',
+      selectedOptions: [{item:'Please select item you want to purchase.', quantity:0}],
       showMenu: false,
       placeholderText: "Please select an item to purchase"
     };
   },
   methods: {
-    add_product: function() {
-      console.log("add_product!!");
-      this.submit();
-      this.selectedOption ='Please select item you want to purchase.';
-
-      this.quantity='';
-      this.note='';
-    },
+    // add_product: function() {
+    //   console.log("add_product!!");
+    //   this.submit();
+    //   this.selectedOption ='Please select item you want to purchase.';
+    //
+    //   this.quantity='';
+    //   this.note='';
+    // },
     submit_purchase: function() {
       this.submit();
       //TODO: this.$router.push({ path: `/read-note/${noteKey}/${this.bookKey}` });
     },
     submit: function() {
       console.log("submit_purchase!");
-      console.log(this.selectedOption);
+      console.log(this.selectedOptions);
       console.log(this.quantity);
       console.log(this.note);
       this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
@@ -133,11 +125,11 @@ export default {
 
       var purchase = {
         date: date.join(" "),
-        // itemKey: this.itemKey,
-        item: this.selectedOption,
-        quantity: this.quantity,
+        //TODO: change this food type! => use foodKey
+        food: this.selectedOptions,
         note: this.note,
         userKey: firebase.auth().currentUser.uid,
+        // isConfirmed
       };
 
       // TODO: change after applying group purchase DB
@@ -148,26 +140,22 @@ export default {
                 _key: purchaseKey
               });
     },
-    updateOption(option) {
-      console.log(option);
-      this.selectedOption = option;
-      this.showMenu = false;
+    add_dropdown(){
+      console.log("add dropdown");
+      // var len = this.selectedOptions.length;
+      console.log(this.selectedOptions);
+      this.selectedOptions.push({item:'Please select item you want to purchase.', quantity:0});
+      console.log(this.selectedOptions);
+      },
+    methodToRunOnSelect({index, payload}) {
+      this.selectedOptions[index].item = payload;
+      console.log("selected: ");
+      console.log(this.selectedOptions);
     },
+  },
 
-    toggleMenu() {
-      this.showMenu = !this.showMenu;
-    },
-
-    clickHandler(event) {
-      const { target } = event;
-      const { $el } = this;
-
-      if (!$el.contains(target)) {
-        this.showMenu = false;
-      }
-    }
   }
-};
+
 </script>
 
 <style scoped>
@@ -202,7 +190,7 @@ textarea {
 .outer {
   width: 800px;
   height: 3px;
-  margin: 5px auto 60px;
+  margin: 5px auto 30px;
   /* alignment: left; */
   overflow: hidden;
   position: relative;
@@ -262,15 +250,13 @@ img {
   background-color: #2f8542;
 }
 .addBtn {
-  margin: auto;
-  margin-left: 50px;
+  margin: auto auto auto 50px;
   width: 250px;
   height: 40px;
 }
 
 .submitBtn {
-  margin: auto;
-  margin-left: 210px;
+  margin: auto auto auto 210px;
   width: 100px;
   height: 40px;
 }
@@ -367,6 +353,10 @@ img {
   border-right: 4px solid transparent;
   border-left: 4px solid transparent;
   right: 10px;
+}
+
+.inputLayout {
+  margin-top:0;
 }
 
 li {

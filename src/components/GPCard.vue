@@ -3,7 +3,7 @@
         <div class="square">
             <div class="board-info">
                 <a class="title" >{{gp.title}}</a>
-                <a class="cDate">{{gp.closedDate}}</a>
+                <a class="cDate">Due: {{gp.closedDate}}</a>
             </div>
         <div class="representative">
             <div class="site">{{gp.website}}</div>
@@ -48,14 +48,15 @@ export default {
   margin: auto;
 }
 .square {
-  width: 800px;
-  height: 200px;
+  width: 1200px;
+  height: 180px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0px 20px 50px #d9dbdf;
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .square:hover {
@@ -76,9 +77,9 @@ a:link {
 }
 .board-info {
   margin: auto;
-  padding-top: 20px;
+  padding-top: 30px;
   border-radius: 15px 15px 0px 0px;
-  width: 740px;
+  width: 1140px;
   position: absolute;
   padding-left: 30px;
   padding-right: 30px;
@@ -94,16 +95,19 @@ a:link {
 
 .site {
   float: left;
+  font-size: 17px;
+  color: #cbcbcb;
+  margin-left: 5px;
 }
 
 .cDate {
   float: right;
-  font-size: 15px;
+  font-size: 10px;
 }
 
 .representative {
   margin: auto;
-  width: 740px;
+  width: 1140px;
   margin-top: 70px;
   padding-left: 30px;
   padding-right: 30px;
@@ -153,7 +157,7 @@ a:link {
 
 .content-box {
   width: 740px;
-  padding-left: 30px;
+  padding-left: 35px;
   padding-right: 30px;
   margin: auto;
   margin-top: 130px;
@@ -186,7 +190,7 @@ a:link {
 }
 
 .hashtag {
-    margin-right: 1px;
+    margin-right: 5px;
 }
 
 </style>
