@@ -11,28 +11,31 @@
         <img src="../assets/logo.png" width="150px" height="150px" alt="">
       </div>
       <div class="inputLayout">
-        <div class="inputRows">
+<!--        <div class="inputRows">-->
           <table id="dropdown_table">
             <tr>
               <td>
-              <button v-on:click = "add_dropdown">
+              <button v-on:click = "add_dropdown" class="addBtn">
                 Add!!
               </button>
               </td>
             </tr>
-            <tr id="dropdown_group" v-for="(item, index) in selectedOptions" v-bind:key="index">
-              <Dropdown :itemArray="itemArray" :selected="item" :index="index" v-on:updateOption="methodToRunOnSelect"></Dropdown>
+            <tr id="dropdown_group" v-for="(select, index) in selectedOptions" v-bind:key="index">
+              <td>
+              <Dropdown :itemArray="itemArray" :selected="select.item" :index="index" v-on:updateOption="methodToRunOnSelect"></Dropdown>
+              </td>
+              <td>
+                <p class="tags">Quantity</p>
+                <input
+                        class="quantityinput inputBorder"
+                        v-model="select.quantity"
+                        type="number"
+                />
+              </td>
             </tr>
           </table>
-        </div>
-        <div class="inputRows">
-          <p class="tags">Quantity</p>
-          <input
-            class="quantityinput inputBorder"
-            v-model="quantity"
-            type="number"
-          />
-        </div>
+<!--        </div>-->
+
         <div class="inputRows" style="height: 200px">
           <p class="tags" style="vertical-align: top; margin-top: 0">Notes</p>
           <div>
@@ -44,9 +47,9 @@
           </div>
         </div>
         <div class="inputRows">
-          <button v-on:click="add_product" class="addBtn btns">
-            Submit and Add Product +
-          </button>
+<!--          <button v-on:click="add_product" class="addBtn btns">-->
+<!--            Submit and Add Product +-->
+<!--          </button>-->
           <button v-on:click="submit_purchase" class="submitBtn btns">
             Submit
           </button>
@@ -87,27 +90,27 @@ export default {
       quantity:"",
       note:"",
       itemArray: ["1","2"],
-      selectedOptions: ['Please select item you want to purchase.'],
+      selectedOptions: [{item:'Please select item you want to purchase.', quantity:0}],
       showMenu: false,
       placeholderText: "Please select an item to purchase"
     };
   },
   methods: {
-    add_product: function() {
-      console.log("add_product!!");
-      this.submit();
-      this.selectedOption ='Please select item you want to purchase.';
-
-      this.quantity='';
-      this.note='';
-    },
+    // add_product: function() {
+    //   console.log("add_product!!");
+    //   this.submit();
+    //   this.selectedOption ='Please select item you want to purchase.';
+    //
+    //   this.quantity='';
+    //   this.note='';
+    // },
     submit_purchase: function() {
       this.submit();
       //TODO: this.$router.push({ path: `/read-note/${noteKey}/${this.bookKey}` });
     },
     submit: function() {
       console.log("submit_purchase!");
-      console.log(this.selectedOption);
+      console.log(this.selectedOptions);
       console.log(this.quantity);
       console.log(this.note);
       this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
@@ -121,7 +124,8 @@ export default {
 
       var purchase = {
         date: date.join(" "),
-        food: [this.foodKey, this.quantity],
+        //TODO: change this food type! => use foodKey
+        food: this.selectedOptions,
         note: this.note,
         // userKey: this.userKey,
         // isConfirmed
@@ -139,15 +143,15 @@ export default {
       console.log("add dropdown");
       // var len = this.selectedOptions.length;
       console.log(this.selectedOptions);
-      this.selectedOptions.push('Please select item you want to purchase.');
+      this.selectedOptions.push({item:'Please select item you want to purchase.', quantity:0});
       console.log(this.selectedOptions);
       },
     methodToRunOnSelect({index, payload}) {
-      this.selectedOptions[index] = payload;
+      this.selectedOptions[index].item = payload;
       console.log("selected: ");
       console.log(this.selectedOptions);
     },
-    },
+  },
 
   }
 
