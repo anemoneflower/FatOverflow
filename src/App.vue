@@ -35,8 +35,9 @@
 <script> 
 import NavBar from "@/components/NavBar.vue";
 import SearchBar from "@/components/SearchBar.vue";
-import current from "./main";
 import firebase from 'firebase';
+import {mapGetters} from "vuex";
+import store from "./store";
 export default {
   components: {
     NavBar,
@@ -47,11 +48,18 @@ export default {
       selected: false
     };
   },
+  computed: {
+    // map `this.user` to `this.$store.getters.user`
+    ...mapGetters({
+      user: "user"
+    })
+  },
+  mounted() {
+    console.log(firebase.auth().currentUser)
+  },
   methods: {
     isSignin() {
-      if(firebase.auth().currentUser != null)
-        console.log(firebase.auth().currentUser)
-      return firebase.auth().currentUser != null
+      return this.user.loggedIn
     },
     goMyPage() {
       var curPath = this.$router.history.current["path"];
@@ -63,7 +71,7 @@ export default {
     goSignIn() {
       var currentUrl = this.$router.history.current["path"];
       // TODO: use vuex here
-      current.push(currentUrl);
+      store.dispatch("pushRoute", currentUrl);
     },
     goSignOut() {
       firebase.auth().signOut().then(function() {
@@ -108,14 +116,6 @@ body {
 }
 .nav {
   position: absolute;
-  background: white;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
-.nav2 {
-  position: fixed;
   background: white;
   top: 0;
   left: 0;
