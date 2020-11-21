@@ -15,6 +15,9 @@
                 title="go to mypage"
                 @click="goMyPage"
         >
+        <button id="sign-out-button" @click="goSignOut" v-if="isSignin()">
+          Sign Out
+        </button>
         <router-link to="/sign-in"
         ><button id="sign-in-button" @click="goSignIn" v-if="!isSignin()">
           Sign In
@@ -46,6 +49,8 @@ export default {
   },
   methods: {
     isSignin() {
+      if(firebase.auth().currentUser != null)
+        console.log(firebase.auth().currentUser)
       return firebase.auth().currentUser != null
     },
     goMyPage() {
@@ -59,6 +64,9 @@ export default {
       var currentUrl = this.$router.history.current["path"];
       // TODO: use vuex here
       current.push(currentUrl);
+    },
+    goSignOut() {
+      
     },
     isNotHome() {
       console.log("isnothome: " + this.$router.history.current["path"]);
@@ -120,24 +128,50 @@ body {
 }
 #my-page-button {
   position: absolute;
-  right: 4%;
-  top: 11px;
+  right: 10%;
+  top: 20px;
   width: 43px;
   cursor: pointer;
   z-index: 3;
 }
-#sign-in-button {
+#sign-out-button {
   background-color: #48C964;
   color: #fff;
-  border-radius: 13px;
+  border-radius: 15px;
   border-width: 0px;
-  padding: 6px 13px 8px 13px;
-  font-size: 25px;
+  padding: 9px 13px 9px 13px;
+  font-size: 15px;
   position: absolute;
-  right: 3.5%;
-  top: 12px;
+  right: 3%;
+  top: 23px;
   cursor: pointer;
   outline: none;
   z-index: 3;
+}
+#sign-out-button:hover {
+  background-color: #43be5d;
+  color: #e0e0e0;
+}
+#sign-in-button {
+  background-color: #48C964;
+  color: #fff;
+  border-radius: 15px;
+  border-width: 0px;
+  padding: 6px 13px 8px 13px;
+  font-size: 23px;
+  position: absolute;
+  right: 3.5%;
+  top: 20px;
+  cursor: pointer;
+  outline: none;
+  z-index: 3;
+}
+#sign-in-button:hover {
+  background-color: #43be5d;
+  color: #e0e0e0;
+}
+
+.certification {
+  margin-top: 10px;
 }
 </style>
