@@ -5,28 +5,62 @@
                 <button id="gpbtn">Group Purchase</button>
             </div>
             <div class = "reviewbtn">
-                 <button id="reviewbtn">Reviews</button>
+                 <button id="reviewbtn" @click="goProducts()">Reviews</button>
             </div>
         </div>
-        <ul class="gpList">
-            <GPCard></GPCard>
-            <GPCard></GPCard>
-            <GPCard></GPCard>
-            <GPCard></GPCard>
+        <ul class="gpList" v-if="gpList.length">
+            <GPCard
+                    v-for="gp in gpList"
+                    :key = "gp in gpList"
+                    :gp = "gp"
+                    :gpKey = "gpKey"
+            ></GPCard>
+<!--            <GPCard></GPCard>-->
+<!--            <GPCard></GPCard>-->
+<!--            <GPCard></GPCard>-->
         </ul>
-        <!-- <p v-else>
+        <p v-else>
             Nothing left in the list.
-        </p> -->
+        </p>
     </div>
 </template>
 
 <script>
 import GPCard from "../components/GPCard.vue"
+import firebase from "firebase";
 
 export default {
     components: {
         GPCard
-    }
+    },
+    data(){
+        return{
+            gpList: []
+            // gp: selectedGp[0]
+        };
+    },
+    mounted() {
+        let query = this.$route.query.result;
+        console.log(query)
+        firebase
+        .database()
+        .ref("/groupPurchase")
+        .once("value",snapshot => {
+            let myValue = snapshot.val();
+            let keyList = Object.keys(myValue);
+            for(let i = keyList.length; i>0; i--){
+                let myKey = keyList[i-1];
+                let gp = myValue[myKey];
+                (this.gpList).push(gp);
+            }
+        })
+    },
+    // methods : {
+    //     goProducts(){
+    //         let query = this.$route.query.result;
+    //         this.$router.push({path:'/products',query:{result:query}})
+    //     }
+    // }
 }
 </script>
 <style scoped>
