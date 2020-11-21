@@ -107,12 +107,11 @@ export default {
 </script>
 <style scoped>
     .head{
-        width: 100%;
         position: relative;
         display: grid;
         grid-template-columns: auto auto;
         justify-content: start;
-        margin-left: 180px;
+        margin-left: 12%;
         margin-top: 20px;
     }
     #gpbtn {
@@ -130,6 +129,10 @@ export default {
         outline: none;
         text-decoration: none;
     }
+    #gpbtn:hover {
+        background-color: #43be5d;
+        color: #f5f5f5;
+    }
     #reviewbtn{
         height: 40px;
         width: 150px;
@@ -143,6 +146,10 @@ export default {
         cursor: pointer;
         outline: none;
         text-decoration: none;
+    }
+    #reviewbtn:hover {
+        background-color: #99e5aa;
+        color: #818181;
     }
     .gpList {
         position: relative;

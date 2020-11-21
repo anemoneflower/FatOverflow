@@ -68,7 +68,7 @@ body {
 #banner {
   position: absolute;
   top: 12px;
-  left: 7%;
+  left: 91px;
   width: 100px;
   cursor: pointer;
 }

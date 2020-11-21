@@ -99,6 +99,7 @@ body {
   margin-top: -100px;
   z-index: 3;
   top: 0;
+  min-width: 1200px;
 }
 .nav {
   position: absolute;
@@ -128,7 +129,7 @@ body {
 }
 #my-page-button {
   position: absolute;
-  right: 10%;
+  right: 150px;
   top: 20px;
   width: 43px;
   cursor: pointer;
@@ -145,7 +146,7 @@ body {
   padding: 9px 13px 9px 13px;
   font-size: 15px;
   position: absolute;
-  right: 3%;
+  right: 50px;
   top: 23px;
   cursor: pointer;
   outline: none;
