@@ -246,13 +246,6 @@ textarea {
 img {
   border: 0.5px solid #3a3a3a;
 }
-.foodImg {
-  width: 50px;
-  height: 50px;
-  margin: auto;
-  margin-right: 0%;
-  margin-left: 100px;
-}
 .inputRows {
   width: 650px;
   height: 40px;
