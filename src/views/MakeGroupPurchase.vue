@@ -1,5 +1,11 @@
 <template>
-  <div id="app" class="main" style="margin-top: 150px">
+  <div id="app" class="main" style="margin-top: 70px">
+    <a class="title" style="margin: auto; text-align: center;">
+      Make Group Purchase
+    </a>    
+    <div class="outer">
+      <div class="inner"></div>
+    </div>
     <div class=rowDiv>
       <input
         class="titleInput inputBorder"
@@ -191,7 +197,34 @@ export default {
 </script>
 
 <style scoped>
-
+.title {
+  width: 800px;
+  height: 30px;
+  margin: auto;
+  /* text-align: left;
+  margin-bottom: 30px; */
+  font-size: 25px;
+  font-weight: bold;
+  color: #3a3a3a;
+}
+.inner {
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  left: 30%;
+  background: #48C964;
+  box-shadow: 0px 0px 10px 70px #48C964;
+}
+.outer {
+  width: 300px;
+  height: 3px;
+  margin: 5px auto 30px;
+  /* alignment: left; */
+  overflow: hidden;
+  position: relative;
+  /* background-color: #f37022; */
+  outline: none;
+}
 .rowDiv {
   margin-left: auto;
   margin-right: auto;

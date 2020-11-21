@@ -66,12 +66,12 @@
 
 <style scoped>
     .head{
-        width: 100%;
         position: relative;
         display: grid;
         grid-template-columns: auto auto;
         justify-content: start;
-        margin-left: 50px;
+        margin-left: 12%;
+        margin-top: 20px;
     }
     #gpbtn {
         height: 40px;
@@ -82,11 +82,15 @@
         border: 0px;
         font-size: 18px;
         margin-top: 10px;
-        margin-right: 5px;
+        margin-right: 15px;
         /* font-weight: bold; */
         cursor: pointer;
         outline: none;
         text-decoration: none;
+    }
+    #gpbtn:hover {
+        background-color: #99e5aa;
+        color: #818181;
     }
     #reviewbtn{
         height: 40px;
@@ -101,6 +105,10 @@
         cursor: pointer;
         outline: none;
         text-decoration: none;
+    }
+    #reviewbtn:hover {
+        background-color: #43be5d;
+        color: #f5f5f5;
     }
     .result {
         font-size: 25px;

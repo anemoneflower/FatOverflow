@@ -1,7 +1,7 @@
 <template>
     <div class="container" @keyup.enter.up="keyPress">
-        <img id="banner" src="../assets/logo.png" @click="goHome" style="height: 80px; width: 150px"/>
-        <div class="id">
+        <img id="banner" src="../assets/logo.png" @click="goHome" style="width: 200px; cursor: pointer;"/>
+<!--        <div class="id">
             <input
                     id="inputId"
                     v-model="userId"
@@ -17,10 +17,12 @@
                     type="password"
                     placeholder="password"
             />
-        </div>
+        </div> 
         <div class="submit">
             <button id="btn" @click="signIn">Sign In</button>
         </div>
+-->
+        <button id='google' @click="googleLogin">Sign in with Google Account</button>
     </div>
 </template>
 
@@ -83,14 +85,7 @@
                 }
             },
             goHome() {
-                var curPath = current[0];
-                console.log(`curpath: ${curPath}`);
-                if (curPath === "/") return;
-                var trim = curPath.split("/");
-                console.log(`select check - banner: ${trim[trim.length - 1]}`);
-                if (trim[trim.length - 1].length > 10)
-                    this.$router.push("/selected-book/" + trim[trim.length - 1]);
-                else this.$router.push("/");
+                this.$router.push("/");
             },
             keyPress() {
                 var uid = this.userId;
@@ -110,6 +105,18 @@
                 } else {
                     alert("Sign in is invalid");
                 }
+            },
+            googleLogin() {
+                const provider = new firebase.auth.GoogleAuthProvider();
+
+                firebase.auth().signInWithPopup(provider).then((result) => {
+                    console.log(result);
+                    // result.user.email
+                    // TODO: 유저의 어떤 정보를 가지고 있을지 정해야함
+                    this.$router.replace('/');
+                }).catch((err)=>{
+                    alert('OOPS.. ' + err.message)
+                })
             }
         }
     };
@@ -119,15 +126,15 @@
     .container {
         border: 0px solid;
         border-radius: 30px 30px 30px 30px;
-        width: 500px;
+        width: 450px;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 100px;
-        height: 430px;
+        margin-top: 110px;
+        height: 240px;
         box-shadow: 0px 20px 50px #d9dbdf;
     }
     #banner {
-        margin-top: 40px;
+        margin-top: 29px;
     }
     .id {
         margin-top: 20px;
@@ -182,5 +189,25 @@
         cursor: pointer;
         outline: none;
         text-decoration: none;
+    }
+    
+
+    #google {
+        height: 50px;
+        width: 320px;
+        border-radius: 20px;
+        background-color: #48C964;
+        color: white;
+        border: 0px;
+        font-size: 20px;
+        margin-top: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+    }
+    #google:hover {
+        background-color: #43be5d;
+        color: #f5f5f5;
     }
 </style>

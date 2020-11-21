@@ -3,7 +3,7 @@
         <div class="square">
             <div class="board-info">
                 <a class="title" >{{gp.title}}</a>
-                <a class="cDate">{{gp.closedDate}}</a>
+                <a class="cDate">Due: {{expressDate(gp.closedDate)}}</a>
             </div>
         <div class="representative">
             <div class="site">{{gp.website}}</div>
@@ -13,11 +13,13 @@
             </div>
         </div>
         <div class="content-box">
-            <div class="hashtag">
-                <Hashtag></Hashtag>
-            </div>
-            <div class="hashtag">
-                <Hashtag></Hashtag>
+            <div class="hashtag" v-if="registeredFood.length">
+                <div
+                        :key = "food.key"
+                        v-for="food in registeredFood"
+                >
+                    <Hashtag :food="food"></Hashtag>
+                </div>
             </div>
           <!-- <p class="content" v-html=AAAAAAAAAAAa></p> -->
         </div>
@@ -35,27 +37,47 @@ export default {
         gp : {
             type: Object
         },
-        gpKey: String
+        gpKey: String,
+        // registeredFoodKey: String
+    },
+    data(){
+        return{
+          registeredFood: []
+        };
+    },
+    mounted() {
+        for (var key in this.gp.registeredFood) {
+            console.log(this.gp.registeredFood[key].foodName);
+            (this.registeredFood).push(this.gp.registeredFood[key].foodName);
+            // console.log(obj[key]);
+        }
+    },
+    methods: {
+      expressDate(num) {
+        return num.slice(0,4) + "." + num.slice(4,6) + "." + num.slice(6);
+      }
     }
 }
 </script>
 
 <style scoped>
 .card-post {
+  width: 1200px;
   display: flex;
   justify-content: center;
   padding: 10px;
   margin: auto;
 }
 .square {
-  width: 800px;
-  height: 200px;
+  width: 1200px;
+  height: 180px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0px 20px 50px #d9dbdf;
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .square:hover {
@@ -76,9 +98,9 @@ a:link {
 }
 .board-info {
   margin: auto;
-  padding-top: 20px;
+  padding-top: 30px;
   border-radius: 15px 15px 0px 0px;
-  width: 740px;
+  width: 1140px;
   position: absolute;
   padding-left: 30px;
   padding-right: 30px;
@@ -88,22 +110,24 @@ a:link {
 }
 
 .board-info > a {
-  font-size: 25px;
   color: rgb(0, 0, 0);
 }
 
 .site {
   float: left;
+  font-size: 17px;
+  color: #cbcbcb;
+  margin-left: 5px;
 }
 
 .cDate {
   float: right;
-  font-size: 15px;
+  font-size: 23px;
 }
 
 .representative {
   margin: auto;
-  width: 740px;
+  width: 1140px;
   margin-top: 70px;
   padding-left: 30px;
   padding-right: 30px;
@@ -121,7 +145,7 @@ a:link {
 }
 
 .post-info > a {
-  font-size: 15px;
+  font-size: 18px;
   color: #cbcbcb;
 }
 
@@ -142,7 +166,7 @@ a:link {
 .title {
   float: left;
   text-align: left;
-  font-size: 20px;
+  font-size: 25px;
   width: 500px;
   color: #9D9D9D;
   text-decoration: none;
@@ -153,13 +177,14 @@ a:link {
 
 .content-box {
   width: 740px;
-  padding-left: 30px;
+  padding-left: 35px;
   padding-right: 30px;
   margin: auto;
   margin-top: 130px;
   position: absolute;
-  display: grid;
+/*  display: grid;
   grid-template-columns: auto auto;
+  grid-template-rows: repeat(1,18px); */
   justify-content: start;
 }
 
@@ -186,7 +211,7 @@ a:link {
 }
 
 .hashtag {
-    margin-right: 1px;
+  margin-left: -7px;
 }
 
 </style>

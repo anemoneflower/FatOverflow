@@ -41,36 +41,78 @@ export default {
     },
     mounted() {
         let query = this.$route.query.result;
-        console.log(query)
-        firebase
-        .database()
-        .ref("/groupPurchase")
-        .once("value",snapshot => {
-            let myValue = snapshot.val();
-            let keyList = Object.keys(myValue);
-            for(let i = keyList.length; i>0; i--){
-                let myKey = keyList[i-1];
-                let gp = myValue[myKey];
-                (this.gpList).push(gp);
-            }
-        })
-    },
-    // methods : {
-    //     goProducts(){
-    //         let query = this.$route.query.result;
-    //         this.$router.push({path:'/products',query:{result:query}})
-    //     }
-    // }
+        if (query == undefined) {
+            firebase
+                .database()
+                .ref("/groupPurchase")
+                .once("value",snapshot => {
+                    let myValue = snapshot.val();
+                    let keyList = Object.keys(myValue);
+                    for(let i = keyList.length; i>0; i--){
+                        let myKey = keyList[i-1];
+                        let gp = myValue[myKey];
+                        (this.gpList).push(gp);
+                    }
+                })
+        }
+        else {
+            //TODO: DB wording 바꾸기
+            firebase
+                .database()
+                .ref("/groupPurchase")
+                .once("value",snapshot => {
+                    let myValue = snapshot.val();
+                    let keyList = Object.keys(myValue);
+                    let title = [];
+                    let tag = [];
+                    let content = [];
+                    for(let i = keyList.length; i>0; i--){
+                        let myKey = keyList[i-1];
+                        let gp = myValue[myKey];
+
+                        let registeredFood = gp.registeredFood;
+                        let foodList = Object.keys(registeredFood);
+                        let count = 0;
+                        for(let j = 0; j<foodList.length; j++){
+                            let foodKey = foodList[j];
+                            let f = registeredFood[foodKey];
+                            if(f.foodName.toLowerCase().includes(query.toLowerCase())){
+                                count++
+                            }
+                        }
+                        if(count>0){
+                            tag.push(gp);
+                        }
+                        else if (gp.title.toLowerCase().includes(query.toLowerCase())){
+                            title.push(gp);
+                        }
+                        else if (gp.content.toLowerCase().includes(query.toLowerCase())){
+                            content.push(gp);
+                        }
+                    }
+                    for (let k=0;k<tag.length;k++){
+                        (this.gpList).push(tag[k]);
+                    }
+                    for (let k=0;k<title.length;k++){
+                        (this.gpList).push(title[k]);
+                    }
+                    for (let k=0;k<content.length;k++){
+                        (this.gpList).push(content[k]);
+                    }
+                })
+        }
+
+    }
 }
 </script>
 <style scoped>
     .head{
-        width: 100%;
         position: relative;
         display: grid;
         grid-template-columns: auto auto;
         justify-content: start;
-        margin-left: 50px;
+        margin-left: 12%;
+        margin-top: 20px;
     }
     #gpbtn {
         height: 40px;
@@ -81,11 +123,15 @@ export default {
         border: 0px;
         font-size: 18px;
         margin-top: 10px;
-        margin-right: 5px;
+        margin-right: 15px;
         /* font-weight: bold; */
         cursor: pointer;
         outline: none;
         text-decoration: none;
+    }
+    #gpbtn:hover {
+        background-color: #43be5d;
+        color: #f5f5f5;
     }
     #reviewbtn{
         height: 40px;
@@ -101,8 +147,12 @@ export default {
         outline: none;
         text-decoration: none;
     }
+    #reviewbtn:hover {
+        background-color: #99e5aa;
+        color: #818181;
+    }
     .gpList {
         position: relative;
-        padding-top: 20px;
+        padding-top: 5px;
     }
 </style>
