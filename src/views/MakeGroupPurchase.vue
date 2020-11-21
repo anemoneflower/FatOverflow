@@ -29,9 +29,45 @@
       ></textarea>
     </div>
     <div class="rowDiv">
-      <button v-on:click="addProduct" class="addBtn btns">
+      <!-- <button v-on:click="addProduct" class="addBtn btns">
         Add Product +
-      </button>
+      </button> -->
+
+        <input
+          class="addProductSearch"
+          autocomplete="off"
+          id="input"
+          type="text"
+          v-model="title"
+          placeholder="Find the product to add"
+          @keydown.up="keyup"
+          @keydown.down="keydown"
+          @keydown.enter="enter"
+          v-focus
+          @focus="visibleOptions = true"
+          @focusout="visibleOptions = false"
+        />
+        <a
+          ><img
+            class="glass"
+            src="../assets/magnifying-glass.png"
+            @click="showModal = true"
+            title="this is search bar"
+        /></a>
+        <SearchProduct v-if="showModal" @close="showModal = false">
+          <!--
+        you can use custom content here to overwrite
+        default content
+      -->
+          <h3 slot="header">custom header</h3>
+        </SearchProduct>
+
+      <AddedProduct
+              v-for="product in productList"
+              :key = "product in productList"
+              :product = "product"
+              :productKey = "productKey"
+      ></AddedProduct>
     </div>
     <div class="rowDiv">
       <button v-on:click="createPurchase" class="submitBtn btns">
@@ -43,22 +79,32 @@
 
 <script>
 // import { db } from "../main";
+import AddedProduct from "../components/AddedProduct.vue"
+import SearchProduct from "./SearchProduct.vue"
+
 
 function isInt(value) {
   return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
 }
 export default {
   name: "GroupPurchase",
+  components: {
+    AddedProduct,
+    SearchProduct
+  },
   props: {
     _postId: String,
   },
 
   data() {
     return {
+      productList: [{title: 'Harim Chicken Breast'}],
+      showProduct: true,
       postTitle: "Join me",
       website: "www.ocook.com",
       date: "2020/12/21",
       note:"Hi",
+      showModal: false,
     };
   },
   methods: {
@@ -203,8 +249,18 @@ export default {
   height: 40px;
 }
 
-.addBtn {
-  
+.glass {
+  height: 28px;
+  position: relative;
+  top: 1px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.addProductSearch {
+  width: 80%;
+  height: 40px;
+  font-size: 20px;
 }
 
 </style>
