@@ -78,13 +78,6 @@ export default {
             default: "sampleFood"
         }
     },
-    mounted() {
-        console.log(this.itemArray);
-
-        if (this.closeOnOutsideClick) {
-            document.addEventListener("click", this.clickHandler);
-        }
-    },
     data() {
         return {
             quantity: "",
@@ -95,10 +88,19 @@ export default {
             placeholderText: "Please select an item to purchase"
         };
     },
+    mounted() {
+        console.log(this.itemArray);
+
+        if (this.closeOnOutsideClick) {
+            document.addEventListener("click", this.clickHandler);
+        }
+    },
     methods: {
         submit_purchase: function () {
             this.submit();
             //TODO: this.$router.push({ path: `/read-note/${noteKey}/${this.bookKey}` });
+            // TODO: https://stackoverflow.com/questions/53788975/vue-router-how-to-get-previous-page-url/53789212
+
         },
         submit: function () {
             console.log("submit_purchase!");
