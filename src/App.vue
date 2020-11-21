@@ -134,6 +134,9 @@ body {
   cursor: pointer;
   z-index: 3;
 }
+#my-page-button:hover {
+  content: url('./assets/account_hover.png');
+}
 #sign-out-button {
   background-color: #48C964;
   color: #fff;
@@ -150,7 +153,7 @@ body {
 }
 #sign-out-button:hover {
   background-color: #43be5d;
-  color: #e0e0e0;
+  color: #f5f5f5;
 }
 #sign-in-button {
   background-color: #48C964;
@@ -168,7 +171,7 @@ body {
 }
 #sign-in-button:hover {
   background-color: #43be5d;
-  color: #e0e0e0;
+  color: #f5f5f5;
 }
 
 .certification {

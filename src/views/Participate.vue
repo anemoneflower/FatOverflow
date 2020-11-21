@@ -261,7 +261,7 @@ img {
 }
 .btns:hover {
   background-color: #43be5d;
-  color: #e0e0e0;
+  color: #f5f5f5;
 }
 .addBtn {
   margin-right: 15px;
@@ -281,7 +281,7 @@ img {
 }
 .delBtn:hover {
   background-color: #ce3030;
-  color: #e0e0e0;
+  color: #f5f5f5;
 }
 
 .submitBtn {
