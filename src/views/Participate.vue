@@ -6,14 +6,14 @@
     <div class="outer">
       <div class="inner"></div>
     </div>
-    <div style="display: flex; width: 900px;">
+    <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; position: absolute;">
       <div class="inputLayout">
 <!--        <div class="inputRows">-->
           <table id="dropdown_table">
             <tr>
               <td>
               <button v-on:click = "add_dropdown" class="addBtn btns">
-                Add!!
+                Add Product
               </button>
               </td>
               <td>
@@ -40,13 +40,15 @@
           </table>
 <!--        </div>-->
 
-        <div class="inputRows" style="height: 200px">
-          <p class="tags" style="vertical-align: top; margin-top: 0">Notes</p>
+        <div class="inputRows">
+          <p class="tags" style="vertical-align: top; margin-top: 0; margin-left: 15px">Notes</p>
+        </div>
+        <div class="inputRows" style="height: 200px; margin-top: -15px; margin-left: 15px">
           <div>
             <textarea
               class="inputBorder"
               v-model="note"
-              style="height: 200px; width: 400px; margin: 0; padding: 0"
+              style="height: 200px; width: 620px; margin: 0; padding: 0"
             ></textarea>
           </div>
         </div>
@@ -211,10 +213,9 @@ img {
   margin-left: 100px;
 }
 .inputRows {
-  width: 700px;
+  width: 650px;
   height: 40px;
   margin-top: 30px;
-  margin-left: 30px;
   display: grid;
   text-align: left;
   grid-template-columns: 100px 400px auto;
@@ -223,19 +224,23 @@ img {
 
 .productinput {
   width: 450px;
+  height: 25px;
 }
 
 .quantityinput {
-  width: 35px;
-  height: 27px;
+  width: 45px;
+  height: 25px;
   outline: none;
   margin-left: 10px;
+  margin-top: 10px;
 }
 
 .tags {
   font-size: 15px;
-  text-align: right;
+  text-align: left;
   font-weight: bold;
+  margin-left: 6px;
+  margin-bottom: 2px;
 }
 
 .inputBorder {
@@ -254,37 +259,39 @@ img {
   cursor: pointer;
 }
 .btns:hover {
-  background-color: #2f8542;
-  color: #9C9C9C;
+  background-color: #43be5d;
+  color: #e0e0e0;
 }
 .addBtn {
-  margin: auto auto auto 50px;
-  width: 100px;
+  margin-right: 15px;
+  width: 125px;
   height: 35px;
 }
 .delBtn {
   background-color: #d83737;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 11px;
   border-width: 0px;
   cursor: pointer;
-  width: 70px;
-  height: 25px;
+  width: 60px;
+  height: 30px;
+  margin-top: 10px;
+  margin-left: 6px;
 }
 .delBtn:hover {
-  background-color: #942121;
-  color: #9C9C9C;
+  background-color: #ce3030;
+  color: #e0e0e0;
 }
 
 .submitBtn {
-  margin: auto auto auto 210px;
+  margin: auto auto auto 275px;
   width: 100px;
   height: 40px;
 }
 
 .btn-group {
   min-width: 400px;
-  height: 40px;
+  height: 30px;
   position: relative;
   margin: 10px 1px;
   display: inline-block;
@@ -385,7 +392,7 @@ img {
 }
 
 #dropdown_table {
-  margin-left: 30px;
+  margin-left: 15px;
 }
 
 .cell {
