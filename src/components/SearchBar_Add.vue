@@ -11,7 +11,6 @@
           @keydown.up="keyup"
           @keydown.down="keydown"
           @keydown.enter="enter"
-          v-focus
           @focus="visibleOptions = true"
           @focusout="visibleOptions = false"
         />
@@ -188,17 +187,16 @@ export default {
   margin-left: auto;
   margin-right: auto;
   background: white;
-  border-radius: 23px;
 }
 .popover {
   margin: 0 auto;
   padding: 0;
-  width: 575px;
+  width: 630px;
   border: 1px solid #dcdcdc;
   position: relative;
   left: 0;
   right: 0;
-  border-radius: 23px;
+  border-radius: 3px;
   list-style-type: none;
 }
 .popover:hover {
@@ -216,17 +214,17 @@ export default {
   cursor: pointer;
 }
 #input {
-  width: 500px;
+  width: 550px;
   outline: none;
   border: none;
   height: 45px;
   font-size: 16px;
 }
 .options {
-  width: 520px;
+  width: 570px;
   padding: none;
   position: relative;
-  left: 27.3px;
+  left: 27px;
   margin: none;
   max-height: 150px;
   overflow-y: auto;

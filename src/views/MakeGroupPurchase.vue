@@ -1,12 +1,13 @@
 <template>
-  <div id="app" class="main" style="margin-top: 70px">
+  <div id="app" class="main" style="margin-top: 40px">
     <a class="title" style="margin: auto; text-align: center;">
       Make Group Purchase
     </a>    
     <div class="outer">
       <div class="inner"></div>
     </div>
-    <div class=rowDiv>
+    <div class="rowDiv">
+      <a class="subTitle">Title</a>
       <input
         class="titleInput inputBorder"
         v-model="postTitle"
@@ -14,35 +15,43 @@
         placeholder="Title"
       />
     </div>
-    <div class=rowDiv>
-      <input
-        class="websiteInput inputBorder"
-        v-model="website"
-        type="text"
-        placeholder="Website"
-      />
-      <input
-        class="dateInput inputBorder"
-        v-model="date"
-        type="text"
-        placeholder="Due date in format YYYY/MM/DD"
-      />
+    <div class="rowDiv">
+      <div style="width: 350px; height: 50px; float:left;">
+        <a class="subTitle" style="margin-left:10%">Website</a>
+        <input
+          class="websiteInput inputBorder"
+          v-model="website"
+          type="text"
+          placeholder="Website"
+        />
+      </div>
+      <div style="width: 350px; height: 50px; float:right;">
+        <a class="subTitle">Due Date</a>
+        <input
+          class="dateInput inputBorder"
+          v-model="date"
+          type="text"
+          placeholder="Due date in format YYYY/MM/DD"
+        />
+      </div>
     </div>
     <div class="rowDiv">
-      <br><br>
-    <vSelect 
-      :options="options"
-      v-model="shipping"
-      placeholder="Please select shipping destination"
-    >s</vSelect>
+      <a class="subTitle">Shipping Place</a>
+      <vSelect 
+        :options="options"
+        v-model="shipping"
+        placeholder="Please select shipping destination"
+        style="padding-top:23px; width:92%; margin-left:4%;"
+      >s</vSelect>
     </div>
-    <div class="rowDiv">
+    <div class="rowDiv" style="height:320px;">
+      <a class="subTitle">Notes</a>
       <textarea
         class="commentInput inputBorder"
         v-model="note"
       ></textarea>
     </div>
-    <div class="rowDiv">
+    <div class="rowDiv" style="50px;">
       <!-- <button v-on:click="addProduct" class="addBtn btns">
         Add Product +
       </button> -->
@@ -71,10 +80,12 @@
         <!-- <SearchProduct v-if="showModal" @close="showModal = false">
           <h3 slot="header">custom header</h3>
         </SearchProduct> -->
+        <a class="subTitle">Products</a>
         <SearchBar 
           @clickedItem="onClickItem"
           @clickedItem_key="onClickItem_key"
           @clickedAdd="onClickAdd"
+          style="padding-top:40px"
         />
       <!-- <button v-on:click="addProduct" class="submitBtn btns">
         Add Product
@@ -289,12 +300,24 @@ export default {
 .rowDiv {
   margin-left: auto;
   margin-right: auto;
-  width: 800px;
-  margin-top: 20px;
+  width: 700px;
+  height: 50px;
+  margin-top: 15px;
+}
+.subTitle {
+  width: 120px;
+  height: 20px;
+  margin: auto;
+  margin-left: 5%;
+  text-align: left;
+  float:left;
+  /* margin-bottom: 30px; */
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .titleInput {
-  width: 100%;
+  width: 90%;
   height: 30px;
   outline: none;
 }
@@ -303,24 +326,26 @@ export default {
   border-radius: 3px;
   border-color: #cbcbcb;
   border-style: solid;
+  border-width: thin;
 }
 
 .websiteInput {
-  width: 390px;
+  width: 85%;
   height: 30px;
   float: left;
+  margin-left: 9%;
 }
 
 .dateInput {
-  width: 380px;
-  margin-left: 10px;
+  width: 85%;
+  margin-right: 9%;
   height: 30px;
-  float: left;
+  float: right;
 }
 
 .commentInput {
-  width: 100%;
-  height: 400px;
+  width: 90%;
+  height: 300px;
 }
 
 .btns {
