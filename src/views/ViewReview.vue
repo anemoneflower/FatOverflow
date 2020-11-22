@@ -64,6 +64,7 @@
             undecided: parseInt(this.inputEvaluation[4])
           }
           if (this.reviewKey == "") {
+            this.newReview = true
             let ref = db.ref("review/");
             let createReviewKey = ref.push(createReview).key;
             this.reviewKey = createReviewKey;
@@ -73,6 +74,7 @@
             console.log(createReviewKey)
           }
           else {
+            this.newReview = false
             let ref = db.ref("review/" + this.reviewKey);
             let createReviewKey = ref.update(createReview).key;
             // Add evaluation to food
@@ -83,7 +85,7 @@
 
 
           // When new rating is added
-          if (this.reviewKey == "") {
+          if (this.newReview) {
             console.log("Adding new value")
             let tmpAvg = [0, 0, 0, 0, 0]
             console.log("Computing new average")
@@ -130,6 +132,7 @@
           Vue.set(this.myEvaluation, 4, this.inputEvaluation[4]);
           // this.myEvaluation = this.inputEvaluation.slice(0)
           this.componentKey = !this.componentKey
+          this.newReview = true;
         }
         else {
           console.log("Missing content")
@@ -145,7 +148,8 @@
         avgCount: 0,
         uid: "",
         componentKey: 0,
-        reviewKey: ""
+        reviewKey: "",
+        newReview: false
       }
     },
     async mounted() {
