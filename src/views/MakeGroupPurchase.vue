@@ -389,7 +389,6 @@ export default {
   height: 40px;
   font-size: 20px;
 }
-
 .removeButton {
   background-color: #d83737;
   color: #fff;
