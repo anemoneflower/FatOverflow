@@ -41,8 +41,8 @@
             <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
                 <button class="btns" @click="closePost()">Close Post</button>
             </div>
-            <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
-                <button class="btns" @click="closePost()">Go Chat</button>
+            <div class="participatebtn" v-if="(gp.closed===false)||(gp.participate===true)">
+                <button class="btns" @click="goChat()">Go Chat</button>
             </div>
         </div>
         </div>
@@ -84,7 +84,7 @@ export default {
       expressDate(num) {
         return num.slice(0,4) + ". " + num.slice(4,6) + ". " + num.slice(6);
       },
-        closePost(){
+        goChat(){
           //TODO: close 하기
           //   this.$router.push({path:'',query:{GP:this.gp.key}});
             console.log("closepost");
