@@ -17,6 +17,7 @@
                     </form>
                     <div>
                         <div class="post-list" v-for="post in chats" :key="post.userkey">
+<!--                            <p>here</p>-->
                             <div class="cont myoutline">
                                     <h5 class="timestamp" >{{post.time}}</h5>
                                     <p class="namestamp">
@@ -29,7 +30,6 @@
                             </div>
                         </div>
                     </div>
-
 <!--                    <div class="loader-section" v-if="loading">-->
 <!--                        <div class="user-list">-->
 <!--                            <div class="columns">-->
@@ -61,12 +61,14 @@
                 userName: '',
                 userKey: '',
                 text: '',
-                chats: [{
-                    content: "test",
-                    time: "date",
-                    username: "name",
-                    userkey: "key",
-                }],
+                chats: [
+                //     {
+                //     content: "test",
+                //     time: "date",
+                //     username: "name",
+                //     userkey: "key",
+                // }
+                ],
                 loading: true,
                 user: '',
                 content: '',
@@ -106,18 +108,23 @@
                     chats.push(v);
                     console.log("data: ", v);
                 }
+                console.log("Firebase: ");
                 console.log(chats);
                 store.dispatch("storeChats", chats);
                 return chats;
-                // return "t";
-
             });
-            c.then(()=>{
-                // this.chats = c;
-                console.log("Chats: "+this.chats);
+            c.then((c)=>{
+                var v = c.val();
+                console.log(v);
+                var k = Object.keys(v);
+                console.log("KKKKKKK");
+                console.log(k);
+                for(var i=0; i<k.length; i++){
+                    this.chats.push(v[k[i]]);
+                }
+                console.log("Chats: ");
+                console.log(this.chats);
             });
-            console.log("Chats: "+this.chats);
-
 
             var user=firebase.auth().currentUser;
             if(user != null){
@@ -152,7 +159,7 @@
         animation-duration: 2s;
     }
     .mycontainer{
-        background-color: rgb(211, 216, 165);
+        /*background-color: rgb(211, 216, 165);*/
         padding: 3rem;
         margin: auto;
         width: 95%;
