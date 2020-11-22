@@ -166,6 +166,13 @@ export default {
               console.log(purchase);
 
               ref.child(userKey).set(purchase);
+
+              let userref = db.ref("users/"+userKey+"/gpList/"+this.gpKey);
+              userref.set({
+                closed: false,
+                participate: true,
+                review: false
+              })
               this.$router.replace(this.previousUrl);
             }else{
               alert("you didn't select any food");
