@@ -110,7 +110,6 @@ export default {
   cursor: pointer;
   float: right;
   margin-right: 50px;
-  outline: none;
 }
 
 .participateButton:hover {

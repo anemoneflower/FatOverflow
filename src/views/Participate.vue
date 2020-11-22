@@ -1,15 +1,12 @@
 <template>
-  <div class="main" style="margin-top: 40px">
+  <div class="main" style="margin-top: 70px">
     <a class="title" style="margin: auto; text-align: center;">
-      Participate in Group Purchase:
+      Participate in Group Purchase: {{ purchaseTitle }}
     </a>    
     <div class="outer">
       <div class="inner"></div>
     </div>
-    <a class="subTitle">
-      {{ purchaseTitle }}
-    </a>  
-    <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; margin-top: 50px; position: absolute;">
+    <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; position: absolute;">
       <div class="inputLayout">
           <table id="dropdown_table">
             <tr>
@@ -35,7 +32,7 @@
               </td>
               <td class="cell">
                 <button class="delBtn">
-                  Remove
+                  Delete
                 </button>
               </td>
             </tr>
@@ -53,7 +50,7 @@
             ></textarea>
           </div>
         </div>
-        <div class="inputRows" style="margin-bottom:30px;">
+        <div class="inputRows">
           <button v-on:click="submit_purchase" class="submitBtn btns">
             Submit
           </button>
@@ -234,27 +231,17 @@ textarea {
   height: 100%;
   left: 30%;
   background: #48C964;
-  box-shadow: 0px 0px 10px 100px #48C964;
+  box-shadow: 0px 0px 10px 125px #48C964;
 }
 .outer {
-  width: 420px;
+  width: 800px;
   height: 3px;
-  margin: 5px auto 5px;
+  margin: 5px auto 30px;
   /* alignment: left; */
   overflow: hidden;
   position: relative;
   /* background-color: #f37022; */
   outline: none;
-}
-.subTitle {
-  width: 800px;
-  height: 30px;
-  margin: auto;
-  /* text-align: left;
-  margin-bottom: 30px; */
-  font-size: 23px;
-  font-weight: bold;
-  color: #3a3a3a;
 }
 img {
   border: 0.5px solid #3a3a3a;
@@ -294,7 +281,6 @@ img {
   border-radius: 3px;
   border-color: #cbcbcb;
   border-style: solid;
-  border-width: thin;
 }
 .btns {
   outline: none;
@@ -325,7 +311,6 @@ img {
   height: 30px;
   margin-top: 10px;
   margin-left: 6px;
-  outline: none;
 }
 .delBtn:hover {
   background-color: #ce3030;

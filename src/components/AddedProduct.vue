@@ -56,18 +56,20 @@ export default {
 
 <style scoped>
 .card-post {
-  display: relative;
+  display: flex;
   justify-content: center;
   padding: 10px;
   margin: auto;
 }
 .square {
-  width: 565px;
-  height: 100px;
+  width: 800px;
+  height: 200px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0px 20px 50px #d9dbdf;
-  float: left;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 /* .square:hover {
@@ -202,11 +204,10 @@ a:link {
 
 .thumbnail {
     background: black;
-    height: 80px;
-    width: 80px;
+    height: 150px;
+    width: 150px;
     overflow: hidden;
-    margin: 9px 0 0 0px;
-    border-radius: 5px;
+    display: block;
 }
 
 .rowDiv {
@@ -217,14 +218,13 @@ a:link {
 
 .columnLeft {
   float: left;
-  width: 100px;
+  width: 200px;
 }
 
 .columnRight {
   float: left;
-  width: 300px;
-  padding-left: 10px;
-  padding-top: 30px;
+  width: 35%;
+  padding-left: 80px;
 }
 
 .removeButton {
