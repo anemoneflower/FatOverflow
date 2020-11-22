@@ -1,12 +1,12 @@
 <template>
-  <div id="app" class="main" style="margin-top: 40px">
+  <div id="app" class="main" style="margin-top: 70px">
     <a class="title" style="margin: auto; text-align: center;">
       Make Group Purchase
     </a>    
     <div class="outer">
       <div class="inner"></div>
     </div>
-    <div class="rowDiv">
+    <div class=rowDiv>
       <a class="subTitle">Title</a>
       <input
         class="titleInput inputBorder"
@@ -15,7 +15,7 @@
         placeholder="Title"
       />
     </div>
-    <div class="rowDiv">
+    <div class=rowDiv>
       <div style="width: 350px; height: 50px; float:left;">
         <a class="subTitle" style="margin-left:10%">Website</a>
         <input
@@ -83,12 +83,20 @@
         <!-- <SearchProduct v-if="showModal" @close="showModal = false">
           <h3 slot="header">custom header</h3>
         </SearchProduct> -->
+        <Popup 
+          successText="Make Group Purchase Successful"
+          v-if="showModal" 
+          @close="showModal = false"
+          >
+          <h3 slot="header"></h3>
+        </Popup>
         
         <SearchBar 
           @clickedItem="onClickItem"
           @clickedItem_key="onClickItem_key"
           @clickedAdd="onClickAdd"
           style="padding-top:1px"
+          v-if="!showModal"
         />
       <!-- <button v-on:click="addProduct" class="submitBtn btns">
         Add Product
@@ -101,24 +109,23 @@
         >
           <AddedProduct
             :product="product"
+            v-if="!showModal"
           ></AddedProduct>
           <button
             v-on:click="removeProduct(index)"
             class="removeButton"
+            v-if="!showModal"
           >
-            remove
+           Remove
           </button>
-        </div>
-        <div class="rowDiv" style="margin-bottom: 30px;">
+         </div>
+        <div class="rowDiv">
           <button v-on:click="createPurchase" class="submitBtn btns">
             Submit
           </button>
-        </div> 
-      </div>
-
-
-    </div>
-    
+        </div>
+       </div>
+     </div>
   </div>
 </template>
 
@@ -297,7 +304,7 @@ export default {
 .outer {
   width: 300px;
   height: 3px;
-  margin: 5px auto 40px;
+  margin: 5px auto 30px;
   /* alignment: left; */
   overflow: hidden;
   position: relative;
@@ -322,7 +329,6 @@ export default {
   font-size: 15px;
   font-weight: bold;
 }
-
 .titleInput {
   width: 90%;
   height: 30px;
@@ -345,7 +351,7 @@ export default {
 
 .dateInput {
   width: 85%;
-  margin-right: 9%;
+  margin-left: 9%;
   height: 30px;
   float: right;
 }
@@ -400,7 +406,6 @@ export default {
   margin-left: -20px;
   outline: none;
 }
-
 .removeButton:hover {
   background-color: #ce3030;
   color: #f5f5f5;
