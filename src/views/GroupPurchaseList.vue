@@ -22,7 +22,7 @@
 <!--            <GPCard></GPCard>-->
 <!--            <GPCard></GPCard>-->
         </ul>
-        <p v-else>
+        <p style="padding: 80px; font-size:20px" v-else>
             Nothing left in the list.
         </p>
     </div>
@@ -135,7 +135,7 @@ export default {
         justify-content: start;
         padding-left: 12%;
         padding-top: 5px;
-        z-index:1;
+        z-index:2;
         background-color: #fff;
         width:100%;
     }

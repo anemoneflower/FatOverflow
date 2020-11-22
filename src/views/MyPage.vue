@@ -14,7 +14,7 @@
                     :gp = "gp"
             ></GPCard>
         </ul>
-        <p v-else>
+        <p style="padding: 80px; font-size:20px" v-else>
             Nothing left in the list.
         </p>
     </div>
@@ -111,13 +111,15 @@
         color: white;
     }
     .head{
-        width: 100%;
-        position: relative;
+        position: fixed;
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto auto;
         justify-content: start;
-        margin-left: 180px;
-        margin-top: 20px;
+        padding-left: 12%;
+        padding-top: 5px;
+        z-index:2;
+        background-color: #fff;
+        width:100%;
     }
     button{
         height: 40px;
@@ -136,6 +138,6 @@
     }
     .gpList {
         position: relative;
-        padding-top: 5px;
+        padding-top: 80px;
     }
 </style>
