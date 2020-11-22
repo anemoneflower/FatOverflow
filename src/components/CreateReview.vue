@@ -1,19 +1,14 @@
 <template>
-  <div class="main" style="margin-top: 150px">
-    <h1>{{foodName}}</h1>
-    <h3>{{website}}</h3>
+  <div class="main">
+    <!-- <h1>{{foodName}}</h1>
+    <h3>{{website}}</h3> -->
     <div class="rowDiw">
       <p>Please rate using the 5 metrics in the range 1-5, where 1 is the lowest score and 5 is the highest score</p>
-      <p>Cost-effective: How beneficial is the product compared to its price?</p>
-      <p>Taste: </p>
-      <p>Filling: </p>
-      <p>Convenience: </p>
-      <p>Undecided: </p>
 
       
     </div>
     <div class="rowDiv">
-      <label for="ce" class="label">cost-effectiveness</label>
+      <label for="ce" class="label">Cost-effective: How beneficial is the product compared to its price?</label>
       <input
         id="ce"
         class="quantityinput inputBorder"
@@ -22,7 +17,7 @@
       />
     </div>
     <div class="rowDiv">
-      <label for="taste" class="label">taste</label>
+      <label for="taste" class="label">Taste: How good is the taste of this product?</label>
       <input
         id="taste"
         class="quantityinput inputBorder"
@@ -31,7 +26,7 @@
       />
     </div>
     <div class="rowDiv">
-      <label for="filling" class="label">filling</label>
+      <label for="filling" class="label">Filling: How much full does it feel after having this product?</label>
       <input
         id="filling"
         class="quantityinput inputBorder"
@@ -40,7 +35,7 @@
       />
     </div>
     <div class="rowDiv">
-      <label for="convenience" class="label">convenience</label>
+      <label for="convenience" class="label">Convenience: How convenient is it to eat this product?</label>
       <input
         id="convenience"
         class="quantityinput inputBorder"
@@ -65,6 +60,9 @@
 
 <script>
 import { db } from "../main";
+import Vue from 'vue'
+
+
 export default {
   name: "GroupPurchase",
   props: {
@@ -79,15 +77,28 @@ export default {
     },
     foodKey: {
       type: String,
-      default: "asdfasdf"
+      default: "foodKey not given"
     },
+    myEvaluation: {
+      type: Array,
+      default: ()=>[0, 0, 0, 0, 0]
+    }
   },
   data() {
     return {
       userKey: "unknownId",
       date: "",
-      evaluation: [1,1,1,1,1]
+      evaluation: [0, 0, 0, 0, 0]
     };
+  },
+  mounted() {
+    Vue.set(this.evaluation, 0, this.myEvaluation[0]);
+    Vue.set(this.evaluation, 1, this.myEvaluation[1]);
+    Vue.set(this.evaluation, 2, this.myEvaluation[2]);
+    Vue.set(this.evaluation, 3, this.myEvaluation[3]);
+    Vue.set(this.evaluation, 4, this.myEvaluation[4]);
+
+
   },
   methods: {
     createReview: function() {
@@ -111,6 +122,10 @@ export default {
         }
         let ref = db.ref("review/");
         let createReviewKey = ref.push(createReview).key;
+
+        // Add evaluation to food
+        // ref = db.ref("food/"+this.foodKey + "/evaluation/");
+        // createReviewKey = ref.push(this.evaluation)
         console.log(createReviewKey)
       }
       else {
@@ -118,62 +133,17 @@ export default {
       }
       
     },
-    submit: function() {
-      console.log("create_review!");
-      console.log(this.postTitle);
-      console.log(this.website);
-      console.log(this.date);
-      // this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
-      console.log(this.note)
-      const dueDate = this.date.split("/").join("")
-      console.log(dueDate);
-      const tmpDate = new Date()
-      const day = tmpDate.getDate()
-      const month = tmpDate.getMonth() + 1
-      const year = tmpDate.getFullYear()
-      const currentDate = year.toString() + month.toString() + day.toString()
-      console.log(currentDate);
-      console.log(this.shipping)
-      console.log(JSON.stringify(this.productList))
-      const foodKeyList = this.productList.map(x => x.key)
-      console.log(JSON.stringify(foodKeyList))
-      let createPurchase = {
-        userKey: "unknown_sdd",
-        closedDate: dueDate,
-        content: this.note,
-        openDate: currentDate,
-        registeredFood: foodKeyList,
-        isClosed: false,
-        shipping: this.shipping,
-        participant: [],
-        website: this.website,
-        title: this.postTitle
-      };
-      console.log(createPurchase);
-      // To do: put into DB
-      var ref = db.ref("groupPurchase/");
-      var createPurchaseKey = ref.push(createPurchase).key;
-      console.log(createPurchaseKey)
-      this.productList = []
-      this.postTitle = ""
-      this.website = ""
-      this.date = ""
-      this.note = ""
-      this.shipping = ""
-      this.searchBarName = ""
-      this.searchBarKey = ""
-      this.options = []
-      this.showModal = true
-    },
+
   }
 };
 </script>
 
 <style scoped>
 .rowDiv {
-  margin-left: auto;
-  margin-right: auto;
-  width: 800px;
+  float: left;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  width: 100%;
   margin-top: 20px;
 }
 .label {
