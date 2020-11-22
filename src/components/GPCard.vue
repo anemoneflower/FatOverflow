@@ -89,7 +89,7 @@ export default {
           //   this.$router.push({path:'',query:{GP:this.gp.key}});
             console.log("closepost");
             console.log(this.gpKey);
-          //   this.$router.push("/chat/"+this.gp.key);
+            this.$router.push("/chat/"+this.gpKey);
         },
         goGp(){
             console.log(this.gp.key);
