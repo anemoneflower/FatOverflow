@@ -94,6 +94,27 @@ const routes = [
       return import("../views/Chat.vue");
 
     }
+  },
+  {
+    path: "/mypage/closed",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
+  },
+  {
+    path: "/mypage/opened",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
+  },
+  {
+    path: "/mypage/participate",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
   }
 ]
 
