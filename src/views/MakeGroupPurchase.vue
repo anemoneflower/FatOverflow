@@ -73,6 +73,7 @@
         </SearchProduct> -->
         <SearchBar 
           @clickedItem="onClickItem"
+          @clickedItem_key="onClickItem_key"
           @clickedAdd="onClickAdd"
         />
       <!-- <button v-on:click="addProduct" class="submitBtn btns">
@@ -137,7 +138,8 @@ export default {
       note:"Hi",
       showModal: false,
       shipping: "",
-      searchBarData: "",
+      searchBarName: "",
+      searchBarKey: "",
       options: [
         'sarang',
         'mir'
@@ -181,16 +183,18 @@ export default {
       console.log(currentDate);
       console.log(this.shipping)
       console.log(JSON.stringify(this.productList))
+      const foodKeyList = this.productList.map(x => x.key)
+      console.log(JSON.stringify(foodKeyList))
 
       let createPurchase = {
         userKey: "unknown_sdd",
         closedDate: dueDate,
         content: this.note,
         openDate: currentDate,
-        registeredFood: this.productList,
+        registeredFood: foodKeyList,
         isClosed: false,
         shipping: this.shipping,
-        participant: "unknown_sdd",
+        participant: [],
         website: this.website,
       };
       console.log(createPurchase);
@@ -223,20 +227,25 @@ export default {
       }
       return false;
     },
-    addProduct: function() {
-      console.log("Add product");
-      this.productList.push({title: this.searchBarData})
-    },
+    // addProduct: function() {
+    //   console.log("Add product");
+    //   this.productList.push({title: this.searchBarName, key: this.searchBarData[1]})
+    // },
     onClickItem (value) {
       console.log("OnClickItem called")
       console.log(value);
-      this.searchBarData = value;
+      this.searchBarName = value;
+    },
+    onClickItem_key (value) {
+      console.log("OnClickItem_key called")
+      console.log(value);
+      this.searchBarKey = value;
     },
     onClickAdd() {
-      this.productList.push({title: this.searchBarData})
+      this.productList.push({title: this.searchBarName, key: this.searchBarKey})
       console.log("OnClickAdd called");
       console.log("Searchbar data is")
-      console.log(this.searchBarData)
+      console.log(JSON.stringify(this.productList))
     },
     removeProduct(index) {
       console.log("Remove product");

@@ -35,7 +35,7 @@
             @mousedown="foodSelected(index), (visibleOptions = true)"
             @mouseenter="hover(index)"
             :class="{ selected: selected == index }"
-            v-text="match"
+            v-text="match[0]"
           ></li>
         </ul>
       </div>
@@ -53,10 +53,11 @@ export default {
   name: "Autocomplete",
   data() {
     return {
-      selectedFood: null,
+      selectedFood: "",
       searchData: "",
       visibleOptions: true,
       selected: 0,
+      selectedKey: "",
       keyDown: false,
       selectAction: false,
       foods: []
@@ -82,19 +83,31 @@ export default {
               for(var i = keyList.length; i>0; i--){
                 var myKey = keyList[i-1];
                 var gp = myValue[myKey];
-                (this.foods).push(gp.foodName);
+                (this.foods).push([gp.foodName, myKey]);
               }
             })
     console.log(this.foods);
   },
   methods: {
     foodSelected(index) {
+      console.log("Selected:", index)
+      const curMatch = this.matches[index];
+      console.log("selectedFood:", JSON.stringify(this.matches[index]))
+      console.log("selectedFood:", JSON.stringify(this.matches[index][0]))
+      console.log("selectedFood:", JSON.stringify(this.matches[index][1]))
+
+
+
+
       this.selectAction = true;
       this.selected = index;
-      this.searchData = this.matches[index];
-      this.selectedFood = this.matches[index];
+      this.searchData = curMatch[0];
+      this.selectedFood = curMatch[0];
+      this.selectedKey = curMatch[1];
       this.searchResult();
       this.onClickItem();
+      this.onClickItem_key();
+
     },
     searchResult() {
       // if(this.searchData==""){
@@ -106,6 +119,10 @@ export default {
     onClickItem: function() {
       console.log("onClickButton pressed")
       this.$emit('clickedItem', this.searchData);
+    },
+    onClickItem_key: function() {
+    console.log("onClickButton_key pressed")
+    this.$emit('clickedItem_key', this.selectedKey);
     },
     onClickAdd: function() {
       console.log("onClickAdd pressed")
@@ -138,8 +155,9 @@ export default {
       this.$refs.optionsList.scrollTop = this.selected * 39;
     },
     enter() {
-      this.searchData = this.matches[this.selected];
-      this.selectedFood = this.matches[this.selected];
+      this.searchData = this.matches[this.selected][0];
+      this.selectedFood = this.matches[this.selected][0];
+      this.selectedKey = this.matches[this.selected][1];
       this.searchResult();
     },
     initialCount() {
@@ -156,7 +174,7 @@ export default {
       }
       this.initialCount();
       return this.foods.filter(food =>
-        food.toLowerCase().includes(this.searchData.toLowerCase())
+        food[0].toLowerCase().includes(this.searchData.toLowerCase())
       );
     }
   },
