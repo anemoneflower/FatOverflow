@@ -39,9 +39,7 @@
 <script>
     import ViewReview from "./ViewReview"
     import ProductCard from "../components/ProductCard";
-    import firebase from "firebase";
     import Vue from 'vue'
-    // import firebase from "firebase";
     import {db} from "../main.js"
 
     export default {
