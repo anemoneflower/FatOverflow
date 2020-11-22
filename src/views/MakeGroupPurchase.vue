@@ -304,7 +304,7 @@ export default {
 .outer {
   width: 300px;
   height: 3px;
-  margin: 5px auto 30px;
+  margin: 5px auto 40px;
   /* alignment: left; */
   overflow: hidden;
   position: relative;
@@ -334,33 +334,28 @@ export default {
   height: 30px;
   outline: none;
 }
-
 .inputBorder {
   border-radius: 3px;
   border-color: #cbcbcb;
   border-style: solid;
   border-width: thin;
 }
-
 .websiteInput {
   width: 85%;
   height: 30px;
   float: left;
   margin-left: 9%;
 }
-
 .dateInput {
   width: 85%;
-  margin-left: 9%;
+  margin-right: 9%;
   height: 30px;
   float: right;
 }
-
 .commentInput {
   width: 90%;
   height: 200px;
 }
-
 .btns {
   outline: none;
   background-color: #48C964;
@@ -374,14 +369,12 @@ export default {
 .btns:hover {
   background-color: #2f8542;
 }
-
 .submitBtn {
   margin: auto;
   margin-top: 10px;
   width: 100px;
   height: 40px;
 }
-
 .glass {
   height: 28px;
   position: relative;
@@ -389,13 +382,11 @@ export default {
   left: 10px;
   cursor: pointer;
 }
-
 .addProductSearch {
   width: 80%;
   height: 40px;
   font-size: 20px;
 }
-
 .removeButton {
   background-color: #d83737;
   color: #fff;
@@ -411,13 +402,10 @@ export default {
   background-color: #ce3030;
   color: #f5f5f5;
 }
-
 .label {
   font-size: 25px;
 }
-
 .shipping {
   font-size: 25px;
 }
-
 </style>

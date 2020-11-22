@@ -1,12 +1,15 @@
 <template>
-  <div class="main" style="margin-top: 70px">
+  <div class="main" style="margin-top: 40px">
     <a class="title" style="margin: auto; text-align: center;">
-      Participate in Group Purchase: {{ purchaseTitle }}
+      Participate in Group Purchase:
     </a>    
     <div class="outer">
       <div class="inner"></div>
     </div>
-    <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; position: absolute;">
+    <a class="subTitle">
+      {{ purchaseTitle }}
+    </a>  
+    <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; margin-top: 50px; position: absolute;">
       <div class="inputLayout">
           <table id="dropdown_table">
             <tr>
@@ -32,7 +35,7 @@
               </td>
               <td class="cell">
                 <button class="delBtn">
-                  Delete
+                  Remove
                 </button>
               </td>
             </tr>
@@ -50,7 +53,7 @@
             ></textarea>
           </div>
         </div>
-        <div class="inputRows">
+        <div class="inputRows" style="margin-bottom:30px;">
           <button v-on:click="submit_purchase" class="submitBtn btns">
             Submit
           </button>
@@ -89,29 +92,22 @@ export default {
           var value = snapshot.val();
           console.log("mounted: " + value);
           return [Object.keys(value.registeredFood), value.title]
-
         }).then((info) => {
           this.foods = info[0];
           console.log("this.foods:: ", this.foods);
           this.purchaseTitle = info[1];
         }).then(() => {
-
           console.log("created: " + this.itemArray);
           console.log("created: " + this.foods + " len: " + this.foods.length);
           for (var i = 0; i < this.foods.length; i++) {
             console.log("hoho: " + i + " " + this.foods[i]);
-
             var l = db.ref('groupPurchase').child(this.gpKey).child('registeredFood').child(this.foods[i])
                     .once('value')
                     .then(function (snapshot) {
                       var value = snapshot.val();
-
                       console.log('name:', value.foodKey);
-
                       return value.foodKey
-
                     });
-
             l.then(function (val) {
               console.log("val: " + val.toString());
               return db.ref('food').child(val).once('value').then(function (snapshot) {
@@ -136,7 +132,6 @@ export default {
             this.submit();
             //TODO: this.$router.push({ path: `/read-note/${noteKey}/${this.bookKey}` });
             // TODO: https://stackoverflow.com/questions/53788975/vue-router-how-to-get-previous-page-url/53789212
-
         },
         submit: function () {
             console.log("submit_purchase!");
@@ -144,14 +139,12 @@ export default {
             console.log(this.quantity);
             console.log(this.note);
             this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
-
             var date = Date().toString().split(" ");
             date.splice(0, 1);
             date.splice(0, 0, date[1]);
             date.splice(2, 1);
             date.splice(4);
             console.log(date);
-
             var foodObj = [];
             for (var i=0; i<this.selectedOptions.length; i++){
                 if (this.selectedOptions[i].quantity !== 0) {
@@ -171,7 +164,6 @@ export default {
                 userKey: firebase.auth().currentUser.uid,
                 isConfirmed: false
             };
-
             // TODO: change after applying group purchase DB
             var ref = db.ref("groupPurchase").child("-MMPFFDBm2EZw2-Wuwob").child("/participant");
             console.log("ref: "+ ref);
@@ -196,7 +188,6 @@ export default {
             this.selectedOptions[index].item = payload;
             var idx = this.itemArray.indexOf(payload);
             this.selectedOptions[index].key = this.foods[idx];
-
             console.log("selected: ");
             console.log(this.selectedOptions);
         },
@@ -208,13 +199,11 @@ export default {
 p {
   margin: auto;
 }
-
 input[type="text"],
 textarea {
   border-style: inset;
   border-width: 2px;
 }
-
 .title {
   width: 800px;
   height: 30px;
@@ -231,17 +220,27 @@ textarea {
   height: 100%;
   left: 30%;
   background: #48C964;
-  box-shadow: 0px 0px 10px 125px #48C964;
+  box-shadow: 0px 0px 10px 100px #48C964;
 }
 .outer {
-  width: 800px;
+  width: 420px;
   height: 3px;
-  margin: 5px auto 30px;
+  margin: 5px auto 5px;
   /* alignment: left; */
   overflow: hidden;
   position: relative;
   /* background-color: #f37022; */
   outline: none;
+}
+.subTitle {
+  width: 800px;
+  height: 30px;
+  margin: auto;
+  /* text-align: left;
+  margin-bottom: 30px; */
+  font-size: 23px;
+  font-weight: bold;
+  color: #3a3a3a;
 }
 img {
   border: 0.5px solid #3a3a3a;
@@ -255,12 +254,10 @@ img {
   grid-template-columns: 100px 400px auto;
   /*grid-template-rows: repeat(4, 1fr);*/
 }
-
 .productinput {
   width: 450px;
   height: 25px;
 }
-
 .quantityinput {
   width: 45px;
   height: 25px;
@@ -268,7 +265,6 @@ img {
   margin-left: 10px;
   margin-top: 10px;
 }
-
 .tags {
   font-size: 15px;
   text-align: left;
@@ -276,11 +272,11 @@ img {
   margin-left: 6px;
   margin-bottom: 2px;
 }
-
 .inputBorder {
   border-radius: 3px;
   border-color: #cbcbcb;
   border-style: solid;
+  border-width: thin;
 }
 .btns {
   outline: none;
@@ -311,32 +307,27 @@ img {
   height: 30px;
   margin-top: 10px;
   margin-left: 6px;
+  outline: none;
 }
 .delBtn:hover {
   background-color: #ce3030;
   color: #f5f5f5;
 }
-
 .submitBtn {
   margin: auto auto auto 275px;
   width: 100px;
   height: 40px;
 }
-
 .inputLayout {
   margin-top:0;
 }
-
 #dropdown_group {
   margin-top: 5px;
 }
-
 #dropdown_table {
   margin-left: 15px;
 }
-
 .cell {
   padding-right: 10px;
 }
-
 </style>
