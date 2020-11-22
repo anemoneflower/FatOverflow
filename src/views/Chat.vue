@@ -91,7 +91,6 @@
                             <div>OK!<button class="sendBtn" v-on:click="save_txt('OK')">send</button></div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </section>
@@ -122,6 +121,11 @@
                 money:'',
                 account:'',
                 user1: '',
+                come_at_h:'',
+                name3:'',
+                go_at_h:'',
+                go_at_m: '',
+                come_at_m:'',
             }
         },
         computed: {
@@ -143,8 +147,10 @@
             });
             if(!this.isSignin()) alert("ERR: login null");
             console.log('Posts page created');
-
             this.updateChats();
+            let chatref = db.ref("chat");
+            await chatref.on("value", this.onchange);
+
             // find if owner's uid
             var post = "-MMPFFDBm2EZw2-Wuwob";
             const o = await db.ref("groupPurchase/"+post).child('username').once("value");
@@ -153,17 +159,33 @@
             console.log(this.ownerKey);
             this.initChats();
         },
+        updated(){
+            this.initChats();
+        },
         methods: {
+            onchange(snapshot){
+                var myValue = snapshot.val();
+                var keyList = Object.keys(myValue);
+                var chats = [];
+                for (var i = 0; i < keyList.length; i++) {
+                    var v = myValue[keyList[i]];
+                    chats.push(v);
+                    console.log("data: ", v);
+                }
+                console.log("Firebase: ");
+                console.log(chats);
+                this.chats = chats;
+            },
             initChats() {
                 var container = this.$el.querySelector("#chatBox");
-                console.log(container);
+                console.log("CONTAINER: ");
+                console.log(container.scrollHeight);
                 container.scrollTop = container.scrollHeight;
             },
             isSignin() {
                 return this.user1!==null
             },
             updateChats() {
-
                 let chatref = db.ref("chat");
                 let c = chatref.once("value", function(snapshot) {
                     var myValue = snapshot.val();
@@ -191,6 +213,8 @@
                     }
                     console.log("Chats: ");
                     console.log(this.chats);
+                    // this.initChats();
+                    this.refresh_inputs();
                 });
             },
             refresh_inputs(){
@@ -203,7 +227,7 @@
               this.money = '';
               this.account = '';
             },
-            async save_at(txt, input1, input2){
+            save_at(txt, input1, input2){
                 console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var t = txt+input1 + ":" + input2;
@@ -217,8 +241,7 @@
                     _key: key
                 });
                 this.updateChats();
-                this.initChats();
-                this.refresh_inputs();
+
             },
             async save_account(){
                 console.log('Entered save_go_at method');
@@ -234,7 +257,7 @@
                     _key: key
                 });
                 this.updateChats();
-                this.initChats();
+                // this.initChats();
                 this.refresh_inputs();
             },
             async save_txt(txt){
@@ -252,24 +275,7 @@
                 });
                 await this.updateChats();
                 this.refresh_inputs();
-                this.initChats();
-            },
-            async save_front(){
-                console.log('Entered save_come_at method');
-                var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
-                var t = `"`+this.name1+`", please send money!`;
-                var key = db.ref('chat').push({
-                    content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
-                    time: d,
-                    username: this.userName,
-                    userkey: this.userKey,
-                }).key;
-                db.ref('chat').child(key).update({
-                    _key: key
-                });
-                this.updateChats();
-                this.initChats();
-                this.refresh_inputs();
+                // this.initChats();
             },
             async save_both(){
                 console.log('Entered save_come_at method');
@@ -285,7 +291,7 @@
                     _key: key
                 });
                 this.updateChats();
-                this.initChats();
+                // this.initChats();
                 this.refresh_inputs();
             },
             async save_ok() {
@@ -302,7 +308,7 @@
                     _key: key
                 });
                 this.updateChats();
-                this.initChats();
+                // this.initChats();
                 this.refresh_inputs();
             },
             getName(namesrc) {
