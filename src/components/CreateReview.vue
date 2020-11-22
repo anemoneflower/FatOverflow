@@ -60,6 +60,7 @@
 
 <script>
 import { db } from "../main";
+import Vue from 'vue'
 
 
 export default {
@@ -78,13 +79,26 @@ export default {
       type: String,
       default: "foodKey not given"
     },
+    myEvaluation: {
+      type: Array,
+      default: ()=>[0, 0, 0, 0, 0]
+    }
   },
   data() {
     return {
       userKey: "unknownId",
       date: "",
-      evaluation: [1,1,1,1,1]
+      evaluation: [0, 0, 0, 0, 0]
     };
+  },
+  mounted() {
+    Vue.set(this.evaluation, 0, this.myEvaluation[0]);
+    Vue.set(this.evaluation, 1, this.myEvaluation[1]);
+    Vue.set(this.evaluation, 2, this.myEvaluation[2]);
+    Vue.set(this.evaluation, 3, this.myEvaluation[3]);
+    Vue.set(this.evaluation, 4, this.myEvaluation[4]);
+
+
   },
   methods: {
     createReview: function() {
