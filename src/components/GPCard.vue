@@ -1,50 +1,50 @@
 <template>
-    <div class = 'card-post' @click.self="goGp()">
-        <div class="square">
-            <div class="closeTag" v-if="(gp.closed!==undefined)&&(gp.closed===true)">
+    <div class = 'card-post'>
+        <div class="square" @click.self="goGp()">
+            <div class="closeTag" v-if="(gp.closed!==undefined)&&(gp.closed===true)" @click.self="goGp()">
                 <a>* Closed *</a>
             </div>
-            <div class="board-info">
+            <div class="board-info" @click.self="goGp()">
                 <a class="title" >{{gp.title}}</a>
                 <a class="cDate">Due: {{expressDate(gp.closedDate)}}</a>
             </div>
-        <div class="representative">
-            <div class="site">{{gp.website}}</div>
-            <div class="post-info">
-                <a class="shipping">Shipping to: {{gp.shipping}}</a>
-                <br />
-            </div>
-        </div>
-        <div class="content-box">
-            <div class="hashtag" v-if="(registeredFood.length>0)&&(gp.participate===true)">
-                <div
-                        :key = "food.key"
-                        v-for="food in gp.food"
-                >
-                    <PurchaseTag :food="food"></PurchaseTag>
+            <div class="representative" @click.self="goGp()">
+                <div class="site">{{gp.website}}</div>
+                <div class="post-info">
+                    <a class="shipping">Shipping to: {{gp.shipping}}</a>
+                    <br />
                 </div>
             </div>
-            <div class="hashtag" v-else-if="(registeredFood.length>0)">
-                <div
-                        :key = "food.key"
-                        v-for="food in registeredFood"
-                >
-                    <Hashtag :food="food"></Hashtag>
+            <div class="content-box" @click.self="goGp()">
+                <div class="hashtag" v-if="(registeredFood.length>0)&&(gp.participate===true)" @click.self="goGp()">
+                    <div
+                            :key = "food.key"
+                            v-for="food in gp.food"
+                    >
+                        <PurchaseTag :food="food"></PurchaseTag>
+                    </div>
+                </div>
+                <div class="hashtag" v-else-if="(registeredFood.length>0)" @click.self="goGp()">
+                    <div
+                            :key = "food.key"
+                            v-for="food in registeredFood"
+                    >
+                        <Hashtag :food="food"></Hashtag>
+                    </div>
+                </div>
+                <div class="review" v-if="(gp.review!==undefined)&&(gp.review===true)">
+                    <button class="btns">Add review</button>
+                </div>
+                <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">
+                    <button class="btns">Your review</button>
+                </div>
+                <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
+                    <button class="btns" @click="closePost()">Close Post</button>
+                </div>
+                <div class="participatebtn" v-if="(gp.closed===false)||(gp.participate===true)">
+                    <button class="btns" @click="goChat()">Go Chat</button>
                 </div>
             </div>
-            <div class="review" v-if="(gp.review!==undefined)&&(gp.review===true)">
-                <button class="btns">Add review</button>
-            </div>
-            <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">
-                <button class="btns">Your review</button>
-            </div>
-            <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
-                <button class="btns" @click="closePost()">Close Post</button>
-            </div>
-            <div class="participatebtn" v-if="(gp.closed===false)||(gp.participate===true)">
-                <button class="btns" @click="goChat()">Go Chat</button>
-            </div>
-        </div>
         </div>
     </div>
 </template>
