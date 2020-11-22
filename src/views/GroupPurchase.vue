@@ -103,7 +103,7 @@ export default {
     this.gp = myValue;
     for (var key in this.gp.registeredFood) {
       console.log(this.gp.registeredFood[key].foodName);
-      (this.registeredFood).push(this.gp.registeredFood[key].foodName);
+      (this.registeredFood).push(this.gp.registeredFood[key]);
       // console.log(obj[key]);
     }
     this.participants = this.gp.participant;
