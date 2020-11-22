@@ -8,7 +8,7 @@
                  <button id="reviewbtn" @click="goProducts()">Products</button>
             </div>
         </div>
-        <ul class="gpList" v-if="gpList.length">
+        <ul class="gpList" v-if="gpList.length>0">
             <GPCard
                     v-for="gp in gpList"
                     :key = "gp in gpList"
@@ -41,7 +41,7 @@ export default {
     },
     mounted() {
         let query = this.$route.query.result;
-        if (query == undefined) {
+        if (query === undefined) {
             firebase
                 .database()
                 .ref("/groupPurchase")
@@ -101,11 +101,18 @@ export default {
                     }
                 })
         }
+        console.log("LEN" + this.gpList.length);
 
     },
     methods: {
         goProducts() {
-            
+            let query = this.$route.query.result;
+            if (query === undefined){
+                this.$router.push({path:'/products'});
+            }
+            else {
+                this.$router.push({path:'/products',query:{result:query}});
+            }
         }
     }
 }

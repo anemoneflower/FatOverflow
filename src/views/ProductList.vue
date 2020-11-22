@@ -27,7 +27,8 @@
 
 <script>
     import ProductCard from "../components/ProductCard";
-    import firebase from "firebase";
+    // import firebase from "firebase";
+    import {db} from "../main.js"
 
     export default {
         components: {
@@ -41,27 +42,41 @@
                 products: []
             };
         },
-        mounted() {
-            firebase
-                .database()
-                .ref("/food")
-                .once("value",snapshot => {
-                    let myValue = snapshot.val();
-                    let keyList = Object.keys(myValue);
-                    for(let i = keyList.length; i>0; i--){
-                        let myKey = keyList[i-1];
-                        let product = myValue[myKey];
-                        (this.products).push(product);
+        async mounted() {
+            let query = this.$route.query.result;
+            if(query === undefined){
+                const snapshot = await db.ref("/food").once("value")
+
+                let myValue = snapshot.val();
+                let keyList = Object.keys(myValue);
+                for(let i = keyList.length; i>0; i--){
+                    let myKey = keyList[i-1];
+                    let product = myValue[myKey];
+                    (this.products).push(product);
+                }
+            }
+            else {
+                const snapshot = await db.ref("/food").once("value");
+                let myValue = snapshot.val();
+                let keyList = Object.keys(myValue);
+                for(let i = keyList.length; i>0; i--){
+                    let myKey = keyList[i-1];
+                    let food = myValue[myKey];
+                    if(food.foodName.toLowerCase().includes(query.toLowerCase())){
+                        (this.products).push(food);
                     }
-                })
+                }
+            }
         },
         methods: {
-            // goBoard(index) {
-            //     /* var _selectedBook = selectedBook; */
-            //     this.$router.push("/product/" + selected.key);
-            // },
             goGPList() {
-            
+                let query = this.$route.query.result;
+                if (query === undefined){
+                    this.$router.push({path:'/gplist'});
+                }
+                else {
+                    this.$router.push({path:'/gplist',query:{result:query}});
+                }
             }
         }
     }

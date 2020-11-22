@@ -62,11 +62,11 @@ export default {
       return this.user.loggedIn
     },
     goMyPage() {
-      var curPath = this.$router.history.current["path"];
-      var trim = curPath.split("/");
-      if (trim[trim.length - 1].length > 10)
-        this.$router.push("/my-page/" + trim[trim.length - 1]);
-      else this.$router.push("/my-page/none");
+      // var curPath = this.$router.history.current["path"];
+      // var trim = curPath.split("/");
+      // if (trim[trim.length - 1].length > 10)
+      //   this.$router.push("/mypage/" + trim[trim.length - 1]);
+      this.$router.push("/mypage/participate");
     },
     goSignIn() {
       var currentUrl = this.$router.history.current["path"];
