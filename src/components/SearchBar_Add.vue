@@ -41,7 +41,11 @@
       </div>
       <!--      </li>-->
     </ul>
+<<<<<<< HEAD
       <button v-on:click="onClickAdd" class="submitBtn btns">
+=======
+      <button v-on:click="onClickAdd" class="submitBtn btns" style="float:left; margin-left:2%;">
+>>>>>>> parent of dd2f957... mgp css
         Add Product
       </button>
   </div>

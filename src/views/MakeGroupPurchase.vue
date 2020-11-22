@@ -44,17 +44,16 @@
         style="padding-top:23px; width:92%; margin-left:4%;"
       >s</vSelect>
     </div>
-    <div class="rowDiv" style="height:220px;">
+    <div class="rowDiv" style="height:320px;">
       <a class="subTitle">Notes</a>
       <textarea
         class="commentInput inputBorder"
         v-model="note"
       ></textarea>
     </div>
-    <div class="rowDiv" style="height:7px">
-      <a class="subTitle">Products</a>
-    </div>
+    
     <div class="rowDiv" style="height:50px;">
+      <a class="subTitle">Products</a>
       <!-- <button v-on:click="addProduct" class="addBtn btns">
         Add Product +
       </button> -->
@@ -95,18 +94,28 @@
           @clickedItem="onClickItem"
           @clickedItem_key="onClickItem_key"
           @clickedAdd="onClickAdd"
+<<<<<<< HEAD
           style="padding-top:1px"
           v-if="!showModal"
+=======
+          style="padding-top:40px"
+>>>>>>> parent of dd2f957... mgp css
         />
       <!-- <button v-on:click="addProduct" class="submitBtn btns">
         Add Product
       </button> -->
-      <div style="margin: 50px 0 0 4%;">
-        <div
-          v-for="(product, index) in productList"
-          :key = "index"
-          style="margin-top: 5px; height: 110px;"
+      <div
+        v-for="(product, index) in productList"
+        :key = "index"
+      >
+        <AddedProduct
+          :product="product"
+        ></AddedProduct>
+        <button
+          v-on:click="removeProduct(index)"
+          class="removeButton"
         >
+<<<<<<< HEAD
           <AddedProduct
             :product="product"
             v-if="!showModal"
@@ -126,6 +135,19 @@
         </div>
        </div>
      </div>
+=======
+          remove
+        </button>
+      </div>
+
+
+    </div>
+    <div class="rowDiv">
+      <button v-on:click="createPurchase" class="submitBtn btns">
+        Submit
+      </button>
+    </div> 
+>>>>>>> parent of dd2f957... mgp css
   </div>
 </template>
 
@@ -358,7 +380,7 @@ export default {
 
 .commentInput {
   width: 90%;
-  height: 200px;
+  height: 300px;
 }
 
 .btns {
@@ -377,7 +399,6 @@ export default {
 
 .submitBtn {
   margin: auto;
-  margin-top: 10px;
   width: 100px;
   height: 40px;
 }
@@ -396,19 +417,18 @@ export default {
   font-size: 20px;
 }
 .removeButton {
-  background-color: #d83737;
-  color: #fff;
-  border-radius: 11px;
-  border-width: 0px;
-  cursor: pointer;
-  width: 60px;
+  background: red;
+  color: white;
   height: 30px;
+<<<<<<< HEAD
   margin-left: -20px;
   outline: none;
 }
 .removeButton:hover {
   background-color: #ce3030;
   color: #f5f5f5;
+=======
+>>>>>>> parent of dd2f957... mgp css
 }
 
 .label {
