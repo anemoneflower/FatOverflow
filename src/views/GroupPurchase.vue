@@ -32,17 +32,18 @@
           <p class="currentOrderTitle">
             Currently Collected Orders
           </p>
-          <div>
-            <ordered-block>sasdfs</ordered-block>
+<!--          <div>-->
+<!--&lt;!&ndash;            <ordered-block>sasdfs</ordered-block>&ndash;&gt;-->
 
-          </div>
-          <div class="orderBlock">
-            
-            <div class="orderLeft">
-              <p class="orderLeftText">aadfasdf</p>
-            </div>
-            <div>
-              <p class="orderRightText">ID: ss </p>
+<!--          </div>-->
+          <div class="orderBlock" v-for="(p, key) in participants" v-bind:key="key">
+            <div v-for="(pp, key) in p.food" v-bind:key="key">
+              <div class="orderLeft">
+                <p class="orderLeftText">{{pp.name}}</p>
+              </div>
+              <div>
+                <p class="orderRightText">ID: {{p.userName}} </p>
+              </div>
             </div>
           </div>
       </div>
@@ -56,6 +57,7 @@
 import {db} from "../main";
 import Hashtag from "../components/Hashtag";
 import firebase from "firebase";
+import store from "../store";
 
 export default {
   name: "GroupPurchase",
@@ -71,7 +73,9 @@ export default {
       // content:"I am looking for people who are willing to buy lunch boxes and meal plans from this website. The products that slimcook provides are very calori-friendly and always come with fresh ingredients, so I guarantee that you will enjoy them as much as I do.\n\nAs this website requires at least 10 items for free shipping, I will wit untiol we have at least 10 items to order together.",
       // postKey: "-MMPFFDBm2EZw2-Wuwob"
       gp:"",
-      registeredFood:[]
+      registeredFood:[],
+      participants:{},
+      cnt:0
     };
   },
   async mounted() {
@@ -87,11 +91,18 @@ export default {
       (this.registeredFood).push(this.gp.registeredFood[key].foodName);
       // console.log(obj[key]);
     }
+    this.participants = this.gp.participant;
+    // for (var key in this.gp.participant) {
+    //
+    // }
     console.log(myValue);
   },
   methods: {
     participate: function() {
       console.log("Clicked participate"+this.$route.query.GP);
+      var currentUrl = this.$router.history.current["fullPath"];
+      console.log(currentUrl);
+      store.dispatch("pushRoute", currentUrl);
       this.$router.push("/participate/"+this.$route.query.GP);
     },
 
