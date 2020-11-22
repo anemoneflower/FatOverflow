@@ -7,7 +7,11 @@
             <div class = "reviewbtn">
                  <button id="reviewbtn" @click="goProducts()">Products</button>
             </div>
+            <div class = "mgp">
+                 <button id="mgpbtn" @click="goMgp()">Make Group Purchase</button>
+            </div>
         </div>
+
         <ul class="gpList" v-if="gpList.length>0">
             <GPCard
                     v-for="gp in gpList"
@@ -117,6 +121,9 @@ export default {
             else {
                 this.$router.push({path:'/products',query:{result:query}});
             }
+        },
+        goMgp() {
+          this.$router.push({path:'/mgp'});
         }
     }
 }
@@ -170,6 +177,12 @@ export default {
         background-color: #99e5aa;
         color: #818181;
     }
+
+
+    #mgpbtn {
+      float: right
+    }
+
     .gpList {
         position: relative;
         padding-top: 80px;
