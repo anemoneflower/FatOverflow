@@ -11,9 +11,8 @@
         <ul class="gpList" v-if="gpList.length>0">
             <GPCard
                     v-for="gp in gpList"
-                    :key = "gp in gpList"
+                    :key = "gp.index"
                     :gp = "gp"
-                    :gpKey = "gpKey"
             ></GPCard>
 <!--            <GPCard></GPCard>-->
 <!--            <GPCard></GPCard>-->
