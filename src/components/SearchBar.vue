@@ -190,14 +190,15 @@ export default {
   font-size: 23px;
 }
 .options {
-  width: 520px;
+  width: 675px;
   padding: none;
   position: relative;
-  left: 27.3px;
+  left: 0px;
   margin: none;
-  max-height: 150px;
+  max-height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
+  box-shadow: 0px 35px 50px #d9dbdf;
 }
 .options::-webkit-scrollbar {
   width: 10px;
