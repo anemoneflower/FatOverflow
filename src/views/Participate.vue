@@ -114,8 +114,9 @@ export default {
                     .once('value')
                     .then(function (snapshot) {
                       var value = snapshot.val();
-                      console.log('name:', value.foodKey);
-                      return value.foodKey
+                      console.log(value);
+                      console.log('name:', value);
+                      return value
                     });
             l.then(function (val) {
               console.log("val: " + val.toString());
