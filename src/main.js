@@ -30,6 +30,7 @@ var firebaseConfig = {
 
 var app = firebase.initializeApp(firebaseConfig);
 export const db = app.database();
+
 // firebase.analytics();
 //
 // db.ref("food/").push().set({

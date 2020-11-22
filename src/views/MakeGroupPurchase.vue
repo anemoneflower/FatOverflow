@@ -29,15 +29,72 @@
       />
     </div>
     <div class="rowDiv">
+      <br><br>
+    <vSelect 
+      :options="options"
+      v-model="shipping"
+      placeholder="Please select shipping destination"
+    >s</vSelect>
+    </div>
+    <div class="rowDiv">
       <textarea
         class="commentInput inputBorder"
         v-model="note"
       ></textarea>
     </div>
     <div class="rowDiv">
-      <button v-on:click="addProduct" class="addBtn btns">
+      <!-- <button v-on:click="addProduct" class="addBtn btns">
         Add Product +
-      </button>
+      </button> -->
+
+        <!-- <input
+          class="addProductSearch"
+          autocomplete="off"
+          id="input"
+          type="text"
+          v-model="title"
+          placeholder="Find the product to add"
+          @keydown.up="keyup"
+          @keydown.down="keydown"
+          @keydown.enter="enter"
+          v-focus
+          @focus="visibleOptions = true"
+          @focusout="visibleOptions = false"
+        />
+        <a
+          ><img
+            class="glass"
+            src="../assets/magnifying-glass.png"
+            @click="showModal = true"
+            title="this is search bar"
+        /></a> -->
+        <!-- <SearchProduct v-if="showModal" @close="showModal = false">
+          <h3 slot="header">custom header</h3>
+        </SearchProduct> -->
+        <SearchBar 
+          @clickedItem="onClickItem"
+          @clickedItem_key="onClickItem_key"
+          @clickedAdd="onClickAdd"
+        />
+      <!-- <button v-on:click="addProduct" class="submitBtn btns">
+        Add Product
+      </button> -->
+      <div
+        v-for="(product, index) in productList"
+        :key = "index"
+      >
+        <AddedProduct
+          :product="product"
+        ></AddedProduct>
+        <button
+          v-on:click="removeProduct(index)"
+          class="removeButton"
+        >
+          remove
+        </button>
+      </div>
+
+
     </div>
     <div class="rowDiv">
       <button v-on:click="createPurchase" class="submitBtn btns">
@@ -48,23 +105,45 @@
 </template>
 
 <script>
-// import { db } from "../main";
+import { db } from "../main";
+import AddedProduct from "../components/AddedProduct.vue"
+// import SearchProduct from "./SearchProduct.vue"
+import SearchBar from "../components/SearchBar_Add.vue"
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+
+
 
 function isInt(value) {
   return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
 }
 export default {
   name: "GroupPurchase",
+  components: {
+    AddedProduct,
+    // SearchProduct,
+    SearchBar,
+    vSelect
+  },
   props: {
     _postId: String,
   },
 
   data() {
     return {
+      productList: [],
       postTitle: "Join me",
       website: "www.ocook.com",
       date: "2020/12/21",
       note:"Hi",
+      showModal: false,
+      shipping: "",
+      searchBarName: "",
+      searchBarKey: "",
+      options: [
+        'sarang',
+        'mir'
+      ]
     };
   },
   methods: {
@@ -102,21 +181,28 @@ export default {
       const year = tmpDate.getFullYear()
       const currentDate = year.toString() + month.toString() + day.toString()
       console.log(currentDate);
+      console.log(this.shipping)
+      console.log(JSON.stringify(this.productList))
+      const foodKeyList = this.productList.map(x => x.key)
+      console.log(JSON.stringify(foodKeyList))
 
       let createPurchase = {
-        createDate: currentDate,
-        user_db_key: "unknown_sdd",
-        foodList: "unknown",
-        title: this.postTitle,
+        userKey: "unknown_sdd",
+        closedDate: dueDate,
+        content: this.note,
+        openDate: currentDate,
+        registeredFood: foodKeyList,
+        isClosed: false,
+        shipping: this.shipping,
+        participant: [],
         website: this.website,
-        note: this.note,
-        userList: "unknown",
-        dueDate: this.dueDate
       };
       console.log(createPurchase);
 
       // To do: put into DB
-
+      var ref = db.ref("groupPurchase/");
+      var createPurchaseKey = ref.push(createPurchase).key;
+      console.log(createPurchaseKey)
     },
     isValidDate: function() {
       if (this.date.includes('/')) {
@@ -141,8 +227,29 @@ export default {
       }
       return false;
     },
-    addProduct: function() {
-      console.log("Add product");
+    // addProduct: function() {
+    //   console.log("Add product");
+    //   this.productList.push({title: this.searchBarName, key: this.searchBarData[1]})
+    // },
+    onClickItem (value) {
+      console.log("OnClickItem called")
+      console.log(value);
+      this.searchBarName = value;
+    },
+    onClickItem_key (value) {
+      console.log("OnClickItem_key called")
+      console.log(value);
+      this.searchBarKey = value;
+    },
+    onClickAdd() {
+      this.productList.push({title: this.searchBarName, key: this.searchBarKey})
+      console.log("OnClickAdd called");
+      console.log("Searchbar data is")
+      console.log(JSON.stringify(this.productList))
+    },
+    removeProduct(index) {
+      console.log("Remove product");
+      this.productList.splice(index, 1);
     }
   }
 };
@@ -236,8 +343,32 @@ export default {
   height: 40px;
 }
 
-.addBtn {
-  
+.glass {
+  height: 28px;
+  position: relative;
+  top: 1px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.addProductSearch {
+  width: 80%;
+  height: 40px;
+  font-size: 20px;
+}
+
+.removeButton {
+  background: red;
+  color: white;
+  height: 30px;
+}
+
+.label {
+  font-size: 25px;
+}
+
+.shipping {
+  font-size: 25px;
 }
 
 </style>
