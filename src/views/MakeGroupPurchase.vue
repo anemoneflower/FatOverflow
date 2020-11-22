@@ -119,7 +119,7 @@
            Remove
           </button>
          </div>
-        <div class="rowDiv">
+        <div class="rowDiv" style="margin-bottom:30px;">
           <button v-on:click="createPurchase" class="submitBtn btns">
             Submit
           </button>
