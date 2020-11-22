@@ -1,6 +1,9 @@
 <template>
     <div class = 'card-post' @click="goGp()">
         <div class="square">
+            <div class="closeTag" v-if="(gp.closed!==undefined)&&(gp.closed===true)">
+                <a>* Closed *</a>
+            </div>
             <div class="board-info">
                 <a class="title" >{{gp.title}}</a>
                 <a class="cDate">Due: {{expressDate(gp.closedDate)}}</a>
@@ -30,19 +33,16 @@
                 </div>
             </div>
             <div class="review" v-if="(gp.review!==undefined)&&(gp.review===true)">
-                <button>Add review</button>
+                <button class="btns">Add review</button>
             </div>
             <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">
-                <button>Your review</button>
-            </div>
-            <div class="closeTag" v-if="(gp.closed!==undefined)&&(gp.closed===true)">
-                <a>Closed</a>
+                <button class="btns">Your review</button>
             </div>
             <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
-                <button @click="closePost()">Close Post</button>
+                <button class="btns" @click="closePost()">Close Post</button>
             </div>
             <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
-                <button @click="closePost()">Go Chat</button>
+                <button class="btns" @click="closePost()">Go Chat</button>
             </div>
         </div>
         </div>
@@ -211,7 +211,7 @@ a:link {
 }
 
 .content-box {
-  width: 740px;
+  width: 1134px;
   padding-left: 35px;
   padding-right: 30px;
   margin: auto;
@@ -249,4 +249,27 @@ a:link {
   margin-left: -7px;
 }
 
+.btns {
+  outline: none;
+  background-color: #48C964;
+  color: #fff;
+  border-radius: 10px;
+  border-width: 0px;
+  font-size: 15px;
+  padding: 6px 11px 6px 11px;
+  margin-right: 7px;
+  cursor: pointer;
+  float:right;
+}
+.btns:hover {
+  background-color: #43be5d;
+  color: #f5f5f5;
+}
+.closeTag {
+  position: absolute;
+  z-index: 1;
+  font-weight: bold;
+  font-size: 15px;
+  margin: 6px 0px 0px 10px;
+}
 </style>
