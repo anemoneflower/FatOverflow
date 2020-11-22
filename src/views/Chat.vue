@@ -135,16 +135,19 @@
             })
         },
         async created () {
-            await firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    this.user1 = user;
-                    this.userName = this.user1.displayName;
-                    this.userKey = this.user1.uid;
-                } else {
-                    console.log('No user');
-                    this.user1 = null
-                }
-            });
+            this.user1 = firebase.auth().currentUser;
+            this.userName = this.user1.displayName;
+            this.userKey = this.user1.uid;
+            // await firebase.auth().onAuthStateChanged(function(user) {
+            //     if (user) {
+            //         this.user1 = user;
+            //         this.userName = this.user1.displayName;
+            //         this.userKey = this.user1.uid;
+            //     } else {
+            //         console.log('No user');
+            //         this.user1 = null
+            //     }
+            // });
             if(!this.isSignin()) alert("ERR: login null");
             console.log('Posts page created');
             this.updateChats();
@@ -318,10 +321,10 @@
                 return namesrc;
             },
             getDate(datesrc) {
-                console.log("date");
+                // console.log("date");
                 var strL = datesrc.split(" ");
                 var hms = strL[4].split(":");
-                console.log(hms);
+                // console.log(hms);
                 return strL[1] + " " + strL[2] + "  " + hms[0] + ":" + hms[1];
             }
         }
