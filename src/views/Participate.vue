@@ -155,7 +155,7 @@ export default {
             var foodObj = {};
             for (var i=0; i<this.selectedOptions.length; i++){
                 if (this.selectedOptions[i].quantity !== 0) {
-                    foodObj[this.selectedOptions[i].key] = {quantity: this.selectedOptions[i].quantity}
+                    foodObj[this.selectedOptions[i].key] = {name: this.selectedOptions[i].item, quantity: this.selectedOptions[i].quantity}
                 }
             }
             console.log("foodObj:");
@@ -166,6 +166,7 @@ export default {
                 food: foodObj,
                 note: this.note,
                 userKey: firebase.auth().currentUser.uid,
+                userName: firebase.auth().currentUser.displayName,
                 isConfirmed: false
               };
               // TODO: change after applying group purchase DB
