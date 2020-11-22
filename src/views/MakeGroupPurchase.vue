@@ -126,6 +126,13 @@
         </div>
        </div>
      </div>
+     <div>
+       <br><br>
+       <p 
+        class="warningMsg"
+        v-if="showWarning"
+       >{{warningMsg}}</p>
+     </div>
   </div>
 </template>
 
@@ -156,12 +163,14 @@ export default {
   },
   mounted() {
     this.uid = firebase.auth().currentUser.uid;
+    this.username = firebase.auth().currentUser.displayName;
     console.log("uid is");
     console.log(this.uid)
   },
   data() {
     return {
       uid: "",
+      username: "",
       productList: [],
       postTitle: "",
       website: "",
@@ -174,7 +183,9 @@ export default {
       options: [
         'sarang',
         'mir'
-      ]
+      ],
+      warningMsg: "",
+      showWarning: false
     };
   },
   methods: {
@@ -183,15 +194,23 @@ export default {
     },
     createPurchase: function() {
       // Check validity of input
-      if (this.postTitle != "" && this.website != "" && this.date != "") {
+      if (this.postTitle != "" 
+        && this.website != "" 
+        && this.date != ""
+        && this.shipping != ""
+        && this.productList.length != 0
+        ) {
         if (this.isValidDate(this.date)) {
           this.submit();
         }
         else {
-          console.log("Invalid date format");
+            this.showWarning = true;
+            this.warningMsg = "Please put the date in correct format yyyy/mm/dd"
         }
       }
       else {
+        this.showWarning = true;
+        this.warningMsg = "Please fill in all the content including Title, Website, Due date, Shipping place and Products"
         console.log("Missing content")
       }
       
@@ -219,6 +238,7 @@ export default {
 
       let createPurchase = {
         userKey: this.uid,
+        username: this.username,
         closedDate: dueDate,
         title: this.postTitle,
         content: this.note,
@@ -235,6 +255,7 @@ export default {
       var ref = db.ref("groupPurchase/");
       var createPurchaseKey = ref.push(createPurchase).key;
       console.log(createPurchaseKey)
+      this.$router.push({path:'gp',query:{GP:createPurchaseKey}});
     },
     isValidDate: function() {
       if (this.date.includes('/')) {
@@ -431,5 +452,8 @@ export default {
 }
 .shipping {
   font-size: 25px;
+}
+.warningMsg {
+  color: #ce3030
 }
 </style>
