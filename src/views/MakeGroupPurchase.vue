@@ -29,7 +29,12 @@
       />
     </div>
     <div class="rowDiv">
-shipping
+      <br><br>
+    <vSelect 
+      :options="options"
+      v-model="shipping"
+      placeholder="Please select shipping destination"
+    >s</vSelect>
     </div>
     <div class="rowDiv">
       <textarea
@@ -99,10 +104,13 @@ shipping
 </template>
 
 <script>
-// import { db } from "../main";
+import { db } from "../main";
 import AddedProduct from "../components/AddedProduct.vue"
 // import SearchProduct from "./SearchProduct.vue"
 import SearchBar from "../components/SearchBar_Add.vue"
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+
 
 
 function isInt(value) {
@@ -113,7 +121,8 @@ export default {
   components: {
     AddedProduct,
     // SearchProduct,
-    SearchBar
+    SearchBar,
+    vSelect
   },
   props: {
     _postId: String,
@@ -128,7 +137,11 @@ export default {
       note:"Hi",
       showModal: false,
       shipping: "",
-      searchBarData: ""
+      searchBarData: "",
+      options: [
+        'sarang',
+        'mir'
+      ]
     };
   },
   methods: {
@@ -166,21 +179,26 @@ export default {
       const year = tmpDate.getFullYear()
       const currentDate = year.toString() + month.toString() + day.toString()
       console.log(currentDate);
+      console.log(this.shipping)
+      console.log(JSON.stringify(this.productList))
 
       let createPurchase = {
-        createDate: currentDate,
-        user_db_key: "unknown_sdd",
-        foodList: "unknown",
-        title: this.postTitle,
+        userKey: "unknown_sdd",
+        closedDate: dueDate,
+        content: this.note,
+        openDate: currentDate,
+        registeredFood: this.productList,
+        isClosed: false,
+        shipping: this.shipping,
+        participant: "unknown_sdd",
         website: this.website,
-        note: this.note,
-        userList: "unknown",
-        dueDate: this.dueDate
       };
       console.log(createPurchase);
 
       // To do: put into DB
-
+      var ref = db.ref("groupPurchase/");
+      var createPurchaseKey = ref.push(createPurchase).key;
+      console.log(createPurchaseKey)
     },
     isValidDate: function() {
       if (this.date.includes('/')) {
