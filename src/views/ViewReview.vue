@@ -166,6 +166,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index:4;
   }
 
   .modal {
@@ -175,7 +176,8 @@
     display: flex;
     flex-direction: column;
     width: 1000px;
-    height: 300;
+    height: 700px;
+    border-radius: 20px;
   }
 
   .modal-header,

@@ -39,11 +39,11 @@
           <div class="orderBlock" v-for="(p, key) in participants" v-bind:key="key">
             <div v-for="(pp, key) in p.food" v-bind:key="key">
               <div class="orderLeft">
-                <p class="orderLeftText">{{pp.name}}</p>
+                <p class="orderLeftText">{{pp.name}}, {{pp.quantity}}</p>
               </div>
-              <div>
-                <p class="orderRightText">ID: {{p.userName}} </p>
-              </div>
+            </div>
+            <div>
+              <p class="orderRightText">ID: {{p.userName}} </p>
             </div>
           </div>
       </div>
@@ -92,6 +92,8 @@ export default {
       // console.log(obj[key]);
     }
     this.participants = this.gp.participant;
+    console.log("participants is")
+    console.log(this.participants)
     // for (var key in this.gp.participant) {
     //
     // }
