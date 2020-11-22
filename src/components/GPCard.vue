@@ -52,6 +52,8 @@
 <script>
 import Hashtag from "./Hashtag.vue"
 import PurchaseTag from "./PurchaseTag.vue"
+// import firebase from "firebase";
+
 export default {
     components :{
         Hashtag,
@@ -94,7 +96,11 @@ export default {
         goGp(){
             console.log(this.gp.key);
             this.$router.push({path:'/gp',query:{GP:this.gp.key}});
-        }
+        },
+        // closePost(){
+        //     let userKey = firebase.auth().
+        //     // let ref = db.ref("/users")
+        // }
     }
 }
 </script>

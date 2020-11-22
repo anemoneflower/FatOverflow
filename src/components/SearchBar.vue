@@ -97,7 +97,17 @@ export default {
         return [];
       }
       this.visibleOptions = false;
-      this.$router.push({path:'gplist',query:{result:this.searchData}})
+      var path = this.$router.history.current["path"];
+      console.log(path);
+      if(path==='/gplist'){
+        this.$router.push({path:'/gplist',query:{result:this.searchData}});
+        window.location.reload();
+      }
+      else if(path==='/products'){
+        this.$router.push({path:'/products',query:{result:this.searchData}});
+        window.location.reload();
+      }
+
 
     },
     hover(index) {
