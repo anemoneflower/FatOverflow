@@ -24,15 +24,10 @@
             Currently Collected Orders
           </p>
           <div>
-            <!-- <ordered-block>sasdfs</ordered-block> -->
+            <ordered-block>sasdfs</ordered-block>
 
           </div>
-          <GPParticipant 
-            v-for="(participant, index) in participantList"
-            :key = "index"
-            :participant = "participant"
-          />
-          <!-- <div class="orderBlock">
+          <div class="orderBlock">
             
             <div class="orderLeft">
               <p class="orderLeftText">aadfasdf</p>
@@ -40,7 +35,7 @@
             <div>
               <p class="orderRightText">ID: ss </p>
             </div>
-          </div> -->
+          </div>
       </div>
 
     </div>
@@ -48,9 +43,8 @@
 </template>
 
 <script>
-import GPParticipant from '../components/GPParticipant.vue';
+
 export default {
-  components: { GPParticipant },
   name: "GroupPurchase",
   props: {
     _postId: String,
@@ -61,9 +55,7 @@ export default {
       website: "http://www.ocook.com",
       date: "11. 05. 2020",
       content:"I am looking for people who are willing to buy lunch boxes and meal plans from this website. The products that slimcook provides are very calori-friendly and always come with fresh ingredients, so I guarantee that you will enjoy them as much as I do.\n\nAs this website requires at least 10 items for free shipping, I will wit untiol we have at least 10 items to order together.",
-      postKey: "-MMPFFDBm2EZw2-Wuwob",
-      participantList: [{id: "unknownid1", food: [["food1", 3], ["food2", 2]]}, 
-      {id: "unknownid2", food: [["food3", 12], ["food4", 9], ["food5", 22]]}]
+      postKey: "-MMPFFDBm2EZw2-Wuwob"
     };
   },
   methods: {

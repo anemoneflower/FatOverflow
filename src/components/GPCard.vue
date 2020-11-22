@@ -21,12 +21,7 @@
                     <Hashtag :food="food"></Hashtag>
                 </div>
             </div>
-            <div class="review" v-if="(gp.review!==undefined)&&(gp.review)===true">
-                <button>Add review</button>
-            </div>
-            <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">
-                <button>Your review</button>
-            </div>
+          <!-- <p class="content" v-html=AAAAAAAAAAAa></p> -->
         </div>
         </div>
     </div>
@@ -41,19 +36,20 @@ export default {
     props: {
         gp : {
             type: Object
-        }
+        },
+        gpKey: String,
+        // registeredFoodKey: String
     },
     data(){
         return{
-          registeredFood: [],
-            review : (this.gp.review!==undefined)&&(this.gp.review)
+          registeredFood: []
         };
     },
     mounted() {
-        console.log("GPREVIEW"+this.gp.review);
         for (var key in this.gp.registeredFood) {
             console.log(this.gp.registeredFood[key].foodName);
             (this.registeredFood).push(this.gp.registeredFood[key].foodName);
+            // console.log(obj[key]);
         }
     },
     methods: {

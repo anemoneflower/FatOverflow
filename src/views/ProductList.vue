@@ -36,35 +36,24 @@
         props: {
             productkey:String
         },
-        data() {
+        data(){
             return {
                 products: []
             };
         },
-        async mounted() {
-            const snapshot = await firebase.database().ref("/food").once("value")
-
-            let myValue = snapshot.val();
-            let keyList = Object.keys(myValue);
-            for(let i = keyList.length; i>0; i--){
-                let myKey = keyList[i-1];
-                let product = myValue[myKey];
-                (this.products).push(product);
-            }
-
-            // const snapshot = awit
-            // firebase
-            //     .database()
-            //     .ref("/food")
-            //     .once("value",snapshot => {
-            //         let myValue = snapshot.val();
-            //         let keyList = Object.keys(myValue);
-            //         for(let i = keyList.length; i>0; i--){
-            //             let myKey = keyList[i-1];
-            //             let product = myValue[myKey];
-            //             (this.products).push(product);
-            //         }
-            //     })
+        mounted() {
+            firebase
+                .database()
+                .ref("/food")
+                .once("value",snapshot => {
+                    let myValue = snapshot.val();
+                    let keyList = Object.keys(myValue);
+                    for(let i = keyList.length; i>0; i--){
+                        let myKey = keyList[i-1];
+                        let product = myValue[myKey];
+                        (this.products).push(product);
+                    }
+                })
         },
         methods: {
             // goBoard(index) {
