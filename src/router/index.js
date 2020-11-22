@@ -108,6 +108,7 @@ const routes = [
       return import("../views/MyPage.vue");
     }
   },
+  {
     path: "/createReview",
     name: "CreateReview",
     component: function() {
