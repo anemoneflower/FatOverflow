@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="main" style="margin-top: 70px">
+  <div id="app" class="main" style="margin-top: 40px">
     <a class="title" style="margin: auto; text-align: center;">
       Make Group Purchase
     </a>    
