@@ -35,8 +35,12 @@
             <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">
                 <button>Your review</button>
             </div>
-
-            
+            <div class="closeTag" v-if="(gp.closed!==undefined)&&(gp.closed===true)">
+                <a>Closed</a>
+            </div>
+            <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
+                <button @click="closePost()">Close Post</button>
+            </div>
         </div>
         </div>
     </div>
@@ -76,7 +80,10 @@ export default {
     methods: {
       expressDate(num) {
         return num.slice(0,4) + ". " + num.slice(4,6) + ". " + num.slice(6);
-      }
+      },
+        closePost(){
+          //TODO: close 하기
+        }
     }
 }
 </script>
