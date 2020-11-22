@@ -87,8 +87,8 @@ export default {
   },
   methods: {
     participate: function() {
-      console.log("Clicked participate");
-      this.$router.push("/participate/"+this.postKey);
+      console.log("Clicked participate"+this.$route.query.GP);
+      this.$router.push("/participate/"+this.$route.query.GP);
     },
 
   }
