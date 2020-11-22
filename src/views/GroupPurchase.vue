@@ -55,6 +55,7 @@
 
 import {db} from "../main";
 import Hashtag from "../components/Hashtag";
+import firebase from "firebase";
 
 export default {
   name: "GroupPurchase",
@@ -74,6 +75,9 @@ export default {
     };
   },
   async mounted() {
+    let user =firebase.auth().currentUser;
+    let uid = user.uid;
+    console.log(uid);
     let query = this.$route.query.GP;
     const snapshot = await db.ref('groupPurchase/'+query).once("value");
     let myValue = snapshot.val();
