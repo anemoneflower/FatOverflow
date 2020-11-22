@@ -2,9 +2,9 @@
     <div>
         <div class="head">
             <div class="btn">
-                <router-link tag="button" @click.native="enableClosed()" to="/mypage/closed">Closed</router-link>
-                <router-link tag="button" @click.native="enableOpened()" to="/mypage/opened">Opened</router-link>
                 <router-link tag="button" @click.native="enableParticipate()" to="/mypage/participate">Participating</router-link>
+                <router-link tag="button" @click.native="enableOpened()" to="/mypage/opened">Opened</router-link>
+                <router-link tag="button" @click.native="enableClosed()" to="/mypage/closed">Closed</router-link>
             </div>
         </div>
         <ul class="gpList" v-if="gpList.length">
@@ -22,10 +22,18 @@
 
 <script>
     import GPCard from "../components/GPCard.vue"
-    import firebase from "firebase";
+    // import firebase from "firebase";
+    import { db } from "../main";
+    import {mapGetters} from "vuex";
 
     export default {
         name: "MyPage",
+        computed: {
+            ...mapGetters({
+                uid: "uid",
+                user: "user"
+            })
+        },
         components: {
             GPCard
         },
@@ -38,28 +46,37 @@
             };
         },
         async mounted() {
-            const snapshot = await firebase.database().ref('users/SVsXvyMLsbUOnof9iAcUy390WZB3').once("value");
+
+            const snapshot = await db.ref('users/SVsXvyMLsbUOnof9iAcUy390WZB3').once("value");
             let myValue = snapshot.val()&&snapshot.val().gpList;
 
             let keyList = Object.keys(myValue);
             for(let i=keyList.length; i>0 ; i--){
                 let myKey = keyList[i-1];
                 let gp = myValue[myKey];
-                const gpSnapshot = await firebase.database().ref('/groupPurchase').once("value");
+                const gpSnapshot = await db.ref('/groupPurchase').once("value");
                 let gpValue = gpSnapshot.val();
 
                 if(gp.closed===true){
                     gpValue[myKey].review = gp.review;
+                    gpValue[myKey].closed = gp.closed;
+                    if(gp.participate===true){
+                        gpValue[myKey].participate = gp.participate;
+                        gpValue[myKey].foodList = gp.foodList;
+                    }
                     this.closedList.push(gpValue[myKey]);
                 }
                 else if(gp.participate===false){
+                    gpValue[myKey].closed = gp.closed;
                     this.openedList.push(gpValue[myKey]);
                 }
                 else{
+                    gpValue[myKey].participate = gp.participate;
+                    gpValue[myKey].foodList = gp.foodList;
                     this.participatingList.push(gpValue[myKey]);
                 }
             }
-            this.gpList = this.closedList;
+            this.gpList = this.participatingList;
         },
         methods : {
             enableClosed() {

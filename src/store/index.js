@@ -19,6 +19,9 @@ const store = new Vuex.Store({
         },
         previousUrl(state){
             return state.previousUrl
+        },
+        uid(state){
+            return state.user.data.uid
         }
     },
     //Mutations allows us to be able to make changes to our state.

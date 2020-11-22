@@ -13,7 +13,15 @@
             </div>
         </div>
         <div class="content-box">
-            <div class="hashtag" v-if="registeredFood.length">
+            <div class="hashtag" v-if="(registeredFood.length>0)&&(gp.participate===true)">
+                <div
+                        :key = "food.key"
+                        v-for="food in gp.foodList"
+                >
+                    <PurchaseTag :food="food"></PurchaseTag>
+                </div>
+            </div>
+            <div class="hashtag" v-else-if="(registeredFood.length>0)">
                 <div
                         :key = "food.key"
                         v-for="food in registeredFood"
@@ -21,12 +29,14 @@
                     <Hashtag :food="food"></Hashtag>
                 </div>
             </div>
-            <div class="review" v-if="(gp.review!==undefined)&&(gp.review)===true">
+            <div class="review" v-if="(gp.review!==undefined)&&(gp.review===true)">
                 <button>Add review</button>
             </div>
             <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">
                 <button>Your review</button>
             </div>
+
+            
         </div>
         </div>
     </div>
@@ -34,9 +44,11 @@
 
 <script>
 import Hashtag from "./Hashtag.vue"
+import PurchaseTag from "./PurchaseTag.vue"
 export default {
     components :{
-        Hashtag
+        Hashtag,
+        PurchaseTag
     },
     props: {
         gp : {
@@ -55,6 +67,10 @@ export default {
             console.log(this.gp.registeredFood[key].foodName);
             (this.registeredFood).push(this.gp.registeredFood[key].foodName);
         }
+        // console.log("TTTRRRRUUUEWWW   " + this.gp.participate);
+        // if(this.gp.participate!==undefined&&this.gp.participate){
+        //     console.log("TTTRRRRUUUEWWW");
+        // }
     },
     methods: {
       expressDate(num) {
