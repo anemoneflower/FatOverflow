@@ -56,22 +56,19 @@ export default {
 
 <style scoped>
 .card-post {
-  display: flex;
+  display: relative;
   justify-content: center;
   padding: 10px;
   margin: auto;
 }
 .square {
-  width: 800px;
-  height: 200px;
+  width: 565px;
+  height: 100px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0px 20px 50px #d9dbdf;
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  float: left;
 }
-
 /* .square:hover {
   -webkit-transform: translate(20px, -10px);
   -ms-transform: translate(10px, -10px);
@@ -83,7 +80,6 @@ a:visited {
   text-decoration: none;
   color: #3a3a3a;
 }
-
 a:link {
   text-decoration: none;
   color: #3a3a3a;
@@ -99,21 +95,17 @@ a:link {
   background-color: #ffffff;
   /* border-style: solid; */
 }
-
 .board-info > a {
   font-size: 25px;
   color: rgb(0, 0, 0);
 }
-
 .site {
   float: left;
 }
-
 .cDate {
   float: right;
   font-size: 15px;
 }
-
 .representative {
   margin: auto;
   width: 740px;
@@ -122,36 +114,30 @@ a:link {
   padding-right: 30px;
   position: absolute;
 }
-
 .post-info {
   float: right;
   position: relative;
 }
-
 .status {
   float: right;
   position: relative;
 }
-
 .post-info > a {
   font-size: 15px;
   color: #cbcbcb;
 }
-
 #eye {
   position: relative;
   top: 3.5px;
   height: 16.8px;
   right: 10px;
 }
-
 #thumbs {
   position: relative;
   top: 2.3px;
   height: 15px;
   right: 3px;
 }
-
 .title {
   float: left;
   text-align: left;
@@ -163,7 +149,6 @@ a:link {
   white-space: nowrap;
   overflow: hidden;
 }
-
 .content-box {
   width: 740px;
   padding-left: 30px;
@@ -175,7 +160,6 @@ a:link {
   grid-template-columns: auto auto;
   justify-content: start;
 }
-
 .shipping {
   text-align: justify;
   font-size: 15px;
@@ -189,7 +173,6 @@ a:link {
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 }
-
 .author {
   float: left;
   text-align: justify;
@@ -197,40 +180,35 @@ a:link {
   text-decoration: none;
   color: #3a3a3a;
 }
-
 .hashtag {
     margin-right: 1px;
 }
-
 .thumbnail {
     background: black;
-    height: 150px;
-    width: 150px;
+    height: 80px;
+    width: 80px;
     overflow: hidden;
-    display: block;
+    margin: 9px 0 0 0px;
+    border-radius: 5px;
 }
-
 .rowDiv {
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
 }
-
 .columnLeft {
   float: left;
-  width: 200px;
+  width: 100px;
 }
-
 .columnRight {
   float: left;
-  width: 35%;
-  padding-left: 80px;
+  width: 300px;
+  padding-left: 10px;
+  padding-top: 30px;
 }
-
 .removeButton {
   background: red;
   color: white;
   height: 30px;
 }
-
 </style>

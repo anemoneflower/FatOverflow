@@ -8,9 +8,10 @@ const store = new Vuex.Store({
         count: 0,
         user: {
             loggedIn: false,
-            data: null,
+            data: null
         },
-        previousUrl: '/'
+        previousUrl: '/',
+        chatList: []
     },
     //provide a way of accessing data stored in the state.
     getters: {
@@ -19,6 +20,9 @@ const store = new Vuex.Store({
         },
         previousUrl(state){
             return state.previousUrl
+        },
+        chatList(state){
+            return state.chatList
         },
         uid(state){
             return state.user.data.uid
@@ -40,6 +44,9 @@ const store = new Vuex.Store({
         // store previous URL
         SET_PREV_URL(state, route) {
             state.previousUrl = route;
+        },
+        STORE_CHAT_LIST(state, list) {
+            state.chatList = list;
         }
     },
     actions: {
@@ -48,8 +55,7 @@ const store = new Vuex.Store({
             if (user) {
                 commit("SET_USER", {
                     displayName: user.displayName,
-                    email: user.email,
-                    uid: user.uid,
+                    email: user.email
                 });
             } else {
                 commit("SET_USER", null);
@@ -57,6 +63,13 @@ const store = new Vuex.Store({
         },
         pushRoute({commit}, prev) {
             commit("SET_PREV_URL", prev);
+        },
+        storeChats({commit}, l) {
+            // var c = [];
+            // for(var i=0; i<l.length; i++){
+            //     c.push(l[i])
+            // }
+            commit("STORE_CHAT_LIST", l);
         }
     }
 })

@@ -37,7 +37,7 @@
         props: {
             productkey:String
         },
-        data() {
+        data(){
             return {
                 products: []
             };

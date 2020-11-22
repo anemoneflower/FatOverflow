@@ -57,19 +57,20 @@ export default {
     props: {
         gp : {
             type: Object
-        }
+        },
+        gpKey: String,
+        // registeredFoodKey: String
     },
     data(){
         return{
-          registeredFood: [],
-            review : (this.gp.review!==undefined)&&(this.gp.review)
+          registeredFood: []
         };
     },
     mounted() {
-        console.log("GPREVIEW"+this.gp.review);
         for (var key in this.gp.registeredFood) {
             console.log(this.gp.registeredFood[key].foodName);
             (this.registeredFood).push(this.gp.registeredFood[key].foodName);
+            // console.log(obj[key]);
         }
         // console.log("TTTRRRRUUUEWWW   " + this.gp.participate);
         // if(this.gp.participate!==undefined&&this.gp.participate){

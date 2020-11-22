@@ -8,13 +8,16 @@
                  <button id="reviewbtn" @click="goProducts()">Products</button>
             </div>
         </div>
-        <ul class="gpList" v-if="gpList.length">
+        <ul class="gpList" v-if="gpList.length>0">
             <GPCard
                     v-for="gp in gpList"
                     :key = "gp in gpList"
                     :gp = "gp"
                     :gpKey = "gpKey"
             ></GPCard>
+<!--            <GPCard></GPCard>-->
+<!--            <GPCard></GPCard>-->
+<!--            <GPCard></GPCard>-->
         </ul>
         <p v-else>
             Nothing left in the list.
@@ -30,7 +33,7 @@ export default {
     components: {
         GPCard
     },
-    data() {
+    data(){
         return{
             gpList: []
             // gp: selectedGp[0]
@@ -98,6 +101,7 @@ export default {
                     }
                 })
         }
+        console.log("LEN" + this.gpList.length);
 
     },
     methods: {

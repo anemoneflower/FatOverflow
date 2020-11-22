@@ -25,9 +25,7 @@
 
                 firebase.auth().signInWithPopup(provider).then((result) => {
                     console.log(result);
-                    // result.user.email
-                    // TODO: 유저의 어떤 정보를 가지고 있을지 정해야함
-                    if(result.additionalUserInfo.isNewUser!=false){
+                    if(result.additionalUserInfo.isNewUser===true){
                         firebase.database().ref('users/'+result.user.uid).set({
                             userEmail : result.user.email,
                             gpList : {
@@ -55,7 +53,6 @@
                             },
                         })
                     }
-                    this.$router.replace('/');
                     console.log("prevURL  " + this.previousUrl);
                     this.$router.replace(this.previousUrl);
                 }).catch((err)=>{

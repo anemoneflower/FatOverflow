@@ -1,6 +1,6 @@
 <template>
   <div class="autocomplete">
-    <ul class="popover">
+    <ul class="popover" style="float:left; margin-left:5%;">
       <li>
         <input
           autocomplete="off"
@@ -11,10 +11,10 @@
           @keydown.up="keyup"
           @keydown.down="keydown"
           @keydown.enter="enter"
-          v-focus
           @focus="visibleOptions = true"
           @focusout="visibleOptions = false"
         />
+        
         <!-- <a
           ><img
             class="glass"
@@ -41,7 +41,7 @@
       </div>
       <!--      </li>-->
     </ul>
-      <button v-on:click="onClickAdd" class="submitBtn btns">
+      <button v-on:click="onClickAdd" class="submitBtn btns" style="float:left; margin-left:2%; margin-top: 4px;">
         Add Product
       </button>
   </div>
@@ -95,10 +95,6 @@ export default {
       console.log("selectedFood:", JSON.stringify(this.matches[index]))
       console.log("selectedFood:", JSON.stringify(this.matches[index][0]))
       console.log("selectedFood:", JSON.stringify(this.matches[index][1]))
-
-
-
-
       this.selectAction = true;
       this.selected = index;
       this.searchData = curMatch[0];
@@ -107,7 +103,6 @@ export default {
       this.searchResult();
       this.onClickItem();
       this.onClickItem_key();
-
     },
     searchResult() {
       // if(this.searchData==""){
@@ -188,18 +183,18 @@ export default {
   margin-left: auto;
   margin-right: auto;
   background: white;
-  border-radius: 23px;
 }
 .popover {
   margin: 0 auto;
   padding: 0;
-  width: 575px;
+  width: 500px;
   border: 1px solid #dcdcdc;
   position: relative;
   left: 0;
   right: 0;
-  border-radius: 23px;
+  border-radius: 3px;
   list-style-type: none;
+  background: white;
 }
 .popover:hover {
   box-shadow: 1px 1px 8px 1px #dcdcdc;
@@ -216,17 +211,17 @@ export default {
   cursor: pointer;
 }
 #input {
-  width: 500px;
+  width: 420px;
   outline: none;
   border: none;
-  height: 45px;
+  height: 40px;
   font-size: 16px;
 }
 .options {
-  width: 520px;
+  width: 440px;
   padding: none;
   position: relative;
-  left: 27.3px;
+  left: 30px;
   margin: none;
   max-height: 150px;
   overflow-y: auto;
@@ -259,7 +254,6 @@ export default {
 .options ul li.selected {
   background-color: #dcdcdc;
 }
-
 .btns {
   outline: none;
   background-color: #48C964;
@@ -273,10 +267,9 @@ export default {
 .btns:hover {
   background-color: #2f8542;
 }
-
 .submitBtn {
   margin: auto;
-  width: 100px;
-  height: 40px;
+  width: 125px;
+  height: 35px;
 }
 </style>

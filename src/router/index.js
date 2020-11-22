@@ -81,10 +81,18 @@ const routes = [
     }
   },
   {
-    path: "/mypage",
-    name: "MyPage",
+    path: "/createReview",
+    name: "CreateReview",
     component: function() {
-      return import("../views/MyPage.vue");
+      return import("../views/CreateReview.vue");
+    }
+  },
+  {
+    path: "/chat",
+    name: "Chat",
+    component: function () {
+      return import("../views/Chat.vue");
+
     }
   },
   {
@@ -106,13 +114,6 @@ const routes = [
     name: "MyPage",
     component: function() {
       return import("../views/MyPage.vue");
-    }
-  },
-  {
-    path: "/createReview",
-    name: "CreateReview",
-    component: function() {
-      return import("../views/CreateReview.vue");
     }
   }
 ]
