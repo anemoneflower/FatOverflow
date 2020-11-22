@@ -22,7 +22,7 @@
                 <p class="tags">Quantity</p>
               </td>
             </tr>
-            <tr id="dropdown_group" v-for="(select, index) in selectedOptions" v-bind:key="index">
+            <tr id="dropdown_group" v-for="(select, index) in selectedOptions" v-bind:key="select.unique">
               <td class="cell">
               <Dropdown class="productinput" :itemArray="itemArray" :selected="select.item" :index="index" v-on:updateOption="methodToRunOnSelect"></Dropdown>
               </td>
@@ -34,7 +34,7 @@
                 />
               </td>
               <td class="cell">
-                <button class="delBtn">
+                <button class="delBtn" v-on:click="delte_purchase(index)">
                   Remove
                 </button>
               </td>
@@ -67,19 +67,28 @@
 import { db } from "../main";
 import firebase from 'firebase';
 import Dropdown from "../components/Dropdown";
+import {mapGetters} from "vuex";
 export default {
     name: "Participate",
     components: {Dropdown},
     props: {
         gpKey: String,
     },
+    computed: {
+      ...mapGetters({
+        previousUrl: "previousUrl"
+      })
+    },
     data() {
         return {
+            unique: 0,
             purchaseTitle: "",
             quantity: "",
             note: "",
             foods: [],
             itemArray: [],
+            usedItems: [],
+            usedFoods: [],
             selectedOptions: [{key: "", item: 'Please select item you want to purchase.', quantity: 0}],
             showMenu: false,
             placeholderText: "Please select an item to purchase"
@@ -105,8 +114,9 @@ export default {
                     .once('value')
                     .then(function (snapshot) {
                       var value = snapshot.val();
-                      console.log('name:', value.foodKey);
-                      return value.foodKey
+                      console.log(value);
+                      console.log('name:', value);
+                      return value
                     });
             l.then(function (val) {
               console.log("val: " + val.toString());
@@ -145,52 +155,73 @@ export default {
             date.splice(2, 1);
             date.splice(4);
             console.log(date);
-            var foodObj = [];
+            var foodObj = {};
             for (var i=0; i<this.selectedOptions.length; i++){
                 if (this.selectedOptions[i].quantity !== 0) {
-                    var v = {
-                        key: this.selectedOptions[i].key,
-                        quantity: this.selectedOptions[i].quantity
-                    };
-                    console.log("v: "+v+"f: "+this.selectedOptions[i]);
-                    foodObj.push(v)
+                    foodObj[this.selectedOptions[i].key] = {name: this.selectedOptions[i].item, quantity: this.selectedOptions[i].quantity}
                 }
             }
-            console.log("foodObj:" + foodObj);
-            var purchase = {
+            console.log("foodObj:");
+            console.log(foodObj);
+            if(Object.keys(foodObj).length !== 0) {
+              var purchase = {
                 date: date.join(" "),
                 food: foodObj,
                 note: this.note,
                 userKey: firebase.auth().currentUser.uid,
+                userName: firebase.auth().currentUser.displayName,
                 isConfirmed: false
-            };
-            // TODO: change after applying group purchase DB
-            var ref = db.ref("groupPurchase").child("-MMPFFDBm2EZw2-Wuwob").child("/participant");
-            console.log("ref: "+ ref);
-            var purchaseKey = ref.push().key;
-            console.log("purchasekey: "+ purchaseKey);
-            purchase['_key'] = purchaseKey;
-            console.log(purchase);
-            ref.child(purchaseKey)
-                .set(purchase);
+              };
+              // TODO: change after applying group purchase DB
+              var ref = db.ref("groupPurchase").child(this.gpKey).child("/participant");
+              console.log("ref: " + ref);
+              var purchaseKey = ref.push().key;
+              console.log("purchasekey: " + purchaseKey);
+              purchase['_key'] = purchaseKey;
+              console.log(purchase);
+              ref.child(purchaseKey).set(purchase);
+              this.$router.replace(this.previousUrl);
+            }else{
+              alert("you didn't select any food");
+            }
         },
         add_dropdown() {
             console.log("add dropdown");
             console.log(this.selectedOptions);
-            if (this.selectedOptions.length >= this.foods.length) {
+            if (this.selectedOptions.length >= (this.foods.length + this.usedFoods.length)) {
                 alert("You already added enough element of foods!");
                 return
             }
-            this.selectedOptions.push({key: "", item: 'Please select item you want to purchase.', quantity: 0});
+            this.selectedOptions.push({unique: this.unique++, key: "", item: 'Please select item you want to purchase.', quantity: 0});
             console.log(this.selectedOptions);
         },
         methodToRunOnSelect({index, payload}) {
             this.selectedOptions[index].item = payload;
             var idx = this.itemArray.indexOf(payload);
             this.selectedOptions[index].key = this.foods[idx];
+            var remove1 = this.itemArray.splice(idx, 1)[0];
+            var remove2 = this.foods.splice(idx, 1)[0];
+            console.log(remove2);
+            console.log(remove1);
+            this.usedItems.push(remove1);
+            this.usedFoods.push(remove2);
             console.log("selected: ");
             console.log(this.selectedOptions);
         },
+        delte_purchase(index) {
+          if(this.selectedOptions.length!==1){
+            var remove = this.selectedOptions.splice(index,1);
+            var i = this.usedItems.indexOf(remove[0].item);
+            console.log(remove[0]);
+            console.log(i);
+            console.log(this.usedFoods);
+            console.log(this.usedItems);
+            this.itemArray.push(this.usedItems.splice(i, 1)[0]);
+            this.foods.push(this.usedFoods.splice(i, 1)[0]);
+            console.log(this.itemArray);
+            console.log(this.foods);
+          }
+        }
     },
 }
 </script>

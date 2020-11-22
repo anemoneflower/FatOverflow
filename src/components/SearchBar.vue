@@ -6,7 +6,7 @@
           autocomplete="off"
           id="input"
           type="text"
-          v-model="title"
+          v-model="searchData"
           placeholder="Search what do you want to eat."
           @keydown.up="keyup"
           @keydown.down="keydown"
@@ -19,7 +19,7 @@
           ><img
             class="glass"
             src="../assets/magnifying-glass.png"
-            @click="searchBook()"
+            @click="searchResult()"
             title="this is search bar"
         /></a>
       </li>
@@ -32,7 +32,7 @@
             @mousemove="keyDown = false"
             :key="index"
             v-for="(match, index) in matches"
-            @mousedown="bookSelected(index), (visibleOptions = true)"
+            @mousedown="foodSelected(index), (visibleOptions = true)"
             @mouseenter="hover(index)"
             :class="{ selected: selected == index }"
             v-text="match"
@@ -45,18 +45,18 @@
 </template>
 
 <script>
-import { bookList, bookTitle, searchedList } from "../main";
+  import firebase from "firebase";
 export default {
   name: "Autocomplete",
   data() {
     return {
-      selectedBook: null,
-      title: "",
-      books: bookTitle,
+      // selectedFood: null,
+      searchData: "",
       visibleOptions: true,
       selected: 0,
       keyDown: false,
-      selectAction: false
+      selectAction: false,
+      foods: []
     };
   },
   directives: {
@@ -68,54 +68,37 @@ export default {
   },
   created() {
     this.selectAction = false;
+  },
+  mounted(){
+    firebase
+            .database()
+            .ref("/food")
+            .once("value",snapshot => {
+              var myValue = snapshot.val();
+              var keyList = Object.keys(myValue);
+              for(var i = keyList.length; i>0; i--){
+                var myKey = keyList[i-1];
+                var gp = myValue[myKey];
+                (this.foods).push(gp.foodName);
+              }
+            })
   }
-  // mounted(){
-  //
-  // }
   ,
   methods: {
-    bookSelected(index) {
+    foodSelected(index) {
       this.selectAction = true;
       this.selected = index;
-      this.title = this.matches[index];
-      this.selectedBook = this.matches[index];
-      this.searchBook();
+      this.searchData = this.matches[index];
+      // this.selectedFood = this.matches[index];
+      this.searchResult();
     },
-    searchBook() {
-      if(this.title==""){
+    searchResult() {
+      if(this.searchData==""){
         return [];
       }
-      searchedList.splice(0, searchedList.length);
-      var book = this.title;
-      var checkList = JSON.parse(JSON.stringify(bookList));
-      console.log(checkList);
-      var idx = 0;
-      for (var i = 0; i < bookList.length; i++) {
-        var title = bookList[i].title.toUpperCase();
-        var checkValue = title.indexOf(book.toUpperCase());
-        console.log(checkValue);
-        if (checkValue != -1) {
-          searchedList.push(bookList[i]);
-          checkList.splice(i + idx, 1);
-          idx--;
-        }
-      }
-      if (checkList.length != 14) {
-        for (var j = 0; j < checkList.length; j++) {
-          if (searchedList[0].series == checkList[j].series) {
-            searchedList.push(checkList[j]);
-          }
-        }
-      }
-      var curPath = this.$router.history.current["path"];
-      var trim = curPath.split("/");
-      console.log(`select check: ${trim[trim.length - 1]}`);
-      if (trim[trim.length - 1].length > 10)
-        this.$router.push("/book-list/" + trim[trim.length - 1]);
-      else this.$router.push("/book-list/none");
       this.visibleOptions = false;
-      this.selectAction = false;
-      this.title = "";
+      this.$router.push({path:'gplist',query:{result:this.searchData}})
+
     },
     hover(index) {
       if (this.keyDown == false) {
@@ -143,9 +126,14 @@ export default {
       this.$refs.optionsList.scrollTop = this.selected * 39;
     },
     enter() {
-      this.title = this.matches[this.selected];
-      this.selectedBook = this.matches[this.selected];
-      this.searchBook();
+      if( this.matches[this.selected] === undefined){
+        this.searchResult();
+      }
+      else{
+        this.searchData = this.matches[this.selected];
+        // this.selectedFood = this.matches[this.selected];
+        this.searchResult();
+      }
     },
     initialCount() {
       this.selected = 0;
@@ -153,15 +141,15 @@ export default {
   },
   computed: {
     matches() {
-      if (this.title == "") {
+      if (this.searchData == "") {
         return [];
       }
       if (this.visibleOptions == false && this.selectAction == false) {
         return [];
       }
       this.initialCount();
-      return this.books.filter(book =>
-        book.toLowerCase().includes(this.title.toLowerCase())
+      return this.foods.filter(food =>
+        food.toLowerCase().includes(this.searchData.toLowerCase())
       );
     }
   }

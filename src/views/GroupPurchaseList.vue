@@ -7,7 +7,11 @@
             <div class = "reviewbtn">
                  <button id="reviewbtn" @click="goProducts()">Products</button>
             </div>
+            <div class = "mgp">
+                 <button id="mgpbtn" @click="goMgp()">Make Group Purchase</button>
+            </div>
         </div>
+
         <ul class="gpList" v-if="gpList.length>0">
             <GPCard
                     v-for="gp in gpList"
@@ -51,6 +55,9 @@ export default {
                     for(let i = keyList.length; i>0; i--){
                         let myKey = keyList[i-1];
                         let gp = myValue[myKey];
+                        gp.key = myKey;
+                        console.log("KKKKKKKKKK");
+                        console.log(myKey);
                         (this.gpList).push(gp);
                     }
                 })
@@ -80,6 +87,7 @@ export default {
                                 count++
                             }
                         }
+                        gp.key = myKey;
                         if(count>0){
                             tag.push(gp);
                         }
@@ -113,6 +121,9 @@ export default {
             else {
                 this.$router.push({path:'/products',query:{result:query}});
             }
+        },
+        goMgp() {
+          this.$router.push({path:'/mgp'});
         }
     }
 }
@@ -166,6 +177,12 @@ export default {
         background-color: #99e5aa;
         color: #818181;
     }
+
+
+    #mgpbtn {
+      float: right
+    }
+
     .gpList {
         position: relative;
         padding-top: 80px;

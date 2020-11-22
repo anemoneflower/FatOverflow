@@ -24,16 +24,17 @@
     import GPCard from "../components/GPCard.vue"
     // import firebase from "firebase";
     import { db } from "../main";
-    import {mapGetters} from "vuex";
+    // import {mapGetters} from "vuex";
+    import firebase from "firebase";
 
     export default {
         name: "MyPage",
-        computed: {
-            ...mapGetters({
-                uid: "uid",
-                user: "user"
-            })
-        },
+        // computed: {
+        //     ...mapGetters({
+        //         uid: "uid",
+        //         user: "user"
+        //     })
+        // },
         components: {
             GPCard
         },
@@ -42,10 +43,21 @@
                 closedList: [],
                 openedList: [],
                 participatingList: [],
-                gpList:[],
+                gpList:[]
             };
         },
         async mounted() {
+            // await firebase.auth().onAuthStateChanged(function(user) {
+            //     if (user) {
+            //         this.user = user;
+            //         this.uid = this.user.uid;
+            //     } else {
+            //         this.user = null
+            //     }
+            // });
+            let uid = firebase.auth().currentUser.uid;
+            console.log("AAAAAAAAAAAa");
+            console.log(uid);
 
             const snapshot = await db.ref('users/SVsXvyMLsbUOnof9iAcUy390WZB3').once("value");
             let myValue = snapshot.val()&&snapshot.val().gpList;

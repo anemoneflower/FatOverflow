@@ -39,13 +39,18 @@ export const db = app.database();
 //   website : "url"
 firebase.auth().onAuthStateChanged(user => {
   store.dispatch("fetchUser", user);
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount('#app')
 });
 //
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+// new Vue({
+//   router,
+//   store,
+//   render: h => h(App)
+// }).$mount('#app')
 
 

@@ -1,5 +1,5 @@
 <template>
-    <div class = 'card-post'>
+    <div class = 'card-post' @click="goGp()">
         <div class="square">
             <div class="board-info">
                 <a class="title" >{{gp.title}}</a>
@@ -83,6 +83,10 @@ export default {
       },
         closePost(){
           //TODO: close 하기
+        },
+        goGp(){
+            console.log(this.gp.key);
+            this.$router.push({path:'gp',query:{GP:this.gp.key}});
         }
     }
 }

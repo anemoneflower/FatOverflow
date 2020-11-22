@@ -80,13 +80,13 @@ const routes = [
       return import("../views/ProductList.vue");
     }
   },
-  {
-    path: "/createReview",
-    name: "CreateReview",
-    component: function() {
-      return import("../views/CreateReview.vue");
-    }
-  },
+  // {
+  //   path: "/createReview",
+  //   name: "CreateReview",
+  //   component: function() {
+  //     return import("../views/CreateReview.vue");
+  //   }
+  // },
   {
     path: "/chat",
     name: "Chat",

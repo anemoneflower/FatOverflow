@@ -10,12 +10,23 @@
         </div>
         <div class="products" v-if="products.length">
             <div
-                    :key="product.key"
-                    v-for="product in products"
-
+              v-for="(product, index) in products"
+              :key="index"
             >
                 <!--                <router-link to="/book-note-board">-->
-                <ProductCard :product="product" />
+
+                <ProductCard 
+                  :product="product" 
+                  v-on:click.native="showModal(index)"
+                  v-if="!showPopup"
+                />
+                <ViewReview 
+                  v-if="showModalList[index]"
+                  :foodName="products[index].foodName"
+                  :imgUrl="products[index].img"
+                  @close="closeModal(index);"
+                  :foodKey="productKeys[index]"
+                />
                 <!--                </router-link>-->
             </div>
         </div>
@@ -26,20 +37,25 @@
 </template>
 
 <script>
+    import ViewReview from "./ViewReview"
     import ProductCard from "../components/ProductCard";
-    // import firebase from "firebase";
+    import Vue from 'vue'
     import {db} from "../main.js"
 
     export default {
         components: {
-            ProductCard
+            ProductCard,
+            ViewReview
         },
         props: {
             productkey:String
         },
         data(){
             return {
-                products: []
+                products: [],
+                productKeys: [],
+                showModalList: [],
+                showPopup: false
             };
         },
         async mounted() {
@@ -53,6 +69,8 @@
                     let myKey = keyList[i-1];
                     let product = myValue[myKey];
                     (this.products).push(product);
+                    this.productKeys.push(myKey);
+                    this.showModalList.push(false);
                 }
             }
             else {
@@ -64,6 +82,8 @@
                     let food = myValue[myKey];
                     if(food.foodName.toLowerCase().includes(query.toLowerCase())){
                         (this.products).push(food);
+                        this.productKeys.push(myKey);
+                        this.showModalList.push(false);
                     }
                 }
             }
@@ -77,6 +97,20 @@
                 else {
                     this.$router.push({path:'/gplist',query:{result:query}});
                 }
+            
+            },
+            showModal(index) {
+              console.log("ShowModal for index", index);
+              Vue.set(this.showModalList, index, true);
+              console.log(this.showModalList);
+              this.showPopup = true;
+            },
+            closeModal(index) {
+              console.log("closeModal for index", index);
+              Vue.set(this.showModalList, index, false);  
+              console.log(this.showModalList);
+              this.showPopup = false;    
+
             }
         }
     }
