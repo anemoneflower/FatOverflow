@@ -13,7 +13,15 @@
             </div>
         </div>
         <div class="content-box">
-            <div class="hashtag" v-if="registeredFood.length">
+            <div class="hashtag" v-if="(registeredFood.length>0)&&(gp.participate===true)">
+                <div
+                        :key = "food.key"
+                        v-for="food in gp.foodList"
+                >
+                    <PurchaseTag :food="food"></PurchaseTag>
+                </div>
+            </div>
+            <div class="hashtag" v-else-if="(registeredFood.length>0)">
                 <div
                         :key = "food.key"
                         v-for="food in registeredFood"
@@ -21,7 +29,18 @@
                     <Hashtag :food="food"></Hashtag>
                 </div>
             </div>
-          <!-- <p class="content" v-html=AAAAAAAAAAAa></p> -->
+            <div class="review" v-if="(gp.review!==undefined)&&(gp.review===true)">
+                <button>Add review</button>
+            </div>
+            <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">
+                <button>Your review</button>
+            </div>
+            <div class="closeTag" v-if="(gp.closed!==undefined)&&(gp.closed===true)">
+                <a>Closed</a>
+            </div>
+            <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
+                <button @click="closePost()">Close Post</button>
+            </div>
         </div>
         </div>
     </div>
@@ -29,9 +48,11 @@
 
 <script>
 import Hashtag from "./Hashtag.vue"
+import PurchaseTag from "./PurchaseTag.vue"
 export default {
     components :{
-        Hashtag
+        Hashtag,
+        PurchaseTag
     },
     props: {
         gp : {
@@ -51,11 +72,18 @@ export default {
             (this.registeredFood).push(this.gp.registeredFood[key].foodName);
             // console.log(obj[key]);
         }
+        // console.log("TTTRRRRUUUEWWW   " + this.gp.participate);
+        // if(this.gp.participate!==undefined&&this.gp.participate){
+        //     console.log("TTTRRRRUUUEWWW");
+        // }
     },
     methods: {
       expressDate(num) {
         return num.slice(0,4) + ". " + num.slice(4,6) + ". " + num.slice(6);
-      }
+      },
+        closePost(){
+          //TODO: close 하기
+        }
     }
 }
 </script>

@@ -127,7 +127,6 @@ export default {
       console.log(this.note)
       const dueDate = this.date.split("/").join("")
       console.log(dueDate);
-
       const tmpDate = new Date()
       const day = tmpDate.getDate()
       const month = tmpDate.getMonth() + 1
@@ -138,7 +137,6 @@ export default {
       console.log(JSON.stringify(this.productList))
       const foodKeyList = this.productList.map(x => x.key)
       console.log(JSON.stringify(foodKeyList))
-
       let createPurchase = {
         userKey: "unknown_sdd",
         closedDate: dueDate,
@@ -152,7 +150,6 @@ export default {
         title: this.postTitle
       };
       console.log(createPurchase);
-
       // To do: put into DB
       var ref = db.ref("groupPurchase/");
       var createPurchaseKey = ref.push(createPurchase).key;
@@ -170,8 +167,6 @@ export default {
     },
   }
 };
-
-
 </script>
 
 <style scoped>
@@ -181,11 +176,9 @@ export default {
   width: 800px;
   margin-top: 20px;
 }
-
 .label {
   margin-right: 20px;
 }
-
 .btns {
   outline: none;
   background-color: #48C964;
@@ -199,12 +192,9 @@ export default {
 .btns:hover {
   background-color: #2f8542;
 }
-
 .submitBtn {
   margin: auto;
   width: 100px;
   height: 40px;
 }
-
 </style>
-

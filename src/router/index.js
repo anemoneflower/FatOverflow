@@ -87,6 +87,35 @@ const routes = [
       return import("../views/CreateReview.vue");
     }
   },
+  {
+    path: "/chat",
+    name: "Chat",
+    component: function () {
+      return import("../views/Chat.vue");
+
+    }
+  },
+  {
+    path: "/mypage/closed",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
+  },
+  {
+    path: "/mypage/opened",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
+  },
+  {
+    path: "/mypage/participate",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
+  }
 ]
 
 const router = new VueRouter({
