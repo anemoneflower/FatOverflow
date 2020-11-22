@@ -10,7 +10,7 @@
         <ul class="gpList" v-if="gpList.length">
             <GPCard
                     v-for="gp in gpList"
-                    :key = "gp in gpList"
+                    :key = "gp.index"
                     :gp = "gp"
             ></GPCard>
         </ul>

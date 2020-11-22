@@ -86,6 +86,10 @@ export default {
       },
         closePost(){
           //TODO: close 하기
+          //   this.$router.push({path:'',query:{GP:this.gp.key}});
+            console.log("closepost");
+            console.log(this.gpKey);
+          //   this.$router.push("/chat/"+this.gp.key);
         },
         goGp(){
             console.log(this.gp.key);
