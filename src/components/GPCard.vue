@@ -2,7 +2,7 @@
     <div class = 'card-post' @click="goGp()">
         <div class="square">
             <div class="closeTag" v-if="(gp.closed!==undefined)&&(gp.closed===true)">
-                <a>Closed</a>
+                <a>* Closed *</a>
             </div>
             <div class="board-info">
                 <a class="title" >{{gp.title}}</a>
@@ -267,5 +267,8 @@ a:link {
 .closeTag {
   position: absolute;
   z-index: 1;
+  font-weight: bold;
+  font-size: 15px;
+  margin: 6px 0px 0px 10px;
 }
 </style>
