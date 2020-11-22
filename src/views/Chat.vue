@@ -1,46 +1,52 @@
 <template>
     <div id="contactspage">
-        <section class="mycontainer animated slideInLeft delay-0s myeffect">
-            <div class="columns">
-                <div class="column is-8">
-                    <form @submit.prevent="savepost">
-                        <div class="postfield">
-                            <textarea
-                                    class="myoutline ppp shadow-none border-light"
-                                    id="textarea-default"
-                                    v-model="content"
-                                    placeholder="Enter something..."
-                                    rows="3"
-                            ></textarea>
-                            <button type="submit" class="button is-link btn shadow-none">Submit</button>
-                        </div>
-                    </form>
-                    <div>
-                        <div class="post-list" v-for="post in chats" :key="post.userkey">
-<!--                            <p>here</p>-->
-                            <div class="cont myoutline">
-                                    <h5 class="timestamp" >{{post.time}}</h5>
-                                    <p class="namestamp">
-                                        {{post.username}}
-                                    </p>
-                                    <p class="contentstamp">
-<!--                                        v-for="b in post.content" v-bind:key=b>-->
-                                        {{post.content}}
-                                    </p>
-                            </div>
+        <section class="mycontainer">
+            <div class="column is-8">
+                <div>
+                    <div>Come at <input type="text" placeholder="(enter time)" v-model="come_at"><button v-on:click="save_at('Come at ', come_at)">send</button></div>
+                </div>
+                <div>
+                    <div>I'll go at <input type="text" placeholder="(enter time)" v-model="go_at"><button v-on:click="save_at('I\'ll go at ', go_at)">send</button></div>
+                </div>
+                <div>
+                    <div>Product will arrive at <input type="text" placeholder="(enter time)" v-model="arrive_at"><button v-on:click="save_at('Product will arrive at ', arrive_at)">send</button></div>
+                </div>
+                <div>
+                    <div>Account is <input type="text" placeholder="(enter bank)" v-model="bank">bank <input type="text" placeholder="(enter account)" v-model="account"><button v-on:click="save_account">send</button></div>
+                </div>
+                <div>
+                    <div>I sent money!<button v-on:click="save_txt('I sent money!')">send</button></div>
+                </div>
+                <div>
+                    <div>"<input type="text" placeholder="(enter username)" v-model="name1">", please send money!<button v-on:click="save_front">send</button></div>
+                </div>
+                <div>
+                    <div>"<input type="text" placeholder="(enter username)" v-model="name2">", you need to give me <input type="text" placeholder="(enter amount of money)" v-model="money"> won!<button v-on:click="save_both">send</button></div>
+                </div>
+<!--                <form @submit.prevent="savepost">-->
+<!--                    <div class="postfield">-->
+<!--                        <textarea-->
+<!--                                class="myoutline"-->
+<!--                                id="textarea-default"-->
+<!--                                v-model="content"-->
+<!--                                placeholder="Enter something..."-->
+<!--                                rows="3"-->
+<!--                        ></textarea>-->
+<!--                        <button type="submit" class="button">Submit</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+                <div>
+                    <div class="post-list" v-for="post in chats" :key="post.time">
+                        <div class="cont myoutline">
+                                <h5 class="timestamp" >{{post.time}}</h5>
+                                <p class="namestamp">
+                                    {{post.username}}
+                                </p>
+                                <p class="contentstamp">
+                                    {{post.content}}
+                                </p>
                         </div>
                     </div>
-<!--                    <div class="loader-section" v-if="loading">-->
-<!--                        <div class="user-list">-->
-<!--                            <div class="columns">-->
-<!--                                <div class="column is-8">-->
-<!--                                    <p class="user-list__header animated-background__header"></p>-->
-<!--                                    <p class="user-list__sub animated-background__sub"></p>-->
-<!--                                    <p class="user-list__sub animated-background__sub"></p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
             </div>
         </section>
@@ -50,8 +56,8 @@
 <script>
     import { db } from "../main";
     import firebase from 'firebase'
-    import {mapGetters} from 'vuex'
-    import store from "../store";
+    // import {mapGetters} from 'vuex'
+    // import store from "../store";
     export default {
         name: 'Chat',
         components: {
@@ -60,93 +66,148 @@
             return {
                 userName: '',
                 userKey: '',
-                text: '',
-                chats: [
-                //     {
-                //     content: "test",
-                //     time: "date",
-                //     username: "name",
-                //     userkey: "key",
-                // }
-                ],
-                loading: true,
-                user: '',
-                content: '',
-                profilepicurl: '',
-                time: null,
-                username:'',
-                now: '',
+                chats: [],
+                come_at: '',
+                go_at:'',
+                arrive_at:'',
+                bank:'',
+                name1:'',
+                name2:'',
+                money:'',
+                account:''
             }
-        },
-        computed: {
-            ...mapGetters({
-                chatList: "chatList"
-            })
         },
         created () {
             console.log('Posts page created');
-            let chatref = db.ref("chat");
-            let c = chatref.once("value", function(snapshot) {
-                // snapshot.forEach(function (childSnapshot) {
-                //     // todo: 바로 출력
-                //     let data = {
-                //         content: childSnapshot.val().content,
-                //         time: childSnapshot.val().time,
-                //         username: childSnapshot.val().username,
-                //         userkey: childSnapshot.val().userkey,
-                //     }
-                //     console.log(data);
-                //     store.dispatch("storeChats", data);
-                //     // this.chats.push(data)
-                //     // console.log("child: " + childSnapshot.val()._key)
-                // });
-                var myValue = snapshot.val();
-                var keyList = Object.keys(myValue);
-                var chats = [];
-                for (var i = 0; i < keyList.length; i++) {
-                    var v = myValue[keyList[i]];
-                    chats.push(v);
-                    console.log("data: ", v);
-                }
-                console.log("Firebase: ");
-                console.log(chats);
-                store.dispatch("storeChats", chats);
-                return chats;
-            });
-            c.then((c)=>{
-                var v = c.val();
-                console.log(v);
-                var k = Object.keys(v);
-                console.log("KKKKKKK");
-                console.log(k);
-                for(var i=0; i<k.length; i++){
-                    this.chats.push(v[k[i]]);
-                }
-                console.log("Chats: ");
-                console.log(this.chats);
-            });
-
+            this.updateChats();
             var user=firebase.auth().currentUser;
             if(user != null){
                 this.userName = user.displayName;
                 this.userKey = user.uid;
+            }else{
+                alert("ERR: login null");
             }
         },
-
         methods: {
-            savepost(){
-                console.log('Entered savepost method')
+            updateChats() {
+                let chatref = db.ref("chat");
+                let c = chatref.once("value", function(snapshot) {
+                    var myValue = snapshot.val();
+                    var keyList = Object.keys(myValue);
+                    var chats = [];
+                    for (var i = 0; i < keyList.length; i++) {
+                        var v = myValue[keyList[i]];
+                        chats.push(v);
+                        console.log("data: ", v);
+                    }
+                    console.log("Firebase: ");
+                    console.log(chats);
+                    return chats;
+                });
+                c.then((c)=>{
+                    var v = c.val();
+                    console.log(v);
+                    var k = Object.keys(v);
+                    console.log("KKKKKKK");
+                    console.log(k);
+                    this.chats = [];
+                    for(var i=0; i<k.length; i++){
+                        this.chats.push(v[k[i]]);
+                    }
+                    console.log("Chats: ");
+                    console.log(this.chats);
+                });
+            },
+            refresh_inputs(){
+              this.come_at = '';
+              this.go_at = '';
+              this.arrive_at = '';
+              this.bank = '';
+              this.name1 = '';
+              this.name2 = '';
+              this.money = '';
+              this.account = '';
+            },
+            save_at(txt, input){
+                console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                var t = txt+input;
                 var key = db.ref('chat').push({
-                    content: this.content.replace(/(\r\n|\n|\r)/gm, "<br>"),
-                    time: d.toString(),
+                    content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
+                    time: d,
                     username: this.userName,
                     userkey: this.userKey,
                 }).key;
                 db.ref('chat').child(key).update({
                     _key: key
                 });
-            }
+                this.updateChats();
+                this.refresh_inputs();
+            },
+            save_account(){
+                console.log('Entered save_go_at method');
+                var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                var t = "Account is "+this.bank+'bank '+this.account;
+                var key = db.ref('chat').push({
+                    content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
+                    time: d,
+                    username: this.userName,
+                    userkey: this.userKey,
+                }).key;
+                db.ref('chat').child(key).update({
+                    _key: key
+                });
+                this.updateChats();
+                this.refresh_inputs();
+            },
+            save_txt(txt){
+                console.log('Entered save_come_at method');
+                var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                // var t = "Come at "+this.come_at;
+                var key = db.ref('chat').push({
+                    content: txt.replace(/(\r\n|\n|\r)/gm, "<br>"),
+                    time: d,
+                    username: this.userName,
+                    userkey: this.userKey,
+                }).key;
+                db.ref('chat').child(key).update({
+                    _key: key
+                });
+                this.updateChats();
+                this.refresh_inputs();
+            },
+            save_front(){
+                console.log('Entered save_come_at method');
+                var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                var t = `"`+this.name1+`", please send money!`;
+                var key = db.ref('chat').push({
+                    content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
+                    time: d,
+                    username: this.userName,
+                    userkey: this.userKey,
+                }).key;
+                db.ref('chat').child(key).update({
+                    _key: key
+                });
+                this.updateChats();
+                this.refresh_inputs();
+            },
+            save_both(){
+                console.log('Entered save_come_at method');
+                var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                var t = `"`+this.name2+`", you need to give me `+this.money+' won!';
+                var key = db.ref('chat').push({
+                    content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
+                    time: d,
+                    username: this.userName,
+                    userkey: this.userKey,
+                }).key;
+                db.ref('chat').child(key).update({
+                    _key: key
+                });
+                this.updateChats();
+                this.refresh_inputs();
+            },
         }
     }
 </script>
@@ -155,9 +216,6 @@
     #contactspage{
         width: 100%;
     }
-    .myeffect{
-        animation-duration: 2s;
-    }
     .mycontainer{
         /*background-color: rgb(211, 216, 165);*/
         padding: 3rem;
@@ -165,18 +223,9 @@
         width: 95%;
         border-radius: 5rem;
     }
-    .ppp {
-        padding: 1rem;
-        width:80%;
-        margin: auto;
-    }
     .myoutline{
         border-radius: 2rem;
         background-color: rgb(244, 247, 221);
-    }
-    .postfield{
-        font-family: 'Goyang';
-        padding: 1rem;
     }
     .cont {
         margin: 2rem;
