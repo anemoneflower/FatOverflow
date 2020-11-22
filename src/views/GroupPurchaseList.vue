@@ -51,6 +51,9 @@ export default {
                     for(let i = keyList.length; i>0; i--){
                         let myKey = keyList[i-1];
                         let gp = myValue[myKey];
+                        gp.key = myKey;
+                        console.log("KKKKKKKKKK");
+                        console.log(myKey);
                         (this.gpList).push(gp);
                     }
                 })
@@ -80,6 +83,7 @@ export default {
                                 count++
                             }
                         }
+                        gp.key = myKey;
                         if(count>0){
                             tag.push(gp);
                         }
