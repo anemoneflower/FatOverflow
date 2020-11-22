@@ -47,6 +47,7 @@
             };
         },
         async mounted() {
+            console.log('mounteeeeeeeeeed')
             // await firebase.auth().onAuthStateChanged(function(user) {
             //     if (user) {
             //         this.user = user;
@@ -88,7 +89,18 @@
                     this.participatingList.push(gpValue[myKey]);
                 }
             }
-            this.gpList = this.participatingList;
+
+            let path = this.$route.path;
+
+            if(path==='/mypage/participate'){
+                this.gpList = this.participatingList;
+            }
+            else if(path === '/mypage/opened'){
+                this.gpList = this.openedList;
+            }
+            else if(path === '/mypage/closed'){
+                this.gpList = this.closedList;
+            }
         },
         methods : {
             enableClosed() {
