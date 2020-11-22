@@ -31,6 +31,7 @@
                         class="quantityinput inputBorder"
                         v-model="select.quantity"
                         type="number"
+                        min="1"
                 />
               </td>
               <td class="cell">
@@ -142,7 +143,7 @@ export default {
             console.log(date);
             var foodObj = {};
             for (var i=0; i<this.selectedOptions.length; i++){
-                if (this.selectedOptions[i].quantity !== 0) {
+                if (this.selectedOptions[i].quantity > 0) {
                     foodObj[this.selectedOptions[i].key] = {name: this.selectedOptions[i].item, quantity: this.selectedOptions[i].quantity}
                 }
             }
