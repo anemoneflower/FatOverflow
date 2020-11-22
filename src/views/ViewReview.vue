@@ -2,6 +2,7 @@
   import { db } from "../main";
   import Vue from 'vue'
   import CreateReview from "../components/CreateReview"
+  import RadarChart from "../components/RadarChart"
   export default {
     name: 'modal',
     props: {
@@ -23,7 +24,8 @@
       }
     },
     components: {
-      CreateReview
+      CreateReview,
+      RadarChart
     },
 
     methods: {
@@ -127,6 +129,10 @@
             filling: {{avgEvaluation[2]}}
             convenience: {{avgEvaluation[3]}}
             undecided: {{avgEvaluation[4]}}
+            <RadarChart class="chart"
+            
+            />
+
             <br>
             Number of ratings: {{avgCount}}
           </div>
@@ -221,6 +227,11 @@
 
   .columnLeft {
     width: 100%;
+  }
+
+  .chart {
+    width: 500px;
+    height: 500px;
   }
 
 
