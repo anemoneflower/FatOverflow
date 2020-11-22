@@ -39,7 +39,7 @@
 <!--&lt;!&ndash;            <ordered-block>sasdfs</ordered-block>&ndash;&gt;-->
 
 <!--          </div>-->
-          <div v-if="Object.keys(participants).length > 0">
+          <div class="paBlock" v-if="participants != null">
             <div class="orderBlock" v-for="(p, key) in participants" v-bind:key="key">
               <div v-for="(pp, key) in p.food" v-bind:key="key">
                 <div class="orderLeft">
@@ -134,8 +134,8 @@ export default {
 
 .column_right {
   float: right;
-  width: 33%;
-  padding-left: 80px;
+  width: 38%;
+  padding-left: 20px;
   margin-right: 10%;
   min-width: 300px;
 }
@@ -229,7 +229,7 @@ textarea {
   border-radius: 10px;
   margin-top: 15px;
   padding: 13px 9px 13px 9px;
-  width: 378px;
+  width: 400px;
   float: right;
   margin-right: 50px;
 }
@@ -254,6 +254,24 @@ textarea {
   position: absolute;
   min-width: 1300px;
   margin-top: -75px;
+}
+
+.paBlock {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+.paBlock::-webkit-scrollbar {
+  width: 12px;
+}
+.paBlock::-webkit-scrollbar-thumb {
+    background-color: none;
+    border-radius: 6px;
+}
+.paBlock:hover::-webkit-scrollbar-thumb {
+    background: #dadada;
+}
+.paBlock::-webkit-scrollbar-track {
+    background-color: none;
 }
 </style>
 
