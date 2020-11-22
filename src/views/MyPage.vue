@@ -25,6 +25,7 @@
     // import firebase from "firebase";
     import { db } from "../main";
     import {mapGetters} from "vuex";
+    import firebase from "firebase";
 
     export default {
         name: "MyPage",
@@ -46,7 +47,9 @@
             };
         },
         async mounted() {
-
+            let user =firebase.auth().currentUser;
+            let uid = user.uid;
+            console.log(uid);
             const snapshot = await db.ref('users/SVsXvyMLsbUOnof9iAcUy390WZB3').once("value");
             let myValue = snapshot.val()&&snapshot.val().gpList;
 
