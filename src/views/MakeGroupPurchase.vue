@@ -44,16 +44,17 @@
         style="padding-top:23px; width:92%; margin-left:4%;"
       >s</vSelect>
     </div>
-    <div class="rowDiv" style="height:320px;">
+    <div class="rowDiv" style="height:220px;">
       <a class="subTitle">Notes</a>
       <textarea
         class="commentInput inputBorder"
         v-model="note"
       ></textarea>
     </div>
-    
-    <div class="rowDiv" style="height:50px;">
+    <div class="rowDiv" style="height:7px">
       <a class="subTitle">Products</a>
+    </div>
+    <div class="rowDiv" style="height:50px;">
       <!-- <button v-on:click="addProduct" class="addBtn btns">
         Add Product +
       </button> -->
@@ -87,33 +88,37 @@
           @clickedItem="onClickItem"
           @clickedItem_key="onClickItem_key"
           @clickedAdd="onClickAdd"
-          style="padding-top:40px"
+          style="padding-top:1px"
         />
       <!-- <button v-on:click="addProduct" class="submitBtn btns">
         Add Product
       </button> -->
-      <div
-        v-for="(product, index) in productList"
-        :key = "index"
-      >
-        <AddedProduct
-          :product="product"
-        ></AddedProduct>
-        <button
-          v-on:click="removeProduct(index)"
-          class="removeButton"
+      <div style="margin: 50px 0 0 4%;">
+        <div
+          v-for="(product, index) in productList"
+          :key = "index"
+          style="margin-top: 5px; height: 110px;"
         >
-          remove
-        </button>
+          <AddedProduct
+            :product="product"
+          ></AddedProduct>
+          <button
+            v-on:click="removeProduct(index)"
+            class="removeButton"
+          >
+            remove
+          </button>
+        </div>
+        <div class="rowDiv" style="margin-bottom: 30px;">
+          <button v-on:click="createPurchase" class="submitBtn btns">
+            Submit
+          </button>
+        </div> 
       </div>
 
 
     </div>
-    <div class="rowDiv">
-      <button v-on:click="createPurchase" class="submitBtn btns">
-        Submit
-      </button>
-    </div> 
+    
   </div>
 </template>
 
@@ -292,7 +297,7 @@ export default {
 .outer {
   width: 300px;
   height: 3px;
-  margin: 5px auto 30px;
+  margin: 5px auto 40px;
   /* alignment: left; */
   overflow: hidden;
   position: relative;
@@ -347,7 +352,7 @@ export default {
 
 .commentInput {
   width: 90%;
-  height: 300px;
+  height: 200px;
 }
 
 .btns {
@@ -366,6 +371,7 @@ export default {
 
 .submitBtn {
   margin: auto;
+  margin-top: 10px;
   width: 100px;
   height: 40px;
 }
@@ -385,9 +391,20 @@ export default {
 }
 
 .removeButton {
-  background: red;
-  color: white;
+  background-color: #d83737;
+  color: #fff;
+  border-radius: 11px;
+  border-width: 0px;
+  cursor: pointer;
+  width: 60px;
   height: 30px;
+  margin-left: -20px;
+  outline: none;
+}
+
+.removeButton:hover {
+  background-color: #ce3030;
+  color: #f5f5f5;
 }
 
 .label {

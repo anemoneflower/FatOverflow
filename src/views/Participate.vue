@@ -9,7 +9,7 @@
     <a class="subTitle">
       {{ purchaseTitle }}
     </a>  
-    <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; margin-top: 30px; position: absolute;">
+    <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; margin-top: 50px; position: absolute;">
       <div class="inputLayout">
           <table id="dropdown_table">
             <tr>
@@ -35,7 +35,7 @@
               </td>
               <td class="cell">
                 <button class="delBtn">
-                  Delete
+                  Remove
                 </button>
               </td>
             </tr>
@@ -53,7 +53,7 @@
             ></textarea>
           </div>
         </div>
-        <div class="inputRows">
+        <div class="inputRows" style="margin-bottom:30px;">
           <button v-on:click="submit_purchase" class="submitBtn btns">
             Submit
           </button>
@@ -325,6 +325,7 @@ img {
   height: 30px;
   margin-top: 10px;
   margin-left: 6px;
+  outline: none;
 }
 .delBtn:hover {
   background-color: #ce3030;

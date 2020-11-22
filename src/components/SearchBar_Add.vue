@@ -41,7 +41,7 @@
       </div>
       <!--      </li>-->
     </ul>
-      <button v-on:click="onClickAdd" class="submitBtn btns" style="float:left; margin-left:2%;">
+      <button v-on:click="onClickAdd" class="submitBtn btns" style="float:left; margin-left:2%; margin-top: 4px;">
         Add Product
       </button>
   </div>
@@ -199,6 +199,7 @@ export default {
   right: 0;
   border-radius: 3px;
   list-style-type: none;
+  background: white;
 }
 .popover:hover {
   box-shadow: 1px 1px 8px 1px #dcdcdc;
