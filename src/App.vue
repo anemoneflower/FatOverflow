@@ -78,7 +78,8 @@ export default {
       }).catch(function(error) {
         alert(error)
       });
-      window.location.reload();
+      // window.location.reload();
+      this.$router.push("/");
     },
     isNotHome() {
       console.log("isnothome: " + this.$router.history.current["path"]);

@@ -88,6 +88,13 @@ export default {
   },
   async mounted() {
     let user =firebase.auth().currentUser;
+
+    if(user === null){
+      var currentUrl = this.$router.history.current["fullPath"];
+      console.log(currentUrl);
+      await store.dispatch("pushRoute", currentUrl);
+      await this.$router.push("/sign-in");
+    }
     let uid = user.uid;
     console.log(uid);
     let query = this.$route.query.GP;
@@ -113,7 +120,12 @@ export default {
       var currentUrl = this.$router.history.current["fullPath"];
       console.log(currentUrl);
       store.dispatch("pushRoute", currentUrl);
-      this.$router.push("/participate/"+this.$route.query.GP);
+      if(firebase.auth().currentUser === null){
+        this.$router.push("/sign-in");
+      }
+      else{
+        this.$router.push("/participate/"+this.$route.query.GP);
+      }
     },
 
   }
