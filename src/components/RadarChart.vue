@@ -10,7 +10,20 @@ export default {
     avgEvaluation: {
       type: Array,
       default: () => [3,2,4.3,2,3.3]
-    }
+    },
+    myCe: Number,
+    myTaste: Number,
+    myFilling: Number,
+    myConvenience: Number,
+    myUndecided: Number,
+    avgCe: Number,
+    avgTaste: Number,
+    avgFilling: Number,
+    avgConvenience: Number,
+    avgUndecided: Number,
+
+
+
   },
   extends: Radar,
   data() {
@@ -28,11 +41,7 @@ export default {
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(179,181,198,1)",
-            data: [this.myEvaluation[0],
-              this.myEvaluation[1],
-              this.myEvaluation[2],
-              this.myEvaluation[3],
-              this.myEvaluation[4]
+            data: [this.myCe, this.myTaste, this.myFilling, this.myConvenience, this.myUndecided
             ]
           },
           {
@@ -43,11 +52,7 @@ export default {
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(255,99,132,1)",
-            data: [this.avgEvaluation[0],
-              this.avgEvaluation[1],
-              this.avgEvaluation[2],
-              this.avgEvaluation[3],
-              this.avgEvaluation[4]
+            data: [this.avgCe, this.avgTaste, this.avgFilling, this.avgConvenience, this.avgUndecided
             ]
           }]},
       options: {
@@ -65,8 +70,10 @@ export default {
                 title: (tooltipItem, data) => data.labels[tooltipItem[0].index]
             }
         }
-          }};},
+          }
+          };},
   mounted() {
+    console.log("RadarChart called")
     this.renderChart(this.datacollection, this.options);
   }};
 </script>
