@@ -156,12 +156,14 @@ export default {
   },
   mounted() {
     this.uid = firebase.auth().currentUser.uid;
+    this.username = firebase.auth().currentUser.displayName;
     console.log("uid is");
     console.log(this.uid)
   },
   data() {
     return {
       uid: "",
+      username: "",
       productList: [],
       postTitle: "",
       website: "",
@@ -219,6 +221,7 @@ export default {
 
       let createPurchase = {
         userKey: this.uid,
+        username: this.username,
         closedDate: dueDate,
         title: this.postTitle,
         content: this.note,
