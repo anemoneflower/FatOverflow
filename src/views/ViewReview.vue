@@ -1,5 +1,6 @@
 <script>
   import { db } from "../main";
+  import CreateReview from "../components/CreateReview"
   export default {
     name: 'modal',
     props: {
@@ -7,18 +8,21 @@
         type: String,
         default: "unknown_user_id"
       },
-      // foodName: {
-      //   type: String,
-      //   default: "unknown food name"
-      // },
+      foodName: {
+        type: String,
+        default: "unknown food name"
+      },
       foodKey: {
         type: String,
         default: "unknown key"
       },
-      // imgUrl: {
-      //   type: String,
-      //   default: "unknown image url"
-      // }
+      imgUrl: {
+        type: String,
+        default: "unknown image url"
+      }
+    },
+    components: {
+      CreateReview
     },
 
     methods: {
@@ -34,20 +38,30 @@
     },
     data() {
       return {
-        foodName: "",
-        imgUrl: "",
-        evaluation: [1,2,1,1,1]
+        myEvaluation: [1,2,1,1,1],
+        avgEvaluation: [3,3,3,3,3]
       }
     },
     async mounted() {
       console.log("Mounted wait for foodkey" + this.foodKey)
-      const snapshot = await db.ref("food/"+this.foodKey).once("value");
+      const snapshot = await db.ref("review").once("value");
       // const snapshot = await db.ref('users/SVsXvyMLsbUOnof9iAcUy390WZB3').once("value");
       console.log("mount done")
       // console.log(snapshot.val())
       const myValue = snapshot.val() && snapshot.val()
-      this.foodName = myValue.foodName
-      this.imgUrl = myValue.imgUrl
+      let evalArr = [0, 0, 0, 0, 0]
+      let count = 0
+      for (const key in myValue) {
+        console.log(myValue[key]);
+        if (myValue[key].foodKey == this.foodKey) {
+          evalArr[0] = evalArr[0] + myValue[key].evaluation[0];
+          evalArr[1] = evalArr[1] + myValue[key].evaluation[1];
+          evalArr[2] = evalArr[2] + myValue[key].evaluation[2];
+          evalArr[3] = evalArr[3] + myValue[key].evaluation[3];
+          evalArr[4] = evalArr[4] + myValue[key].evaluation[4];
+          count = count + 1;
+        }
+      }
       console.log(myValue);
     }
   };
@@ -70,12 +84,24 @@
         </slot>
       </header>
       <section class="modal-body">
+        <CreateReview></CreateReview>
         <slot name="body">
-          <p>cost-effectiveness: {{evaluation[0]}}</p>
-          <p>taste: {{evaluation[1]}}</p>
-          <p>filling: {{evaluation[0]}}</p>
-          <p>convenience: {{evaluation[0]}}</p>
-          <p>undecided: {{evaluation[0]}}</p>
+          <div class="columnLeft">
+            <p>My evaluation</p>
+            cost-effectiveness: {{myEvaluation[0]}}
+            taste: {{myEvaluation[1]}}
+            filling: {{myEvaluation[2]}}
+            convenience: {{myEvaluation[3]}}
+            undecided: {{myEvaluation[4]}}
+          </div>
+          <div>
+            <p>Average evaluation</p>
+            cost-effectiveness: {{avgEvaluation[0]}}
+            taste: {{avgEvaluation[1]}}
+            filling: {{avgEvaluation[2]}}
+            convenience: {{avgEvaluation[3]}}
+            undecided: {{avgEvaluation[4]}}
+          </div>
 
         </slot>
        </section>
@@ -163,5 +189,11 @@
     width: 150px;
     overflow: hidden;
     display: block;
-}
+  }
+
+  .columnLeft {
+    width: 100%;
+  }
+
+
 </style>

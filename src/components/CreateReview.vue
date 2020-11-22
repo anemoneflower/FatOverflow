@@ -1,19 +1,14 @@
 <template>
-  <div class="main" style="margin-top: 150px">
-    <h1>{{foodName}}</h1>
-    <h3>{{website}}</h3>
+  <div class="main">
+    <!-- <h1>{{foodName}}</h1>
+    <h3>{{website}}</h3> -->
     <div class="rowDiw">
       <p>Please rate using the 5 metrics in the range 1-5, where 1 is the lowest score and 5 is the highest score</p>
-      <p>Cost-effective: How beneficial is the product compared to its price?</p>
-      <p>Taste: </p>
-      <p>Filling: </p>
-      <p>Convenience: </p>
-      <p>Undecided: </p>
 
       
     </div>
     <div class="rowDiv">
-      <label for="ce" class="label">cost-effectiveness</label>
+      <label for="ce" class="label">Cost-effective: How beneficial is the product compared to its price?</label>
       <input
         id="ce"
         class="quantityinput inputBorder"
@@ -22,7 +17,7 @@
       />
     </div>
     <div class="rowDiv">
-      <label for="taste" class="label">taste</label>
+      <label for="taste" class="label">Taste: How good is the taste of this product?</label>
       <input
         id="taste"
         class="quantityinput inputBorder"
@@ -31,7 +26,7 @@
       />
     </div>
     <div class="rowDiv">
-      <label for="filling" class="label">filling</label>
+      <label for="filling" class="label">Filling: How much full does it feel after having this product?</label>
       <input
         id="filling"
         class="quantityinput inputBorder"
@@ -40,7 +35,7 @@
       />
     </div>
     <div class="rowDiv">
-      <label for="convenience" class="label">convenience</label>
+      <label for="convenience" class="label">Convenience: How convenient is it to eat this product?</label>
       <input
         id="convenience"
         class="quantityinput inputBorder"
@@ -131,9 +126,10 @@ export default {
 
 <style scoped>
 .rowDiv {
-  margin-left: auto;
-  margin-right: auto;
-  width: 800px;
+  float: left;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  width: 100%;
   margin-top: 20px;
 }
 .label {

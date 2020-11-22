@@ -6,7 +6,7 @@
                 <h1 class="name">{{ product.foodName }}</h1>
             </div>
             <h2 class="site">{{ product.website }}</h2>
-            <button class="rating">Evaluate</button>
+            <button class="rating">Rating</button>
         </div>
     </div>
 </template>
