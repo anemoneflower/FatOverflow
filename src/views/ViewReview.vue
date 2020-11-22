@@ -66,6 +66,7 @@
           if (this.reviewKey == "") {
             let ref = db.ref("review/");
             let createReviewKey = ref.push(createReview).key;
+            this.reviewKey = createReviewKey;
             // Add evaluation to food
             // ref = db.ref("food/"+this.foodKey + "/evaluation/");
             // createReviewKey = ref.push(this.evaluation)
