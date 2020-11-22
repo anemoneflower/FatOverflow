@@ -87,6 +87,8 @@ export default {
             note: "",
             foods: [],
             itemArray: [],
+            usedItems: [],
+            usedFoods: [],
             selectedOptions: [{key: "", item: 'Please select item you want to purchase.', quantity: 0}],
             showMenu: false,
             placeholderText: "Please select an item to purchase"
@@ -185,7 +187,7 @@ export default {
         add_dropdown() {
             console.log("add dropdown");
             console.log(this.selectedOptions);
-            if (this.selectedOptions.length >= this.foods.length) {
+            if (this.selectedOptions.length >= (this.foods.length + this.usedFoods.length)) {
                 alert("You already added enough element of foods!");
                 return
             }
@@ -196,12 +198,27 @@ export default {
             this.selectedOptions[index].item = payload;
             var idx = this.itemArray.indexOf(payload);
             this.selectedOptions[index].key = this.foods[idx];
+            var remove1 = this.itemArray.splice(idx, 1)[0];
+            var remove2 = this.foods.splice(idx, 1)[0];
+            console.log(remove2);
+            console.log(remove1);
+            this.usedItems.push(remove1);
+            this.usedFoods.push(remove2);
             console.log("selected: ");
             console.log(this.selectedOptions);
         },
         delte_purchase(index) {
           if(this.selectedOptions.length!==1){
-            this.selectedOptions.splice(index,1);
+            var remove = this.selectedOptions.splice(index,1);
+            var i = this.usedItems.indexOf(remove[0].item);
+            console.log(remove[0]);
+            console.log(i);
+            console.log(this.usedFoods);
+            console.log(this.usedItems);
+            this.itemArray.push(this.usedItems.splice(i, 1)[0]);
+            this.foods.push(this.usedFoods.splice(i, 1)[0]);
+            console.log(this.itemArray);
+            console.log(this.foods);
           }
         }
     },
