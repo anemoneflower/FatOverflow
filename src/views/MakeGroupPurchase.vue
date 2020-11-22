@@ -131,6 +131,7 @@
 
 <script>
 import { db } from "../main";
+import firebase from "firebase";
 import AddedProduct from "../components/AddedProduct.vue"
 // import SearchProduct from "./SearchProduct.vue"
 import SearchBar from "../components/SearchBar_Add.vue"
@@ -153,14 +154,19 @@ export default {
   props: {
     _postId: String,
   },
-
+  mounted() {
+    this.uid = firebase.auth().currentUser.uid;
+    console.log("uid is");
+    console.log(this.uid)
+  },
   data() {
     return {
+      uid: "",
       productList: [],
-      postTitle: "Join me",
-      website: "www.ocook.com",
-      date: "2020/12/21",
-      note:"Hi",
+      postTitle: "",
+      website: "",
+      date: "",
+      note:"",
       showModal: false,
       shipping: "",
       searchBarName: "",
@@ -212,8 +218,9 @@ export default {
       console.log(JSON.stringify(foodKeyList))
 
       let createPurchase = {
-        userKey: "unknown_sdd",
+        userKey: this.uid,
         closedDate: dueDate,
+        title: this.postTitle,
         content: this.note,
         openDate: currentDate,
         registeredFood: foodKeyList,
