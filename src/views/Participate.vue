@@ -22,7 +22,7 @@
                 <p class="tags">Quantity</p>
               </td>
             </tr>
-            <tr id="dropdown_group" v-for="(select, index) in selectedOptions" v-bind:key="index">
+            <tr id="dropdown_group" v-for="(select, index) in selectedOptions" v-bind:key="select.unique">
               <td class="cell">
               <Dropdown class="productinput" :itemArray="itemArray" :selected="select.item" :index="index" v-on:updateOption="methodToRunOnSelect"></Dropdown>
               </td>
@@ -34,7 +34,7 @@
                 />
               </td>
               <td class="cell">
-                <button class="delBtn">
+                <button class="delBtn" v-on:click="delte_purchase(index)">
                   Remove
                 </button>
               </td>
@@ -75,6 +75,7 @@ export default {
     },
     data() {
         return {
+            unique: 0,
             purchaseTitle: "",
             quantity: "",
             note: "",
@@ -181,7 +182,7 @@ export default {
                 alert("You already added enough element of foods!");
                 return
             }
-            this.selectedOptions.push({key: "", item: 'Please select item you want to purchase.', quantity: 0});
+            this.selectedOptions.push({unique: this.unique++, key: "", item: 'Please select item you want to purchase.', quantity: 0});
             console.log(this.selectedOptions);
         },
         methodToRunOnSelect({index, payload}) {
@@ -191,6 +192,11 @@ export default {
             console.log("selected: ");
             console.log(this.selectedOptions);
         },
+        delte_purchase(index) {
+          if(this.selectedOptions.length!==1){
+            this.selectedOptions.splice(index,1);
+          }
+        }
     },
 }
 </script>
