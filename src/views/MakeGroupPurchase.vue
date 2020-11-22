@@ -261,6 +261,14 @@ export default {
         })
       }
 
+      let userref = db.ref("users/"+this.uid+"/gpList/"+createPurchaseKey);
+      userref.set({
+        closed: false,
+        participate: false,
+        review : false
+      });
+
+
       console.log(createPurchaseKey)
       this.$router.push({path:'gp',query:{GP:createPurchaseKey}});
     },
