@@ -3,16 +3,16 @@
     <div class="row">
       <div class="column_left">
         <p class="postTitle">
-          {{ postTitle }}
+          {{ gp.title }}
         </p>
         <p class="website">
-          {{website}}
+          {{gp.website}}
         </p>
         <p  class="due">
-          Due: {{date}}
+          Due: {{gp.closedDate}}
         </p>
         <p class="content">
-          {{content}}
+          {{gp.content}}
         </p>
       </div>
       <div class="column_right">
@@ -44,6 +44,8 @@
 
 <script>
 
+import {db} from "../main";
+
 export default {
   name: "GroupPurchase",
   props: {
@@ -51,12 +53,20 @@ export default {
   },
   data() {
     return {
-      postTitle: "Ocook Chicken Breast Group Purchase",
-      website: "http://www.ocook.com",
-      date: "11. 05. 2020",
-      content:"I am looking for people who are willing to buy lunch boxes and meal plans from this website. The products that slimcook provides are very calori-friendly and always come with fresh ingredients, so I guarantee that you will enjoy them as much as I do.\n\nAs this website requires at least 10 items for free shipping, I will wit untiol we have at least 10 items to order together.",
-      postKey: "-MMPFFDBm2EZw2-Wuwob"
+      // postTitle: "Ocook Chicken Breast Group Purchase",
+      // website: "http://www.ocook.com",
+      // date: "11. 05. 2020",
+      // content:"I am looking for people who are willing to buy lunch boxes and meal plans from this website. The products that slimcook provides are very calori-friendly and always come with fresh ingredients, so I guarantee that you will enjoy them as much as I do.\n\nAs this website requires at least 10 items for free shipping, I will wit untiol we have at least 10 items to order together.",
+      // postKey: "-MMPFFDBm2EZw2-Wuwob"
+      gp:"",
     };
+  },
+  async mounted() {
+    let query = this.$route.query.GP;
+    const snapshot = await db.ref('groupPurchase/'+query).once("value");
+    let myValue = snapshot.val();
+    this.gp = myValue;
+    console.log(myValue);
   },
   methods: {
     participate: function() {
