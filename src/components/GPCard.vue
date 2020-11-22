@@ -72,7 +72,7 @@ export default {
     mounted() {
         for (var key in this.gp.registeredFood) {
             console.log(this.gp.registeredFood[key].foodName);
-            (this.registeredFood).push(this.gp.registeredFood[key].foodName);
+            (this.registeredFood).push(this.gp.registeredFood[key]);
             // console.log(obj[key]);
         }
         // console.log("TTTRRRRUUUEWWW   " + this.gp.participate);
@@ -93,7 +93,7 @@ export default {
         },
         goGp(){
             console.log(this.gp.key);
-            this.$router.push({path:'gp',query:{GP:this.gp.key}});
+            this.$router.push({path:'/gp',query:{GP:this.gp.key}});
         }
     }
 }
