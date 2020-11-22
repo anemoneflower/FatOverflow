@@ -42,7 +42,7 @@
                 <button class="btns" @click="closePost()">Close Post</button>
             </div>
             <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
-                <button @click="closePost()">Go Chat</button>
+                <button class="btns" @click="closePost()">Go Chat</button>
             </div>
         </div>
         </div>
@@ -257,6 +257,7 @@ a:link {
   border-width: 0px;
   font-size: 15px;
   padding: 6px 11px 6px 11px;
+  margin-right: 7px;
   cursor: pointer;
   float:right;
 }
