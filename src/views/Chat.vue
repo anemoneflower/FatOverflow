@@ -217,6 +217,17 @@
                 if(txt==='') return;
                 if(input1==='') return;
                 if(input2==='')return;
+                if((txt==="Come at ") || (txt==="I'll go at ")){
+
+                    if((Number(input1)>24) || (Number(input1)<0)) {
+                        alert("check time!");
+                        return
+                    }
+                    if((Number(input2)>59)||(Number(input2)<0)){
+                        alert("check time!");
+                        return
+                    }
+                }
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var t = txt+input1 + ":" + input2;
                 var key = db.ref('chat').push({
