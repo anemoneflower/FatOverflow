@@ -94,46 +94,31 @@ export default {
             placeholderText: "Please select an item to purchase"
         };
     },
-    created() {
-      if(firebase.auth().currentUser != null) {
+    async created() {
+      if (firebase.auth().currentUser != null) {
         console.log(this.gpKey);
-        db.ref('groupPurchase').child(this.gpKey).once('value').then(function (snapshot) {
-          var value = snapshot.val();
-          console.log("mounted: " + value);
-          return [Object.keys(value.registeredFood), value.title]
-        }).then((info) => {
-          this.foods = info[0];
-          console.log("this.foods:: ", this.foods);
-          this.purchaseTitle = info[1];
-        }).then(() => {
-          console.log("created: " + this.itemArray);
-          console.log("created: " + this.foods + " len: " + this.foods.length);
-          for (var i = 0; i < this.foods.length; i++) {
-            console.log("hoho: " + i + " " + this.foods[i]);
-            var l = db.ref('groupPurchase').child(this.gpKey).child('registeredFood').child(this.foods[i])
-                    .once('value')
-                    .then(function (snapshot) {
-                      var value = snapshot.val();
-                      console.log(value);
-                      console.log('name:', value);
-                      return value
-                    });
-            l.then(function (val) {
-              console.log("val: " + val.toString());
-              return db.ref('food').child(val).once('value').then(function (snapshot) {
-                console.log("val: " + snapshot.val().foodName);
-                return snapshot.val().foodName;
-              });
-            }).then((val) => {
-                      console.log("val2: " + val);
-                      this.itemArray.push(val)
-                    }
-            );
-            console.log("check: " + this.itemArray);
-          }
-        });
-      }
-      else{
+        const snapshot = await db.ref('groupPurchase').child(this.gpKey).once('value');
+        var value = snapshot.val();
+        console.log("mounted: ");
+        console.log(value);
+        this.foods = Object.keys(value.registeredFood);
+        console.log("this.foods:: ", this.foods);
+        this.purchaseTitle = value.title;
+        console.log("created: " + this.itemArray);
+        console.log("created: " + this.foods + " len: " + this.foods.length);
+        for (var i = 0; i < this.foods.length; i++) {
+          console.log("hoho: " + i + " " + this.foods[i]);
+          const snapshot2 = await db.ref('groupPurchase').child(this.gpKey).child('registeredFood').child(this.foods[i])
+                  .once('value');
+          var val = snapshot2.val();
+          console.log(val);
+          console.log('name:', val);
+          console.log("val: ");
+          console.log(val);
+          this.itemArray.push(val.foodName);
+          console.log("check: " + this.itemArray);
+        }
+      } else {
         this.$router.push('/');
       }
     },
