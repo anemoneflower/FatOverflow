@@ -145,6 +145,9 @@ export default {
             for (var i=0; i<this.selectedOptions.length; i++){
                 if (this.selectedOptions[i].quantity > 0) {
                     foodObj[this.selectedOptions[i].key] = {name: this.selectedOptions[i].item, quantity: this.selectedOptions[i].quantity}
+                }else{
+                  alert("Please Check Quantity!!");
+                  return
                 }
             }
             console.log("foodObj:");
