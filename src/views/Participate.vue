@@ -67,11 +67,17 @@
 import { db } from "../main";
 import firebase from 'firebase';
 import Dropdown from "../components/Dropdown";
+import {mapGetters} from "vuex";
 export default {
     name: "Participate",
     components: {Dropdown},
     props: {
         gpKey: String,
+    },
+    computed: {
+      ...mapGetters({
+        previousUrl: "previousUrl"
+      })
     },
     data() {
         return {
@@ -146,34 +152,34 @@ export default {
             date.splice(2, 1);
             date.splice(4);
             console.log(date);
-            var foodObj = [];
+            var foodObj = {};
             for (var i=0; i<this.selectedOptions.length; i++){
                 if (this.selectedOptions[i].quantity !== 0) {
-                    var v = {
-                        key: this.selectedOptions[i].key,
-                        quantity: this.selectedOptions[i].quantity
-                    };
-                    console.log("v: "+v+"f: "+this.selectedOptions[i]);
-                    foodObj.push(v)
+                    foodObj[this.selectedOptions[i].key] = {quantity: this.selectedOptions[i].quantity}
                 }
             }
-            console.log("foodObj:" + foodObj);
-            var purchase = {
+            console.log("foodObj:");
+            console.log(foodObj);
+            if(Object.keys(foodObj).length !== 0) {
+              var purchase = {
                 date: date.join(" "),
                 food: foodObj,
                 note: this.note,
                 userKey: firebase.auth().currentUser.uid,
                 isConfirmed: false
-            };
-            // TODO: change after applying group purchase DB
-            var ref = db.ref("groupPurchase").child("-MMPFFDBm2EZw2-Wuwob").child("/participant");
-            console.log("ref: "+ ref);
-            var purchaseKey = ref.push().key;
-            console.log("purchasekey: "+ purchaseKey);
-            purchase['_key'] = purchaseKey;
-            console.log(purchase);
-            ref.child(purchaseKey)
-                .set(purchase);
+              };
+              // TODO: change after applying group purchase DB
+              var ref = db.ref("groupPurchase").child(this.gpKey).child("/participant");
+              console.log("ref: " + ref);
+              var purchaseKey = ref.push().key;
+              console.log("purchasekey: " + purchaseKey);
+              purchase['_key'] = purchaseKey;
+              console.log(purchase);
+              ref.child(purchaseKey).set(purchase);
+              this.$router.replace(this.previousUrl);
+            }else{
+              alert("you didn't select any food");
+            }
         },
         add_dropdown() {
             console.log("add dropdown");

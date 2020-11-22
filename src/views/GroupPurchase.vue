@@ -56,6 +56,7 @@
 import {db} from "../main";
 import Hashtag from "../components/Hashtag";
 import firebase from "firebase";
+import store from "../store";
 
 export default {
   name: "GroupPurchase",
@@ -92,6 +93,9 @@ export default {
   methods: {
     participate: function() {
       console.log("Clicked participate"+this.$route.query.GP);
+      var currentUrl = this.$router.history.current["fullPath"];
+      console.log(currentUrl);
+      store.dispatch("pushRoute", currentUrl);
       this.$router.push("/participate/"+this.$route.query.GP);
     },
 

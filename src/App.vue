@@ -70,7 +70,6 @@ export default {
     },
     goSignIn() {
       var currentUrl = this.$router.history.current["path"];
-      // TODO: use vuex here
       store.dispatch("pushRoute", currentUrl);
     },
     goSignOut() {
