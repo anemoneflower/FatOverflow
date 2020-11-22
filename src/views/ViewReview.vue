@@ -63,15 +63,26 @@
             convenience: parseInt(this.inputEvaluation[3]),
             undecided: parseInt(this.inputEvaluation[4])
           }
-          let ref = db.ref("review/");
-          let createReviewKey = ref.push(createReview).key;
-          // Add evaluation to food
-          // ref = db.ref("food/"+this.foodKey + "/evaluation/");
-          // createReviewKey = ref.push(this.evaluation)
-          console.log(createReviewKey)
+          if (this.reviewKey == "") {
+            let ref = db.ref("review/");
+            let createReviewKey = ref.push(createReview).key;
+            // Add evaluation to food
+            // ref = db.ref("food/"+this.foodKey + "/evaluation/");
+            // createReviewKey = ref.push(this.evaluation)
+            console.log(createReviewKey)
+          }
+          else {
+            let ref = db.ref("review/" + this.reviewKey);
+            let createReviewKey = ref.update(createReview).key;
+            // Add evaluation to food
+            // ref = db.ref("food/"+this.foodKey + "/evaluation/");
+            // createReviewKey = ref.push(this.evaluation)
+            console.log(createReviewKey)            
+          }
+
 
           // When new rating is added
-          if (this.myEvaluation[0] == 0) {
+          if (this.reviewKey == "") {
             console.log("Adding new value")
             let tmpAvg = [0, 0, 0, 0, 0]
             console.log("Computing new average")
@@ -92,7 +103,24 @@
             this.avgUndecided = parseFloat(this.avgEvaluation[4])
           }
           else{
-            console.log(this.myEvaluation[0])
+            console.log("Change new value")
+            let tmpAvg = [0, 0, 0, 0, 0]
+            console.log("Computing new average")
+            console.log(this.avgEvaluation)
+            console.log(this.avgCount)
+            console.log(this.inputEvaluation)
+            tmpAvg[0] = ((this.avgEvaluation[0] * this.avgCount - parseInt(this.myEvaluation[0]) + parseInt(this.inputEvaluation[0])) / (this.avgCount)).toFixed(2)
+            tmpAvg[1] = ((this.avgEvaluation[1] * this.avgCount - parseInt(this.myEvaluation[1]) + parseInt(this.inputEvaluation[1])) / (this.avgCount)).toFixed(2)
+            tmpAvg[2] = ((this.avgEvaluation[2] * this.avgCount - parseInt(this.myEvaluation[2]) + parseInt(this.inputEvaluation[2])) / (this.avgCount)).toFixed(2)
+            tmpAvg[3] = ((this.avgEvaluation[3] * this.avgCount - parseInt(this.myEvaluation[3]) + parseInt(this.inputEvaluation[3])) / (this.avgCount)).toFixed(2)
+            tmpAvg[4] = ((this.avgEvaluation[4] * this.avgCount - parseInt(this.myEvaluation[4]) + parseInt(this.inputEvaluation[4])) / (this.avgCount)).toFixed(2)
+            // this.avgCount = this.avgCount + 1
+            this.avgEvaluation = [...tmpAvg]
+            this.avgCe = parseFloat(this.avgEvaluation[0])
+            this.avgTaste = parseFloat(this.avgEvaluation[1])
+            this.avgFilling = parseFloat(this.avgEvaluation[2])
+            this.avgConvenience = parseFloat(this.avgEvaluation[3])
+            this.avgUndecided = parseFloat(this.avgEvaluation[4])
           }
           Vue.set(this.myEvaluation, 0, this.inputEvaluation[0]);
           Vue.set(this.myEvaluation, 1, this.inputEvaluation[1]);
@@ -115,7 +143,8 @@
         avgEvaluation: [0,0,0,0,0],
         avgCount: 0,
         uid: "",
-        componentKey: 0
+        componentKey: 0,
+        reviewKey: ""
       }
     },
     async mounted() {
@@ -136,6 +165,7 @@
         console.log(myValue[key].userKey)
         if (myValue[key].userKey == this.uid) {
           console.log("found matching uid")
+          this.reviewKey = key;
           console.log(myValue[key])
           Vue.set(this.myEvaluation, 0, myValue[key].ce);
           Vue.set(this.myEvaluation, 1, myValue[key].taste);
