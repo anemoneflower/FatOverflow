@@ -2,60 +2,96 @@
     <div id="contactspage">
         <section class="mycontainer">
             <div class="column is-8">
-                <div>
-                    <div>Come at <input type="text" placeholder="(enter time)" v-model="come_at"><button v-on:click="save_at('Come at ', come_at)">send</button></div>
+                <a class="title" style="margin: auto; text-align: center;">
+                    Chatting Room
+                </a>    
+                <div class="outer">
+                    <div class="inner"></div>
                 </div>
-                <div>
-                    <div>I'll go at <input type="text" placeholder="(enter time)" v-model="go_at"><button v-on:click="save_at('I\'ll go at ', go_at)">send</button></div>
-                </div>
-                <div>
-                    <div>Product will arrive at <input type="text" placeholder="(enter time)" v-model="arrive_at"><button v-on:click="save_at('Product will arrive at ', arrive_at)">send</button></div>
-                </div>
-                <div>
-                    <div>Account is <input type="text" placeholder="(enter bank)" v-model="bank">bank <input type="text" placeholder="(enter account)" v-model="account"><button v-on:click="save_account">send</button></div>
-                </div>
-                <div>
-                    <div>I sent money!<button v-on:click="save_txt('I sent money!')">send</button></div>
-                </div>
-                <div>
-                    <div>"<input type="text" placeholder="(enter username)" v-model="name1">", please send money!<button v-on:click="save_front">send</button></div>
-                </div>
-                <div>
-                    <div>"<input type="text" placeholder="(enter username)" v-model="name2">", you need to give me <input type="text" placeholder="(enter amount of money)" v-model="money"> won!<button v-on:click="save_both">send</button></div>
-                </div>
-                <div>
+                <a class="subTitle">
+                    Room Title
+                </a>  
+                <div id="chatBox" class="inputBorder">
                     <div class="post-list" v-for="post in chats" :key="post.time">
 <!--                        check if user === owner-->
-                        <div class="cont myoutline" v-if="ownerKey===post.userkey" style="background: #d83737">
-                            <h5 class="timestamp" >{{post.time}}</h5>
-                            <p class="namestamp">
-                                {{post.username}}
-                            </p>
-                            <p class="contentstamp">
+                        <div class="rightText" v-if="ownerKey===post.userkey && ownerKey===userKey">
+                            <div class="namestamp">
+                                {{getName(post.username)}}
+                            </div>
+                            <div class="timestamp" >
+                                {{getDate(post.time)}}
+                            </div>
+                            <div class="contentstamp" style="background-color: #f1d73f">
                                 {{post.content}}
-                            </p>
+                            </div>
+                        </div>
+                        <div class="leftText" v-else-if="ownerKey===post.userkey">
+                            <div class="namestamp">
+                                {{getName(post.username)}}
+                            </div>
+                            <div class="timestamp" >
+                                {{getDate(post.time)}}
+                            </div>
+                            <div class="contentstamp" style="background-color: #f1d73f">
+                                {{post.content}}
+                            </div>
                         </div>
 <!--                        check if user's comment-->
-                        <div class="cont myoutline" v-else-if="userKey===post.userkey" style="background: #409fcb">
-                                <h5 class="timestamp" >{{post.time}}</h5>
-                                <p class="namestamp">
-                                    {{post.username}}
-                                </p>
-                                <p class="contentstamp">
-                                    {{post.content}}
-                                </p>
+                        <div class="rightText" v-else-if="userKey===post.userkey">
+                            <div class="namestamp">
+                                {{getName(post.username)}}
+                            </div>
+                            <div class="timestamp" >
+                                {{getDate(post.time)}}
+                            </div>
+                            <div class="contentstamp" style="background-color: #5fd265">
+                                {{post.content}}
+                            </div>
                         </div>
 <!--                        otherwise-->
-                        <div class="cont myoutline" v-else style="background: #FFFFFF">
-                            <h5 class="timestamp" >{{post.time}}</h5>
-                            <p class="namestamp">
-                                {{post.username}}
-                            </p>
-                            <p class="contentstamp">
+                        <div class="leftText" v-else>
+                            <div class="namestamp">
+                                {{getName(post.username)}}
+                            </div>
+                            <div class="timestamp">
+                                {{getDate(post.time)}}
+                            </div>
+                            <div class="contentstamp" style="background-color: #5c86f1">
                                 {{post.content}}
-                            </p>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div id="messagecmd">
+                    <div style="float:left; font-size:18px; margin-left:10px; font-weight:bold; margin-top:5px;">
+                        <div>Message Form</div>
+                    </div>
+                    <div v-if="userKey==ownerKey">
+                        <div class="message" style="margin-left:425px">
+                            <div>Come at <input class="timeInput" type="text" placeholder="hh" v-model="come_at_h">:<input class="timeInput" type="text" placeholder="mm" v-model="come_at_m"><button class="sendBtn" v-on:click="save_at('Come at ', come_at_h, come_at_m)">send</button></div>
+                        </div>
+                        <div class="message" style="margin-left:249px">
+                            <div>Account is <input class="bankInput" type="text" placeholder="Bank" v-model="bank"> bank <input class="accountInput" type="text" placeholder="Account Number" v-model="account"><button class="sendBtn" v-on:click="save_account">send</button></div>
+                        </div>
+                        <div class="message" style="margin-left:195px">
+                            <div>"<input class="userInput" type="text" placeholder="Username" v-model="name2">", you need to give me <input class="moneyInput" type="text" placeholder="Price" v-model="money"> won!<button class="sendBtn" v-on:click="save_both">send</button></div>
+                        </div>
+                        <div class="message" style="margin-left:429px">
+                            <div>"<input class="userInput" type="text" placeholder="Username" v-model="name3">", OK <button class="sendBtn" v-on:click="save_ok">send</button></div>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div class="message" style="margin-left:426px">
+                            <div>I'll go at <input class="timeInput" type="text" placeholder="hh" v-model="go_at_h">:<input class="timeInput" type="text" placeholder="mm" v-model="go_at_m"><button class="sendBtn" v-on:click="save_at('I\'ll go at ', go_at_h, go_at_m)">send</button></div>
+                        </div>
+                        <div class="message" style="margin-left:448px">
+                            <div>I sent money!<button class="sendBtn" v-on:click="save_txt('I sent money!')">send</button></div>
+                        </div>
+                        <div class="message" style="margin-left:524px">
+                            <div>OK!<button class="sendBtn" v-on:click="save_txt('OK')">send</button></div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -110,8 +146,14 @@
             this.ownerKey = o.val();
             console.log("ownerKey: ");
             console.log(this.ownerKey);
+            this.initChats();
         },
         methods: {
+            initChats() {
+                var container = this.$el.querySelector("#chatBox");
+                console.log(container);
+                container.scrollTop = container.scrollHeight;
+            },
             updateChats() {
                 let chatref = db.ref("chat");
                 let c = chatref.once("value", function(snapshot) {
@@ -152,10 +194,10 @@
               this.money = '';
               this.account = '';
             },
-            save_at(txt, input){
+            async save_at(txt, input1, input2){
                 console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
-                var t = txt+input;
+                var t = txt+input1 + ":" + input2;
                 var key = db.ref('chat').push({
                     content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
                     time: d,
@@ -166,9 +208,10 @@
                     _key: key
                 });
                 this.updateChats();
+                this.initChats();
                 this.refresh_inputs();
             },
-            save_account(){
+            async save_account(){
                 console.log('Entered save_go_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var t = "Account is "+this.bank+'bank '+this.account;
@@ -182,9 +225,10 @@
                     _key: key
                 });
                 this.updateChats();
+                this.initChats();
                 this.refresh_inputs();
             },
-            save_txt(txt){
+            async save_txt(txt){
                 console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 // var t = "Come at "+this.come_at;
@@ -197,10 +241,11 @@
                 db.ref('chat').child(key).update({
                     _key: key
                 });
-                this.updateChats();
+                await this.updateChats();
                 this.refresh_inputs();
+                this.initChats();
             },
-            save_front(){
+            async save_front(){
                 console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var t = `"`+this.name1+`", please send money!`;
@@ -214,9 +259,10 @@
                     _key: key
                 });
                 this.updateChats();
+                this.initChats();
                 this.refresh_inputs();
             },
-            save_both(){
+            async save_both(){
                 console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var t = `"`+this.name2+`", you need to give me `+this.money+' won!';
@@ -230,52 +276,77 @@
                     _key: key
                 });
                 this.updateChats();
+                this.initChats();
                 this.refresh_inputs();
             },
+            async save_ok() {
+                console.log('Entered send_ok method');
+                var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                var t = `"`+this.name3+`", OK `;
+                var key = db.ref('chat').push({
+                    content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
+                    time: d,
+                    username: this.userName,
+                    userkey: this.userKey,
+                }).key;
+                db.ref('chat').child(key).update({
+                    _key: key
+                });
+                this.updateChats();
+                this.initChats();
+                this.refresh_inputs();
+            },
+            getName(namesrc) {
+                if(namesrc === '') {
+                    return "None";
+                }
+                return namesrc;
+            },
+            getDate(datesrc) {
+                console.log("date");
+                var strL = datesrc.split(" ");
+                var hms = strL[4].split(":");
+                console.log(hms);
+                return strL[1] + " " + strL[2] + "  " + hms[0] + ":" + hms[1];
+            }
         }
     }
 </script>
 
 <style scoped>
     #contactspage{
-        width: 100%;
+        width: 90%;
+        min-width: 1000px;
+        margin-left: 5%;
     }
     .mycontainer{
         /*background-color: rgb(211, 216, 165);*/
-        padding: 3rem;
+        padding-top: 30px;
         margin: auto;
         width: 95%;
         border-radius: 5rem;
     }
-    .myoutline{
-        border-radius: 2rem;
-        background-color: rgb(244, 247, 221);
-    }
-    .cont {
-        margin: 2rem;
-        text-align: left;
-    }
     .timestamp{
-        margin-top: 0.5rem;
         font-family: 'Goyang';
-        margin-bottom: 0.1rem;
-        font-size: 0.8rem;
+        font-size: 10px;
         color: #B3A580;
-        position: left;
+        padding: 0px 8px 3px 8px;
     }
     .namestamp{
         font-family: 'Goyang';
         color: hsl(0, 1%, 61%);
-        margin-top: 0.1rem;
-        font-size: 0.8rem;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 0px 7px 0px 7px;
     }
     .contentstamp{
         font-family: 'Goyang';
-        font-size: 1.1rem;
+        font-size: 13px;
         text-align: center;
-        margin: 0.2rem;
-        font-weight: 550;
-        color: #685642;
+        padding: 7px 16px 7px 16px;
+        font-weight: 400;
+        color: #fff;
+        border-radius: 16px;
     }
     .btn{
         display: inline-block;
@@ -310,6 +381,43 @@
         font-size: 4rem;
         padding: 30px;
         color: #685642;
+    }
+
+    .post-list {
+        margin:0px 0px 0px 5px;
+        width: 600px;
+        height: 70px;
+    }
+
+    #chatBox {
+        height: 350px;
+        overflow-y: scroll;
+        left: 50%;
+        margin-top: 20px;
+        margin-left: -310px;
+        width: 620px;
+        position: absolute;
+    }
+    #chatBox::-webkit-scrollbar {
+        width: 12px;
+    }
+    #chatBox::-webkit-scrollbar-thumb {
+        background-color: none;
+        border-radius: 6px;
+    }
+    #chatBox:hover::-webkit-scrollbar-thumb {
+        background: #dadada;
+    }
+    #chatBox::-webkit-scrollbar-track {
+        background-color: none;
+    }
+
+    #messagecmd {
+        position: absolute;
+        left: 50%;
+        width: 620px;
+        margin-left: -310px;
+        margin-top: 385px;
     }
 
     @keyframes placeHolderShimmer{
@@ -363,5 +471,102 @@
         height: 20px;
         width: 200px;
         position: relative;
+    }
+    .title {
+        width: 800px;
+        height: 30px;
+        margin: auto;
+        /* text-align: left;
+        margin-bottom: 30px; */
+        font-size: 25px;
+        font-weight: bold;
+        color: #3a3a3a;
+    }
+    .inner {
+        position: absolute;
+        width: 40%;
+        height: 100%;
+        left: 30%;
+        background: #48C964;
+        box-shadow: 0px 0px 10px 50px #48C964;
+    }
+    .outer {
+        width: 370px;
+        height: 3px;
+        margin: 5px auto 5px;
+        /* alignment: left; */
+        overflow: hidden;
+        position: relative;
+        /* background-color: #f37022; */
+        outline: none;
+    }
+    .subTitle {
+        width: 800px;
+        height: 30px;
+        margin: auto;
+        /* text-align: left;
+        margin-bottom: 30px; */
+        font-size: 23px;
+        font-weight: bold;
+        color: #3a3a3a;
+    }
+    .inputBorder {
+        border-radius: 3px;
+        border-color: #cbcbcb;
+        border-style: solid;
+        border-width: thin;
+    }
+    .rightText {
+        float: right;
+        text-align: right;
+    }
+    .leftText {
+        float: left;
+        text-align: left;
+    }
+
+    .message {
+        margin: 5px 0px 1px 0px;
+        font-size:17px;
+    }
+    .sendBtn {
+        outline: none;
+        background-color: #48C964;
+        color: #fff;
+        border-radius: 10px;
+        border-width: 0px;
+        font-size: 15px;
+        padding: 5px 10px 7px 10px;
+        cursor: pointer;
+        margin-left: 5px;
+    }
+    .sendBtn:hover {
+        background-color: #2f8542;
+    }
+
+    .bankInput {
+        width: 50px;
+        height: 17px;
+        text-align: center;
+    }
+    .accountInput {
+        width: 110px;
+        height: 17px;
+        text-align: center;
+    }
+    .timeInput {
+        width: 20px;
+        height: 17px;
+        text-align: center;
+    }
+    .userInput {
+        width: 70px;
+        height: 17px;
+        text-align: center;
+    }
+    .moneyInput {
+        width: 55px;
+        height: 17px;
+        text-align: center;
     }
 </style>
