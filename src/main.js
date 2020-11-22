@@ -37,7 +37,9 @@ export const db = app.database();
 //   foodName : "KAI-breast",
 //   img : "url",
 //   website : "url"
-
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch("fetchUser", user);
+});
 //
 
 new Vue({

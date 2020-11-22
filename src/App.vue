@@ -35,8 +35,9 @@
 <script> 
 import NavBar from "@/components/NavBar.vue";
 import SearchBar from "@/components/SearchBar.vue";
-import current from "./main";
 import firebase from 'firebase';
+import {mapGetters} from "vuex";
+import store from "./store";
 export default {
   components: {
     NavBar,
@@ -47,11 +48,18 @@ export default {
       selected: false
     };
   },
+  computed: {
+    // map `this.user` to `this.$store.getters.user`
+    ...mapGetters({
+      user: "user"
+    })
+  },
+  mounted() {
+    console.log(firebase.auth().currentUser)
+  },
   methods: {
     isSignin() {
-      if(firebase.auth().currentUser != null)
-        console.log(firebase.auth().currentUser)
-      return firebase.auth().currentUser != null
+      return this.user.loggedIn
     },
     goMyPage() {
       var curPath = this.$router.history.current["path"];
@@ -63,10 +71,15 @@ export default {
     goSignIn() {
       var currentUrl = this.$router.history.current["path"];
       // TODO: use vuex here
-      current.push(currentUrl);
+      store.dispatch("pushRoute", currentUrl);
     },
     goSignOut() {
-      
+      firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+      }).catch(function(error) {
+        alert(error)
+      });
+      window.location.reload();
     },
     isNotHome() {
       console.log("isnothome: " + this.$router.history.current["path"]);
@@ -103,14 +116,6 @@ body {
 }
 .nav {
   position: absolute;
-  background: white;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
-.nav2 {
-  position: fixed;
   background: white;
   top: 0;
   left: 0;
@@ -162,10 +167,10 @@ body {
   border-radius: 15px;
   border-width: 0px;
   padding: 6px 13px 8px 13px;
-  font-size: 23px;
+  font-size: 18px;
   position: absolute;
   right: 3.5%;
-  top: 20px;
+  top: 25px;
   cursor: pointer;
   outline: none;
   z-index: 3;

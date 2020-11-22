@@ -2,8 +2,10 @@
   <div class="home">
     <img class="lo" alt="Hey you can read it!" src="../assets/logo.png" />
     <search-bar></search-bar>
-    <router-link to="/gplist" ><img class="lb" alt="Group Purchase" src="../assets/main_left.png" @click="goPurchaseList"/></router-link>
-    <router-link to="/products"><img class="rb" alt="Product" src="../assets/main_right.png" @click="goProductsList"/></router-link>
+    <div style="width: 490px; position:fixed; left:50%; margin-left:-245px; top: 370px; z-index: 1;">
+      <router-link to="/gplist" ><img class="lb" alt="Group Purchase" src="../assets/main_left.png" @click="goPurchaseList"/></router-link>
+      <router-link to="/products"><img class="rb" alt="Product" src="../assets/main_right.png" @click="goProductsList"/></router-link>
+    </div>
   </div>
 </template>
 
@@ -51,11 +53,11 @@ export default {
   position: relative;
 }
 .lo {
-  position: relative;
+  position: absolute;
   margin: auto;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  width: 575px;
+  margin: -257px 0 20px -288px;
+  left: 50%;
+  width: 576px;
 }
 .rb {
   position: relative;

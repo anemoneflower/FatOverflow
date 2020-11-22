@@ -9,12 +9,16 @@ const store = new Vuex.Store({
         user: {
             loggedIn: false,
             data: null
-        }
+        },
+        previousUrl: '/'
     },
     //provide a way of accessing data stored in the state.
     getters: {
         user(state){
             return state.user
+        },
+        previousUrl(state){
+            return state.previousUrl
         }
     },
     //Mutations allows us to be able to make changes to our state.
@@ -22,11 +26,17 @@ const store = new Vuex.Store({
         increment (state) {
             state.count++
         },
+        // sets the loggedIn property on state.user to the value that was passed to it.
         SET_LOGGED_IN(state, value) {
             state.user.loggedIn = value;
         },
+        // makes changes to the data property on state.user.
         SET_USER(state, data) {
             state.user.data = data;
+        },
+        // store previous URL
+        SET_PREV_URL(state, route) {
+            state.previousUrl = route;
         }
     },
     actions: {
@@ -40,6 +50,9 @@ const store = new Vuex.Store({
             } else {
                 commit("SET_USER", null);
             }
+        },
+        pushRoute({commit}, prev) {
+            commit("SET_PREV_URL", prev);
         }
     }
 })

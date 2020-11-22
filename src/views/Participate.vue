@@ -8,7 +8,6 @@
     </div>
     <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; position: absolute;">
       <div class="inputLayout">
-<!--        <div class="inputRows">-->
           <table id="dropdown_table">
             <tr>
               <td>
@@ -38,7 +37,6 @@
               </td>
             </tr>
           </table>
-<!--        </div>-->
 
         <div class="inputRows">
           <p class="tags" style="vertical-align: top; margin-top: 0; margin-left: 15px">Notes</p>
@@ -53,9 +51,6 @@
           </div>
         </div>
         <div class="inputRows">
-<!--          <button v-on:click="add_product" class="addBtn btns">-->
-<!--            Submit and Add Product +-->
-<!--          </button>-->
           <button v-on:click="submit_purchase" class="submitBtn btns">
             Submit
           </button>
@@ -70,98 +65,143 @@ import { db } from "../main";
 import firebase from 'firebase';
 import Dropdown from "../components/Dropdown";
 export default {
-  name: "Participate",
-  components: {Dropdown},
-  props: {
-    purchaseTitle: String,
-    closeOnOutsideClick: {
-      type: [Boolean],
-      default: true
+    name: "Participate",
+    components: {Dropdown},
+    props: {
+        gpKey: String,
     },
-    foodKey: {
-      type: String,
-      default: "sampleFood"
-    }
-  },
-  mounted() {
-    console.log(this.itemArray);
-
-    if (this.closeOnOutsideClick) {
-      document.addEventListener("click", this.clickHandler);
-    }
-  },
-
-
-  data() {
-    return {
-      quantity:"",
-      note:"",
-      itemArray: ["1","2"],
-      selectedOptions: [{item:'Please select item you want to purchase.', quantity:0}],
-      showMenu: false,
-      placeholderText: "Please select an item to purchase"
-    };
-  },
-  methods: {
-    // add_product: function() {
-    //   console.log("add_product!!");
-    //   this.submit();
-    //   this.selectedOption ='Please select item you want to purchase.';
-    //
-    //   this.quantity='';
-    //   this.note='';
-    // },
-    submit_purchase: function() {
-      this.submit();
-      //TODO: this.$router.push({ path: `/read-note/${noteKey}/${this.bookKey}` });
+    data() {
+        return {
+            purchaseTitle: "",
+            quantity: "",
+            note: "",
+            foods: [],
+            itemArray: [],
+            selectedOptions: [{key: "", item: 'Please select item you want to purchase.', quantity: 0}],
+            showMenu: false,
+            placeholderText: "Please select an item to purchase"
+        };
     },
-    submit: function() {
-      console.log("submit_purchase!");
-      console.log(this.selectedOptions);
-      console.log(this.quantity);
-      console.log(this.note);
-      this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
+    created() {
+      if(firebase.auth().currentUser != null) {
+        console.log(this.gpKey);
+        db.ref('groupPurchase').child(this.gpKey).once('value').then(function (snapshot) {
+          var value = snapshot.val();
+          console.log("mounted: " + value);
+          return [Object.keys(value.registeredFood), value.title]
 
-      var date = Date().toString().split(" ");
-      date.splice(0, 1);
-      date.splice(0, 0, date[1]);
-      date.splice(2, 1);
-      date.splice(4);
-      console.log(date);
+        }).then((info) => {
+          this.foods = info[0];
+          console.log("this.foods:: ", this.foods);
+          this.purchaseTitle = info[1];
+        }).then(() => {
 
-      var purchase = {
-        date: date.join(" "),
-        //TODO: change this food type! => use foodKey
-        food: this.selectedOptions,
-        note: this.note,
-        userKey: firebase.auth().currentUser.uid,
-        isConfirmed: false
-      };
+          console.log("created: " + this.itemArray);
+          console.log("created: " + this.foods + " len: " + this.foods.length);
+          for (var i = 0; i < this.foods.length; i++) {
+            console.log("hoho: " + i + " " + this.foods[i]);
 
-      // TODO: change after applying group purchase DB
-      var ref = db.ref("groupPurchase/"+"-MMPFFDBm2EZw2-Wuwob"+"/participant");
-      var purchaseKey = ref.push(purchase).key;
-      ref.child(purchaseKey)
-              .update({
-                _key: purchaseKey
+            var l = db.ref('groupPurchase').child(this.gpKey).child('registeredFood').child(this.foods[i])
+                    .once('value')
+                    .then(function (snapshot) {
+                      var value = snapshot.val();
+
+                      console.log('name:', value.foodKey);
+
+                      return value.foodKey
+
+                    });
+
+            l.then(function (val) {
+              console.log("val: " + val.toString());
+              return db.ref('food').child(val).once('value').then(function (snapshot) {
+                console.log("val: " + snapshot.val().foodName);
+                return snapshot.val().foodName;
               });
+            }).then((val) => {
+                      console.log("val2: " + val);
+                      this.itemArray.push(val)
+                    }
+            );
+            console.log("check: " + this.itemArray);
+          }
+        });
+      }
+      else{
+        this.$router.push('/');
+      }
     },
-    add_dropdown(){
-      console.log("add dropdown");
-      // var len = this.selectedOptions.length;
-      console.log(this.selectedOptions);
-      this.selectedOptions.push({item:'Please select item you want to purchase.', quantity:0});
-      console.log(this.selectedOptions);
-      },
-    methodToRunOnSelect({index, payload}) {
-      this.selectedOptions[index].item = payload;
-      console.log("selected: ");
-      console.log(this.selectedOptions);
+    methods: {
+        submit_purchase: function () {
+            this.submit();
+            //TODO: this.$router.push({ path: `/read-note/${noteKey}/${this.bookKey}` });
+            // TODO: https://stackoverflow.com/questions/53788975/vue-router-how-to-get-previous-page-url/53789212
+
+        },
+        submit: function () {
+            console.log("submit_purchase!");
+            console.log(this.selectedOptions);
+            console.log(this.quantity);
+            console.log(this.note);
+            this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
+
+            var date = Date().toString().split(" ");
+            date.splice(0, 1);
+            date.splice(0, 0, date[1]);
+            date.splice(2, 1);
+            date.splice(4);
+            console.log(date);
+
+            var foodObj = [];
+            for (var i=0; i<this.selectedOptions.length; i++){
+                if (this.selectedOptions[i].quantity !== 0) {
+                    var v = {
+                        key: this.selectedOptions[i].key,
+                        quantity: this.selectedOptions[i].quantity
+                    };
+                    console.log("v: "+v+"f: "+this.selectedOptions[i]);
+                    foodObj.push(v)
+                }
+            }
+            console.log("foodObj:" + foodObj);
+            var purchase = {
+                date: date.join(" "),
+                food: foodObj,
+                note: this.note,
+                userKey: firebase.auth().currentUser.uid,
+                isConfirmed: false
+            };
+
+            // TODO: change after applying group purchase DB
+            var ref = db.ref("groupPurchase").child("-MMPFFDBm2EZw2-Wuwob").child("/participant");
+            console.log("ref: "+ ref);
+            var purchaseKey = ref.push().key;
+            console.log("purchasekey: "+ purchaseKey);
+            purchase['_key'] = purchaseKey;
+            console.log(purchase);
+            ref.child(purchaseKey)
+                .set(purchase);
+        },
+        add_dropdown() {
+            console.log("add dropdown");
+            console.log(this.selectedOptions);
+            if (this.selectedOptions.length >= this.foods.length) {
+                alert("You already added enough element of foods!");
+                return
+            }
+            this.selectedOptions.push({key: "", item: 'Please select item you want to purchase.', quantity: 0});
+            console.log(this.selectedOptions);
+        },
+        methodToRunOnSelect({index, payload}) {
+            this.selectedOptions[index].item = payload;
+            var idx = this.itemArray.indexOf(payload);
+            this.selectedOptions[index].key = this.foods[idx];
+
+            console.log("selected: ");
+            console.log(this.selectedOptions);
+        },
     },
-  },
-
-  }
-
+}
 </script>
 
 <style scoped>
@@ -205,13 +245,6 @@ textarea {
 }
 img {
   border: 0.5px solid #3a3a3a;
-}
-.foodImg {
-  width: 50px;
-  height: 50px;
-  margin: auto;
-  margin-right: 0%;
-  margin-left: 100px;
 }
 .inputRows {
   width: 650px;
@@ -290,100 +323,6 @@ img {
   height: 40px;
 }
 
-.btn-group {
-  min-width: 400px;
-  height: 30px;
-  position: relative;
-  margin: 10px 1px;
-  display: inline-block;
-  vertical-align: middle;
-}
-.btn-group a:hover {
-  text-decoration: none;
-}
-
-.dropdown-toggle {
-  color: #636b6f;
-  min-width: 400px;
-  padding: 10px 20px 10px 10px;
-  text-transform: none;
-  font-weight: 300;
-  margin-bottom: 7px;
-  border: 0;
-  background-image: linear-gradient(#009688, #009688),
-  linear-gradient(#d2d2d2, #d2d2d2);
-  background-size: 0 2px, 100% 1px;
-  background-repeat: no-repeat;
-  background-position: center bottom, center calc(100% - 1px);
-  background-color: transparent;
-  transition: background 0s ease-out;
-  float: none;
-  box-shadow: none;
-  border-radius: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.dropdown-toggle:hover {
-  background: #e1e1e1;
-  cursor: pointer;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  float: left;
-  min-width: 400px;
-  padding: 5px 0;
-  margin: 2px 0 0;
-  list-style: none;
-  font-size: 14px;
-  text-align: left;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  background-clip: padding-box;
-}
-
-.dropdown-menu > li > a {
-  padding: 10px 30px;
-  display: block;
-  clear: both;
-  font-weight: normal;
-  line-height: 1.6;
-  color: #333333;
-  white-space: nowrap;
-  text-decoration: none;
-}
-.dropdown-menu > li > a:hover {
-  background: #efefef;
-  color: #409fcb;
-}
-
-.dropdown-menu > li {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-  margin: 0;
-}
-
-.caret {
-  width: 0;
-  position: absolute;
-  top: 19px;
-  height: 0;
-  margin-left: -24px;
-  vertical-align: middle;
-  border-top: 4px dashed;
-  border-top: 4px solid \9;
-  border-right: 4px solid transparent;
-  border-left: 4px solid transparent;
-  right: 10px;
-}
-
 .inputLayout {
   margin-top:0;
 }
@@ -398,10 +337,6 @@ img {
 
 .cell {
   padding-right: 10px;
-}
-
-li {
-  list-style: none;
 }
 
 </style>
