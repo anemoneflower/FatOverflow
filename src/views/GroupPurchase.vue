@@ -8,12 +8,21 @@
         <p class="website">
           {{gp.website}}
         </p>
+        <div class="hashtag" v-if="(registeredFood.length>0)">
+          <div
+                  :key = "food.key"
+                  v-for="food in registeredFood"
+          >
+            <Hashtag :food="food"></Hashtag>
+          </div>
+        </div>
         <p  class="due">
           Due: {{gp.closedDate}}
         </p>
         <p class="content">
           {{gp.content}}
         </p>
+
       </div>
       <div class="column_right">
         <button 
@@ -45,9 +54,11 @@
 <script>
 
 import {db} from "../main";
+import Hashtag from "../components/Hashtag";
 
 export default {
   name: "GroupPurchase",
+  components: {Hashtag},
   props: {
     _postId: String,
   },
@@ -59,6 +70,7 @@ export default {
       // content:"I am looking for people who are willing to buy lunch boxes and meal plans from this website. The products that slimcook provides are very calori-friendly and always come with fresh ingredients, so I guarantee that you will enjoy them as much as I do.\n\nAs this website requires at least 10 items for free shipping, I will wit untiol we have at least 10 items to order together.",
       // postKey: "-MMPFFDBm2EZw2-Wuwob"
       gp:"",
+      registeredFood:[]
     };
   },
   async mounted() {
@@ -66,6 +78,11 @@ export default {
     const snapshot = await db.ref('groupPurchase/'+query).once("value");
     let myValue = snapshot.val();
     this.gp = myValue;
+    for (var key in this.gp.registeredFood) {
+      console.log(this.gp.registeredFood[key].foodName);
+      (this.registeredFood).push(this.gp.registeredFood[key].foodName);
+      // console.log(obj[key]);
+    }
     console.log(myValue);
   },
   methods: {
