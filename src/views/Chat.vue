@@ -23,21 +23,20 @@
                 <div>
                     <div>"<input type="text" placeholder="(enter username)" v-model="name2">", you need to give me <input type="text" placeholder="(enter amount of money)" v-model="money"> won!<button v-on:click="save_both">send</button></div>
                 </div>
-<!--                <form @submit.prevent="savepost">-->
-<!--                    <div class="postfield">-->
-<!--                        <textarea-->
-<!--                                class="myoutline"-->
-<!--                                id="textarea-default"-->
-<!--                                v-model="content"-->
-<!--                                placeholder="Enter something..."-->
-<!--                                rows="3"-->
-<!--                        ></textarea>-->
-<!--                        <button type="submit" class="button">Submit</button>-->
-<!--                    </div>-->
-<!--                </form>-->
                 <div>
                     <div class="post-list" v-for="post in chats" :key="post.time">
-                        <div class="cont myoutline">
+<!--                        check if user === owner-->
+                        <div class="cont myoutline" v-if="ownerKey===post.userkey" style="background: #d83737">
+                            <h5 class="timestamp" >{{post.time}}</h5>
+                            <p class="namestamp">
+                                {{post.username}}
+                            </p>
+                            <p class="contentstamp">
+                                {{post.content}}
+                            </p>
+                        </div>
+<!--                        check if user's comment-->
+                        <div class="cont myoutline" v-else-if="userKey===post.userkey" style="background: #409fcb">
                                 <h5 class="timestamp" >{{post.time}}</h5>
                                 <p class="namestamp">
                                     {{post.username}}
@@ -45,6 +44,16 @@
                                 <p class="contentstamp">
                                     {{post.content}}
                                 </p>
+                        </div>
+<!--                        otherwise-->
+                        <div class="cont myoutline" v-else style="background: #FFFFFF">
+                            <h5 class="timestamp" >{{post.time}}</h5>
+                            <p class="namestamp">
+                                {{post.username}}
+                            </p>
+                            <p class="contentstamp">
+                                {{post.content}}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -56,7 +65,7 @@
 <script>
     import { db } from "../main";
     import firebase from 'firebase'
-    // import {mapGetters} from 'vuex'
+    import {mapGetters} from 'vuex'
     // import store from "../store";
     export default {
         name: 'Chat',
@@ -64,6 +73,7 @@
         },
         data () {
             return {
+                ownerKey: '',
                 userName: '',
                 userKey: '',
                 chats: [],
@@ -77,16 +87,29 @@
                 account:''
             }
         },
-        created () {
+        computed: {
+            // map `this.user` to `this.$store.getters.user`
+            ...mapGetters({
+                user: "user"
+            })
+        },
+        async created () {
             console.log('Posts page created');
-            this.updateChats();
-            var user=firebase.auth().currentUser;
-            if(user != null){
-                this.userName = user.displayName;
-                this.userKey = user.uid;
+
+            var user1=firebase.auth().currentUser;
+            if(this.user.loggedIn){
+                this.userName = user1.displayName;
+                this.userKey = user1.uid;
             }else{
                 alert("ERR: login null");
             }
+            this.updateChats();
+            // find if owner's uid
+            var post = "-MMPFFDBm2EZw2-Wuwob";
+            const o = await db.ref("groupPurchase/"+post).child('username').once("value");
+            this.ownerKey = o.val();
+            console.log("ownerKey: ");
+            console.log(this.ownerKey);
         },
         methods: {
             updateChats() {
@@ -112,7 +135,8 @@
                     console.log(k);
                     this.chats = [];
                     for(var i=0; i<k.length; i++){
-                        this.chats.push(v[k[i]]);
+                        var ch = v[k[i]];
+                        this.chats.push(ch);
                     }
                     console.log("Chats: ");
                     console.log(this.chats);
