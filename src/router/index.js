@@ -88,8 +88,9 @@ const routes = [
   //   }
   // },
   {
-    path: "/chat",
+    path: "/chat/:gp",
     name: "Chat",
+    props: route => ({gpKey: `${route.params.gp}`}),
     component: function () {
       return import("../views/Chat.vue");
 
