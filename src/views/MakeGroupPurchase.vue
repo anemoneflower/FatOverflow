@@ -1,13 +1,12 @@
 <template>
-  <div id="app" class="main" style="margin-top: 40px">
+  <div id="app" class="main" style="margin-top: 70px">
     <a class="title" style="margin: auto; text-align: center;">
       Make Group Purchase
     </a>    
     <div class="outer">
       <div class="inner"></div>
     </div>
-    <div class="rowDiv">
-      <a class="subTitle">Title</a>
+    <div class=rowDiv>
       <input
         class="titleInput inputBorder"
         v-model="postTitle"
@@ -15,46 +14,35 @@
         placeholder="Title"
       />
     </div>
-    <div class="rowDiv">
-      <div style="width: 350px; height: 50px; float:left;">
-        <a class="subTitle" style="margin-left:10%">Website</a>
-        <input
-          class="websiteInput inputBorder"
-          v-model="website"
-          type="text"
-          placeholder="Website"
-        />
-      </div>
-      <div style="width: 350px; height: 50px; float:right;">
-        <a class="subTitle">Due Date</a>
-        <input
-          class="dateInput inputBorder"
-          v-model="date"
-          type="text"
-          placeholder="Due date in format YYYY/MM/DD"
-        />
-      </div>
+    <div class=rowDiv>
+      <input
+        class="websiteInput inputBorder"
+        v-model="website"
+        type="text"
+        placeholder="Website"
+      />
+      <input
+        class="dateInput inputBorder"
+        v-model="date"
+        type="text"
+        placeholder="Due date in format YYYY/MM/DD"
+      />
     </div>
     <div class="rowDiv">
-      <a class="subTitle">Shipping Place</a>
-      <vSelect 
-        :options="options"
-        v-model="shipping"
-        placeholder="Please select shipping destination"
-        style="padding-top:23px; width:92%; margin-left:4%;"
-      >s</vSelect>
+      <br><br>
+    <vSelect 
+      :options="options"
+      v-model="shipping"
+      placeholder="Please select shipping destination"
+    >s</vSelect>
     </div>
-    <div class="rowDiv" style="height:220px;">
-      <a class="subTitle">Notes</a>
+    <div class="rowDiv">
       <textarea
         class="commentInput inputBorder"
         v-model="note"
       ></textarea>
     </div>
-    <div class="rowDiv" style="height:7px">
-      <a class="subTitle">Products</a>
-    </div>
-    <div class="rowDiv" style="height:50px;">
+    <div class="rowDiv">
       <!-- <button v-on:click="addProduct" class="addBtn btns">
         Add Product +
       </button> -->
@@ -80,7 +68,6 @@
             @click="showModal = true"
             title="this is search bar"
         /></a> -->
-
         <Popup 
           successText="Make Group Purchase Successful"
           v-if="showModal" 
@@ -88,12 +75,10 @@
           >
           <h3 slot="header"></h3>
         </Popup>
-        
         <SearchBar 
           @clickedItem="onClickItem"
           @clickedItem_key="onClickItem_key"
           @clickedAdd="onClickAdd"
-          style="padding-top:1px"
           v-if="!showModal"
         />
       <!-- <button v-on:click="addProduct" class="submitBtn btns">
@@ -102,7 +87,6 @@
       <div
         v-for="(product, index) in productList"
         :key = "index"
-        style="margin-top: 5px; height: 110px;"
       >
         <AddedProduct
           :product="product"
@@ -113,26 +97,17 @@
           class="removeButton"
           v-if="!showModal"
         >
-          <AddedProduct
-            :product="product"
-          ></AddedProduct>
-          <button
-            v-on:click="removeProduct(index)"
-            class="removeButton"
-          >
-            remove
-          </button>
-        </div>
-        <div class="rowDiv" style="margin-bottom: 30px;">
-          <button v-on:click="createPurchase" class="submitBtn btns">
-            Submit
-          </button>
-        </div> 
+          remove
+        </button>
       </div>
 
 
     </div>
-    
+    <div class="rowDiv">
+      <button v-on:click="createPurchase" class="submitBtn btns">
+        Submit
+      </button>
+    </div> 
   </div>
 </template>
 
@@ -319,7 +294,7 @@ export default {
 .outer {
   width: 300px;
   height: 3px;
-  margin: 5px auto 40px;
+  margin: 5px auto 30px;
   /* alignment: left; */
   overflow: hidden;
   position: relative;
@@ -329,24 +304,12 @@ export default {
 .rowDiv {
   margin-left: auto;
   margin-right: auto;
-  width: 700px;
-  height: 50px;
-  margin-top: 15px;
-}
-.subTitle {
-  width: 120px;
-  height: 20px;
-  margin: auto;
-  margin-left: 5%;
-  text-align: left;
-  float:left;
-  /* margin-bottom: 30px; */
-  font-size: 15px;
-  font-weight: bold;
+  width: 800px;
+  margin-top: 20px;
 }
 
 .titleInput {
-  width: 90%;
+  width: 100%;
   height: 30px;
   outline: none;
 }
@@ -355,26 +318,24 @@ export default {
   border-radius: 3px;
   border-color: #cbcbcb;
   border-style: solid;
-  border-width: thin;
 }
 
 .websiteInput {
-  width: 85%;
+  width: 390px;
   height: 30px;
   float: left;
-  margin-left: 9%;
 }
 
 .dateInput {
-  width: 85%;
-  margin-right: 9%;
+  width: 380px;
+  margin-left: 10px;
   height: 30px;
-  float: right;
+  float: left;
 }
 
 .commentInput {
-  width: 90%;
-  height: 200px;
+  width: 100%;
+  height: 400px;
 }
 
 .btns {
@@ -393,7 +354,6 @@ export default {
 
 .submitBtn {
   margin: auto;
-  margin-top: 10px;
   width: 100px;
   height: 40px;
 }
@@ -413,20 +373,9 @@ export default {
 }
 
 .removeButton {
-  background-color: #d83737;
-  color: #fff;
-  border-radius: 11px;
-  border-width: 0px;
-  cursor: pointer;
-  width: 60px;
+  background: red;
+  color: white;
   height: 30px;
-  margin-left: -20px;
-  outline: none;
-}
-
-.removeButton:hover {
-  background-color: #ce3030;
-  color: #f5f5f5;
 }
 
 .label {
