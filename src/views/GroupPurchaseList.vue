@@ -8,7 +8,7 @@
                  <button id="reviewbtn" @click="goProducts()">Products</button>
             </div>
         </div>
-        <ul class="gpList" v-if="gpList.length">
+        <ul class="gpList" v-if="gpList.length>0">
             <GPCard
                     v-for="gp in gpList"
                     :key = "gp in gpList"
@@ -101,6 +101,7 @@ export default {
                     }
                 })
         }
+        console.log("LEN" + this.gpList.length);
 
     },
     methods: {
