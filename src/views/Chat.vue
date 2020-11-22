@@ -94,14 +94,20 @@
                 user: "user"
             })
         },
-        mounted(){
-            this.user1=firebase.auth().currentUser;
-            this.userName = this.user1.displayName;
-            this.userKey = this.user1.uid;
-        },
         async created () {
-            console.log('Posts page created');
+            await firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    this.user1 = user;
+                    this.userName = this.user1.displayName;
+                    this.userKey = this.user1.uid;
+                } else {
+                    console.log('No user');
+                    this.user1 = null
+                }
+            });
             if(!this.isSignin()) alert("ERR: login null");
+            console.log('Posts page created');
+
             this.updateChats();
             // find if owner's uid
             var post = "-MMPFFDBm2EZw2-Wuwob";
