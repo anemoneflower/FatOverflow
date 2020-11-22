@@ -1,6 +1,6 @@
 <template>
     <div class="hashtag">
-        {{food.quantity}} {{food.foodName}}
+        {{food.quantity}} {{food.name}}
     </div>
 </template>
 

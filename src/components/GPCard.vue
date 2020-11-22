@@ -19,7 +19,7 @@
             <div class="hashtag" v-if="(registeredFood.length>0)&&(gp.participate===true)">
                 <div
                         :key = "food.key"
-                        v-for="food in gp.foodList"
+                        v-for="food in gp.food"
                 >
                     <PurchaseTag :food="food"></PurchaseTag>
                 </div>
