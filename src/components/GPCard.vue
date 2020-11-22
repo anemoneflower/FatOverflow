@@ -41,6 +41,9 @@
             <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
                 <button class="btns" @click="closePost()">Close Post</button>
             </div>
+            <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
+                <button @click="closePost()">Go Chat</button>
+            </div>
         </div>
         </div>
     </div>

@@ -188,7 +188,7 @@ a:link {
     height: 80px;
     width: 80px;
     overflow: hidden;
-    margin: 9px 0 0 0px;
+    margin: 9px 0 0 10px;
     border-radius: 5px;
 }
 .rowDiv {
