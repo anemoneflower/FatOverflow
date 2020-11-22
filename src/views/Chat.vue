@@ -12,7 +12,7 @@
                     Room Title
                 </a>  
                 <div id="chatBox" class="inputBorder">
-                    <div class="post-list" v-for="post in chats" :key="post.time">
+                    <div class="post-list" v-for="post in chats" :key="post._key">
 <!--                        check if user === owner-->
                         <div class="rightText" v-if="ownerKey===post.userkey && ownerKey===userKey">
                             <div class="namestamp">
@@ -82,7 +82,7 @@
                     </div>
                     <div v-else>
                         <div class="message" style="margin-left:426px">
-                            <div>I'll go at <input class="timeInput" type="text" placeholder="hh" v-model="go_at_h">:<input class="timeInput" type="text" placeholder="mm" v-model="go_at_m"><button class="sendBtn" v-on:click="save_at('I\'ll go at ', go_at_h, go_at_m)">send</button></div>
+                            <div>I'll go at <input class="timeInput" type="number" placeholder="hh" v-model="go_at_h">:<input class="timeInput" type="number" placeholder="mm" v-model="go_at_m"><button class="sendBtn" v-on:click="save_at('I\'ll go at ', go_at_h, go_at_m)">send</button></div>
                         </div>
                         <div class="message" style="margin-left:448px">
                             <div>I sent money!<button class="sendBtn" v-on:click="save_txt('I sent money!')">send</button></div>
@@ -91,7 +91,6 @@
                             <div>OK!<button class="sendBtn" v-on:click="save_txt('OK')">send</button></div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </section>
@@ -101,8 +100,6 @@
 <script>
     import { db } from "../main";
     import firebase from 'firebase'
-    import {mapGetters} from 'vuex'
-    // import store from "../store";
     export default {
         name: 'Chat',
         components: {
@@ -122,29 +119,23 @@
                 money:'',
                 account:'',
                 user1: '',
+                come_at_h:'',
+                name3:'',
+                go_at_h:'',
+                go_at_m: '',
+                come_at_m:'',
             }
         },
-        computed: {
-            // map `this.user` to `this.$store.getters.user`
-            ...mapGetters({
-                user: "user"
-            })
-        },
         async created () {
-            await firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    this.user1 = user;
-                    this.userName = this.user1.displayName;
-                    this.userKey = this.user1.uid;
-                } else {
-                    console.log('No user');
-                    this.user1 = null
-                }
-            });
+            this.user1 = firebase.auth().currentUser;
+            this.userName = this.user1.displayName;
+            this.userKey = this.user1.uid;
             if(!this.isSignin()) alert("ERR: login null");
             console.log('Posts page created');
-
             this.updateChats();
+            let chatref = db.ref("chat");
+            await chatref.on("value", this.onchange);
+
             // find if owner's uid
             var post = "-MMPFFDBm2EZw2-Wuwob";
             const o = await db.ref("groupPurchase/"+post).child('username').once("value");
@@ -153,17 +144,33 @@
             console.log(this.ownerKey);
             this.initChats();
         },
+        updated(){
+            this.initChats();
+        },
         methods: {
+            onchange(snapshot){
+                var myValue = snapshot.val();
+                var keyList = Object.keys(myValue);
+                var chats = [];
+                for (var i = 0; i < keyList.length; i++) {
+                    var v = myValue[keyList[i]];
+                    chats.push(v);
+                    console.log("data: ", v);
+                }
+                console.log("Firebase: ");
+                console.log(chats);
+                this.chats = chats;
+            },
             initChats() {
                 var container = this.$el.querySelector("#chatBox");
-                console.log(container);
+                console.log("CONTAINER: ");
+                console.log(container.scrollHeight);
                 container.scrollTop = container.scrollHeight;
             },
             isSignin() {
                 return this.user1!==null
             },
             updateChats() {
-
                 let chatref = db.ref("chat");
                 let c = chatref.once("value", function(snapshot) {
                     var myValue = snapshot.val();
@@ -191,6 +198,8 @@
                     }
                     console.log("Chats: ");
                     console.log(this.chats);
+                    // this.initChats();
+                    this.refresh_inputs();
                 });
             },
             refresh_inputs(){
@@ -203,8 +212,11 @@
               this.money = '';
               this.account = '';
             },
-            async save_at(txt, input1, input2){
+            save_at(txt, input1, input2){
                 console.log('Entered save_come_at method');
+                if(txt==='') return;
+                if(input1==='') return;
+                if(input2==='')return;
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var t = txt+input1 + ":" + input2;
                 var key = db.ref('chat').push({
@@ -217,12 +229,12 @@
                     _key: key
                 });
                 this.updateChats();
-                this.initChats();
-                this.refresh_inputs();
+
             },
             async save_account(){
                 console.log('Entered save_go_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                if((this.bank==='')||(this.account===''))return;
                 var t = "Account is "+this.bank+'bank '+this.account;
                 var key = db.ref('chat').push({
                     content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
@@ -234,13 +246,14 @@
                     _key: key
                 });
                 this.updateChats();
-                this.initChats();
+                // this.initChats();
                 this.refresh_inputs();
             },
             async save_txt(txt){
                 console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 // var t = "Come at "+this.come_at;
+                if(txt==='')return;
                 var key = db.ref('chat').push({
                     content: txt.replace(/(\r\n|\n|\r)/gm, "<br>"),
                     time: d,
@@ -252,28 +265,12 @@
                 });
                 await this.updateChats();
                 this.refresh_inputs();
-                this.initChats();
-            },
-            async save_front(){
-                console.log('Entered save_come_at method');
-                var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
-                var t = `"`+this.name1+`", please send money!`;
-                var key = db.ref('chat').push({
-                    content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
-                    time: d,
-                    username: this.userName,
-                    userkey: this.userKey,
-                }).key;
-                db.ref('chat').child(key).update({
-                    _key: key
-                });
-                this.updateChats();
-                this.initChats();
-                this.refresh_inputs();
+                // this.initChats();
             },
             async save_both(){
                 console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                if((this.name==='')||(this.money==='')) return ;
                 var t = `"`+this.name2+`", you need to give me `+this.money+' won!';
                 var key = db.ref('chat').push({
                     content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
@@ -285,12 +282,13 @@
                     _key: key
                 });
                 this.updateChats();
-                this.initChats();
+                // this.initChats();
                 this.refresh_inputs();
             },
             async save_ok() {
                 console.log('Entered send_ok method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                if(this.name3==='')return ;
                 var t = `"`+this.name3+`", OK `;
                 var key = db.ref('chat').push({
                     content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
@@ -302,7 +300,7 @@
                     _key: key
                 });
                 this.updateChats();
-                this.initChats();
+                // this.initChats();
                 this.refresh_inputs();
             },
             getName(namesrc) {
@@ -312,10 +310,10 @@
                 return namesrc;
             },
             getDate(datesrc) {
-                console.log("date");
+                // console.log("date");
                 var strL = datesrc.split(" ");
                 var hms = strL[4].split(":");
-                console.log(hms);
+                // console.log(hms);
                 return strL[1] + " " + strL[2] + "  " + hms[0] + ":" + hms[1];
             }
         }
