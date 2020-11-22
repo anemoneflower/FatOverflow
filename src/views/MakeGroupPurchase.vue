@@ -156,6 +156,7 @@ export default {
   },
   mounted() {
     this.uid = firebase.auth().currentUser.uid;
+    this.userName = firebase.auth().currentUser.displayName;
     console.log("uid is");
     console.log(this.uid)
   },
@@ -212,18 +213,19 @@ export default {
       const year = tmpDate.getFullYear()
       const currentDate = year.toString() + month.toString() + day.toString()
       console.log(currentDate);
-      console.log(this.shipping)
-      console.log(JSON.stringify(this.productList))
-      const foodKeyList = this.productList.map(x => x.key)
-      console.log(JSON.stringify(foodKeyList))
+      console.log(this.shipping);
+      console.log(this.productList[0].key);
+      console.log(this.productList.length);
+      console.log(this.productList[0].title);
 
       let createPurchase = {
         userKey: this.uid,
+        userName: this.userName,
         closedDate: dueDate,
         title: this.postTitle,
         content: this.note,
         openDate: currentDate,
-        registeredFood: foodKeyList,
+        // registeredFood: foodKeyList,
         isClosed: false,
         shipping: this.shipping,
         participant: [],
@@ -234,6 +236,13 @@ export default {
       // To do: put into DB
       var ref = db.ref("groupPurchase/");
       var createPurchaseKey = ref.push(createPurchase).key;
+      for(let i=0;i<this.productList.length;i++){
+        let foodref = db.ref("groupPurchase/"+createPurchaseKey+'/registeredFood/'+this.productList[i].key);
+        foodref.set({
+          foodName : this.productList[i].title
+        })
+      }
+
       console.log(createPurchaseKey)
     },
     isValidDate: function() {
