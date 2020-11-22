@@ -69,7 +69,7 @@
                 let gp = myValue[myKey];
                 const gpSnapshot = await db.ref('/groupPurchase').once("value");
                 let gpValue = gpSnapshot.val();
-
+                gpValue[myKey].key = myKey;
                 if(gp.closed===true){
                     gpValue[myKey].review = gp.review;
                     gpValue[myKey].closed = gp.closed;

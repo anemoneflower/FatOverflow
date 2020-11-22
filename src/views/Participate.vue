@@ -172,9 +172,11 @@ export default {
               ref.child(userKey).set(purchase);
 
               let userref = db.ref("users/"+userKey+"/gpList/"+this.gpKey);
+
               userref.set({
                 closed: false,
                 participate: true,
+                food : foodObj,
                 review: false
               })
               this.$router.replace(this.previousUrl);

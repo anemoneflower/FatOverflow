@@ -1,6 +1,6 @@
 <template>
     <div class="hashtag">
-        {{food}}
+        {{food.foodName}}
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
     props:{
         food: {
-            type: String
+            type: Object
         }
     }
 }
