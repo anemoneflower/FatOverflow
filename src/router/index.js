@@ -81,6 +81,13 @@ const routes = [
     }
   },
   {
+    path: "/createReview",
+    name: "CreateReview",
+    component: function() {
+      return import("../views/CreateReview.vue");
+    }
+  },
+  {
     path: "/chat",
     name: "Chat",
     component: function () {
