@@ -80,6 +80,13 @@ const routes = [
       return import("../views/ProductList.vue");
     }
   },
+  {
+    path: "/createReview",
+    name: "CreateReview",
+    component: function() {
+      return import("../views/CreateReview.vue");
+    }
+  },
 ]
 
 const router = new VueRouter({
