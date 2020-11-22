@@ -8,6 +8,9 @@
         <p class="website">
           {{gp.website}}
         </p>
+        <p class="userName">
+          by {{gp.userName}}
+        </p>
         <p  class="due">
           Due: {{gp.closedDate}}
         </p>
@@ -175,6 +178,13 @@ textarea {
   margin-top: 40px;
   text-align: center;
   font-size: 18px;
+}
+
+.userName {
+  float: right;
+  margin-top: -30px;
+  margin-right: 30px;
+  font-size: 18px
 }
 
 .website {
