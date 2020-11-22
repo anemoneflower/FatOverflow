@@ -184,7 +184,7 @@ textarea {
   float: right;
   margin-top: -30px;
   margin-right: 30px;
-  font-size: 18px
+  font-size: 17px
 }
 
 .website {
