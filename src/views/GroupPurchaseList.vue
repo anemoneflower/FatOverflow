@@ -15,9 +15,8 @@
         <ul class="gpList" v-if="gpList.length>0">
             <GPCard
                     v-for="gp in gpList"
-                    :key = "gp in gpList"
+                    :key = "gp.index"
                     :gp = "gp"
-                    :gpKey = "gpKey"
             ></GPCard>
 <!--            <GPCard></GPCard>-->
 <!--            <GPCard></GPCard>-->
@@ -132,7 +131,7 @@ export default {
     .head{
         position: fixed;
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto auto;
         justify-content: start;
         padding-left: 12%;
         padding-top: 5px;
@@ -178,10 +177,26 @@ export default {
         color: #818181;
     }
 
-
-    #mgpbtn {
-      float: right
+    #mgpbtn{
+        height: 40px;
+        width: 220px;
+        border-radius: 15px;
+        background-color: #48C964;
+        color: white;
+        border: 0px;
+        font-size: 18px;
+        margin-top: 10px;
+        margin-left: 640px;
+        /* font-weight: bold; */
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
     }
+    #mgpbtn:hover {
+        background-color: #43be5d;
+        color: #f5f5f5;
+    }
+
 
     .gpList {
         position: relative;

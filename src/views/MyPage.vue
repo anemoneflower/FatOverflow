@@ -56,10 +56,10 @@
             //     }
             // });
             let uid = firebase.auth().currentUser.uid;
-            console.log("AAAAAAAAAAAa");
+            // console.log("AAAAAAAAAAAa");
             console.log(uid);
 
-            const snapshot = await db.ref('users/SVsXvyMLsbUOnof9iAcUy390WZB3').once("value");
+            const snapshot = await db.ref('users/'+uid).once("value");
             let myValue = snapshot.val()&&snapshot.val().gpList;
 
             let keyList = Object.keys(myValue);

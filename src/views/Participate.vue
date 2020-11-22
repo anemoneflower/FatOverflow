@@ -114,8 +114,9 @@ export default {
                     .once('value')
                     .then(function (snapshot) {
                       var value = snapshot.val();
-                      console.log('name:', value.foodKey);
-                      return value.foodKey
+                      console.log(value);
+                      console.log('name:', value);
+                      return value
                     });
             l.then(function (val) {
               console.log("val: " + val.toString());
@@ -167,18 +168,19 @@ export default {
                 date: date.join(" "),
                 food: foodObj,
                 note: this.note,
-                userKey: firebase.auth().currentUser.uid,
+                // userKey: firebase.auth().currentUser.uid,
                 userName: firebase.auth().currentUser.displayName,
-                isConfirmed: false
+                // isConfirmed: false
               };
               // TODO: change after applying group purchase DB
               var ref = db.ref("groupPurchase").child(this.gpKey).child("/participant");
               console.log("ref: " + ref);
-              var purchaseKey = ref.push().key;
-              console.log("purchasekey: " + purchaseKey);
-              purchase['_key'] = purchaseKey;
+              // var purchaseKey = ref.push().key;
+              let userKey = firebase.auth().currentUser.uid;
+
               console.log(purchase);
-              ref.child(purchaseKey).set(purchase);
+
+              ref.child(userKey).set(purchase);
               this.$router.replace(this.previousUrl);
             }else{
               alert("you didn't select any food");
