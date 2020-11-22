@@ -67,12 +67,14 @@
             //     })
         },
         methods: {
-            // goBoard(index) {
-            //     /* var _selectedBook = selectedBook; */
-            //     this.$router.push("/product/" + selected.key);
-            // },
             goGPList() {
-            
+                let query = this.$route.query.result;
+                if (query === undefined){
+                    this.$router.push({path:'/gplist'});
+                }
+                else {
+                    this.$router.push({path:'/gplist',query:{result:query}});
+                }
             }
         }
     }
