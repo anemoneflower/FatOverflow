@@ -51,7 +51,9 @@
         v-model="note"
       ></textarea>
     </div>
-    <div class="rowDiv" style="50px;">
+    
+    <div class="rowDiv" style="height:50px;">
+      <a class="subTitle">Products</a>
       <!-- <button v-on:click="addProduct" class="addBtn btns">
         Add Product +
       </button> -->
@@ -80,7 +82,7 @@
         <!-- <SearchProduct v-if="showModal" @close="showModal = false">
           <h3 slot="header">custom header</h3>
         </SearchProduct> -->
-        <a class="subTitle">Products</a>
+        
         <SearchBar 
           @clickedItem="onClickItem"
           @clickedItem_key="onClickItem_key"

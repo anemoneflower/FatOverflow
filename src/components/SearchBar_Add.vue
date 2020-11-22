@@ -1,6 +1,6 @@
 <template>
   <div class="autocomplete">
-    <ul class="popover">
+    <ul class="popover" style="float:left; margin-left:5%;">
       <li>
         <input
           autocomplete="off"
@@ -14,6 +14,7 @@
           @focus="visibleOptions = true"
           @focusout="visibleOptions = false"
         />
+        
         <!-- <a
           ><img
             class="glass"
@@ -40,7 +41,7 @@
       </div>
       <!--      </li>-->
     </ul>
-      <button v-on:click="onClickAdd" class="submitBtn btns">
+      <button v-on:click="onClickAdd" class="submitBtn btns" style="float:left; margin-left:2%;">
         Add Product
       </button>
   </div>
@@ -191,7 +192,7 @@ export default {
 .popover {
   margin: 0 auto;
   padding: 0;
-  width: 630px;
+  width: 500px;
   border: 1px solid #dcdcdc;
   position: relative;
   left: 0;
@@ -214,17 +215,17 @@ export default {
   cursor: pointer;
 }
 #input {
-  width: 550px;
+  width: 420px;
   outline: none;
   border: none;
-  height: 45px;
+  height: 40px;
   font-size: 16px;
 }
 .options {
-  width: 570px;
+  width: 440px;
   padding: none;
   position: relative;
-  left: 27px;
+  left: 30px;
   margin: none;
   max-height: 150px;
   overflow-y: auto;
@@ -274,7 +275,7 @@ export default {
 
 .submitBtn {
   margin: auto;
-  width: 100px;
-  height: 40px;
+  width: 125px;
+  height: 35px;
 }
 </style>
