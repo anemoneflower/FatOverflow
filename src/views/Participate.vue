@@ -1,19 +1,15 @@
 <template>
   <div class="main" style="margin-top: 70px">
     <a class="title" style="margin: auto; text-align: center;">
-      Participate in Group Purchase: {{ purchaseTitle }}
+      Participate in Group Purchase:
     </a>    
     <div class="outer">
       <div class="inner"></div>
     </div>
-<<<<<<< HEAD
-    <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; position: absolute;">
-=======
     <a class="subTitle">
       {{ purchaseTitle }}
     </a>  
     <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; margin-top: 30px; position: absolute;">
->>>>>>> parent of dd2f957... mgp css
       <div class="inputLayout">
           <table id="dropdown_table">
             <tr>

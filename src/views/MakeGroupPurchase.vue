@@ -94,12 +94,8 @@
           @clickedItem="onClickItem"
           @clickedItem_key="onClickItem_key"
           @clickedAdd="onClickAdd"
-<<<<<<< HEAD
-          style="padding-top:1px"
-          v-if="!showModal"
-=======
           style="padding-top:40px"
->>>>>>> parent of dd2f957... mgp css
+          v-if="!showModal"
         />
       <!-- <button v-on:click="addProduct" class="submitBtn btns">
         Add Product
@@ -110,44 +106,22 @@
       >
         <AddedProduct
           :product="product"
+          v-if="!showModal"
         ></AddedProduct>
         <button
           v-on:click="removeProduct(index)"
           class="removeButton"
+          v-if="!showModal"
         >
-<<<<<<< HEAD
-          <AddedProduct
-            :product="product"
-            v-if="!showModal"
-          ></AddedProduct>
-          <button
-            v-on:click="removeProduct(index)"
-            class="removeButton"
-            v-if="!showModal"
-          >
-           Remove
-          </button>
-         </div>
-        <div class="rowDiv">
-          <button v-on:click="createPurchase" class="submitBtn btns">
-            Submit
-          </button>
-        </div>
-       </div>
-     </div>
-=======
-          remove
+          Remove
         </button>
       </div>
-
-
+      <div class="rowDiv">
+        <button v-on:click="createPurchase" class="submitBtn btns">
+          Submit
+        </button>
+      </div>
     </div>
-    <div class="rowDiv">
-      <button v-on:click="createPurchase" class="submitBtn btns">
-        Submit
-      </button>
-    </div> 
->>>>>>> parent of dd2f957... mgp css
   </div>
 </template>
 
@@ -420,17 +394,13 @@ export default {
   background: red;
   color: white;
   height: 30px;
-<<<<<<< HEAD
   margin-left: -20px;
   outline: none;
 }
 .removeButton:hover {
   background-color: #ce3030;
   color: #f5f5f5;
-=======
->>>>>>> parent of dd2f957... mgp css
 }
-
 .label {
   font-size: 25px;
 }
