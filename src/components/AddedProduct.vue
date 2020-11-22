@@ -1,5 +1,5 @@
 <template>
-    <div class = 'card-post' v-if="showProduct">
+    <div class = 'card-post'>
         <!-- <div class="rowDiv">
           <div class="columnLeft">
               <img class="thumbnail" :src="product.img" style="position: relative;" />
@@ -14,36 +14,42 @@
             </div>
             <div class="board-info columnRight">
                 <a class="title" >{{product.title}}</a>
-                <div class="content-box">
+                <!-- <div class="content-box">
                     <div class="hashtag">
                         <Hashtag></Hashtag>
                     </div>
                     <div class="hashtag">
                         <Hashtag></Hashtag>
                     </div>
-                  <!-- <p class="content" v-html=AAAAAAAAAAAa></p> -->
-                </div>
+                </div> -->
             </div>
         <div class="representative">
             <div class="site">{{product.website}}</div>
         </div>
 
         </div>
+        <!-- <button class="removeButton" v-on:click="removeProduct">
+          remove
+        </button> -->
     </div>
 </template>
 
 <script>
-import Hashtag from "./Hashtag.vue"
+// import Hashtag from "./Hashtag.vue"
 export default {
     components :{
-        Hashtag
+        // Hashtag
     },
     props: {
         product : {
             type: Object
         },
         productKey: String,
-        showProduct: Boolean
+    },
+    methods: {
+      removeProduct() {
+        console.log("Call remove product");
+      }
     }
 }
 </script>
@@ -66,13 +72,13 @@ export default {
   transition: all 0.3s ease;
 }
 
-.square:hover {
+/* .square:hover {
   -webkit-transform: translate(20px, -10px);
   -ms-transform: translate(10px, -10px);
   transform: translate(10px, -10px);
   -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
+} */
 a:visited {
   text-decoration: none;
   color: #3a3a3a;
@@ -219,6 +225,12 @@ a:link {
   float: left;
   width: 35%;
   padding-left: 80px;
+}
+
+.removeButton {
+  background: red;
+  color: white;
+  height: 30px;
 }
 
 </style>

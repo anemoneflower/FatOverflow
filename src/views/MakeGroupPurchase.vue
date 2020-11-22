@@ -29,6 +29,9 @@
       />
     </div>
     <div class="rowDiv">
+shipping
+    </div>
+    <div class="rowDiv">
       <textarea
         class="commentInput inputBorder"
         v-model="note"
@@ -39,7 +42,7 @@
         Add Product +
       </button> -->
 
-        <input
+        <!-- <input
           class="addProductSearch"
           autocomplete="off"
           id="input"
@@ -59,21 +62,33 @@
             src="../assets/magnifying-glass.png"
             @click="showModal = true"
             title="this is search bar"
-        /></a>
-        <SearchProduct v-if="showModal" @close="showModal = false">
-          <!--
-        you can use custom content here to overwrite
-        default content
-      -->
+        /></a> -->
+        <!-- <SearchProduct v-if="showModal" @close="showModal = false">
           <h3 slot="header">custom header</h3>
-        </SearchProduct>
+        </SearchProduct> -->
+        <SearchBar 
+          @clickedItem="onClickItem"
+          @clickedAdd="onClickAdd"
+        />
+      <!-- <button v-on:click="addProduct" class="submitBtn btns">
+        Add Product
+      </button> -->
+      <div
+        v-for="(product, index) in productList"
+        :key = "index"
+      >
+        <AddedProduct
+          :product="product"
+        ></AddedProduct>
+        <button
+          v-on:click="removeProduct(index)"
+          class="removeButton"
+        >
+          remove
+        </button>
+      </div>
 
-      <AddedProduct
-              v-for="product in productList"
-              :key = "product in productList"
-              :product = "product"
-              :productKey = "productKey"
-      ></AddedProduct>
+
     </div>
     <div class="rowDiv">
       <button v-on:click="createPurchase" class="submitBtn btns">
@@ -86,7 +101,8 @@
 <script>
 // import { db } from "../main";
 import AddedProduct from "../components/AddedProduct.vue"
-import SearchProduct from "./SearchProduct.vue"
+// import SearchProduct from "./SearchProduct.vue"
+import SearchBar from "../components/SearchBar_Add.vue"
 
 
 function isInt(value) {
@@ -96,7 +112,8 @@ export default {
   name: "GroupPurchase",
   components: {
     AddedProduct,
-    SearchProduct
+    // SearchProduct,
+    SearchBar
   },
   props: {
     _postId: String,
@@ -104,13 +121,14 @@ export default {
 
   data() {
     return {
-      productList: [{title: 'Harim Chicken Breast'}],
-      showProduct: true,
+      productList: [],
       postTitle: "Join me",
       website: "www.ocook.com",
       date: "2020/12/21",
       note:"Hi",
       showModal: false,
+      shipping: "",
+      searchBarData: ""
     };
   },
   methods: {
@@ -189,6 +207,22 @@ export default {
     },
     addProduct: function() {
       console.log("Add product");
+      this.productList.push({title: this.searchBarData})
+    },
+    onClickItem (value) {
+      console.log("OnClickItem called")
+      console.log(value);
+      this.searchBarData = value;
+    },
+    onClickAdd() {
+      this.productList.push({title: this.searchBarData})
+      console.log("OnClickAdd called");
+      console.log("Searchbar data is")
+      console.log(this.searchBarData)
+    },
+    removeProduct(index) {
+      console.log("Remove product");
+      this.productList.splice(index, 1);
     }
   }
 };
@@ -294,6 +328,20 @@ export default {
   width: 80%;
   height: 40px;
   font-size: 20px;
+}
+
+.removeButton {
+  background: red;
+  color: white;
+  height: 30px;
+}
+
+.label {
+  font-size: 25px;
+}
+
+.shipping {
+  font-size: 25px;
 }
 
 </style>
