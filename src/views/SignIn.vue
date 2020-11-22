@@ -28,29 +28,29 @@
                     if(result.additionalUserInfo.isNewUser===true){
                         firebase.database().ref('users/'+result.user.uid).set({
                             userEmail : result.user.email,
-                            gpList : {
-                                "-MMQfqZW4RQVRSpr_h-w" : {
-                                    review : false,
-                                    closed : true,
-                                    participate : true
-                                },
-                                "-MMQfnXdPkQv02EReV5v" : {
-                                    review : true,
-                                    closed : true,
-                                    participate : false
-                                },
-                                "-MMPFFKDz6SZFsPRLvJ8" : {
-                                    review : false,
-                                    closed : false,
-                                    participate : true
-                                },
-                                "-MMPFFDBm2EZw2-Wuwob" : {
-                                    review : false,
-                                    closed : false,
-                                    participate : false
-                                }
-
-                            },
+                            // gpList : {
+                            //     "-MMQfqZW4RQVRSpr_h-w" : {
+                            //         review : false,
+                            //         closed : true,
+                            //         participate : true
+                            //     },
+                            //     "-MMQfnXdPkQv02EReV5v" : {
+                            //         review : true,
+                            //         closed : true,
+                            //         participate : false
+                            //     },
+                            //     "-MMPFFKDz6SZFsPRLvJ8" : {
+                            //         review : false,
+                            //         closed : false,
+                            //         participate : true
+                            //     },
+                            //     "-MMPFFDBm2EZw2-Wuwob" : {
+                            //         review : false,
+                            //         closed : false,
+                            //         participate : false
+                            //     }
+                            //
+                            // },
                         })
                     }
                     console.log("prevURL  " + this.previousUrl);
