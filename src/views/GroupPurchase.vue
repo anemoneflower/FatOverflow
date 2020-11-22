@@ -127,16 +127,15 @@ export default {
 
 .column_left {
   float: left;
-  width: 38%;
-  margin-left: 12%;
+  width: 550px;
+  margin-left: 200px;
   min-width: 500px;
 }
 
 .column_right {
-  float: right;
-  width: 38%;
+  float: left;
+  width: 550px;
   padding-left: 20px;
-  margin-right: 10%;
   min-width: 300px;
 }
 
@@ -189,7 +188,7 @@ textarea {
   float: right;
   margin-top: -30px;
   margin-right: 30px;
-  font-size: 17px
+  font-size: 17px;
 }
 
 .website {
@@ -252,7 +251,7 @@ textarea {
 
 .row {
   position: absolute;
-  min-width: 1300px;
+  min-width: 1500px;
   margin-top: -75px;
 }
 
