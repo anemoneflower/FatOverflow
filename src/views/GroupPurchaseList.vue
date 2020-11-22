@@ -15,9 +15,6 @@
                     :gp = "gp"
                     :gpKey = "gpKey"
             ></GPCard>
-<!--            <GPCard></GPCard>-->
-<!--            <GPCard></GPCard>-->
-<!--            <GPCard></GPCard>-->
         </ul>
         <p v-else>
             Nothing left in the list.
@@ -33,7 +30,7 @@ export default {
     components: {
         GPCard
     },
-    data(){
+    data() {
         return{
             gpList: []
             // gp: selectedGp[0]

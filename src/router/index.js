@@ -80,6 +80,41 @@ const routes = [
       return import("../views/ProductList.vue");
     }
   },
+  {
+    path: "/mypage",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
+  },
+  {
+    path: "/mypage/closed",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
+  },
+  {
+    path: "/mypage/opened",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
+  },
+  {
+    path: "/mypage/participate",
+    name: "MyPage",
+    component: function() {
+      return import("../views/MyPage.vue");
+    }
+  },
+  {
+    path: "/createReview",
+    name: "CreateReview",
+    component: function() {
+      return import("../views/CreateReview.vue");
+    }
+  }
 ]
 
 const router = new VueRouter({
