@@ -1,6 +1,5 @@
 <template>
   <div class="main" style="margin-top: 150px">
-    postId: {{ _postId }}
     <div class="row">
       <div class="column_left">
         <p class="postTitle">
@@ -76,28 +75,30 @@ export default {
 
 .column_left {
   float: left;
-  width: 40%;
-  margin-left: 100px;
+  width: 38%;
+  margin-left: 12%;
+  min-width: 500px;
 }
 
 .column_right {
   float: right;
   width: 33%;
   padding-left: 80px;
-  margin-right: 100px;
+  margin-right: 10%;
+  min-width: 300px;
 }
 
 .participateButton {
   background-color: #48C964; /* Green */
   border: none;
   color: white;
-  padding: 8px 15px;
+  padding: 6px 13px 6px 13px;
   text-align: center center;
   text-decoration: none;
   display: inline-block;
-  border-radius: 13px;
-  font-size: 20px;
-  margin: 4px 2px;
+  border-radius: 14px;
+  font-size: 13px;
+  margin: 5px 2px;
   cursor: pointer;
   float: right;
   margin-right: 50px;
@@ -126,28 +127,31 @@ textarea {
 }
 
 .currentOrderTitle {
-  margin-top: 75px;
+  margin-top: 40px;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .website {
   text-align: left;
   margin-top: 10px;
+  margin-left: 8px;
   font-size: 13px;
   color: #9D9D9D
 }
 
 .due {
-  margin-top: 10px;
-  font-size: 13px;
+  margin-top: 5px;
+  margin-left: 8px;
+  font-size: 15px;
   text-align: left;
 }
 
 .content {
   margin-top: 20px;
+  margin-left: 5px;
   text-align: left;
-  font-size: 15px;
+  font-size: 16px;
   white-space: pre-line;
 }
 
@@ -157,8 +161,8 @@ textarea {
   border-width: 1px;
   border-radius: 10px;
   margin-top: 15px;
-  padding: 15px 13px 15px 13px;
-  width: 400px;
+  padding: 13px 9px 13px 9px;
+  width: 378px;
   float: right;
   margin-right: 50px;
 }
@@ -181,6 +185,8 @@ textarea {
 
 .row {
   position: absolute;
+  min-width: 1300px;
+  margin-top: -75px;
 }
 </style>
 

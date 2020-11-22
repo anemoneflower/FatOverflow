@@ -167,10 +167,10 @@ body {
   border-radius: 15px;
   border-width: 0px;
   padding: 6px 13px 8px 13px;
-  font-size: 23px;
+  font-size: 18px;
   position: absolute;
   right: 3.5%;
-  top: 20px;
+  top: 25px;
   cursor: pointer;
   outline: none;
   z-index: 3;
