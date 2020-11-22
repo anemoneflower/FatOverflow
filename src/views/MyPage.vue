@@ -85,7 +85,7 @@
                 }
                 else{
                     gpValue[myKey].participate = gp.participate;
-                    gpValue[myKey].foodList = gp.foodList;
+                    gpValue[myKey].food = gp.food;
                     this.participatingList.push(gpValue[myKey]);
                 }
             }
