@@ -40,7 +40,8 @@
     data() {
       return {
         myEvaluation: [0,0,0,0,0],
-        avgEvaluation: [0,0,0,0,0]
+        avgEvaluation: [0,0,0,0,0],
+        avgCount: 0
       }
     },
     async mounted() {
@@ -84,6 +85,7 @@
         Vue.set(this.avgEvaluation, 3, (evalArr[3] / count).toFixed(2));
         Vue.set(this.avgEvaluation, 4, (evalArr[4] / count).toFixed(2));
       }
+      this.avgCount = count;
       console.log(myValue);
     }
   };
@@ -125,6 +127,8 @@
             filling: {{avgEvaluation[2]}}
             convenience: {{avgEvaluation[3]}}
             undecided: {{avgEvaluation[4]}}
+            <br>
+            Number of ratings: {{avgCount}}
           </div>
 
         </slot>
