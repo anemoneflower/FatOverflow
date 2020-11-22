@@ -80,6 +80,14 @@ const routes = [
       return import("../views/ProductList.vue");
     }
   },
+  {
+    path: "/chat",
+    name: "Chat",
+    component: function () {
+      return import("../views/Chat.vue");
+
+    }
+  }
 ]
 
 const router = new VueRouter({
