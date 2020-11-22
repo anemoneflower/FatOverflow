@@ -1,6 +1,6 @@
 <template>
   <div class="autocomplete">
-    <ul class="popover" style="float:left; margin-left:5%;">
+    <ul class="popover">
       <li>
         <input
           autocomplete="off"
@@ -11,10 +11,10 @@
           @keydown.up="keyup"
           @keydown.down="keydown"
           @keydown.enter="enter"
+          v-focus
           @focus="visibleOptions = true"
           @focusout="visibleOptions = false"
         />
-        
         <!-- <a
           ><img
             class="glass"
@@ -41,7 +41,7 @@
       </div>
       <!--      </li>-->
     </ul>
-      <button v-on:click="onClickAdd" class="submitBtn btns" style="float:left; margin-left:2%; margin-top: 4px;">
+      <button v-on:click="onClickAdd" class="submitBtn btns">
         Add Product
       </button>
   </div>
@@ -188,18 +188,18 @@ export default {
   margin-left: auto;
   margin-right: auto;
   background: white;
+  border-radius: 23px;
 }
 .popover {
   margin: 0 auto;
   padding: 0;
-  width: 500px;
+  width: 575px;
   border: 1px solid #dcdcdc;
   position: relative;
   left: 0;
   right: 0;
-  border-radius: 3px;
+  border-radius: 23px;
   list-style-type: none;
-  background: white;
 }
 .popover:hover {
   box-shadow: 1px 1px 8px 1px #dcdcdc;
@@ -216,17 +216,17 @@ export default {
   cursor: pointer;
 }
 #input {
-  width: 420px;
+  width: 500px;
   outline: none;
   border: none;
-  height: 40px;
+  height: 45px;
   font-size: 16px;
 }
 .options {
-  width: 440px;
+  width: 520px;
   padding: none;
   position: relative;
-  left: 30px;
+  left: 27.3px;
   margin: none;
   max-height: 150px;
   overflow-y: auto;
@@ -276,7 +276,7 @@ export default {
 
 .submitBtn {
   margin: auto;
-  width: 125px;
-  height: 35px;
+  width: 100px;
+  height: 40px;
 }
 </style>
