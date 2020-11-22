@@ -8,7 +8,7 @@
     export default {
         props:{
             food: {
-                type: Array
+                type: Object
             }
         },
         mounted() {
