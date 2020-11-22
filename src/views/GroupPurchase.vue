@@ -8,6 +8,9 @@
         <p class="website">
           {{gp.website}}
         </p>
+        <p  class="due">
+          Due: {{gp.closedDate}}
+        </p>
         <div class="hashtag" v-if="(registeredFood.length>0)">
           <div
                   :key = "food.key"
@@ -16,9 +19,6 @@
             <Hashtag :food="food"></Hashtag>
           </div>
         </div>
-        <p  class="due">
-          Due: {{gp.closedDate}}
-        </p>
         <p class="content">
           {{gp.content}}
         </p>
@@ -179,7 +179,7 @@ textarea {
 
 .website {
   text-align: left;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 8px;
   font-size: 13px;
   color: #9D9D9D
@@ -192,8 +192,15 @@ textarea {
   text-align: left;
 }
 
+.hashtag {
+  text-align: left;
+  margin-top: 3px;
+  font-size: 13px;
+  margin-left: 3px;
+}
+
 .content {
-  margin-top: 20px;
+  margin-top: 50px;
   margin-left: 5px;
   text-align: left;
   font-size: 16px;
