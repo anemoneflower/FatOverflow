@@ -54,7 +54,7 @@ export default {
     },
     methods: {
       expressDate(num) {
-        return num.slice(0,4) + "." + num.slice(4,6) + "." + num.slice(6);
+        return num.slice(0,4) + ". " + num.slice(4,6) + ". " + num.slice(6);
       }
     }
 }
