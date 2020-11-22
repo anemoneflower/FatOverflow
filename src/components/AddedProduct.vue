@@ -1,60 +1,54 @@
 <template>
     <div class = 'card-post'>
+        <!-- <div class="rowDiv">
+          <div class="columnLeft">
+              <img class="thumbnail" :src="product.img" style="position: relative;" />
+          </div>
+          <div class="columnRight">
+            s
+          </div>
+        </div> -->
         <div class="square">
-            <div class="board-info">
-                <a class="title" >{{gp.title}}</a>
-                <a class="cDate">Due: {{expressDate(gp.closedDate)}}</a>
+            <div class="columnLeft">
+              <img class="thumbnail" :src="product.img" style="position: relative;" />
+            </div>
+            <div class="board-info columnRight">
+                <a class="title" >{{product.title}}</a>
+                <!-- <div class="content-box">
+                    <div class="hashtag">
+                        <Hashtag></Hashtag>
+                    </div>
+                    <div class="hashtag">
+                        <Hashtag></Hashtag>
+                    </div>
+                </div> -->
             </div>
         <div class="representative">
-            <div class="site">{{gp.website}}</div>
-            <div class="post-info">
-                <a class="shipping">Shipping to: {{gp.shipping}}</a>
-                <br />
-            </div>
+            <div class="site">{{product.website}}</div>
         </div>
-        <div class="content-box">
-            <div class="hashtag" v-if="registeredFood.length">
-                <div
-                        :key = "food.key"
-                        v-for="food in registeredFood"
-                >
-                    <Hashtag :food="food"></Hashtag>
-                </div>
-            </div>
-          <!-- <p class="content" v-html=AAAAAAAAAAAa></p> -->
+
         </div>
-        </div>
+        <!-- <button class="removeButton" v-on:click="removeProduct">
+          remove
+        </button> -->
     </div>
 </template>
 
 <script>
-import Hashtag from "./Hashtag.vue"
+// import Hashtag from "./Hashtag.vue"
 export default {
     components :{
-        Hashtag
+        // Hashtag
     },
     props: {
-        gp : {
+        product : {
             type: Object
         },
-        gpKey: String,
-        // registeredFoodKey: String
-    },
-    data(){
-        return{
-          registeredFood: []
-        };
-    },
-    mounted() {
-        for (var key in this.gp.registeredFood) {
-            console.log(this.gp.registeredFood[key].foodName);
-            (this.registeredFood).push(this.gp.registeredFood[key].foodName);
-            // console.log(obj[key]);
-        }
+        productKey: String,
     },
     methods: {
-      expressDate(num) {
-        return num.slice(0,4) + ". " + num.slice(4,6) + ". " + num.slice(6);
+      removeProduct() {
+        console.log("Call remove product");
       }
     }
 }
@@ -62,31 +56,29 @@ export default {
 
 <style scoped>
 .card-post {
-  width: 1200px;
   display: flex;
   justify-content: center;
   padding: 10px;
   margin: auto;
 }
 .square {
-  width: 1200px;
-  height: 180px;
+  width: 800px;
+  height: 200px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0px 20px 50px #d9dbdf;
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  cursor: pointer;
 }
 
-.square:hover {
+/* .square:hover {
   -webkit-transform: translate(20px, -10px);
   -ms-transform: translate(10px, -10px);
   transform: translate(10px, -10px);
   -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
+} */
 a:visited {
   text-decoration: none;
   color: #3a3a3a;
@@ -98,10 +90,9 @@ a:link {
 }
 .board-info {
   margin: auto;
-  padding-top: 30px;
+  padding-top: 20px;
   border-radius: 15px 15px 0px 0px;
-  width: 1140px;
-  position: absolute;
+  width: 740px;
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 10px;
@@ -110,24 +101,22 @@ a:link {
 }
 
 .board-info > a {
+  font-size: 25px;
   color: rgb(0, 0, 0);
 }
 
 .site {
   float: left;
-  font-size: 17px;
-  color: #cbcbcb;
-  margin-left: 5px;
 }
 
 .cDate {
   float: right;
-  font-size: 23px;
+  font-size: 15px;
 }
 
 .representative {
   margin: auto;
-  width: 1140px;
+  width: 740px;
   margin-top: 70px;
   padding-left: 30px;
   padding-right: 30px;
@@ -145,7 +134,7 @@ a:link {
 }
 
 .post-info > a {
-  font-size: 18px;
+  font-size: 15px;
   color: #cbcbcb;
 }
 
@@ -166,7 +155,7 @@ a:link {
 .title {
   float: left;
   text-align: left;
-  font-size: 25px;
+  font-size: 20px;
   width: 500px;
   color: #9D9D9D;
   text-decoration: none;
@@ -177,14 +166,13 @@ a:link {
 
 .content-box {
   width: 740px;
-  padding-left: 35px;
+  padding-left: 30px;
   padding-right: 30px;
   margin: auto;
   margin-top: 130px;
   position: absolute;
-/*  display: grid;
+  display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: repeat(1,18px); */
   justify-content: start;
 }
 
@@ -211,7 +199,38 @@ a:link {
 }
 
 .hashtag {
-  margin-left: -7px;
+    margin-right: 1px;
+}
+
+.thumbnail {
+    background: black;
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    display: block;
+}
+
+.rowDiv {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.columnLeft {
+  float: left;
+  width: 200px;
+}
+
+.columnRight {
+  float: left;
+  width: 35%;
+  padding-left: 80px;
+}
+
+.removeButton {
+  background: red;
+  color: white;
+  height: 30px;
 }
 
 </style>
