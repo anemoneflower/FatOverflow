@@ -50,7 +50,7 @@ export default {
   name: "Autocomplete",
   data() {
     return {
-      selectedFood: null,
+      // selectedFood: null,
       searchData: "",
       visibleOptions: true,
       selected: 0,
@@ -89,13 +89,14 @@ export default {
       this.selectAction = true;
       this.selected = index;
       this.searchData = this.matches[index];
-      this.selectedFood = this.matches[index];
+      // this.selectedFood = this.matches[index];
       this.searchResult();
     },
     searchResult() {
       if(this.searchData==""){
         return [];
       }
+      this.visibleOptions = false;
       this.$router.push({path:'gplist',query:{result:this.searchData}})
 
     },
@@ -125,9 +126,14 @@ export default {
       this.$refs.optionsList.scrollTop = this.selected * 39;
     },
     enter() {
-      this.searchData = this.matches[this.selected];
-      this.selectedFood = this.matches[this.selected];
-      this.searchResult();
+      if( this.matches[this.selected] === undefined){
+        this.searchResult();
+      }
+      else{
+        this.searchData = this.matches[this.selected];
+        // this.selectedFood = this.matches[this.selected];
+        this.searchResult();
+      }
     },
     initialCount() {
       this.selected = 0;

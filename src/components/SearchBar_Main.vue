@@ -96,37 +96,8 @@ export default {
       if(this.searchData==""){
         return [];
       }
-      // var book = this.searchData;
-      // var checkList = JSON.parse(JSON.stringify(bookList));
-      // console.log(checkList);
-      // var idx = 0;
-      // for (var i = 0; i < bookList.length; i++) {
-      //   var searchData = bookList[i].searchData.toUpperCase();
-      //   var checkValue = searchData.indexOf(book.toUpperCase());
-      //   console.log(checkValue);
-      //   if (checkValue != -1) {
-      //     searchedList.push(bookList[i]);
-      //     checkList.splice(i + idx, 1);
-      //     idx--;
-      //   }
-      // }
-      // if (checkList.length != 14) {
-      //   for (var j = 0; j < checkList.length; j++) {
-      //     if (searchedList[0].series == checkList[j].series) {
-      //       searchedList.push(checkList[j]);
-      //     }
-      //   }
-      // }
+      this.visibleOptions = false;
       this.$router.push({path:'gplist',query:{result:this.searchData}})
-      // var curPath = this.$router.history.current["path"];
-      // var trim = curPath.split("/");
-      // console.log(`select check: ${trim[trim.length - 1]}`);
-      // if (trim[trim.length - 1].length > 10)
-      //   this.$router.push("/gpList/" + trim[trim.length - 1]);
-      // else this.$router.push("/gpList/none");
-      // this.visibleOptions = false;
-      // this.selectAction = false;
-      // this.searchData = "";
     },
     hover(index) {
       if (this.keyDown == false) {
@@ -154,9 +125,15 @@ export default {
       this.$refs.optionsList.scrollTop = this.selected * 39;
     },
     enter() {
-      this.searchData = this.matches[this.selected];
-      this.selectedFood = this.matches[this.selected];
-      this.searchResult();
+      if( this.matches[this.selected] === undefined){
+        this.searchResult();
+      }
+      else{
+        this.searchData = this.matches[this.selected];
+        this.selectedFood = this.matches[this.selected];
+        this.searchResult();
+      }
+
     },
     initialCount() {
       this.selected = 0;
