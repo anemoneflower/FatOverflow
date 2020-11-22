@@ -15,13 +15,13 @@
           @focus="visibleOptions = true"
           @focusout="visibleOptions = false"
         />
-        <a
+        <!-- <a
           ><img
             class="glass"
             src="../assets/magnifying-glass.png"
             @click="searchResult()"
             searchData="this is search bar"
-        /></a>
+        /></a> -->
       </li>
       <!--      <li  v-if="visibleOptions" >-->
       <div class="options" ref="optionsList" @focusout="selectAction = false">
@@ -35,12 +35,15 @@
             @mousedown="foodSelected(index), (visibleOptions = true)"
             @mouseenter="hover(index)"
             :class="{ selected: selected == index }"
-            v-text="match"
+            v-text="match[0]"
           ></li>
         </ul>
       </div>
       <!--      </li>-->
     </ul>
+      <button v-on:click="onClickAdd" class="submitBtn btns">
+        Add Product
+      </button>
   </div>
 </template>
 
@@ -50,10 +53,11 @@ export default {
   name: "Autocomplete",
   data() {
     return {
-      selectedFood: null,
+      selectedFood: "",
       searchData: "",
       visibleOptions: true,
       selected: 0,
+      selectedKey: "",
       keyDown: false,
       selectAction: false,
       foods: []
@@ -79,54 +83,51 @@ export default {
               for(var i = keyList.length; i>0; i--){
                 var myKey = keyList[i-1];
                 var gp = myValue[myKey];
-                (this.foods).push(gp.foodName);
+                (this.foods).push([gp.foodName, myKey]);
               }
             })
     console.log(this.foods);
   },
   methods: {
     foodSelected(index) {
+      console.log("Selected:", index)
+      const curMatch = this.matches[index];
+      console.log("selectedFood:", JSON.stringify(this.matches[index]))
+      console.log("selectedFood:", JSON.stringify(this.matches[index][0]))
+      console.log("selectedFood:", JSON.stringify(this.matches[index][1]))
+
+
+
+
       this.selectAction = true;
       this.selected = index;
-      this.searchData = this.matches[index];
-      this.selectedFood = this.matches[index];
+      this.searchData = curMatch[0];
+      this.selectedFood = curMatch[0];
+      this.selectedKey = curMatch[1];
       this.searchResult();
+      this.onClickItem();
+      this.onClickItem_key();
+
     },
     searchResult() {
-      if(this.searchData==""){
-        return [];
-      }
-      // var book = this.searchData;
-      // var checkList = JSON.parse(JSON.stringify(bookList));
-      // console.log(checkList);
-      // var idx = 0;
-      // for (var i = 0; i < bookList.length; i++) {
-      //   var searchData = bookList[i].searchData.toUpperCase();
-      //   var checkValue = searchData.indexOf(book.toUpperCase());
-      //   console.log(checkValue);
-      //   if (checkValue != -1) {
-      //     searchedList.push(bookList[i]);
-      //     checkList.splice(i + idx, 1);
-      //     idx--;
-      //   }
+      // if(this.searchData==""){
+      //   return [];
       // }
-      // if (checkList.length != 14) {
-      //   for (var j = 0; j < checkList.length; j++) {
-      //     if (searchedList[0].series == checkList[j].series) {
-      //       searchedList.push(checkList[j]);
-      //     }
-      //   }
-      // }
-      this.$router.push({path:'gplist',query:{result:this.searchData}})
-      // var curPath = this.$router.history.current["path"];
-      // var trim = curPath.split("/");
-      // console.log(`select check: ${trim[trim.length - 1]}`);
-      // if (trim[trim.length - 1].length > 10)
-      //   this.$router.push("/gpList/" + trim[trim.length - 1]);
-      // else this.$router.push("/gpList/none");
-      // this.visibleOptions = false;
-      // this.selectAction = false;
-      // this.searchData = "";
+      console.log("Search result pressed")
+      console.log(this.searchData)
+    },
+    onClickItem: function() {
+      console.log("onClickButton pressed")
+      this.$emit('clickedItem', this.searchData);
+    },
+    onClickItem_key: function() {
+    console.log("onClickButton_key pressed")
+    this.$emit('clickedItem_key', this.selectedKey);
+    },
+    onClickAdd: function() {
+      console.log("onClickAdd pressed")
+      this.searchData = "";
+      this.$emit('clickedAdd', this.searchData);
     },
     hover(index) {
       if (this.keyDown == false) {
@@ -154,13 +155,14 @@ export default {
       this.$refs.optionsList.scrollTop = this.selected * 39;
     },
     enter() {
-      this.searchData = this.matches[this.selected];
-      this.selectedFood = this.matches[this.selected];
+      this.searchData = this.matches[this.selected][0];
+      this.selectedFood = this.matches[this.selected][0];
+      this.selectedKey = this.matches[this.selected][1];
       this.searchResult();
     },
     initialCount() {
       this.selected = 0;
-    }
+    },
   },
   computed: {
     matches() {
@@ -172,10 +174,10 @@ export default {
       }
       this.initialCount();
       return this.foods.filter(food =>
-        food.toLowerCase().includes(this.searchData.toLowerCase())
+        food[0].toLowerCase().includes(this.searchData.toLowerCase())
       );
     }
-  }
+  },
 };
 </script>
 
@@ -187,8 +189,6 @@ export default {
   margin-right: auto;
   background: white;
   border-radius: 23px;
-  margin-top: 240px;
-  z-index: 3;
 }
 .popover {
   margin: 0 auto;
@@ -258,5 +258,25 @@ export default {
 /*}*/
 .options ul li.selected {
   background-color: #dcdcdc;
+}
+
+.btns {
+  outline: none;
+  background-color: #48C964;
+  color: #fff;
+  border-radius: 10px;
+  border-width: 0px;
+  font-size: 15px;
+  padding: 5px 10px 7px 10px;
+  cursor: pointer;
+}
+.btns:hover {
+  background-color: #2f8542;
+}
+
+.submitBtn {
+  margin: auto;
+  width: 100px;
+  height: 40px;
 }
 </style>

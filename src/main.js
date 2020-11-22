@@ -30,13 +30,16 @@ var firebaseConfig = {
 
 var app = firebase.initializeApp(firebaseConfig);
 export const db = app.database();
+
 // firebase.analytics();
 //
 // db.ref("food/").push().set({
 //   foodName : "KAI-breast",
 //   img : "url",
 //   website : "url"
-
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch("fetchUser", user);
+});
 //
 
 new Vue({

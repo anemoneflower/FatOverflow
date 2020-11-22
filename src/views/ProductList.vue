@@ -2,10 +2,10 @@
     <div>
         <div class="head">
             <div class = "gpbtn">
-                <button id="gpbtn">Group Purchase</button>
+                <button id="gpbtn" @click="goGPList()">Group Purchase</button>
             </div>
             <div class = "reviewbtn">
-                <button id="reviewbtn" @click="goProducts()">Reviews</button>
+                <button id="reviewbtn">Products</button>
             </div>
         </div>
         <div class="products" v-if="products.length">
@@ -66,23 +66,29 @@
             //         }
             //     })
         },
-        // methods: {
-        //     goBoard(index) {
-        //         /* var _selectedBook = selectedBook; */
-        //         this.$router.push("/product/" + selected.key);
-        //     }
-        // }
+        methods: {
+            // goBoard(index) {
+            //     /* var _selectedBook = selectedBook; */
+            //     this.$router.push("/product/" + selected.key);
+            // },
+            goGPList() {
+            
+            }
+        }
     }
 </script>
 
 <style scoped>
     .head{
-        width: 100%;
-        position: relative;
+        position: fixed;
         display: grid;
         grid-template-columns: auto auto;
         justify-content: start;
-        margin-left: 50px;
+        padding-left: 12%;
+        padding-top: 20px;
+        z-index:1;
+        background-color: #fff;
+        width:100%;
     }
     #gpbtn {
         height: 40px;
@@ -93,11 +99,15 @@
         border: 0px;
         font-size: 18px;
         margin-top: 10px;
-        margin-right: 5px;
+        margin-right: 15px;
         /* font-weight: bold; */
         cursor: pointer;
         outline: none;
         text-decoration: none;
+    }
+    #gpbtn:hover {
+        background-color: #99e5aa;
+        color: #818181;
     }
     #reviewbtn{
         height: 40px;
@@ -113,13 +123,9 @@
         outline: none;
         text-decoration: none;
     }
-    .result {
-        font-size: 25px;
-        padding-top: 50px;
-        padding-left: 120px;
-        text-align: left;
-        position: relative;
-        width: 80%;
+    #reviewbtn:hover {
+        background-color: #43be5d;
+        color: #f5f5f5;
     }
     .products {
         display: grid;
@@ -127,7 +133,7 @@
         grid-auto-rows: minmax(300px, auto);
         column-gap: 40px;
         row-gap: 20px;
-        padding-top: 20px;
+        padding-top: 80px;
         margin-left: 90px;
         margin-right: 90px;
     }
