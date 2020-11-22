@@ -84,7 +84,8 @@
                 name1:'',
                 name2:'',
                 money:'',
-                account:''
+                account:'',
+                user1: '',
             }
         },
         computed: {
@@ -93,16 +94,14 @@
                 user: "user"
             })
         },
+        mounted(){
+            this.user1=firebase.auth().currentUser;
+            this.userName = this.user1.displayName;
+            this.userKey = this.user1.uid;
+        },
         async created () {
             console.log('Posts page created');
-
-            var user1=firebase.auth().currentUser;
-            if(this.user.loggedIn){
-                this.userName = user1.displayName;
-                this.userKey = user1.uid;
-            }else{
-                alert("ERR: login null");
-            }
+            if(!this.isSignin()) alert("ERR: login null");
             this.updateChats();
             // find if owner's uid
             var post = "-MMPFFDBm2EZw2-Wuwob";
@@ -112,7 +111,11 @@
             console.log(this.ownerKey);
         },
         methods: {
+            isSignin() {
+                return this.user1!==null
+            },
             updateChats() {
+
                 let chatref = db.ref("chat");
                 let c = chatref.once("value", function(snapshot) {
                     var myValue = snapshot.val();
