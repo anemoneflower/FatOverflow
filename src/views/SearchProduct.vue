@@ -1,9 +1,7 @@
 <script>
   export default {
     name: 'modal',
-    props: {
-      successText: String
-    },
+
     methods: {
       close() {
         this.$emit('close');
@@ -15,11 +13,123 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal">
-      <p>{{successText}}</p>
       <header class="modal-header">
+        <slot name="header">
+          This is the default tile!
+
+          <button
+            type="button"
+            class="btn-close"
+            @click="close"
+          >
+            x
+          </button>
+        </slot>
       </header>
+      <section class="modal-body">
+        <slot name="body">
+          I'm the default body!
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+        </slot>
+       </section>
        <footer class="modal-footer">
           <slot name="footer">
+            I'm the default footer!
 
             <button
               type="button"
@@ -53,7 +163,8 @@
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 1000px;
+    height: 800px;
   }
 
   .modal-header,

@@ -8,7 +8,7 @@ const store = new Vuex.Store({
         count: 0,
         user: {
             loggedIn: false,
-            data: null,
+            data: null
         },
         previousUrl: '/'
     },
@@ -45,8 +45,7 @@ const store = new Vuex.Store({
             if (user) {
                 commit("SET_USER", {
                     displayName: user.displayName,
-                    email: user.email,
-                    uid: user.uid,
+                    email: user.email
                 });
             } else {
                 commit("SET_USER", null);
