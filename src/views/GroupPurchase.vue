@@ -39,15 +39,20 @@
 <!--&lt;!&ndash;            <ordered-block>sasdfs</ordered-block>&ndash;&gt;-->
 
 <!--          </div>-->
-          <div class="orderBlock" v-for="(p, key) in participants" v-bind:key="key">
-            <div v-for="(pp, key) in p.food" v-bind:key="key">
-              <div class="orderLeft">
-                <p class="orderLeftText">{{pp.name}}, {{pp.quantity}}</p>
+          <div class="paBlock" v-if="participants != null">
+            <div class="orderBlock" v-for="(p, key) in participants" v-bind:key="key">
+              <div v-for="(pp, key) in p.food" v-bind:key="key">
+                <div class="orderLeft">
+                  <p class="orderLeftText">{{pp.name}}, {{pp.quantity}}</p>
+                </div>
+              </div>
+              <div>
+                <p class="orderRightText">ID: {{p.userName}} </p>
               </div>
             </div>
-            <div>
-              <p class="orderRightText">ID: {{p.userName}} </p>
-            </div>
+          </div>
+          <div class="orderBlock" v-else>
+            There is no participant.
           </div>
       </div>
 
@@ -122,16 +127,15 @@ export default {
 
 .column_left {
   float: left;
-  width: 38%;
-  margin-left: 12%;
+  width: 550px;
+  margin-left: 200px;
   min-width: 500px;
 }
 
 .column_right {
-  float: right;
-  width: 33%;
-  padding-left: 80px;
-  margin-right: 10%;
+  float: left;
+  width: 550px;
+  padding-left: 20px;
   min-width: 300px;
 }
 
@@ -184,7 +188,7 @@ textarea {
   float: right;
   margin-top: -30px;
   margin-right: 30px;
-  font-size: 17px
+  font-size: 17px;
 }
 
 .website {
@@ -224,7 +228,7 @@ textarea {
   border-radius: 10px;
   margin-top: 15px;
   padding: 13px 9px 13px 9px;
-  width: 378px;
+  width: 400px;
   float: right;
   margin-right: 50px;
 }
@@ -247,8 +251,26 @@ textarea {
 
 .row {
   position: absolute;
-  min-width: 1300px;
+  min-width: 1500px;
   margin-top: -75px;
+}
+
+.paBlock {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+.paBlock::-webkit-scrollbar {
+  width: 12px;
+}
+.paBlock::-webkit-scrollbar-thumb {
+    background-color: none;
+    border-radius: 6px;
+}
+.paBlock:hover::-webkit-scrollbar-thumb {
+    background: #dadada;
+}
+.paBlock::-webkit-scrollbar-track {
+    background-color: none;
 }
 </style>
 
