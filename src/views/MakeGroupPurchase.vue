@@ -267,10 +267,27 @@ export default {
       this.searchBarKey = value;
     },
     onClickAdd() {
-      this.productList.push({title: this.searchBarName, key: this.searchBarKey})
-      console.log("OnClickAdd called");
-      console.log("Searchbar data is")
-      console.log(JSON.stringify(this.productList))
+      if (this.searchBarName != "") {
+        let duplicateExist = false;
+        for (let i = 0; i < this.productList.length; i++) {
+          if (this.searchBarKey == this.productList[i].key) {
+            console.log("duplicate exists")
+            duplicateExist = true;
+            break;
+          }
+        }
+        if (duplicateExist == false) {
+          this.productList.push({title: this.searchBarName, key: this.searchBarKey})
+          console.log("OnClickAdd called");
+          console.log("Searchbar data is")
+          console.log(JSON.stringify(this.productList))
+        }
+
+      }
+      else {
+        console.log("empty searchBarName")
+      }
+
     },
     removeProduct(index) {
       console.log("Remove product");
