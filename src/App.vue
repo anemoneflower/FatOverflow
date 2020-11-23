@@ -29,7 +29,6 @@
     <div class="view">
       <router-view />
     </div>
-    <notifications group="foo" position="top center" classes="my-style"></notifications>
     <notifications group="error" position="top center" classes="my-error"></notifications>
     <notifications group="success" position="top center" classes="my-success"></notifications>
   </div>

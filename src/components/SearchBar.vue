@@ -7,7 +7,7 @@
           id="input"
           type="text"
           v-model="searchData"
-          placeholder="Search what do you want to eat."
+          placeholder="Search what you want to eat."
           @keydown.up="keyup"
           @keydown.down="keydown"
           @keydown.enter="enter"
