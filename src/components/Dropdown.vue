@@ -141,7 +141,8 @@
         border-radius: 4px;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         background-clip: padding-box;
-        height: 200px;
+        max-height: 200px;
+        min-height: 30px;
         overflow-y:scroll;
     }
     .dropdown-menu::-webkit-scrollbar {
