@@ -450,7 +450,7 @@
   .modal-body {
     position: relative;
     padding: 5px 10px;
-    margin-top: -120px;
+    margin-top: -165px;
   }
 
   .btn-close {
@@ -485,7 +485,7 @@
     height: 180px;
     width: 180px;
     overflow: hidden;
-    margin: -65px 64px 0 0;
+    margin: -20px 95px 0 0;
     float: right;
     border-radius:12px;
   }
