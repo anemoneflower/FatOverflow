@@ -144,7 +144,7 @@ export default {
                 closed: true
             })
 
-            this.$router.push("/mypage/closed");
+            this.$router.replace("/mypage/closed");
             window.location.reload();
             // let ref = db.ref("/users")
         },
