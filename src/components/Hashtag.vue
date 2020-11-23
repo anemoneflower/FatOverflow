@@ -27,8 +27,8 @@ export default {
           type: Object
         },
         enableClick: {
-          type: Boolean,
-          default: false
+          type: String,
+          default: ""
         }
     },
     components: {
@@ -45,6 +45,9 @@ export default {
     },
     async mounted() {
       // this.uid = firebase.auth().currentUser.uid;
+      if (this.food.key == null) {
+        return;
+      }
       console.log("Mounted wait for foodkey" + this.food.key)
       console.log(this.food.key)
       console.log(this.food)
