@@ -61,33 +61,36 @@
         },
         async mounted() {
             let query = this.$route.query.result;
+            const products = [];
+            const productKeys = [];
+            const showModalList = [];
             if(query === undefined){
-                const snapshot = await db.ref("/food").once("value")
-
-                let myValue = snapshot.val();
-                let keyList = Object.keys(myValue);
-                for(let i = keyList.length; i>0; i--){
-                    let myKey = keyList[i-1];
-                    let product = myValue[myKey];
-                    (this.products).push(product);
-                    this.productKeys.push(myKey);
-                    this.showModalList.push(false);
-                }
+                const ref = await db.ref("food");
+                const snapshot = await ref.orderByChild('foodName').once("value");
+                snapshot.forEach(function(child){
+                    // console.log(child.val().foodName);
+                    const v = child.val();
+                    products.push(v);
+                    productKeys.push(child.key);
+                    showModalList.push(false);
+                })
             }
             else {
-                const snapshot = await db.ref("/food").once("value");
-                let myValue = snapshot.val();
-                let keyList = Object.keys(myValue);
-                for(let i = keyList.length; i>0; i--){
-                    let myKey = keyList[i-1];
-                    let food = myValue[myKey];
-                    if(food.foodName.toLowerCase().includes(query.toLowerCase())){
-                        (this.products).push(food);
-                        this.productKeys.push(myKey);
-                        this.showModalList.push(false);
+                const ref = await db.ref("food");
+                const snapshot = await ref.orderByChild('foodName').once("value");
+                snapshot.forEach(function(child){
+                    // console.log(child.val().foodName);
+                    const v = child.val();
+                    if(v.foodName.toLowerCase().includes(query.toLowerCase())) {
+                        products.push(v);
+                        productKeys.push(child.key);
+                        showModalList.push(false);
                     }
-                }
+                })
             }
+            this.products = products;
+            this.productKeys = productKeys;
+            this.showModalList = showModalList;
         },
         methods: {
             goGPList() {
