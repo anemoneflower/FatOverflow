@@ -74,6 +74,7 @@ export default {
     if (query!==undefined){
       this.searchData = query;
     }
+    this.visibleOptions = false;
     firebase
             .database()
             .ref("/food")
