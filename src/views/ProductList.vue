@@ -106,7 +106,14 @@
             goGPList() {
                 let user = firebase.auth().currentUser;
                 if (user == null) {
-                  alert("Please sign in to go to group purchase.");
+                //   alert("Please sign in to go to group purchase.");
+                  this.$notify({
+                    group: 'foo',
+                    title: 'Please sign in to go to group purchase.',
+                    // text: 'Hello user! This is a notification!',
+                    duration: 5000,
+                    type: 'error'
+                  });
                   return;
                 }
                 let query = this.$route.query.result;
