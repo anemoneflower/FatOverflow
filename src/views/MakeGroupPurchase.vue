@@ -173,6 +173,8 @@ export default {
   },
   mounted() {
     if (firebase.auth().currentUser == null) {
+      alert("Please sign in to go to group purchase.");
+      this.$router.push("/");
       return;
     }
     this.uid = firebase.auth().currentUser.uid;
