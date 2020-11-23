@@ -200,7 +200,7 @@ export default {
 .popover {
   margin: 0 auto;
   padding: 0;
-  width: 500px;
+  width: 300px;
   border: 1px solid #dcdcdc;
   position: relative;
   left: 0;
@@ -208,6 +208,7 @@ export default {
   border-radius: 3px;
   list-style-type: none;
   background: white;
+  z-index:3;
 }
 .popover:hover {
   box-shadow: 1px 1px 8px 1px #dcdcdc;
@@ -224,14 +225,14 @@ export default {
   cursor: pointer;
 }
 #input {
-  width: 420px;
+  width: 240px;
   outline: none;
   border: none;
   height: 40px;
   font-size: 16px;
 }
 .options {
-  width: 440px;
+  width: 250px;
   padding: none;
   position: relative;
   left: 30px;

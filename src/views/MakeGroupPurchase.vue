@@ -1,139 +1,141 @@
 <template>
-  <div id="app" class="main" style="margin-top: 40px">
+  <div id="app" class="main" style="margin-top: 40px; width:1200px; left:50%; margin-left: -600px;">
     <a class="title" style="margin: auto; text-align: center;">
       Make Group Purchase
     </a>    
     <div class="outer">
       <div class="inner"></div>
     </div>
-    <div class=rowDiv>
-      <a class="subTitle">Title</a>
-      <input
-        class="titleInput inputBorder"
-        v-model="postTitle"
-        type="text"
-        placeholder="Title"
-      />
-    </div>
-    <div class=rowDiv>
-      <div style="width: 350px; height: 50px; float:left;">
-        <a class="subTitle" style="margin-left:10%">Website</a>
-        <input
-          class="websiteInput inputBorder"
-          v-model="website"
-          type="text"
-          placeholder="Website"
-        />
-      </div>
-      <div style="width: 350px; height: 50px; float:right;">
-        <a class="subTitle">Due Date</a>
-        <input
-          class="dateInput inputBorder"
-          v-model="date"
-          type="text"
-          placeholder="Due date in format YYYY/MM/DD"
-        />
-      </div>
-    </div>
-    <div class="rowDiv">
-      <a class="subTitle">Shipping Place</a>
-      <vSelect 
-        :options="options"
-        v-model="shipping"
-        placeholder="Please select shipping destination"
-        style="padding-top:23px; width:92%; margin-left:4%;"
-      >s</vSelect>
-    </div>
-    <div class="rowDiv" style="height:220px;">
-      <a class="subTitle">Notes</a>
-      <textarea
-        class="commentInput inputBorder"
-        v-model="note"
-      ></textarea>
-    </div>
-    <div class="rowDiv" style="height:7px">
-      <a class="subTitle">Products</a>
-    </div>
-    <div class="rowDiv" style="height:50px;">
-      <!-- <button v-on:click="addProduct" class="addBtn btns">
-        Add Product +
-      </button> -->
-
-        <!-- <input
-          class="addProductSearch"
-          autocomplete="off"
-          id="input"
-          type="text"
-          v-model="title"
-          placeholder="Find the product to add"
-          @keydown.up="keyup"
-          @keydown.down="keydown"
-          @keydown.enter="enter"
-          v-focus
-          @focus="visibleOptions = true"
-          @focusout="visibleOptions = false"
-        />
-        <a
-          ><img
-            class="glass"
-            src="../assets/magnifying-glass.png"
-            @click="showModal = true"
-            title="this is search bar"
-        /></a> -->
-        <!-- <SearchProduct v-if="showModal" @close="showModal = false">
-          <h3 slot="header">custom header</h3>
-        </SearchProduct> -->
-        <Popup 
-          successText="Make Group Purchase Successful"
-          v-if="showModal" 
-          @close="showModal = false"
-          >
-          <h3 slot="header"></h3>
-        </Popup>
-        
-        <SearchBar 
-          @clickedItem="onClickItem"
-          @clickedItem_key="onClickItem_key"
-          @clickedItem_img="onClickItem_img"
-          @clickedAdd="onClickAdd"
-          style="padding-top:1px"
-          v-if="!showModal"
-        />
-      <!-- <button v-on:click="addProduct" class="submitBtn btns">
-        Add Product
-      </button> -->
-      <div style="margin: 50px 0 0 4%;">
-        <div
-          v-for="(product, index) in productList"
-          :key = "index"
-          style="margin-top: 5px; height: 110px;"
-        >
-          <AddedProduct
-            :product="product"
-            v-if="!showModal"
-          ></AddedProduct>
-          <button
-            v-on:click="removeProduct(index)"
-            class="removeButton"
-            v-if="!showModal"
-          >
-           Remove
-          </button>
-         </div>
-        <div class="rowDiv" style="margin-bottom:30px;">
-          <button v-on:click="createPurchase" class="submitBtn btns">
-            Submit
-          </button>
-        </div>
-       </div>
-     </div>
-     <div>
-       <br><br>
-       <p 
+    <div style="position:fixed; z-index:5; margin-top:-80px;">
+      <br><br>
+      <p 
         class="warningMsg"
         v-if="showWarning"
-       >{{warningMsg}}</p>
-     </div>
+      >{{warningMsg}}</p>
+    </div>
+    <div class="column_left">
+      <div class="rowDiv">
+        <a class="subTitle">Title</a>
+        <input
+          class="titleInput inputBorder"
+          v-model="postTitle"
+          type="text"
+          placeholder="Title"
+        />
+      </div>
+      <div class="rowDiv">
+        <div style="width: 250px; height: 50px; float:left;">
+          <a class="subTitle" style="margin-left:10%">Website</a>
+          <input
+            class="websiteInput inputBorder"
+            v-model="website"
+            type="text"
+            placeholder="Website"
+          />
+        </div>
+        <div style="width: 250px; height: 50px; float:right;">
+          <a class="subTitle">Due Date</a>
+          <input
+            class="dateInput inputBorder"
+            v-model="date"
+            type="text"
+            placeholder="Due date in format YYYY/MM/DD"
+          />
+        </div>
+      </div>
+      <div class="rowDiv">
+        <a class="subTitle">Shipping Place</a>
+        <vSelect 
+          :options="options"
+          v-model="shipping"
+          placeholder="Please select shipping destination"
+          style="padding-top:23px; width:92%; margin-left:4%;"
+        >s</vSelect>
+      </div>
+      <div class="rowDiv" style="height:220px;">
+        <a class="subTitle">Notes</a>
+        <textarea
+          class="commentInput inputBorder"
+          v-model="note"
+        ></textarea>
+      </div>
+    </div>
+    <div class="column_right">
+      <div class="rowDiv" style="height:7px">
+        <button v-on:click="createPurchase" class="submitBtn btns">
+          Submit
+        </button>
+        <a class="subTitle">Products</a>
+      </div>
+      <div class="rowDiv" style="height:50px;">
+        <!-- <button v-on:click="addProduct" class="addBtn btns">
+          Add Product +
+        </button> -->
+
+          <!-- <input
+            class="addProductSearch"
+            autocomplete="off"
+            id="input"
+            type="text"
+            v-model="title"
+            placeholder="Find the product to add"
+            @keydown.up="keyup"
+            @keydown.down="keydown"
+            @keydown.enter="enter"
+            v-focus
+            @focus="visibleOptions = true"
+            @focusout="visibleOptions = false"
+          />
+          <a
+            ><img
+              class="glass"
+              src="../assets/magnifying-glass.png"
+              @click="showModal = true"
+              title="this is search bar"
+          /></a> -->
+          <!-- <SearchProduct v-if="showModal" @close="showModal = false">
+            <h3 slot="header">custom header</h3>
+          </SearchProduct> -->
+          <Popup 
+            successText="Make Group Purchase Successful"
+            v-if="showModal" 
+            @close="showModal = false"
+            >
+            <h3 slot="header"></h3>
+          </Popup>
+          
+          <SearchBar 
+            @clickedItem="onClickItem"
+            @clickedItem_key="onClickItem_key"
+            @clickedItem_img="onClickItem_img"
+            @clickedAdd="onClickAdd"
+            style="padding-top:1px"
+            v-if="!showModal"
+          />
+        <!-- <button v-on:click="addProduct" class="submitBtn btns">
+          Add Product
+        </button> -->
+        <div class="adds">
+          <div
+            v-for="(product, index) in productList"
+            :key = "index"
+            style="margin-top: 5px; height: 85px; width: 450px;"
+          >
+            <AddedProduct
+              :product="product"
+              v-if="!showModal"
+            ></AddedProduct>
+            <button
+              v-on:click="removeProduct(index)"
+              class="removeButton"
+              v-if="!showModal"
+            >
+            Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -381,7 +383,7 @@ export default {
 .rowDiv {
   margin-left: auto;
   margin-right: auto;
-  width: 700px;
+  width: 500px;
   height: 50px;
   margin-top: 15px;
 }
@@ -438,9 +440,12 @@ export default {
 }
 .submitBtn {
   margin: auto;
-  margin-top: 10px;
+  margin-top: -95px;
+  margin-left: 110px;
   width: 100px;
   height: 40px;
+  font-size: 20px;
+  position: absolute;
 }
 .glass {
   height: 28px;
@@ -462,7 +467,7 @@ export default {
   cursor: pointer;
   width: 60px;
   height: 30px;
-  margin-left: -20px;
+  margin-left: 0px;
   outline: none;
 }
 .removeButton:hover {
@@ -477,5 +482,39 @@ export default {
 }
 .warningMsg {
   color: #ce3030
+}
+
+
+.column_left {
+  float: left;
+  width: 600px;
+  min-width: 500px;
+}
+
+.column_right {
+  float: left;
+  width: 550px;
+  padding-left: 20px;
+  min-width: 300px;
+}
+
+.adds {
+  margin: 50px 0 0 15px;
+  position:fixed; 
+  height:350px; 
+  overflow-y:scroll;
+}
+.adds::-webkit-scrollbar {
+    width: 12px;
+}
+.adds::-webkit-scrollbar-thumb {
+    background-color: none;
+    border-radius: 6px;
+}
+.adds:hover::-webkit-scrollbar-thumb {
+    background: #dadada;
+}
+.adds::-webkit-scrollbar-track {
+    background-color: none;
 }
 </style>
