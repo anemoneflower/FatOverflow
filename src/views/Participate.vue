@@ -97,27 +97,27 @@ export default {
     },
     async created() {
       if (firebase.auth().currentUser != null) {
-        console.log(this.gpKey);
+        // console.log(this.gpKey);
         const snapshot = await db.ref('groupPurchase').child(this.gpKey).once('value');
         var value = snapshot.val();
-        console.log("mounted: ");
-        console.log(value);
+        // console.log("mounted: ");
+        // console.log(value);
         this.foods = Object.keys(value.registeredFood);
-        console.log("this.foods:: ", this.foods);
+        // console.log("this.foods:: ", this.foods);
         this.purchaseTitle = value.title;
-        console.log("created: " + this.itemArray);
-        console.log("created: " + this.foods + " len: " + this.foods.length);
+        // console.log("created: " + this.itemArray);
+        // console.log("created: " + this.foods + " len: " + this.foods.length);
         for (var i = 0; i < this.foods.length; i++) {
-          console.log("hoho: " + i + " " + this.foods[i]);
+          // console.log("hoho: " + i + " " + this.foods[i]);
           const snapshot2 = await db.ref('groupPurchase').child(this.gpKey).child('registeredFood').child(this.foods[i])
                   .once('value');
           var val = snapshot2.val();
-          console.log(val);
-          console.log('name:', val);
-          console.log("val: ");
-          console.log(val);
+          // console.log(val);
+          // console.log('name:', val);
+          // console.log("val: ");
+          // console.log(val);
           this.itemArray.push(val.foodName);
-          console.log("check: " + this.itemArray);
+          // console.log("check: " + this.itemArray);
         }
       } else {
         this.$router.push('/');
@@ -143,10 +143,10 @@ export default {
             console.log(date);
             var foodObj = {};
             for (var i=0; i<this.selectedOptions.length; i++){
-                if (this.selectedOptions[i].quantity > 0) {
+                if ((this.selectedOptions[i].quantity > 0) && (this.selectedOptions[i].item !== 'Please select item you want to purchase.')){
                     foodObj[this.selectedOptions[i].key] = {name: this.selectedOptions[i].item, quantity: this.selectedOptions[i].quantity}
                 }else{
-                  alert("Please Check Quantity!!");
+                  alert("Please Check Product and Quantity!!");
                   return
                 }
             }
@@ -178,7 +178,15 @@ export default {
                 participate: true,
                 food : foodObj,
                 review: false
-              })
+              });
+
+              this.$notify({
+                group: 'foo',
+                title: 'Successfully submitted your purchase!',
+                // text: 'Hello user! This is a notification!',
+                duration: 1000,
+                type: 'success'
+              });
               this.$router.replace(this.previousUrl);
             }else{
               alert("you didn't select any food");
