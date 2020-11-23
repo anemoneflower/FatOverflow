@@ -2,7 +2,7 @@
     <div class = 'card-post'>
         <div class="square" @click.self="goGp()">
             <div class="board-info" @click.self="goGp()">
-                <a class="title" >{{gp.title}}</a>
+                <a class="title" >{{gp.title}} <a v-if="(this.opened===true)" class="owner">Owner</a></a>
                 <div class="closeTag" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===true)" @click.self="goGp()">
 <!--                    <button class="cbtn">Closed</button>-->
                     <a>CLOSED</a>
@@ -37,12 +37,12 @@
                         <Hashtag :food="overflow2" v-else-if="index===3"></Hashtag>
                     </div>
                 </div>
-                <div class="review" v-if="(gp.review!==undefined)&&(gp.review===true)">
-                    <button class="btns">Add review</button>
-                </div>
-                <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">
-                    <button class="btns">Your review</button>
-                </div>
+<!--                <div class="review" v-if="(gp.review!==undefined)&&(gp.review===true)">-->
+<!--                    <button class="btns">Add review</button>-->
+<!--                </div>-->
+<!--                <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">-->
+<!--                    <button class="btns">Your review</button>-->
+<!--                </div>-->
                 <div class="closebtn" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===false)&&(gp.opened===true)">
                     <button class="btns" @click="closePost()">Close Post</button>
                 </div>
@@ -81,7 +81,8 @@ export default {
             },
             overflow2: {
                 foodName: "More... "
-            }
+            },
+            opened: false
         };
     },
     mounted() {
@@ -90,13 +91,21 @@ export default {
             (this.registeredFood).push(this.gp.registeredFood[key]);
             // console.log(obj[key]);
         }
-        // let userKey = firebase.auth().currentUser.uid;
-        // let ref = db.ref('users/'+userKey+'/gpList')
-        // if(gp.key===userKey)
-        // console.log("TTTRRRRUUUEWWW   " + this.gp.participate);
-        // if(this.gp.participate!==undefined&&this.gp.participate){
-        //     console.log("TTTRRRRUUUEWWW");
-        // }
+
+        let userKey = firebase.auth().currentUser.uid;
+
+        firebase.database().ref('users/'+userKey+'/gpList/'+this.gp.key).once("value",snapshot=>{
+            var myValue = snapshot.val();
+            // console.log("VALUE");
+            // console.log(myValue);
+            if(myValue!==null){
+                if(myValue.participate===false){
+                    this.opened=true;
+                }
+            }
+        })
+
+
     },
     methods: {
         expressDate(num) {
@@ -246,9 +255,35 @@ a:link {
   white-space: nowrap;
   overflow: hidden;
 }
+.owner{
+    margin-left: 7px;
+    margin-top: 10px;
+    border-radius: 30px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #fff;
+    color: #fff;
+    background-color: #48C964;
+    padding : 1px 10px 1px 10px;
+    font-size: 13px;
+}
+
+/*.hashtag {*/
+/*    float: left;*/
+/*    border-radius: 30px;*/
+/*    border-style: solid;*/
+/*    border-width: 1px;*/
+/*    border-color: #48C964;*/
+/*    color: #48C964;*/
+/*    background-color: #fff;*/
+/*    padding : 3px 12px 3px 12px;*/
+/*    font-size: 15px;*/
+/*    margin-right: 15px;*/
+/*    !*height: 30px;*!*/
+/*}*/
 
 .content-box {
-  width: 1134px;
+  width: 943px;
   padding-left: 35px;
   padding-right: 30px;
   margin: auto;
