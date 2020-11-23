@@ -66,30 +66,69 @@
                     <div style="float:left; font-size:18px; margin-left:10px; font-weight:bold; margin-top:5px;">
                         <div>Message Form</div>
                     </div>
-                    <div v-if="userKey==ownerKey">
-                        <div class="message" style="margin-left:391px">
-                            <div>Come at <input class="timeInput" type="text" placeholder="hh" v-model="come_at_h">:<input class="timeInput" type="text" placeholder="mm" v-model="come_at_m"><button class="sendBtn" v-on:click="save_at('Come at ', come_at_h, come_at_m)">send</button></div>
-                        </div>
-                        <div class="message" style="margin-left:249px">
-                            <div>Account is <input class="bankInput" type="text" placeholder="Bank" v-model="bank"> bank <input class="accountInput" type="text" placeholder="Account Number" v-model="account"><button class="sendBtn" v-on:click="save_account">send</button></div>
-                        </div>
-                        <div class="message" style="margin-left:195px">
-                            <div>"<input class="userInput" type="text" placeholder="Username" v-model="name2">", you need to give me <input class="moneyInput" type="text" placeholder="Price" v-model="money"> won!<button class="sendBtn" v-on:click="save_both">send</button></div>
-                        </div>
-                        <div class="message" style="margin-left:429px">
-                            <div>"<input class="userInput" type="text" placeholder="Username" v-model="name3">", OK <button class="sendBtn" v-on:click="save_ok">send</button></div>
-                        </div>
+                    <div v-if="userKey==ownerKey" style="float:right;">
+                        <table>
+                            <tr>
+                                <td class="message">
+                                    Come at <input class="timeInput" type="text" placeholder="hh" v-model="come_at_h">:<input class="timeInput" type="text" placeholder="mm" v-model="come_at_m">
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="save_at('Come at ', come_at_h, come_at_m)">send</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="message">
+                                    Account is <input class="bankInput" type="text" placeholder="Bank" v-model="bank"> bank <input class="accountInput" type="text" placeholder="Account Number" v-model="account">
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="save_account">send</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="message">
+                                    "<input class="userInput" type="text" placeholder="Username" v-model="name2">", you need to give me <input class="moneyInput" type="text" placeholder="Price" v-model="money"> won!
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="save_both">send</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="message">
+                                    "<input class="userInput" type="text" placeholder="Username" v-model="name3">", OK
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="save_ok">send</button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div v-else>
-                        <div class="message" style="margin-left:392px">
-                            <div>I'll go at <input class="timeInput" type="number" placeholder="hh" v-model="go_at_h">:<input class="timeInput" type="number" placeholder="mm" v-model="go_at_m"><button class="sendBtn" v-on:click="save_at('I\'ll go at ', go_at_h, go_at_m)">send</button></div>
-                        </div>
-                        <div class="message" style="margin-left:448px">
-                            <div>I sent money!<button class="sendBtn" v-on:click="save_txt('I sent money!')">send</button></div>
-                        </div>
-                        <div class="message" style="margin-left:524px">
-                            <div>OK!<button class="sendBtn" v-on:click="save_txt('OK')">send</button></div>
-                        </div>
+                    <div v-else style="float:right;">
+                        <table>
+                            <tr>
+                                <td class="message">
+                                    I'll go at <input class="timeInput" type="number" placeholder="hh" v-model="go_at_h">:<input class="timeInput" type="number" placeholder="mm" v-model="go_at_m">
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="save_at('I\'ll go at ', go_at_h, go_at_m)">send</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="message">
+                                    I sent money!
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="save_txt('I sent money!')">send</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="message">
+                                    OK!
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="save_txt('OK')">send</button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -560,7 +599,8 @@
     }
 
     .message {
-        margin: 5px 0px 1px 0px;
+        margin: 7px 0px 1px 0px;
+        float:right;
         font-size:17px;
     }
     .sendBtn {
