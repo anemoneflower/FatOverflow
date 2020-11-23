@@ -428,12 +428,12 @@
     display: flex;
     flex-direction: column;
     width: 900px;
-    height: 650px;
+    height: 700px;
     border-radius: 20px;
   }
 
   #modalTitle {
-    margin: 21px 0px 0px 35px;
+    margin: 30px 0px 0px 35px;
     font-size:30px;
     font-weight:bold;
     color: #4AAE9B;
