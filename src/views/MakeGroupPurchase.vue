@@ -7,10 +7,10 @@
       <div class="inner"></div>
     </div>
     <div style="position:fixed; z-index:5; margin-top:-45px; margin-left:270px;">
-      <p 
+      <!-- <p 
         class="warningMsg"
         v-if="showWarning"
-      >{{warningMsg}}</p>
+      >{{warningMsg}}</p> -->
     </div>
     <div class="column_left">
       <div class="rowDiv">
@@ -44,12 +44,6 @@
       </div>
       <div class="rowDiv" style="height: 60px">
         <a class="subTitle">Shipping Place</a>
-<!--        <vSelect -->
-<!--          :options="options"-->
-<!--          v-model="shipping"-->
-<!--          placeholder="Please select shipping destination"-->
-<!--          style="padding-top:23px; width:92%; margin-left:4%;"-->
-<!--        >s</vSelect>-->
         <Dropdown style="width:92%; height: 26px;"
                   :itemArray="options"
                   :selected="shipping"
@@ -73,39 +67,6 @@
         <a class="subTitle">Products</a>
       </div>
       <div class="rowDiv" style="height:50px;">
-        <!-- <button v-on:click="addProduct" class="addBtn btns">
-          Add Product +
-        </button> -->
-
-          <!-- <input
-            class="addProductSearch"
-            autocomplete="off"
-            id="input"
-            type="text"
-            v-model="title"
-            placeholder="Find the product to add"
-            @keydown.up="keyup"
-            @keydown.down="keydown"
-            @keydown.enter="enter"
-            v-focus
-            @focus="visibleOptions = true"
-            @focusout="visibleOptions = false"
-          />
-          <a
-            ><img
-              class="glass"
-              src="../assets/magnifying-glass.png"
-              @click="showModal = true"
-              title="this is search bar"
-          /></a> -->
-          <Popup 
-            successText="Make Group Purchase Successful"
-            v-if="showModal" 
-            @close="showModal = false"
-            >
-            <h3 slot="header"></h3>
-          </Popup>
-          
           <SearchBar 
             @clickedItem="onClickItem"
             @clickedItem_key="onClickItem_key"
@@ -114,9 +75,6 @@
             style="padding-top:1px"
             v-if="!showModal"
           />
-        <!-- <button v-on:click="addProduct" class="submitBtn btns">
-          Add Product
-        </button> -->
         <div class="adds">
           <div
             v-for="(product, index) in productList"
@@ -225,13 +183,29 @@ export default {
           this.submit();
         }
         else {
-            this.showWarning = true;
-            this.warningMsg = "Please put the date in correct format yyyy/mm/dd"
+            // this.showWarning = true;
+            // this.warningMsg = 
+            // alert("Please put the date in correct format yyyy/mm/dd")
+            this.$notify({
+                group: 'foo',
+                title: 'Please put the date in correct format: yyyy/mm/dd',
+                // text: 'Hello user! This is a notification!',
+                duration: 5000,
+                type: 'error'
+              });
         }
       }
       else {
-        this.showWarning = true;
-        this.warningMsg = "Please fill in all the content including Title, Website, Due date, Shipping place and Products"
+        // this.showWarning = true;
+        // this.warningMsg = 
+        // alert("Please fill in all the content including Title, Website, Due date, Shipping place and Products")
+        this.$notify({
+                group: 'foo',
+                title: 'Please fill in all the fields',
+                // text: 'Hello user! This is a notification!',
+                duration: 5000,
+                type: 'error',
+              });
         console.log("Missing content")
       }
       
