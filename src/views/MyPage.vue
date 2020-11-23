@@ -66,6 +66,11 @@
             const snapshot = await db.ref('users/'+uid).once("value");
             const gpSnapshot = await db.ref('/groupPurchase').once("value");
             let myValue = snapshot.val()&&snapshot.val().gpList;
+            console.log("Result of myValue")
+            console.log(myValue)
+            if (myValue == null) {
+              return;
+            }
             let keyList = Object.keys(myValue);
 
 
@@ -74,6 +79,8 @@
                 let myKey = keyList[i-1];
                 let gp = myValue[myKey];
                 let gpValue = gpSnapshot.val();
+                console.log("print gpValue[myKey]")
+                console.log(gpValue[myKey])
                 gpValue[myKey].key = myKey;
                 console.log(myKey);
 
