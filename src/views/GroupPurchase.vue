@@ -1,6 +1,6 @@
 <template>
   <div class="main" style="margin-top: 150px">
-    <div class="row">
+    <div class="row2">
       <div class="column_left">
         <p class="postTitle">
           {{ gp.title }}
@@ -150,7 +150,6 @@ export default {
 .column_left {
   float: left;
   width: 550px;
-  margin-left: 200px;
   min-width: 500px;
 }
 
@@ -293,10 +292,12 @@ textarea {
   margin-right: 20px;
 }
 
-.row {
+.row2 {
   position: absolute;
-  min-width: 1500px;
+  min-width: 1120px;
   margin-top: -75px;
+  left: 50%;
+  margin-left: -560px;
 }
 
 .paBlock {
