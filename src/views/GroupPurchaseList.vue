@@ -71,7 +71,9 @@ export default {
                         console.log(myKey);
                         // this.gpList = [];
                         // this.gpEmpty = false;
-                        (this.gpList).push(gp);
+                        if(gp.isClosed===false){
+                            (this.gpList).push(gp);
+                        }
                     }
                 })
         }
@@ -101,14 +103,16 @@ export default {
                             }
                         }
                         gp.key = myKey;
-                        if(count>0){
-                            tag.push(gp);
-                        }
-                        else if (gp.title.toLowerCase().includes(query.toLowerCase())){
-                            title.push(gp);
-                        }
-                        else if (gp.content.toLowerCase().includes(query.toLowerCase())){
-                            content.push(gp);
+                        if(gp.isClosed===false){
+                            if(count>0){
+                                tag.push(gp);
+                            }
+                            else if (gp.title.toLowerCase().includes(query.toLowerCase())){
+                                title.push(gp);
+                            }
+                            else if (gp.content.toLowerCase().includes(query.toLowerCase())){
+                                content.push(gp);
+                            }
                         }
                     }
                     this.gpEmpty = false;
