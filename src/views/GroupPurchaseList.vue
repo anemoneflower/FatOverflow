@@ -134,7 +134,8 @@ export default {
         display: grid;
         grid-template-columns: auto auto auto;
         justify-content: start;
-        padding-left: 12%;
+        left: 50%;
+        margin-left: -486px;
         padding-top: 5px;
         z-index:2;
         background-color: #fff;
@@ -187,7 +188,7 @@ export default {
         border: 0px;
         font-size: 18px;
         margin-top: 10px;
-        margin-left: 640px;
+        margin-left: 480px;
         /* font-weight: bold; */
         cursor: pointer;
         outline: none;

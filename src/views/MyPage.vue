@@ -128,7 +128,8 @@
         display: grid;
         grid-template-columns: auto auto auto;
         justify-content: start;
-        padding-left: 12%;
+        left: 50%;
+        margin-left: -486px;
         padding-top: 5px;
         z-index:2;
         background-color: #fff;
