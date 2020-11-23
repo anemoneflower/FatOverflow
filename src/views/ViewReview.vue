@@ -230,8 +230,16 @@
     <div class="modal">
       <header class="modal-header">
         <slot name="header">
-          <h1>Review for {{foodName}}</h1>
-          <img class="thumbnail" :src="imgUrl" style="position: relative;" />
+           <button
+              type="button"
+              class="closeBtn"
+              @click="close"
+            >
+              x
+            </button>
+          <h1 id="modalTitle">Review for {{foodName}}</h1>
+          <div id="modalWebsite">Website</div>
+          <img class="thumbnail2" :src="getImage(imgUrl)"/>
           <!-- <button
             type="button"
             class="btn-close"
@@ -246,78 +254,11 @@
           :myEvaluation="myEvaluation"
         /> -->
 
-    <div class="rowDiw">
-      <p>Please rate using the 5 metrics in the range 1-5, where 1 is the lowest score and 5 is the highest score</p>
-
-      
-    </div>
-    <div class="rowDiv">
-      <label for="ce" class="label">Cost-effective: How beneficial is the product compared to its price?</label>
-      <input
-        id="ce"
-        class="quantityinput inputBorder"
-        v-model="inputEvaluation[0]"
-        type="number"
-      />
-    </div>
-    <div class="rowDiv">
-      <label for="taste" class="label">Taste: How good is the taste of this product?</label>
-      <input
-        id="taste"
-        class="quantityinput inputBorder"
-        v-model="inputEvaluation[1]"
-        type="number"
-      />
-    </div>
-    <div class="rowDiv">
-      <label for="filling" class="label">Filling: How much full does it feel after having this product?</label>
-      <input
-        id="filling"
-        class="quantityinput inputBorder"
-        v-model="inputEvaluation[2]"
-        type="number"
-      />
-    </div>
-    <div class="rowDiv">
-      <label for="convenience" class="label">Convenience: How convenient is it to eat this product?</label>
-      <input
-        id="convenience"
-        class="quantityinput inputBorder"
-        v-model="inputEvaluation[3]"
-        type="number"
-      />
-    </div>
-    <div class="rowDiv">
-      <label for="undecided" class="label">undecided</label>
-      <input
-        id="undecided"
-        class="quantityinput inputBorder"
-        v-model="inputEvaluation[4]"
-        type="number"
-      />
-    </div>
-      <button v-on:click="createReview" class="submitBtn btns">
-        Submit
-      </button>
-
-
-
         <slot name="body">
           <div class="columnLeft">
-            <p>My evaluation</p>
-            cost-effectiveness: {{myEvaluation[0]}}
-            taste: {{myEvaluation[1]}}
-            filling: {{myEvaluation[2]}}
-            convenience: {{myEvaluation[3]}}
-            undecided: {{myEvaluation[4]}}
-          </div>
-          <div>
-            <p>Average evaluation</p>
-            cost-effectiveness: {{avgEvaluation[0]}}
-            taste: {{avgEvaluation[1]}}
-            filling: {{avgEvaluation[2]}}
-            convenience: {{avgEvaluation[3]}}
-            undecided: {{avgEvaluation[4]}}
+            <div class="numR">
+              Number of ratings: {{avgCount}}
+            </div>
             <RadarChart class="chart"
               :myCe = "parseInt(myEvaluation[0])"
               :myTaste = "parseInt(myEvaluation[1])"
@@ -331,14 +272,112 @@
               :avgUndecided = "parseFloat(avgEvaluation[4])"
               :key="componentKey"
             />
-
-            <br>
-            Number of ratings: {{avgCount}}
+          </div>
+          <div class="columnRight">
+            <table id="resultTable">
+              <th style="width:55px;">Average</th>
+              <th style="font-size:18px;">Criteria</th>
+              <th style="width:55px;">Mine</th>
+              <tr>
+                <td>{{avgEvaluation[0]}}</td>
+                <td>cost-effectiveness</td>
+                <td>{{myEvaluation[0]}}</td>
+              </tr>
+              <tr>
+                <td>{{avgEvaluation[1]}}</td>
+                <td>taste</td>
+                <td>{{myEvaluation[1]}}</td>
+              </tr>
+              <tr>
+                <td>{{avgEvaluation[2]}}</td>
+                <td>filling</td>
+                <td>{{myEvaluation[2]}}</td>
+              </tr>
+              <tr>
+                <td>{{avgEvaluation[3]}}</td>
+                <td>convenience</td>
+                <td>{{myEvaluation[3]}}</td>
+              </tr>
+              <tr>
+                <td>{{avgEvaluation[4]}}</td>
+                <td>undecided</td>
+                <td>{{myEvaluation[4]}}</td>
+              </tr>
+            </table>
           </div>
 
         </slot>
+        <div class="modal-bottom">
+          <div class="instruct">
+            Please rate using the 5 metrics in the range 1-5, where 1 is the lowest score and 5 is the highest score.
+          </div>
+          <table id="evalTable">
+            <tr>
+              <td class="evalHead">Cost-effective :</td>
+              <td class="evalContent">How beneficial is the product compared to its price?</td>
+              <td>
+                <input
+                  class="ratingValue"
+                  v-model="inputEvaluation[0]"
+                  type="number"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="evalHead">Taste :</td>
+              <td class="evalContent">How good is the taste of this product?</td>
+              <td>
+                <input
+                  class="ratingValue"
+                  v-model="inputEvaluation[1]"
+                  type="number"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="evalHead">Filling :</td>
+              <td class="evalContent">How much full does it feel after having this product?</td>
+              <td>
+                <input
+                  class="ratingValue"
+                  v-model="inputEvaluation[2]"
+                  type="number"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="evalHead">Convenience :</td>
+              <td class="evalContent">How convenient is it to eat this product?</td>
+              <td>
+                <input
+                  class="ratingValue"
+                  v-model="inputEvaluation[3]"
+                  type="number"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="evalHead">Undecided :</td>
+              <td class="evalContent">Undecided</td>
+              <td>
+                <input
+                  class="ratingValue"
+                  v-model="inputEvaluation[4]"
+                  type="number"
+                />
+              </td>
+            </tr>
+          </table>
+          <button v-on:click="createReview" class="submitBtn btns">
+            Submit
+          </button>
+        </div>
+
+
+
+        
        </section>
-       <footer class="modal-footer">
+  <!--     <footer class="modal-footer">
           <slot name="footer">
 
             <button
@@ -347,9 +386,9 @@
               @click="close"
             >
               Close me!
-          </button>
-        </slot>
-      </footer>
+            </button>
+          </slot>
+        </footer> -->
     </div>
   </div>
 </template>
@@ -374,21 +413,33 @@
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-    width: 1000px;
-    height: 1300px;
+    width: 900px;
+    height: 650px;
     border-radius: 20px;
   }
 
-  .modal-header,
+  #modalTitle {
+    margin: 21px 0px 0px 35px;
+    color: #4AAE9B;
+    display:flex;
+  }
+
+  #modalWebsite {
+    margin-left: 50px;
+    color: rgb(148, 148, 148);
+    font-size: 23px;
+    display: flex;
+  }
+
+
   .modal-footer {
     padding: 15px;
     display: flex;
   }
 
   .modal-header {
-    border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
-    justify-content: space-between;
+    padding: 0 15px;
+    /*justify-content: space-between;*/
   }
 
   .modal-footer {
@@ -398,7 +449,8 @@
 
   .modal-body {
     position: relative;
-    padding: 20px 10px;
+    padding: 5px 10px;
+    margin-top: -120px;
   }
 
   .btn-close {
@@ -411,29 +463,107 @@
     background: transparent;
   }
 
-  .btn-green {
+  .closeBtn {
     color: white;
-    background: #4AAE9B;
-    border: 1px solid #4AAE9B;
-    border-radius: 2px;
+    background: #d83737;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    padding: 2px 6px 2px 7px;
+    margin-top: 10px;
+    margin-left: 414px;
+  }
+  .closeBtn:hover {
+  background-color: #ce3030;
+  color: #f5f5f5;
+}
+
+  .thumbnail2 {
+    background: black;
+    height: 180px;
+    width: 180px;
+    overflow: hidden;
+    margin: -65px 64px 0 0;
+    float: right;
+    border-radius:12px;
   }
 
-  .thumbnail {
-    background: black;
-    height: 150px;
-    width: 150px;
-    overflow: hidden;
-    display: block;
+
+  .numR {
+    margin-top: 30px;
+    margin-left: 320px;
+    font-size: 11px;
+    font-weight: thin;
+    position: absolute;
   }
 
   .columnLeft {
-    width: 100%;
+    margin-left: 72px;
+    float:left;
+  }
+
+  .columnRight {
+    margin-top: 170px;
+    margin-right: 62px;
+    float: right;
   }
 
   .chart {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
   }
+
+  #resultTable {
+    padding: 5px;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  #resultTable td {
+    padding-top: 10px;
+    padding-left:5px;
+  }
+  #resultTable th {
+    padding-left: 10px;
+    border-bottom: 0.5px solid #d0d0d0;
+  }
+
+  .modal-bottom {
+    margin-top: 400px;
+    font-size: 16px;
+    margin-left: 12px;
+  }
+
+  .instruct {
+    margin-bottom: 8px;
+    margin-left: 60px;
+    text-align: left;
+  }
+
+  #evalTable {
+    border-collapse: collapse;
+    margin-left: 112px;
+    float:left;
+  }
+  #evalTable td {
+    padding-bottom: 4px;
+  }
+  .evalHead {
+    width: 120px;
+    text-align: right;
+    font-weight: bold;
+  }
+  .evalContent {
+    padding-left: 5px;
+    text-align: left;
+    width: 375px;
+  }
+  .ratingValue {
+    width: 24px;
+    height: 15px;
+  }
+
   .btns {
     outline: none;
     background-color: #48C964;
@@ -441,16 +571,18 @@
     border-radius: 10px;
     border-width: 0px;
     font-size: 15px;
-    padding: 5px 10px 7px 10px;
+    padding: 6px 10px 6px 10px;
     cursor: pointer;
   }
   .btns:hover {
     background-color: #2f8542;
   }
   .submitBtn {
-    margin: auto;
+    margin-right: 100px;
+    margin-top: 84px;
     width: 100px;
-    height: 40px;
+    height: 37px;
+    float: right;
   }
 
 </style>
