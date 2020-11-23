@@ -58,7 +58,7 @@
               <div>
                 <div class="orderLeft">
                   <p class="orderLeftText">{{pp.name}}, {{pp.quantity}}</p>
-                <p class="orderRightText">ID: {{p.userName}} </p>
+                  <p class="orderRightText">ID: {{p.userName}} </p>
                 </div>
               </div>
             <div>
@@ -292,7 +292,7 @@ textarea {
 }
 
 .orderLeft {
-  width: 60%;
+  width: 100%;
   float: left;
 }
 
@@ -300,11 +300,15 @@ textarea {
   text-align: left;
   font-weight: bold;
   margin-left: 15px;
+  width: 55%;
+  float: left;
 }
 
 .orderRightText {
   text-align: right;
-  margin-right: 20px;
+  margin-right: 6px;
+  width: 37%;
+  float:right;
 }
 
 .row2 {
