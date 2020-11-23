@@ -47,6 +47,9 @@
             };
         },
         async mounted() {
+            if (firebase.auth().currentUser == null) {
+              return;
+            }
             console.log('mounteeeeeeeeeed')
             // await firebase.auth().onAuthStateChanged(function(user) {
             //     if (user) {
