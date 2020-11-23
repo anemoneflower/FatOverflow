@@ -14,17 +14,21 @@
         <p  class="due">
           Due: {{gp.closedDate}}
         </p>
-        <div class="hashtag" v-if="(registeredFood.length>0)">
-          <div
-                  :key = "food.key"
-                  v-for="food in registeredFood"
-          >
-            <Hashtag :food="food"></Hashtag>
+        <div style="width: 550px">
+          <div class="hashtag" v-if="(registeredFood.length>0)">
+            <div
+                    :key = "food.key"
+                    v-for="food in registeredFood"
+            >
+              <Hashtag :food="food"></Hashtag>
+            </div>
           </div>
         </div>
-        <p class="content">
-          {{gp.content}}
-        </p>
+        <div style="width:550px; display:flex;">
+          <p class="content">
+            {{gp.content}}
+          </p>
+        </div>
 
       </div>
       <div class="column_right">
@@ -209,12 +213,14 @@ textarea {
   text-align: left;
   font-size: 25px;
   font-weight: bold;
+  word-break:break-all;
 }
 
 .currentOrderTitle {
   margin-top: 40px;
   text-align: center;
   font-size: 18px;
+  word-break:break-all;
 }
 
 .userName {
@@ -222,6 +228,7 @@ textarea {
   margin-top: -30px;
   margin-right: 30px;
   font-size: 17px;
+  word-break:break-all;
 }
 
 .website {
@@ -229,7 +236,8 @@ textarea {
   margin-top: 20px;
   margin-left: 8px;
   font-size: 13px;
-  color: #9D9D9D
+  color: #9D9D9D;
+  word-break:break-all;
 }
 
 .due {
@@ -237,6 +245,7 @@ textarea {
   margin-left: 8px;
   font-size: 15px;
   text-align: left;
+  word-break:break-all;
 }
 
 .hashtag {
@@ -247,11 +256,13 @@ textarea {
 }
 
 .content {
-  margin-top: 50px;
+  display: flex;
+  margin-top: 30px;
   margin-left: 5px;
   text-align: left;
   font-size: 16px;
   white-space: pre-line;
+  word-break:break-all;
 }
 
 .orderBlock {
