@@ -70,6 +70,10 @@ export default {
     this.selectAction = false;
   },
   mounted(){
+    let query = this.$route.query.result;
+    if (query!==undefined){
+      this.searchData = query;
+    }
     firebase
             .database()
             .ref("/food")
