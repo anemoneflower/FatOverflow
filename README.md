@@ -11,17 +11,17 @@ Junyoung Choi (@Juny0ung, joonchoi518@kaist.ac.kr)
 KAIST students in campus who gained weight during Covid-19 have difficulty in losing weight as it is hard to eat healthy food in campus. Our team tackled the problem by providing platform for group purchase of diet foods by allowing people to create or join posts gathering people interested in purchasing the same products. Our application is unique in that it shows ratings with diet-food specific metrics gathered from the crowd to help food selection and encourage more group purchases, and provides real-time button-based chatroom for efficient communication among people participating in the same group purchase.   
 
 ## Libraries and frameworks
-### Vue.js (@vue/cli 4.4.4)
+#### Vue.js (@vue/cli 4.4.4)
   * vue-chartjs  
   * vuex  
   * router  
   * vue-notification
 
-### Firebase (8.4.2)
+#### Firebase (8.4.2)
   * Realtime database
   * Storage
 
-### Views & Components in ./src
+## Views & Components in ./src
 __App.vue__: manage global components like NavBar, SearchBar, Sign In/Out buttions   
 assets: png files for logo and icons   
 components: Components that used for pages in View folder   
@@ -38,7 +38,7 @@ views: Components that used for pages
 - __ViewReview.vue__: Review popup   
 
 router/__index.js__: set routing   
-store/__index.js__: global variables   
+store/__index.js__: global variables using vuex   
 
 
 ## Project setup
@@ -46,20 +46,20 @@ store/__index.js__: global variables
 npm install
 ```
 
-### Compiles and hot-reloads for development
+#### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+#### Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Lints and fixes files
+#### Lints and fixes files
 ```
 npm run lint
 ```
 
-### Customize configuration
+#### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
