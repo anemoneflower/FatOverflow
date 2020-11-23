@@ -1,7 +1,7 @@
 <template>
     <div class = 'card-post'>
         <div class="square" @click.self="goGp()">
-            <div class="closeTag" v-if="(gp.closed!==undefined)&&(gp.closed===true)" @click.self="goGp()">
+            <div class="closeTag" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===true)" @click.self="goGp()">
                 <a>* Closed *</a>
             </div>
             <div class="board-info" @click.self="goGp()">
@@ -38,10 +38,10 @@
                 <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">
                     <button class="btns">Your review</button>
                 </div>
-                <div class="closebtn" v-if="(gp.closed!==undefined)&&(gp.closed===false)">
+                <div class="closebtn" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===false)&&(gp.opened===true)">
                     <button class="btns" @click="closePost()">Close Post</button>
                 </div>
-                <div class="participatebtn" v-if="(gp.closed===false)||(gp.participate===true)">
+                <div class="participatebtn" v-if="(gp.isClosed===false)&&((gp.participate===true)||(gp.opened===true))">
                     <button class="btns" @click="goChat()">Go Chat</button>
                 </div>
             </div>
@@ -77,6 +77,9 @@ export default {
             (this.registeredFood).push(this.gp.registeredFood[key]);
             // console.log(obj[key]);
         }
+        // let userKey = firebase.auth().currentUser.uid;
+        // let ref = db.ref('users/'+userKey+'/gpList')
+        // if(gp.key===userKey)
         // console.log("TTTRRRRUUUEWWW   " + this.gp.participate);
         // if(this.gp.participate!==undefined&&this.gp.participate){
         //     console.log("TTTRRRRUUUEWWW");
@@ -99,8 +102,12 @@ export default {
         },
         closePost(){
             let userKey = firebase.auth().currentUser.uid;
-            let ref = firebase.database().ref("/users/"+userKey+"/gpList/"+this.gp.key);
-            ref.set({
+            let ref = firebase.database().ref("groupPurchase/"+this.gp.key);
+            ref.update({
+                isClosed : true
+            })
+            let userref = firebase.database().ref("/users/"+userKey+"/gpList/"+this.gp.key);
+            userref.update({
                 closed : true
             })
 

@@ -70,9 +70,10 @@
                 const gpSnapshot = await db.ref('/groupPurchase').once("value");
                 let gpValue = gpSnapshot.val();
                 gpValue[myKey].key = myKey;
-                if(gp.closed===true){
+                console.log(myKey);
+                if(gpValue[myKey].isClosed===true){
                     gpValue[myKey].review = gp.review;
-                    gpValue[myKey].closed = gp.closed;
+                    // gpValue[myKey].isClosed = gp.closed;
                     if(gp.participate===true){
                         gpValue[myKey].participate = gp.participate;
                         gpValue[myKey].foodList = gp.foodList;
@@ -80,7 +81,7 @@
                     this.closedList.push(gpValue[myKey]);
                 }
                 else if(gp.participate===false){
-                    gpValue[myKey].closed = gp.closed;
+                    gpValue[myKey].opened = true;
                     this.openedList.push(gpValue[myKey]);
                 }
                 else{
