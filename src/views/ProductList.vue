@@ -44,6 +44,7 @@
     import ProductCard from "../components/ProductCard";
     import Vue from 'vue'
     import {db} from "../main.js"
+    import firebase from "firebase";
 
     export default {
         components: {
@@ -59,7 +60,7 @@
                 productKeys: [],
                 showModalList: [],
                 showPopup: false,
-                foodEmpty: false
+                foodEmpty: false,
             };
         },
         async mounted() {
@@ -103,10 +104,16 @@
         },
         methods: {
             goGPList() {
-                let query = this.$route.query.result;
-                if (query === undefined){
+                let user = firebase.auth().currentUser;
+                if (user == null) {
                   alert("Please sign in to go to group purchase.");
-                    // this.$router.push({path:'/gplist'});
+                  return;
+                }
+                let query = this.$route.query.result;
+                if (query === undefined) {
+                  
+
+                  this.$router.push({path:'/gplist'});
                 }
                 else {
                     this.$router.push({path:'/gplist',query:{result:query}});

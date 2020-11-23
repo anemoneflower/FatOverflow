@@ -58,7 +58,7 @@
               <div>
                 <div class="orderLeft">
                   <p class="orderLeftText">{{pp.name}}, {{pp.quantity}}</p>
-                  <p class="orderRightText">ID: {{p.userName}} </p>
+                  <p class="orderRightText">by {{p.userName}} </p>
                 </div>
               </div>
             <div>
