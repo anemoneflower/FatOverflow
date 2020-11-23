@@ -223,7 +223,7 @@
       <header class="modal-header">
         <slot name="header">
           <h1>Review for {{foodName}}</h1>
-          <img class="thumbnail" :src="getImage(imgUrl)" style="position: relative;" />
+          <img class="thumbnail" :src="imgUrl" style="position: relative;" />
           <!-- <button
             type="button"
             class="btn-close"
