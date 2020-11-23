@@ -44,7 +44,13 @@
           return "../assets/placeholder.png"
       },
       createReview: function() {
-
+        if (this.uid == "") {
+          alert("You should sign in in order to write a review")
+          return
+        }
+        else {
+          console.log(this.uid);
+        }
         // Check validity of input
         if (this.inputEvaluation[0] >= 1 && this.inputEvaluation[0] <=5
         && this.inputEvaluation[1] >= 1 && this.inputEvaluation[0] <= 5
@@ -158,7 +164,9 @@
       }
     },
     async mounted() {
-      this.uid = firebase.auth().currentUser.uid;
+      if (firebase.auth().currentUser != null) {
+        this.uid = firebase.auth().currentUser.uid;
+      }
       console.log("Mounted wait for foodkey" + this.foodKey)
       const snapshot = await db.ref("review").once("value");
       // const snapshot = await db.ref('users/SVsXvyMLsbUOnof9iAcUy390WZB3').once("value");

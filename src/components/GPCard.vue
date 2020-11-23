@@ -87,6 +87,9 @@ export default {
     },
     async mounted() {
         if(this.gp.opened===undefined){
+            if (firebase.auth().currentUser == null) {
+              return;
+            }
             let userKey = firebase.auth().currentUser.uid;
             const snapshot = await firebase.database().ref('groupPurchase/'+this.gp.key+'/userKey').once("value")
             var myValue = snapshot.val();
@@ -125,6 +128,9 @@ export default {
             this.$router.push({path: '/gp', query: {GP: this.gp.key}});
         },
         closePost() {
+            if (firebase.auth().currentUser == null) {
+              return;
+            }
             let userKey = firebase.auth().currentUser.uid;
             let ref = firebase.database().ref("groupPurchase/" + this.gp.key);
             ref.update({

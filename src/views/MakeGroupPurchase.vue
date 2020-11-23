@@ -165,6 +165,9 @@ export default {
     _postId: String,
   },
   mounted() {
+    if (firebase.auth().currentUser == null) {
+      return;
+    }
     this.uid = firebase.auth().currentUser.uid;
     this.userName = firebase.auth().currentUser.displayName;
     console.log("uid is");

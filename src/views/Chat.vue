@@ -131,6 +131,9 @@
             }
         },
         async created () {
+            if (firebase.auth().currentUser == null) {
+              return;
+            }
             this.user1 = firebase.auth().currentUser;
             this.userName = this.user1.displayName;
             this.userKey = this.user1.uid;
