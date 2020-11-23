@@ -47,7 +47,7 @@
                     <button class="btns" @click="closePost()">Close Post</button>
                 </div>
                 <div class="cancelbtn" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===false)&&(gp.participate===true)">
-                    <button class="btns" @click="closePost()">Cancel Purchase</button>
+                    <button class="btns" @click="cancelPost()">Cancel Purchase</button>
                 </div>
                 <div class="participatebtn" v-if="(gp.isClosed===false)&&((gp.participate===true)||(gp.opened===true))">
                     <button class="btns" @click="goChat()">Go Chat</button>
@@ -147,6 +147,9 @@ export default {
             this.$router.push("/mypage/closed");
             window.location.reload();
             // let ref = db.ref("/users")
+        },
+        cancelPost(){
+            
         }
     }
 }
