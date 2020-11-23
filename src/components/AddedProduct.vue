@@ -9,10 +9,10 @@
           </div>
         </div> -->
         <div class="square">
-            <div class="columnLeft">
+            <div class="columnLeft2">
               <img class="thumbnail" :src="product.img" style="position: relative;" />
             </div>
-            <div class="board-info columnRight">
+            <div class="board-info columnRight2">
                 <a class="title" >{{product.title}}</a>
                 <!-- <div class="content-box">
                     <div class="hashtag">
@@ -195,11 +195,11 @@ a:link {
   margin-right: auto;
   margin-top: 20px;
 }
-.columnLeft {
+.columnLeft2 {
   float: left;
   width: 66px;
 }
-.columnRight {
+.columnRight2 {
   float: left;
   width: 200px;
   padding-left: 10px;
