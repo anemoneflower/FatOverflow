@@ -18,18 +18,20 @@
             <div class="content-box" @click.self="goGp()">
                 <div class="hashtag" v-if="(registeredFood.length>0)&&(gp.participate===true)" @click.self="goGp()">
                     <div
-                            :key = "food.key"
-                            v-for="food in gp.food"
+                            :key = "key"
+                            v-for="(food, key, index) in gp.food"
                     >
-                        <PurchaseTag :food="food"></PurchaseTag>
+                        <PurchaseTag :food="food" v-if="index<3"></PurchaseTag>
+                        <PurchaseTag :food="overflow1" v-else-if="index===3"></PurchaseTag>
                     </div>
                 </div>
                 <div class="hashtag" v-else-if="(registeredFood.length>0)" @click.self="goGp()">
                     <div
                             :key = "food.key"
-                            v-for="food in registeredFood"
+                            v-for="(food, index) in registeredFood"
                     >
-                        <Hashtag :food="food"></Hashtag>
+                        <Hashtag :food="food" v-if="index<3"></Hashtag>
+                        <Hashtag :food="overflow2" v-else-if="index===3"></Hashtag>
                     </div>
                 </div>
                 <div class="review" v-if="(gp.review!==undefined)&&(gp.review===true)">
@@ -67,8 +69,16 @@ export default {
         // registeredFoodKey: String
     },
     data(){
-        return{
-          registeredFood: []
+        return {
+            registeredFood: [],
+            overflow1: {
+                quantity: "More...",
+                name: ""
+
+            },
+            overflow2: {
+                foodName: "More... "
+            }
         };
     },
     mounted() {
@@ -86,29 +96,29 @@ export default {
         // }
     },
     methods: {
-      expressDate(num) {
-        return num.slice(0,4) + ". " + num.slice(4,6) + ". " + num.slice(6);
-      },
-        goChat(){
-          //TODO: close 하기
-          //   this.$router.push({path:'',query:{GP:this.gp.key}});
+        expressDate(num) {
+            return num.slice(0, 4) + ". " + num.slice(4, 6) + ". " + num.slice(6);
+        },
+        goChat() {
+            //TODO: close 하기
+            //   this.$router.push({path:'',query:{GP:this.gp.key}});
             console.log("closepost");
             console.log(this.gp.key);
-            this.$router.push("/chat/"+this.gp.key);
+            this.$router.push("/chat/" + this.gp.key);
         },
-        goGp(){
+        goGp() {
             console.log(this.gp.key);
-            this.$router.push({path:'/gp',query:{GP:this.gp.key}});
+            this.$router.push({path: '/gp', query: {GP: this.gp.key}});
         },
-        closePost(){
+        closePost() {
             let userKey = firebase.auth().currentUser.uid;
-            let ref = firebase.database().ref("groupPurchase/"+this.gp.key);
+            let ref = firebase.database().ref("groupPurchase/" + this.gp.key);
             ref.update({
-                isClosed : true
+                isClosed: true
             })
-            let userref = firebase.database().ref("/users/"+userKey+"/gpList/"+this.gp.key);
+            let userref = firebase.database().ref("/users/" + userKey + "/gpList/" + this.gp.key);
             userref.update({
-                closed : true
+                closed: true
             })
 
             this.$router.push("/mypage/closed");
