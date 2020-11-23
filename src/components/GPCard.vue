@@ -52,7 +52,7 @@
 <script>
 import Hashtag from "./Hashtag.vue"
 import PurchaseTag from "./PurchaseTag.vue"
-// import firebase from "firebase";
+import firebase from "firebase";
 
 export default {
     components :{
@@ -97,10 +97,17 @@ export default {
             console.log(this.gp.key);
             this.$router.push({path:'/gp',query:{GP:this.gp.key}});
         },
-        // closePost(){
-        //     let userKey = firebase.auth().
-        //     // let ref = db.ref("/users")
-        // }
+        closePost(){
+            let userKey = firebase.auth().currentUser.uid;
+            let ref = firebase.database().ref("/users/"+userKey+"/gpList/"+this.gp.key);
+            ref.set({
+                closed : true
+            })
+
+            this.$router.push("/mypage/closed");
+            window.location.reload();
+            // let ref = db.ref("/users")
+        }
     }
 }
 </script>
