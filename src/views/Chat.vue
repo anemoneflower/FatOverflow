@@ -315,7 +315,7 @@
                     }
                 }
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
-                var t = txt+input1 + ":" + input2;
+                var t = txt+input1 + ":" + input2+" in "+i3+"/"+i4;
                 var key = db.ref("groupPurchase/"+this.gpKey+"/chat").push({
                     content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
                     time: d,
