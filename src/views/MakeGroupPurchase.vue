@@ -43,7 +43,7 @@
           />
         </div>
       </div>
-      <div class="rowDiv">
+      <div class="rowDiv" style="height: 60px">
         <a class="subTitle">Shipping Place</a>
 <!--        <vSelect -->
 <!--          :options="options"-->
@@ -51,7 +51,7 @@
 <!--          placeholder="Please select shipping destination"-->
 <!--          style="padding-top:23px; width:92%; margin-left:4%;"-->
 <!--        >s</vSelect>-->
-        <Dropdown style="padding-top:23px; width:92%; margin-left:4%; height: 25px;"
+        <Dropdown style="width:92%; height: 40px;"
                   :itemArray="options"
                   :selected="shipping"
                   :index="0"
