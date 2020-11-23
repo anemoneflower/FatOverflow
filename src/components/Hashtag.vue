@@ -7,7 +7,7 @@
         {{food.foodName}}
       </div>
       <ViewReview 
-        v-if="showReview && enableClick"
+        v-if='showReview && enableClick !=""'
         :foodName="foodName"
         :imgUrl="img"
         :website="website"
@@ -26,8 +26,8 @@ export default {
           type: Object
         },
         enableClick: {
-          type: Boolean,
-          default: false
+          type: String,
+          default: ""
         }
     },
     components: {
@@ -44,6 +44,7 @@ export default {
     },
     async mounted() {
       // this.uid = firebase.auth().currentUser.uid;
+      console.log(this.food)
       console.log("Mounted wait for foodkey" + this.food.key)
       const snapshot = await db.ref("food").child(this.food.key).once("value");
       // const snapshot = await db.ref('users/SVsXvyMLsbUOnof9iAcUy390WZB3').once("value");
