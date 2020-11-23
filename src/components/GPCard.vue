@@ -267,7 +267,7 @@ a:link {
   float: left;
   text-align: left;
   font-size: 25px;
-  width: 500px;
+  width: 700px;
   color: #9D9D9D;
   text-decoration: none;
   text-overflow: ellipsis;

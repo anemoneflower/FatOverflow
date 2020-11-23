@@ -73,6 +73,7 @@
             console.log("Result of myValue")
             console.log(myValue)
             if (myValue == null) {
+                this.gpEmpty = true;
               return;
             }
             let keyList = Object.keys(myValue);
@@ -149,6 +150,7 @@
             }
             else{
                 this.gpEmpty = true;
+
             }
         },
         methods : {
