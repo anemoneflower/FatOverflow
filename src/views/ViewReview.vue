@@ -22,7 +22,11 @@
       website: {
         type: String,
         default: "unknown website url"
-      }
+      },
+      fromTag: {
+        type: Boolean,
+        default: false
+      },
     },
     components: {
       // CreateReview,
@@ -233,12 +237,21 @@
         <slot name="header">
            <button
               type="button"
-              class="closeBtn2"
+              class="closeBtn"
               @click="close"
+              v-if="fromTag"
             >
               x
             </button>
-          <h1 id="modalTitle">Review for {{foodName}}</h1>
+            <button
+              type="button"
+              class="closeBtn2"
+              @click="close"
+              v-else
+            >
+              x
+            </button>
+          <div id="modalTitle">Review for {{foodName}}</div>
           <div id="modalWebsite">{{website}}</div>
           <img class="thumbnail2" :src="imgUrl"/>
           <!-- <button
@@ -421,6 +434,8 @@
 
   #modalTitle {
     margin: 21px 0px 0px 35px;
+    font-size:30px;
+    font-weight:bold;
     color: #4AAE9B;
     display:flex;
   }
@@ -463,6 +478,23 @@
     color: #4AAE9B;
     background: transparent;
   }
+
+  .closeBtn {
+    color: white;
+    background: #d83737;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    padding: 2px 6px 2px 7px;
+    margin-top: 10px;
+    margin-left: 849px;
+  }
+  .closeBtn:hover {
+  background-color: #ce3030;
+  color: #f5f5f5;
+}
 
   .closeBtn2 {
     color: white;
@@ -517,6 +549,7 @@
   }
 
   #resultTable {
+    text-align:center;
     padding: 5px;
     border-collapse: collapse;
     font-size: 16px;

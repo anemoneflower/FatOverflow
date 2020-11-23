@@ -1,7 +1,7 @@
 <template>
     <div>
       <div
-        class="hashtag"
+        class="hashtag2"
         @click="showReview = !showReview;"
       >
         {{food.foodName}}
@@ -13,6 +13,7 @@
         :website="website"
         @close="showReview = !showReview"
         :foodKey="foodKey"
+        :fromTag="true"
       />
     </div>
 </template>
@@ -67,7 +68,7 @@ export default {
 </script>
 
 <style scoped>
-    .hashtag {
+    .hashtag2 {
         float: left;
         border-radius: 30px;
         border-style: solid;
@@ -77,7 +78,8 @@ export default {
         background-color: #fff;
         padding : 3px 12px 3px 12px;
         font-size: 15px;
-        margin-right: 15px;
+        margin-right: 8px;
+        margin-top: 5px;
         /*height: 30px;*/
     }
 </style>
