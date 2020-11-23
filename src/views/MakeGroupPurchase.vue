@@ -278,7 +278,7 @@ export default {
       if (this.date.includes('/')) {
         let tmpDate = this.date.split("/");
         console.log(tmpDate);
-        if (tmpDate.length == 3) {
+        if (tmpDate.length == 3 && this.date.length == 10) {
           if ( isInt(tmpDate[0]) 
           && isInt(tmpDate[1]) 
           && isInt(tmpDate[2])

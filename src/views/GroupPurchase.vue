@@ -12,7 +12,7 @@
           by {{gp.userName}}
         </p>
         <p  class="due">
-          Due: {{gp.closedDate}}
+          Due: {{gp.closedDate.slice(0, 4)}}. {{gp.closedDate.slice(4, 6)}}. {{gp.closedDate.slice(6, 8)}}
         </p>
         <div style="width: 550px">
           <div class="hashtag" v-if="(registeredFood.length>0)">
