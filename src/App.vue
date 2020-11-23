@@ -29,6 +29,7 @@
     <div class="view">
       <router-view />
     </div>
+    <notifications group="foo" position="top center"></notifications>
   </div>
 </template>
 
