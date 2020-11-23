@@ -152,7 +152,6 @@ import AddedProduct from "../components/AddedProduct.vue"
 import Dropdown from "../components/Dropdown";
 import SearchBar from "../components/SearchBar_Add.vue"
 // import vSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css';
 
 
 
@@ -301,6 +300,13 @@ export default {
 
 
       console.log(createPurchaseKey)
+      this.$notify({
+                group: 'foo',
+                title: 'Successfully created group purchase!',
+                // text: 'Hello user! This is a notification!',
+                duration: 1000,
+                type: 'success'
+              });
       this.$router.push({path:'gp',query:{GP:createPurchaseKey}});
     },
     isValidDate: function() {
