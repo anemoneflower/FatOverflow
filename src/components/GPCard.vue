@@ -128,7 +128,7 @@ export default {
             this.$router.push({path: '/gp', query: {GP: this.gp.key}});
         },
         closePost() {
-            if (firebase.auth().currentUser == null) {
+            if (firebase.auth().currentUser === null) {
               return;
             }
             let userKey = firebase.auth().currentUser.uid;

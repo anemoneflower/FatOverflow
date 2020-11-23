@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <ul class="gpList" v-if="gpList.length>0">
+        <ul class="gpList" v-if="(gpList.length>0)">
             <GPCard
                     v-for="gp in gpList"
                     :key = "gp.index"
@@ -22,9 +22,14 @@
 <!--            <GPCard></GPCard>-->
 <!--            <GPCard></GPCard>-->
         </ul>
+        <p style="padding: 80px; font-size:20px" v-else-if = "gpEmpty">
+            Loading results...
+        </p>
         <p style="padding: 80px; font-size:20px" v-else>
             Nothing left in the list.
         </p>
+
+
     </div>
 </template>
 
@@ -38,12 +43,14 @@ export default {
     },
     data(){
         return{
-            gpList: []
+            gpList: [],
+            gpEmpty: true
             // gp: selectedGp[0]
         };
     },
     mounted() {
         let query = this.$route.query.result;
+        // this.gpEmpty = false;
         if (query === undefined) {
             firebase
                 .database()
@@ -57,6 +64,8 @@ export default {
                         gp.key = myKey;
                         console.log("KKKKKKKKKK");
                         console.log(myKey);
+                        // this.gpList = [];
+                        // this.gpEmpty = false;
                         (this.gpList).push(gp);
                     }
                 })
@@ -97,6 +106,7 @@ export default {
                             content.push(gp);
                         }
                     }
+                    this.gpEmpty = false;
                     for (let k=0;k<tag.length;k++){
                         (this.gpList).push(tag[k]);
                     }
@@ -107,6 +117,12 @@ export default {
                         (this.gpList).push(content[k]);
                     }
                 })
+        }
+        if(this.gpList.length>0){
+            this.gpEmpty = false;
+        }
+        else{
+            this.gpEmpty = true;
         }
         console.log("LEN" + this.gpList.length);
 

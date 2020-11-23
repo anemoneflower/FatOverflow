@@ -14,6 +14,9 @@
                     :gp = "gp"
             ></GPCard>
         </ul>
+        <p style="padding: 80px; font-size:20px" v-else-if = "gpEmpty===false">
+            Loading results...
+        </p>
         <p style="padding: 80px; font-size:20px" v-else>
             Nothing left in the list.
         </p>
@@ -43,7 +46,8 @@
                 closedList: [],
                 openedList: [],
                 participatingList: [],
-                gpList:[]
+                gpList:[],
+                gpEmpty: false
             };
         },
         async mounted() {
@@ -129,7 +133,6 @@
                 //     this.participatingList.push(gpValue[myKey]);
                 // }
             }
-
             let path = this.$route.path;
 
             if(path==='/mypage/participate'){
@@ -140,6 +143,12 @@
             }
             else if(path === '/mypage/closed'){
                 this.gpList = this.closedList;
+            }
+            if(this.gpList.length>0){
+                this.gpEmpty = false;
+            }
+            else{
+                this.gpEmpty = true;
             }
         },
         methods : {
