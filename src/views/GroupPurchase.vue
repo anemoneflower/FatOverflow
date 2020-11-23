@@ -262,6 +262,7 @@ textarea {
   margin-top: 3px;
   font-size: 13px;
   margin-left: 3px;
+  cursor: pointer;
 }
 
 .content {

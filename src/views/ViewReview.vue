@@ -427,6 +427,7 @@
     justify-content: center;
     align-items: center;
     z-index:4;
+    cursor: auto;
   }
 
   .modal {
