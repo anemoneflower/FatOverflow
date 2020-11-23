@@ -149,7 +149,12 @@ export default {
             // let ref = db.ref("/users")
         },
         cancelPost(){
-            
+            let userKey = firebase.auth().currentUser.uid;
+            let ref = firebase.database().ref("groupPurchase/" + this.gp.key +"/participant/"+userKey);
+            ref.remove();
+            let userref = firebase.database().ref('users/'+userKey+'/gpList/'+this.gp.key);
+            userref.remove();
+            window.location.reload();
         }
     }
 }
