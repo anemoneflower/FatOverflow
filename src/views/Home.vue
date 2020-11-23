@@ -24,11 +24,16 @@ export default {
       default: "none"
     }
   },
+  data() {
+    return {
+      user: ""
+    }
+  },
   created() {
-    var user = firebase.auth().currentUser;
+    this.user = firebase.auth().currentUser;
 
-    if (user != null) {
-      user.providerData.forEach(function (profile) {
+    if (this.user != null) {
+      this.user.providerData.forEach(function (profile) {
         console.log("Sign-in provider: " + profile.providerId);
         console.log("  Provider-specific UID: " + profile.uid);
         console.log("  Name: " + profile.displayName);
@@ -39,7 +44,12 @@ export default {
   },
   methods: {
     goPurchaseList(){
-      this.$router.push("/gplist");
+      if (this.user == null) {
+        alert("Please sign in to go to group purchase.");
+      }
+      else {
+        this.$router.push("/gplist");
+      }
     },
     goProductsList(){
       this.$router.push("/products");

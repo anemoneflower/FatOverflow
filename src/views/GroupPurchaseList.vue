@@ -43,6 +43,7 @@ export default {
         };
     },
     mounted() {
+      
         let query = this.$route.query.result;
         if (query === undefined) {
             firebase
