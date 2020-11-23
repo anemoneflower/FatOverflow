@@ -135,11 +135,13 @@ export default {
         grid-template-columns: auto auto auto;
         justify-content: start;
         left: 50%;
-        margin-left: -486px;
+        margin-left: -786px;
         padding-top: 5px;
         z-index:2;
         background-color: #fff;
         width:100%;
+        padding-left:300px;
+        padding-right:300px;
     }
     #gpbtn {
         height: 40px;
