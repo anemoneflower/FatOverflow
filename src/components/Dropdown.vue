@@ -34,8 +34,6 @@
         data() {
             return {
                 selectedOption: 'Please select item you want to purchase.',
-                placeholderText:
-                    "Please select an item to purchase",
                 showMenu:
                     false,
             }
@@ -47,6 +45,7 @@
             },
             itemArray: Array,
             index: Number,
+            placeholderText: String,
         },
         mounted() {
             console.log(this.itemArray);

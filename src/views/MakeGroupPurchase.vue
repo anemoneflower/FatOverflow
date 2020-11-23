@@ -54,6 +54,7 @@
         <Dropdown style="width:92%; height: 40px;"
                   :itemArray="options"
                   :selected="shipping"
+                  :placeholderText="'Please select shipping place.'"
                   :index="0"
                   v-on:updateOption="methodToRunOnSelect"></Dropdown>
       </div>
