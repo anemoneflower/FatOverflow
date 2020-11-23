@@ -42,14 +42,20 @@
           />
         </div>
       </div>
-      <div class="rowDiv">
+      <div class="rowDiv" style="height: 60px">
         <a class="subTitle">Shipping Place</a>
-        <vSelect 
-          :options="options"
-          v-model="shipping"
-          placeholder="Please select shipping destination"
-          style="padding-top:23px; width:92%; margin-left:4%;"
-        >s</vSelect>
+<!--        <vSelect -->
+<!--          :options="options"-->
+<!--          v-model="shipping"-->
+<!--          placeholder="Please select shipping destination"-->
+<!--          style="padding-top:23px; width:92%; margin-left:4%;"-->
+<!--        >s</vSelect>-->
+        <Dropdown style="width:92%; height: 26px;"
+                  :itemArray="options"
+                  :selected="shipping"
+                  :placeholderText="'Please select shipping place.'"
+                  :index="0"
+                  v-on:updateOption="methodToRunOnSelect"></Dropdown>
       </div>
       <div class="rowDiv" style="height:220px;">
         <a class="subTitle">Notes</a>
@@ -143,8 +149,9 @@ import { db } from "../main";
 import firebase from "firebase";
 import AddedProduct from "../components/AddedProduct.vue"
 // import SearchProduct from "./SearchProduct.vue"
+import Dropdown from "../components/Dropdown";
 import SearchBar from "../components/SearchBar_Add.vue"
-import vSelect from 'vue-select'
+// import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
 
 
@@ -158,7 +165,8 @@ export default {
     AddedProduct,
     // SearchProduct,
     SearchBar,
-    vSelect
+    Dropdown,
+    // vSelect
   },
   props: {
     _postId: String,
@@ -361,7 +369,21 @@ export default {
     removeProduct(index) {
       console.log("Remove product");
       this.productList.splice(index, 1);
-    }
+    },
+    methodToRunOnSelect({index, payload}) {
+      // this.selectedOptions[index].item = payload;
+      // var idx = this.itemArray.indexOf(payload);
+      // this.selectedOptions[index].key = this.foods[idx];
+      // var remove1 = this.itemArray.splice(idx, 1)[0];
+      // var remove2 = this.foods.splice(idx, 1)[0];
+      // console.log(remove2);
+      // console.log(remove1);
+      // this.usedItems.push(remove1);
+      // this.usedFoods.push(remove2);
+      console.log(index);
+      // console.log(this.selectedOptions);
+      this.shipping = payload;
+    },
   }
 };
 

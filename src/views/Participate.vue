@@ -27,7 +27,9 @@
             </tr>
             <tr id="dropdown_group" v-for="(select, index) in selectedOptions" v-bind:key="select.unique">
               <td class="cell">
-              <Dropdown class="productinput" :itemArray="itemArray" :selected="select.item" :index="index" v-on:updateOption="methodToRunOnSelect"></Dropdown>
+              <Dropdown class="productinput"
+                        :placeholderText="'Please select an item to purchase'"
+                        :itemArray="itemArray" :selected="select.item" :index="index" v-on:updateOption="methodToRunOnSelect"></Dropdown>
               </td>
               <td class="cell">
                 <input

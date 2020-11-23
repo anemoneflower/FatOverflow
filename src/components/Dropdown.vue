@@ -3,7 +3,7 @@
         <li
                 @click="toggleMenu()"
                 class="dropdown-toggle"
-                v-if="selectedOption !== undefined"
+                v-if="selectedOption !== ''"
         >
             {{ selectedOption }}
             <span class="caret"></span>
@@ -12,7 +12,7 @@
         <li
                 @click="toggleMenu()"
                 class="dropdown-toggle dropdown-toggle-placeholder"
-                v-if="selectedOption === undefined"
+                v-if="selectedOption === ''"
         >
             {{ placeholderText }}
             <span class="caret"></span>
@@ -33,9 +33,7 @@
         name: "Dropdown",
         data() {
             return {
-                selectedOption: 'Please select item you want to purchase.',
-                placeholderText:
-                    "Please select an item to purchase",
+                selectedOption: '',
                 showMenu:
                     false,
             }
@@ -47,6 +45,7 @@
             },
             itemArray: Array,
             index: Number,
+            placeholderText: String,
         },
         mounted() {
             console.log(this.itemArray);
@@ -92,6 +91,7 @@
         margin: 10px 1px;
         display: inline-block;
         vertical-align: middle;
+        max-height: 40px;
     }
     .btn-group a:hover {
         text-decoration: none;
@@ -130,9 +130,9 @@
         left: 0;
         z-index: 1000;
         float: left;
-        min-width: 400px;
+        min-width: 435px;
         padding: 5px 0;
-        margin: 2px 0 0;
+        margin: 11px 0 0;
         list-style: none;
         font-size: 14px;
         text-align: left;
@@ -141,6 +141,21 @@
         border-radius: 4px;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         background-clip: padding-box;
+        height: 200px;
+        overflow-y:scroll;
+    }
+    .dropdown-menu::-webkit-scrollbar {
+        width: 12px;
+    }
+    .dropdown-menu::-webkit-scrollbar-thumb {
+        background-color: none;
+        border-radius: 6px;
+    }
+    .dropdown-menu:hover::-webkit-scrollbar-thumb {
+        background: #dadada;
+    }
+    .dropdown-menu::-webkit-scrollbar-track {
+        background-color: white;
     }
 
     .dropdown-menu > li > a {
