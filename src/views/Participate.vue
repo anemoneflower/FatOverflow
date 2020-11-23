@@ -148,7 +148,7 @@ export default {
                 }else{
                   // alert("Please Check Product and Quantity!!");
                   this.$notify({
-                    group: 'foo',
+                    group: 'error',
                     title: 'Please Check Product and Quantity!!',
                     // text: 'Hello user! This is a notification!',
                     duration: 5000,
@@ -188,7 +188,7 @@ export default {
               });
 
               this.$notify({
-                group: 'foo',
+                group: 'error',
                 title: 'Successfully submitted your purchase!',
                 // text: 'Hello user! This is a notification!',
                 duration: 1000,
@@ -198,7 +198,7 @@ export default {
             }else{
               // alert("you didn't select any food");
               this.$notify({
-                    group: 'foo',
+                    group: 'error',
                     title: "you didn't select any food",
                     // text: 'Hello user! This is a notification!',
                     duration: 5000,
@@ -213,7 +213,7 @@ export default {
             if (this.selectedOptions.length >= (this.foods.length + this.usedFoods.length)) {
                 // alert("You already added enough element of foods!");
                 this.$notify({
-                    group: 'foo',
+                    group: 'error',
                     title: 'You already added enough element of foods!',
                     // text: 'Hello user! This is a notification!',
                     duration: 5000,

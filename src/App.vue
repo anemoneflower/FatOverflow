@@ -29,7 +29,9 @@
     <div class="view">
       <router-view />
     </div>
-    <notifications group="foo" position="top center"></notifications>
+    <notifications group="foo" position="top center" classes="my-style"></notifications>
+    <notifications group="error" position="top center" classes="my-error"></notifications>
+    <notifications group="success" position="top center" classes="my-success"></notifications>
   </div>
 </template>
 
@@ -94,7 +96,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 body {
   margin: 0px;
   padding: 0px;
@@ -184,4 +186,26 @@ body {
 .certification {
   margin-top: 10px;
 }
+
+.my-error {
+  width: 100%;
+  padding: 7px;
+  margin: 0 5px 5px;
+  font-size: 20px;
+  color: #ffffff;
+  background: #E54D42 !important;
+  border-left: 5px solid #B82E24;
+}
+
+.my-success {
+  width: 100%;
+  padding: 7px;
+  margin: 0 5px 5px;
+  font-size: 20px;
+  color: #ffffff;
+  background: #68CD86 !important;
+  border-left: 5px solid #42A85F;
+}
+
+
 </style>

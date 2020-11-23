@@ -47,7 +47,7 @@
         if (this.uid == "") {
           // alert("You should sign in in order to write a review")
           this.$notify({
-                    group: 'foo',
+                    group: 'error',
                     title: "You should sign in in order to write a review",
                     // text: 'Hello user! This is a notification!',
                     duration: 5000,
@@ -154,7 +154,7 @@
         else {
           // alert("Please select a score for all five metrics");
           this.$notify({
-                    group: 'foo',
+                    group: 'error',
                     title: "Please select a score for all five metrics",
                     // text: 'Hello user! This is a notification!',
                     duration: 5000,

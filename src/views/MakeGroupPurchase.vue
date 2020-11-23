@@ -123,7 +123,7 @@ export default {
     if (firebase.auth().currentUser == null) {
       // alert("Please sign in to go to group purchase.");
       this.$notify({
-            group: 'foo',
+            group: 'error',
             title: 'Please sign in to go to group purchase.',
             // text: 'Hello user! This is a notification!',
             duration: 5000,
@@ -194,7 +194,7 @@ export default {
             // this.warningMsg = 
             // alert("Please put the date in correct format yyyy/mm/dd")
             this.$notify({
-                group: 'foo',
+                group: 'error',
                 title: 'Please put the date in correct format: yyyy/mm/dd',
                 // text: 'Hello user! This is a notification!',
                 duration: 5000,
@@ -207,7 +207,7 @@ export default {
         // this.warningMsg = 
         // alert("Please fill in all the content including Title, Website, Due date, Shipping place and Products")
         this.$notify({
-                group: 'foo',
+                group: 'error',
                 title: 'Please fill in all the fields',
                 // text: 'Hello user! This is a notification!',
                 duration: 5000,
@@ -273,8 +273,8 @@ export default {
 
       console.log(createPurchaseKey)
       this.$notify({
-                group: 'foo',
-                title: 'Successfully created group purchase!',
+                group: 'success',
+                title: 'Successfully created!',
                 // text: 'Hello user! This is a notification!',
                 duration: 1000,
                 type: 'success'

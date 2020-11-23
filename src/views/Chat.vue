@@ -277,7 +277,7 @@
                     if((Number(input1)>24) || (Number(input1)<0)) {
                         // alert("check time!");
                         this.$notify({
-                            group: 'foo',
+                            group: 'error',
                             title: 'check time!',
                             // text: 'Hello user! This is a notification!',
                             duration: 5000,
@@ -287,7 +287,7 @@
                     }
                     if((Number(input2)>59)||(Number(input2)<0)){
                         this.$notify({
-                            group: 'foo',
+                            group: 'error',
                             title: 'check time!',
                             // text: 'Hello user! This is a notification!',
                             duration: 5000,

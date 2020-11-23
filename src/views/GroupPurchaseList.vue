@@ -53,7 +53,7 @@ export default {
         if (user == null) {
         //   alert("Please sign in to go to group purchase.");
           this.$notify({
-            group: 'foo',
+            group: 'error',
             title: 'Please sign in to go to group purchase.',
             // text: 'Hello user! This is a notification!',
             duration: 5000,
