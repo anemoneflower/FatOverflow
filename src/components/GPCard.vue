@@ -2,20 +2,20 @@
     <div class = 'card-post'>
         <div class="square" @click.self="goGp()">
             <div class="board-info" @click.self="goGp()">
-                <a class="title" >{{gp.title}} <a v-if="(this.opened===true)||(gp.opened===true)" class="owner">Owner</a></a>
+                <a class="title" @click.self="goGp()">{{gp.title}} <a v-if="(this.opened===true)||(gp.opened===true)" class="owner">Owner</a></a>
                 <div class="closeTag" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===true)" @click.self="goGp()">
 <!--                    <button class="cbtn">Closed</button>-->
                     <a>CLOSED</a>
                 </div>
-                <div class="cDate" v-else>
+                <div class="cDate" v-else @click.self="goGp()">
                     <a class="cDate" >Due: {{expressDate(gp.closedDate)}}</a>
                 </div>
             </div>
             <div class="representative" @click.self="goGp()">
-                <div class="site">{{gp.website}}</div>
-                <div class="post-info">
-                    <a class="shipping">Shipping to: {{gp.shipping}}</a>
-                    <br />
+                <div class="site" @click.self="goGp()">{{gp.website}}</div>
+                <div class="post-info" @click.self="goGp()">
+                    <a class="shipping" @click.self="goGp()">Shipping to: {{gp.shipping}}</a>
+                    <br @click.self="goGp()"/>
                 </div>
             </div>
             <div class="content-box" @click.self="goGp()">
@@ -23,18 +23,18 @@
                     <div
                             :key = "key"
                             v-for="(food, key, index) in gp.food"
-                    >
-                        <PurchaseTag :food="food" v-if="index<2"></PurchaseTag>
-                        <PurchaseTag :food="overflow1" v-else-if="index===3"></PurchaseTag>
+                            @click.self="goGp()">
+                        <PurchaseTag :food="food" v-if="index<2" @click.self="goGp()"></PurchaseTag>
+                        <PurchaseTag :food="overflow1" v-else-if="index===3" @click.self="goGp()"></PurchaseTag>
                     </div>
                 </div>
                 <div class="hashtag" v-else-if="(registeredFood.length>0)" @click.self="goGp()">
                     <div
                             :key = "food.key"
                             v-for="(food, index) in registeredFood"
-                    >
-                        <Hashtag :food="food" v-if="index<2"></Hashtag>
-                        <Hashtag :food="overflow2" v-else-if="index===3"></Hashtag>
+                            @click.self="goGp()">
+                        <Hashtag :food="food" v-if="index<2" @click.self="goGp()"></Hashtag>
+                        <Hashtag :food="overflow2" v-else-if="index===3" @click.self="goGp()"></Hashtag>
                     </div>
                 </div>
 <!--                <div class="review" v-if="(gp.review!==undefined)&&(gp.review===true)">-->
