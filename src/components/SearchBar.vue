@@ -11,7 +11,6 @@
           @keydown.up="keyup"
           @keydown.down="keydown"
           @keydown.enter="enter"
-          v-focus
           @focus="visibleOptions = true"
           @focusout="visibleOptions = false"
         />
@@ -25,7 +24,7 @@
       </li>
       <!--      <li  v-if="visibleOptions" >-->
       <div class="options" ref="optionsList" @focusout="selectAction = false">
-        <ul>
+        <ul >
           <li
             id="auto"
             @focuson="selectAction = true"
@@ -33,6 +32,7 @@
             :key="index"
             v-for="(match, index) in matches"
             @mousedown="foodSelected(index), (visibleOptions = true)"
+            @mouseup="(visibleOptions = false)"
             @mouseenter="hover(index)"
             :class="{ selected: selected == index }"
             v-text="match"
@@ -70,6 +70,11 @@ export default {
     this.selectAction = false;
   },
   mounted(){
+    let query = this.$route.query.result;
+    if (query!==undefined){
+      this.searchData = query;
+    }
+    this.visibleOptions = false;
     firebase
             .database()
             .ref("/food")
@@ -99,12 +104,16 @@ export default {
       this.visibleOptions = false;
       var path = this.$router.history.current["path"];
       console.log(path);
-      if(path==='/gplist'){
-        this.$router.push({path:'/gplist',query:{result:this.searchData}});
+      // if(path==='/gplist'){
+      //   this.$router.push({path:'/gplist',query:{result:this.searchData}});
+      //   window.location.reload();
+      // }
+      if(path==='/products'){
+        this.$router.push({path:'/products',query:{result:this.searchData}});
         window.location.reload();
       }
-      else if(path==='/products'){
-        this.$router.push({path:'/products',query:{result:this.searchData}});
+      else{
+        this.$router.push({path:'/gplist',query:{result:this.searchData}});
         window.location.reload();
       }
 

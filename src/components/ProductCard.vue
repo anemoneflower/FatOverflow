@@ -1,7 +1,7 @@
 <template>
     <div class="product-wrap">
         <div class="product-info">
-            <img class="thumbnail" :src="getImage(product.img)" style="position: relative;" />
+            <img class="thumbnail" :src="product.img" style="position: relative;" />
             <div class="nameDiv">
                 <h1 class="name">{{ product.foodName }}</h1>
             </div>

@@ -166,9 +166,14 @@
       // Find my value
       console.log("myUID is")
       console.log(this.uid)
+      console.log("foodkey is")
+      console.log(this.foodKey)
       for (const key in myValue) {
+        console.log("Found userKey:")
         console.log(myValue[key].userKey)
-        if (myValue[key].userKey == this.uid) {
+        console.log("Found foodKey:")
+        console.log(myValue[key].foodKey)
+        if (myValue[key].userKey == this.uid && myValue[key].foodKey == this.foodKey) {
           console.log("found matching uid")
           this.reviewKey = key;
           console.log(myValue[key])
@@ -183,13 +188,15 @@
           Vue.set(this.inputEvaluation, 3, myValue[key].convenience);
           Vue.set(this.inputEvaluation, 4, myValue[key].undecided);
           this.componentKey = !this.componentKey
-
         }
       }      
       // Compute average
+      console.log("Time to compute average. current food key is")
+      console.log(this.foodKey);
       for (const key in myValue) {
         console.log(myValue[key]);
         if (myValue[key].foodKey == this.foodKey) {
+          console.log("Found matching foodkey")
           evalArr[0] = evalArr[0] + parseInt(myValue[key].ce);
           evalArr[1] = evalArr[1] + parseInt(myValue[key].taste);
           evalArr[2] = evalArr[2] + parseInt(myValue[key].filling);
@@ -198,6 +205,7 @@
           count = count + 1;
         }
       }
+      console.log("Added all average");
       console.log(evalArr)
 
       if (count != 0) {

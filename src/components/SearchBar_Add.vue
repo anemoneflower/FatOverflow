@@ -25,7 +25,7 @@
       </li>
       <!--      <li  v-if="visibleOptions" >-->
       <div class="options" ref="optionsList" @focusout="selectAction = false">
-        <ul>
+        <ul v-if="visibleOptions">
           <li
             id="auto"
             @focuson="selectAction = true"
@@ -33,6 +33,7 @@
             :key="index"
             v-for="(match, index) in matches"
             @mousedown="foodSelected(index), (visibleOptions = true)"
+            @mouseup="(visibleOptions = false)"
             @mouseenter="hover(index)"
             :class="{ selected: selected == index }"
             v-text="match[0]"
@@ -58,6 +59,7 @@ export default {
       visibleOptions: true,
       selected: 0,
       selectedKey: "",
+      selectedImg: "",
       keyDown: false,
       selectAction: false,
       foods: []
@@ -83,7 +85,7 @@ export default {
               for(var i = keyList.length; i>0; i--){
                 var myKey = keyList[i-1];
                 var gp = myValue[myKey];
-                (this.foods).push([gp.foodName, myKey]);
+                (this.foods).push([gp.foodName, myKey, gp.img]);
               }
             })
     console.log(this.foods);
@@ -100,9 +102,11 @@ export default {
       this.searchData = curMatch[0];
       this.selectedFood = curMatch[0];
       this.selectedKey = curMatch[1];
+      this.selectedImg = curMatch[2];
       this.searchResult();
       this.onClickItem();
       this.onClickItem_key();
+      this.onClickItem_img();
     },
     searchResult() {
       // if(this.searchData==""){
@@ -116,8 +120,12 @@ export default {
       this.$emit('clickedItem', this.searchData);
     },
     onClickItem_key: function() {
-    console.log("onClickButton_key pressed")
-    this.$emit('clickedItem_key', this.selectedKey);
+      console.log("onClickButton_key pressed")
+      this.$emit('clickedItem_key', this.selectedKey);
+    },
+    onClickItem_img: function() {
+      console.log("onClickButton_key pressed")
+      this.$emit('clickedItem_img', this.selectedImg);
     },
     onClickAdd: function() {
       console.log("onClickAdd pressed")
@@ -142,7 +150,6 @@ export default {
       this.keyDown = true;
       if (this.selected < this.matches.length - 1) {
         this.selected += 1;
-        // this.title = this.matches[this.selected];
         this.scroll();
       }
     },
@@ -153,7 +160,13 @@ export default {
       this.searchData = this.matches[this.selected][0];
       this.selectedFood = this.matches[this.selected][0];
       this.selectedKey = this.matches[this.selected][1];
+      this.selectedImg = this.matches[this.selected][2];
+      this.visibleOptions = false;
       this.searchResult();
+      this.onClickItem();
+      this.onClickItem_key();
+      this.onClickItem_img();
+
     },
     initialCount() {
       this.selected = 0;

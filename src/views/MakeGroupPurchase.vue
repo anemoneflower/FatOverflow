@@ -94,6 +94,7 @@
         <SearchBar 
           @clickedItem="onClickItem"
           @clickedItem_key="onClickItem_key"
+          @clickedItem_img="onClickItem_img"
           @clickedAdd="onClickAdd"
           style="padding-top:1px"
           v-if="!showModal"
@@ -180,6 +181,7 @@ export default {
       shipping: "",
       searchBarName: "",
       searchBarKey: "",
+      searchBarImg: "",
       options: [
         'sarang',
         'mir'
@@ -309,6 +311,11 @@ export default {
       console.log(value);
       this.searchBarKey = value;
     },
+    onClickItem_img (value) {
+      console.log("OnClickItem_img called")
+      console.log(value);
+      this.searchBarImg = value;
+    },
     onClickAdd() {
       if (this.searchBarName != "") {
         let duplicateExist = false;
@@ -320,7 +327,7 @@ export default {
           }
         }
         if (duplicateExist == false) {
-          this.productList.push({title: this.searchBarName, key: this.searchBarKey})
+          this.productList.push({title: this.searchBarName, key: this.searchBarKey, img: this.searchBarImg})
           console.log("OnClickAdd called");
           console.log("Searchbar data is")
           console.log(JSON.stringify(this.productList))
