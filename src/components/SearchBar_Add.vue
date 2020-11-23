@@ -59,6 +59,7 @@ export default {
       visibleOptions: true,
       selected: 0,
       selectedKey: "",
+      selectedImg: "",
       keyDown: false,
       selectAction: false,
       foods: []
@@ -84,7 +85,7 @@ export default {
               for(var i = keyList.length; i>0; i--){
                 var myKey = keyList[i-1];
                 var gp = myValue[myKey];
-                (this.foods).push([gp.foodName, myKey]);
+                (this.foods).push([gp.foodName, myKey, gp.img]);
               }
             })
     console.log(this.foods);
@@ -101,9 +102,11 @@ export default {
       this.searchData = curMatch[0];
       this.selectedFood = curMatch[0];
       this.selectedKey = curMatch[1];
+      this.selectedImg = curMatch[2];
       this.searchResult();
       this.onClickItem();
       this.onClickItem_key();
+      this.onClickItem_img();
     },
     searchResult() {
       // if(this.searchData==""){
@@ -117,8 +120,12 @@ export default {
       this.$emit('clickedItem', this.searchData);
     },
     onClickItem_key: function() {
-    console.log("onClickButton_key pressed")
-    this.$emit('clickedItem_key', this.selectedKey);
+      console.log("onClickButton_key pressed")
+      this.$emit('clickedItem_key', this.selectedKey);
+    },
+    onClickItem_img: function() {
+      console.log("onClickButton_key pressed")
+      this.$emit('clickedItem_img', this.selectedImg);
     },
     onClickAdd: function() {
       console.log("onClickAdd pressed")
@@ -153,10 +160,13 @@ export default {
       this.searchData = this.matches[this.selected][0];
       this.selectedFood = this.matches[this.selected][0];
       this.selectedKey = this.matches[this.selected][1];
+      this.selectedImg = this.matches[this.selected][2];
       this.visibleOptions = false;
       this.searchResult();
       this.onClickItem();
       this.onClickItem_key();
+      this.onClickItem_img();
+
     },
     initialCount() {
       this.selected = 0;
