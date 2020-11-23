@@ -1,6 +1,6 @@
 <template>
   <div class="main" style="margin-top: 150px">
-    <div class="row">
+    <div class="row" style="margin-left: auto; margin-right: auto">
       <div class="column_left">
         <p class="postTitle">
           {{ gp.title }}
