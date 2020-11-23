@@ -85,14 +85,19 @@ export default {
             opened: false
         };
     },
-    mounted() {
-        let userKey = firebase.auth().currentUser.uid;
-        firebase.database().ref('groupPurchase/'+this.gp.key+'/userKey').once("value",snapshot=>{
+    async mounted() {
+        if(this.gp.opened===undefined){
+            let userKey = firebase.auth().currentUser.uid;
+            const snapshot = await firebase.database().ref('groupPurchase/'+this.gp.key+'/userKey').once("value")
             var myValue = snapshot.val();
             if(myValue===userKey){
                 this.opened = true;
             }
-        })
+            else{
+                this.opened = false;
+            }
+        }
+
 
         for (var key in this.gp.registeredFood) {
             console.log(this.gp.registeredFood[key].foodName);

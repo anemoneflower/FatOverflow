@@ -65,30 +65,59 @@
             let myValue = snapshot.val()&&snapshot.val().gpList;
             let keyList = Object.keys(myValue);
 
+
+
             for(let i=keyList.length; i>0 ; i--){
                 let myKey = keyList[i-1];
                 let gp = myValue[myKey];
                 let gpValue = gpSnapshot.val();
                 gpValue[myKey].key = myKey;
                 console.log(myKey);
-                if(gpValue[myKey].isClosed===true){
-                    gpValue[myKey].review = gp.review;
-                    // gpValue[myKey].isClosed = gp.closed;
-                    if(gp.participate===true){
-                        gpValue[myKey].participate = gp.participate;
-                        gpValue[myKey].foodList = gp.foodList;
-                    }
-                    this.closedList.push(gpValue[myKey]);
-                }
-                else if(gp.participate===false){
+
+                if(gpValue[myKey].userKey===uid){
                     gpValue[myKey].opened = true;
-                    this.openedList.push(gpValue[myKey]);
+                    if(gpValue[myKey].isClosed===true){
+                        gpValue[myKey].review = gp.review;
+                        this.closedList.push(gpValue[myKey]);
+                    }
+                    else{
+                        this.openedList.push(gpValue[myKey]);
+                    }
                 }
                 else{
                     gpValue[myKey].participate = gp.participate;
                     gpValue[myKey].food = gp.food;
-                    this.participatingList.push(gpValue[myKey]);
+                    if(gpValue[myKey].isClosed===true){
+                        gpValue[myKey].review = gp.review;
+                        this.closedList.push(gpValue[myKey]);
+                    }
+                    else{
+                        this.participatingList.push(gpValue[myKey]);
+                    }
                 }
+                // if(gpValue[myKey].isClosed===true){
+                //     gpValue[myKey].review = gp.review;
+                //     this.closedList.push(gpValue[myKey]);
+                // }
+
+                // if(gpValue[myKey].isClosed===true){
+                //     gpValue[myKey].review = gp.review;
+                //     // gpValue[myKey].isClosed = gp.closed;
+                //     if(gp.participate===true){
+                //         gpValue[myKey].participate = gp.participate;
+                //         gpValue[myKey].foodList = gp.foodList;
+                //     }
+                //     this.closedList.push(gpValue[myKey]);
+                // }
+                // else if(gp.participate===false){
+                //     gpValue[myKey].opened = true;
+                //     this.openedList.push(gpValue[myKey]);
+                // }
+                // else{
+                //     gpValue[myKey].participate = gp.participate;
+                //     gpValue[myKey].food = gp.food;
+                //     this.participatingList.push(gpValue[myKey]);
+                // }
             }
 
             let path = this.$route.path;

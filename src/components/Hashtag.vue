@@ -45,6 +45,8 @@ export default {
     async mounted() {
       // this.uid = firebase.auth().currentUser.uid;
       console.log("Mounted wait for foodkey" + this.food.key)
+      console.log(this.food.key)
+      console.log(this.food)
       const snapshot = await db.ref("food").child(this.food.key).once("value");
       // const snapshot = await db.ref('users/SVsXvyMLsbUOnof9iAcUy390WZB3').once("value");
       console.log("read done")
