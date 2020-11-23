@@ -27,7 +27,7 @@
                     console.log(result);
                     if(result.additionalUserInfo.isNewUser===true){
                         firebase.database().ref('users/'+result.user.uid).set({
-                            userEmail : result.user.email,
+                            userName : result.user.displayName,
                             // gpList : {
                             //     "-MMQfqZW4RQVRSpr_h-w" : {
                             //         review : false,

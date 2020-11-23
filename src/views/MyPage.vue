@@ -87,7 +87,7 @@
                         this.openedList.push(gpValue[myKey]);
                     }
                 }
-                else{
+                else if(gp.participate===true){
                     gpValue[myKey].participate = gp.participate;
                     gpValue[myKey].food = gp.food;
                     if(gpValue[myKey].isClosed===true){
