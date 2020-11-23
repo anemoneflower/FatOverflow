@@ -70,10 +70,12 @@
                         <table>
                             <tr>
                                 <td class="message">
-                                    Come at <input class="timeInput" type="text" placeholder="hh" v-model="come_at_h">:<input class="timeInput" type="text" placeholder="mm" v-model="come_at_m">
+                                    Come at <input class="timeInput" type="text" placeholder="hh" v-model="come_at_h">:<input class="timeInput" type="text" placeholder="mm" v-model="come_at_m"> in
+                                    <input class="timeInput" type="number" placeholder="MM" v-model="go_in_mm">/
+                                    <input class="timeInput" type="number" placeholder="DD" v-model="go_in_dd">
                                 </td>
                                 <td>
-                                    <button class="sendBtn" v-on:click="save_at('Come at ', come_at_h, come_at_m)">send</button>
+                                    <button class="sendBtn" v-on:click="save_at('Come at ', come_at_h, come_at_m, go_in_mm, go_in_dd)">send</button>
                                 </td>
                             </tr>
                             <tr>
@@ -106,10 +108,13 @@
                         <table>
                             <tr>
                                 <td class="message">
-                                    I'll go at <input class="timeInput" type="number" placeholder="hh" v-model="go_at_h">:<input class="timeInput" type="number" placeholder="mm" v-model="go_at_m">
+                                    I'll go at <input class="timeInput" type="number" placeholder="hh" v-model="go_at_h">:
+                                    <input class="timeInput" type="number" placeholder="mm" v-model="go_at_m"> in 
+                                    <input class="timeInput" type="number" placeholder="MM" v-model="go_in_mm">/
+                                    <input class="timeInput" type="number" placeholder="DD" v-model="go_in_dd">
                                 </td>
                                 <td>
-                                    <button class="sendBtn" v-on:click="save_at('I\'ll go at ', go_at_h, go_at_m)">send</button>
+                                    <button class="sendBtn" v-on:click="save_at('I\'ll go at ', go_at_h, go_at_m, go_in_mm, go_in_dd)">send</button>
                                 </td>
                             </tr>
                             <tr>
@@ -167,6 +172,8 @@
                 go_at_h:'',
                 go_at_m: '',
                 come_at_m:'',
+                go_in_mm: '',
+                go_in_dd: ''
             }
         },
         async created () {
@@ -267,11 +274,12 @@
                 this.money = '';
                 this.account = '';
             },
-            save_at(txt, input1, input2){
+            save_at(txt, input1, input2, i3, i4){
                 console.log('Entered save_come_at method');
                 if(txt==='') return;
                 if(input1==='') return;
                 if(input2==='')return;
+                if((i3==='')||(i4===''))return;
                 if((txt==="Come at ") || (txt==="I'll go at ")){
 
                     if((Number(input1)>24) || (Number(input1)<0)) {
@@ -295,9 +303,19 @@
                         });
                         return
                     }
+                    if((Number(i3)>12)||(Number(i3<1))||(Number(i4>31))||(Number(i4<1))){
+                        this.$notify({
+                            group: 'foo',
+                            title: 'check date!',
+                            // text: 'Hello user! This is a notification!',
+                            duration: 5000,
+                            type: 'error'
+                        });
+                        return
+                    }
                 }
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
-                var t = txt+input1 + ":" + input2;
+                var t = txt+input1 + ":" + input2+" in "+i3+"/"+i4;
                 var key = db.ref("groupPurchase/"+this.gpKey+"/chat").push({
                     content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
                     time: d,

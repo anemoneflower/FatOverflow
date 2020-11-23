@@ -44,7 +44,7 @@
 <!--                    <button class="btns">Your review</button>-->
 <!--                </div>-->
                 <div v-if="(gp.isClosed!==undefined)&&(gp.isClosed===false)&&(gp.opened===true)">
-                    <button class="closebtn" @click="closePost()">Close Post</button>
+                    <button class="closebtn" @click="closePost()">Close Purchase</button>
                 </div>
                 <div v-if="(gp.isClosed!==undefined)&&(gp.isClosed===false)&&(gp.participate===true)">
                     <button class="cancelbtn" @click="cancelPost()">Cancel Purchase</button>
@@ -144,7 +144,7 @@ export default {
                 closed: true
             })
 
-            this.$router.push("/mypage/closed");
+            this.$router.replace("/mypage/closed");
             window.location.reload();
             // let ref = db.ref("/users")
         },
