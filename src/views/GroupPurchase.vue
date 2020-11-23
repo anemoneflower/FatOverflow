@@ -42,6 +42,7 @@
                 v-else-if="(gp.isClosed===true)"
                 disabled
         >Closed</button>
+        <a v-else> </a>
           <p class="currentOrderTitle">
             Currently Collected Orders
           </p>
