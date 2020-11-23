@@ -145,7 +145,7 @@
           this.newReview = true;
         }
         else {
-          alert("Please give the scores between 1-5!");
+          alert("Please select a score for all five metrics");
           console.log("Missing content")
         }
         
@@ -338,55 +338,82 @@
               <td class="evalHead">Cost-effective :</td>
               <td class="evalContent">How beneficial is the product compared to its price?</td>
               <td>
-                <input
+                <!-- <input
                   class="ratingValue"
                   v-model="inputEvaluation[0]"
                   type="number"
-                />
+                /> -->
+                <input type="radio" value=1 v-model="inputEvaluation[0]">
+                <input type="radio" value=2 v-model="inputEvaluation[0]">
+                <input type="radio" value=3 v-model="inputEvaluation[0]">
+                <input type="radio" value=4 v-model="inputEvaluation[0]">
+                <input type="radio" value=5 v-model="inputEvaluation[0]">
               </td>
             </tr>
             <tr>
               <td class="evalHead">Taste :</td>
               <td class="evalContent">How good is the taste of this product?</td>
               <td>
-                <input
+                <!-- <input
                   class="ratingValue"
                   v-model="inputEvaluation[1]"
                   type="number"
-                />
+                /> -->
+                <input type="radio" value=1 v-model="inputEvaluation[1]">
+                <input type="radio" value=2 v-model="inputEvaluation[1]">
+                <input type="radio" value=3 v-model="inputEvaluation[1]">
+                <input type="radio" value=4 v-model="inputEvaluation[1]">
+                <input type="radio" value=5 v-model="inputEvaluation[1]">
               </td>
             </tr>
             <tr>
               <td class="evalHead">Filling :</td>
               <td class="evalContent">How much full does it feel after having this product?</td>
               <td>
-                <input
+                <!-- <input
                   class="ratingValue"
                   v-model="inputEvaluation[2]"
                   type="number"
-                />
+                /> -->
+                <input type="radio" value=1 v-model="inputEvaluation[2]">
+                <input type="radio" value=2 v-model="inputEvaluation[2]">
+                <input type="radio" value=3 v-model="inputEvaluation[2]">
+                <input type="radio" value=4 v-model="inputEvaluation[2]">
+                <input type="radio" value=5 v-model="inputEvaluation[2]">
               </td>
             </tr>
             <tr>
               <td class="evalHead">Convenience :</td>
               <td class="evalContent">How convenient is it to eat this product?</td>
               <td>
-                <input
+                <!-- <input
                   class="ratingValue"
                   v-model="inputEvaluation[3]"
                   type="number"
-                />
+                /> -->
+                <input type="radio" value=1 v-model="inputEvaluation[3]">
+                <input type="radio" value=2 v-model="inputEvaluation[3]">
+                <input type="radio" value=3 v-model="inputEvaluation[3]">
+                <input type="radio" value=4 v-model="inputEvaluation[3]">
+                <input type="radio" value=5 v-model="inputEvaluation[3]">
               </td>
             </tr>
             <tr>
               <td class="evalHead">Portability :</td>
               <td class="evalContent">How portable is the product to carry around?</td>
               <td>
-                <input
+                <!-- <input
                   class="ratingValue"
                   v-model="inputEvaluation[4]"
                   type="number"
-                />
+                /> -->
+              <!-- <fieldset id="fieldGroup"> -->
+                <input type="radio" value=1 v-model="inputEvaluation[4]">
+                <input type="radio" value=2 v-model="inputEvaluation[4]">
+                <input type="radio" value=3 v-model="inputEvaluation[4]">
+                <input type="radio" value=4 v-model="inputEvaluation[4]">
+                <input type="radio" value=5 v-model="inputEvaluation[4]">
+              <!-- </fieldset> -->
               </td>
             </tr>
           </table>
