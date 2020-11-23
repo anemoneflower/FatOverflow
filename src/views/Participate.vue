@@ -10,6 +10,9 @@
       {{ purchaseTitle }}
     </a>  
     <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; margin-top: 50px; position: absolute;">
+      <button v-on:click="submit_purchase" class="submitBtn btns">
+        Submit
+      </button>
       <div class="inputLayout">
           <table id="dropdown_table">
             <tr>
@@ -45,7 +48,7 @@
         <div class="inputRows">
           <p class="tags" style="vertical-align: top; margin-top: 0; margin-left: 15px">Notes</p>
         </div>
-        <div class="inputRows" style="height: 200px; margin-top: -15px; margin-left: 15px">
+        <div class="inputRows" style="height: 200px; margin-top: -15px; margin-left: 15px; margin-bottom:30px;">
           <div>
             <textarea
               class="inputBorder"
@@ -53,11 +56,6 @@
               style="height: 200px; width: 620px; margin: 0; padding: 0"
             ></textarea>
           </div>
-        </div>
-        <div class="inputRows" style="margin-bottom:30px;">
-          <button v-on:click="submit_purchase" class="submitBtn btns">
-            Submit
-          </button>
         </div>
       </div>
     </div>
@@ -344,9 +342,13 @@ img {
   color: #f5f5f5;
 }
 .submitBtn {
-  margin: auto auto auto 275px;
+  margin: auto;
+  margin-top: -121px;
+  margin-left: 730px;
   width: 100px;
   height: 40px;
+  font-size: 20px;
+  position: absolute;
 }
 .inputLayout {
   margin-top:0;
