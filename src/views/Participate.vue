@@ -146,7 +146,14 @@ export default {
                 if ((this.selectedOptions[i].quantity > 0) && (this.selectedOptions[i].item !== 'Please select item you want to purchase.')){
                     foodObj[this.selectedOptions[i].key] = {name: this.selectedOptions[i].item, quantity: this.selectedOptions[i].quantity}
                 }else{
-                  alert("Please Check Product and Quantity!!");
+                  // alert("Please Check Product and Quantity!!");
+                  this.$notify({
+                    group: 'foo',
+                    title: 'Please Check Product and Quantity!!',
+                    // text: 'Hello user! This is a notification!',
+                    duration: 5000,
+                    type: 'error'
+                  });
                   return
                 }
             }
@@ -189,14 +196,29 @@ export default {
               });
               this.$router.replace(this.previousUrl);
             }else{
-              alert("you didn't select any food");
+              // alert("you didn't select any food");
+              this.$notify({
+                    group: 'foo',
+                    title: "you didn't select any food",
+                    // text: 'Hello user! This is a notification!',
+                    duration: 5000,
+                    type: 'error'
+                  });
+              
             }
         },
         add_dropdown() {
             console.log("add dropdown");
             console.log(this.selectedOptions);
             if (this.selectedOptions.length >= (this.foods.length + this.usedFoods.length)) {
-                alert("You already added enough element of foods!");
+                // alert("You already added enough element of foods!");
+                this.$notify({
+                    group: 'foo',
+                    title: 'You already added enough element of foods!',
+                    // text: 'Hello user! This is a notification!',
+                    duration: 5000,
+                    type: 'error'
+                  });
                 return
             }
             this.selectedOptions.push({unique: this.unique++, key: "", item: 'Please select item you want to purchase.', quantity: 0});
