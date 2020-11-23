@@ -51,7 +51,7 @@
 <!--          placeholder="Please select shipping destination"-->
 <!--          style="padding-top:23px; width:92%; margin-left:4%;"-->
 <!--        >s</vSelect>-->
-        <Dropdown style="width:92%; height: 40px;"
+        <Dropdown style="width:92%; height: 26px;"
                   :itemArray="options"
                   :selected="shipping"
                   :placeholderText="'Please select shipping place.'"
