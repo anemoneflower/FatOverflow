@@ -3,8 +3,8 @@
     <img class="lo" alt="Hey you can read it!" src="../assets/logo.png" />
     <search-bar></search-bar>
     <div style="width: 490px; position:fixed; left:50%; margin-left:-245px; top: 370px; z-index: 1;">
-      <router-link to="/gplist" ><img class="lb" alt="Group Purchase" src="../assets/main_left.png" @click="goPurchaseList"/></router-link>
-      <router-link to="/products"><img class="rb" alt="Product" src="../assets/main_right.png" @click="goProductsList"/></router-link>
+      <router-link to="/gplist" ><img class="lb" alt="Group Purchase" src="../assets/main_left.png"/></router-link>
+      <router-link to="/products"><img class="rb" alt="Product" src="../assets/main_right.png"/></router-link>
     </div>
   </div>
 </template>
@@ -42,19 +42,6 @@ export default {
       });
     }
   },
-  methods: {
-    goPurchaseList(){
-      if (this.user == null) {
-        alert("Please sign in to go to group purchase.");
-      }
-      else {
-        this.$router.push("/gplist");
-      }
-    },
-    goProductsList(){
-      this.$router.push("/products");
-    }
-  }
 };
 </script>
 
