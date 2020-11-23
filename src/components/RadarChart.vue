@@ -15,12 +15,12 @@ export default {
     myTaste: Number,
     myFilling: Number,
     myConvenience: Number,
-    myUndecided: Number,
+    myPortability: Number,
     avgCe: Number,
     avgTaste: Number,
     avgFilling: Number,
     avgConvenience: Number,
-    avgUndecided: Number,
+    avgPortability: Number,
 
 
 
@@ -30,7 +30,7 @@ export default {
     return {
       datacollection: {
         labels: [
-          "cost-effectiveness", "taste", "filling", "convenience", "undecided"
+          "cost-effectiveness", "taste", "filling", "convenience", "portability"
         ],
         datasets: [
           {
@@ -41,7 +41,7 @@ export default {
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(179,181,198,1)",
-            data: [this.myCe, this.myTaste, this.myFilling, this.myConvenience, this.myUndecided
+            data: [this.myCe, this.myTaste, this.myFilling, this.myConvenience, this.myPortability
             ]
           },
           {
@@ -52,7 +52,7 @@ export default {
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(255,99,132,1)",
-            data: [this.avgCe, this.avgTaste, this.avgFilling, this.avgConvenience, this.avgUndecided
+            data: [this.avgCe, this.avgTaste, this.avgFilling, this.avgConvenience, this.avgPortability
             ]
           }]},
       options: {
