@@ -24,6 +24,7 @@
                   v-if="showModalList[index]"
                   :foodName="products[index].foodName"
                   :imgUrl="products[index].img"
+                  :website="products[index].website"
                   @close="closeModal(index);"
                   :foodKey="productKeys[index]"
                 />

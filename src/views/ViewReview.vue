@@ -22,6 +22,10 @@
       imgUrl: {
         type: String,
         default: "unknown image url"
+      },
+      website: {
+        type: String,
+        default: "unknown image url"
       }
     },
     components: {
@@ -135,6 +139,7 @@
           this.newReview = true;
         }
         else {
+          alert("Please give the scores between 1-5!");
           console.log("Missing content")
         }
         
@@ -238,8 +243,8 @@
               x
             </button>
           <h1 id="modalTitle">Review for {{foodName}}</h1>
-          <div id="modalWebsite">Website</div>
-          <img class="thumbnail2" :src="getImage(imgUrl)"/>
+          <div id="modalWebsite">{{website}}</div>
+          <img class="thumbnail2" :src="imgUrl"/>
           <!-- <button
             type="button"
             class="btn-close"
