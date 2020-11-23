@@ -140,7 +140,7 @@ export default {
 .column_left {
   float: left;
   width: 550px;
-  margin-left: 25%;
+  margin-left: 20vw;
   min-width: 500px;
 }
 
