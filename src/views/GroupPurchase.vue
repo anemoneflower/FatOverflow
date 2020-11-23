@@ -35,13 +35,14 @@
         <button
           class="participateButton"
           v-on:click="participate"
-          v-if="(gp.isClosed===false)"
+          v-if="(gp.isClosed===false)&&(this.isUser===false)"
         >Participate +</button>
         <button
                 class="closedButton"
-                v-else
+                v-else-if="(gp.isClosed===true)"
                 disabled
         >Closed</button>
+        <a v-else> </a>
           <p class="currentOrderTitle">
             Currently Collected Orders
           </p>
@@ -93,7 +94,8 @@ export default {
       gp:"",
       registeredFood:[],
       participants:{},
-      cnt:0
+      cnt:0,
+      isUser:false
     };
   },
   async mounted() {
@@ -106,6 +108,8 @@ export default {
       await this.$router.push("/sign-in");
     }
     let uid = user.uid;
+
+
     console.log(uid);
     let query = this.$route.query.GP;
     const snapshot = await db.ref('groupPurchase/'+query).once("value");
@@ -124,6 +128,9 @@ export default {
     // for (var key in this.gp.participant) {
     //
     // }
+    if(this.gp.userKey===uid){
+      this.isUser = true;
+    }
     console.log(myValue);
   },
   methods: {
