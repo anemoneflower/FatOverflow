@@ -62,8 +62,8 @@ export default {
   margin: auto;
 }
 .square {
-  width: 565px;
-  height: 100px;
+  width: 360px;
+  height: 75px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0px 20px 50px #d9dbdf;
@@ -96,7 +96,6 @@ a:link {
   /* border-style: solid; */
 }
 .board-info > a {
-  font-size: 25px;
   color: rgb(0, 0, 0);
 }
 .site {
@@ -108,7 +107,7 @@ a:link {
 }
 .representative {
   margin: auto;
-  width: 740px;
+  width: 400px;
   margin-top: 70px;
   padding-left: 30px;
   padding-right: 30px;
@@ -141,8 +140,8 @@ a:link {
 .title {
   float: left;
   text-align: left;
-  font-size: 20px;
-  width: 500px;
+  font-size: 16px;
+  width: 250px;
   color: #9D9D9D;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -185,10 +184,10 @@ a:link {
 }
 .thumbnail {
     background: black;
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
     overflow: hidden;
-    margin: 9px 0 0 10px;
+    margin: 7px 0 0 9px;
     border-radius: 5px;
 }
 .rowDiv {
@@ -198,11 +197,11 @@ a:link {
 }
 .columnLeft {
   float: left;
-  width: 100px;
+  width: 66px;
 }
 .columnRight {
   float: left;
-  width: 300px;
+  width: 200px;
   padding-left: 10px;
   padding-top: 30px;
 }
