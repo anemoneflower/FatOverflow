@@ -3,8 +3,8 @@
     <img class="lo" alt="Hey you can read it!" src="../assets/logo.png" />
     <search-bar></search-bar>
     <div style="width: 490px; position:fixed; left:50%; margin-left:-245px; top: 370px; z-index: 1;">
-      <router-link to="/gplist" ><img class="lb" alt="Group Purchase" src="../assets/main_left.png" @click="goPurchaseList"/></router-link>
-      <router-link to="/products"><img class="rb" alt="Product" src="../assets/main_right.png" @click="goProductsList"/></router-link>
+      <router-link to="/gplist" ><img class="lb" alt="Group Purchase" src="../assets/main_left.png"/></router-link>
+      <router-link to="/products"><img class="rb" alt="Product" src="../assets/main_right.png"/></router-link>
     </div>
   </div>
 </template>
@@ -24,11 +24,16 @@ export default {
       default: "none"
     }
   },
+  data() {
+    return {
+      user: ""
+    }
+  },
   created() {
-    var user = firebase.auth().currentUser;
+    this.user = firebase.auth().currentUser;
 
-    if (user != null) {
-      user.providerData.forEach(function (profile) {
+    if (this.user != null) {
+      this.user.providerData.forEach(function (profile) {
         console.log("Sign-in provider: " + profile.providerId);
         console.log("  Provider-specific UID: " + profile.uid);
         console.log("  Name: " + profile.displayName);
@@ -37,14 +42,6 @@ export default {
       });
     }
   },
-  methods: {
-    goPurchaseList(){
-      this.$router.push("/gplist");
-    },
-    goProductsList(){
-      this.$router.push("/products");
-    }
-  }
 };
 </script>
 

@@ -49,6 +49,11 @@ export default {
         };
     },
     mounted() {
+        let user = firebase.auth().currentUser;
+        if (user == null) {
+          alert("Please sign in to go to group purchase.");
+          this.$router.push("/");
+        }
         let query = this.$route.query.result;
         // this.gpEmpty = false;
         if (query === undefined) {

@@ -105,7 +105,8 @@
             goGPList() {
                 let query = this.$route.query.result;
                 if (query === undefined){
-                    this.$router.push({path:'/gplist'});
+                  alert("Please sign in to go to group purchase.");
+                    // this.$router.push({path:'/gplist'});
                 }
                 else {
                     this.$router.push({path:'/gplist',query:{result:query}});
