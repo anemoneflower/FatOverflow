@@ -43,14 +43,14 @@
 <!--                <div class="review" v-else-if="(gp.review!==undefined)&&(gp.review===false)">-->
 <!--                    <button class="btns">Your review</button>-->
 <!--                </div>-->
-                <div class="closebtn" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===false)&&(gp.opened===true)">
-                    <button class="btns" @click="closePost()">Close Post</button>
+                <div v-if="(gp.isClosed!==undefined)&&(gp.isClosed===false)&&(gp.opened===true)">
+                    <button class="closebtn" @click="closePost()">Close Post</button>
                 </div>
-                <div class="cancelbtn" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===false)&&(gp.participate===true)">
-                    <button class="btns" @click="cancelPost()">Cancel Purchase</button>
+                <div v-if="(gp.isClosed!==undefined)&&(gp.isClosed===false)&&(gp.participate===true)">
+                    <button class="cancelbtn" @click="cancelPost()">Cancel Purchase</button>
                 </div>
-                <div class="participatebtn" v-if="(gp.isClosed===false)&&((gp.participate===true)||(gp.opened===true))">
-                    <button class="btns" @click="goChat()">Go Chat</button>
+                <div v-if="(gp.isClosed===false)&&((gp.participate===true)||(gp.opened===true))">
+                    <button class="participatebtn" @click="goChat()">Go Chat</button>
                 </div>
             </div>
         </div>
@@ -267,7 +267,7 @@ a:link {
   float: left;
   text-align: left;
   font-size: 25px;
-  width: 500px;
+  width: 700px;
   color: #9D9D9D;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -340,21 +340,45 @@ a:link {
   margin-left: -7px;
 }
 
-.btns {
+.cancelbtn,
+.closebtn {
   outline: none;
-  background-color: #48C964;
-  color: #fff;
+  background-color: #fff;
+  color:#d83737;
   border-radius: 10px;
-  border-width: 0px;
+  border: 2px solid #d83737;
   font-size: 15px;
+  font-weight: bold;
   padding: 6px 11px 6px 11px;
   margin-right: 7px;
   cursor: pointer;
   float:right;
 }
-.btns:hover {
-  background-color: #43be5d;
-  color: #f5f5f5;
+.closebtn:hover {
+  background-color: #d83737;
+  color: #fff;
+}
+.cancelbtn:hover {
+  background-color: #d83737;
+  color: #fff;
+}
+
+.participatebtn {
+  outline: none;
+  background-color: #fff;
+  color: #48C964;
+  border-radius: 10px;
+  border: 2px solid #48C964;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 11px 6px 11px;
+  margin-right: 7px;
+  cursor: pointer;
+  float:right;
+}
+.participatebtn:hover {
+  background-color: #48C964;
+  color: #fff
 }
 
 .cbtn{

@@ -62,6 +62,10 @@ export default {
                 .ref("/groupPurchase")
                 .once("value",snapshot => {
                     let myValue = snapshot.val();
+                    if (myValue == null) {
+                        this.gpEmpty = true;
+                        return;
+                    }
                     let keyList = Object.keys(myValue);
                     for(let i = keyList.length; i>0; i--){
                         let myKey = keyList[i-1];
@@ -84,6 +88,10 @@ export default {
                 .ref("/groupPurchase")
                 .once("value",snapshot => {
                     let myValue = snapshot.val();
+                    if (myValue == null) {
+                        this.gpEmpty = true;
+                        return;
+                    }
                     let keyList = Object.keys(myValue);
                     let title = [];
                     let tag = [];

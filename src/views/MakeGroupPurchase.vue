@@ -98,9 +98,6 @@
               @click="showModal = true"
               title="this is search bar"
           /></a> -->
-          <!-- <SearchProduct v-if="showModal" @close="showModal = false">
-            <h3 slot="header">custom header</h3>
-          </SearchProduct> -->
           <Popup 
             successText="Make Group Purchase Successful"
             v-if="showModal" 
@@ -148,12 +145,8 @@
 import { db } from "../main";
 import firebase from "firebase";
 import AddedProduct from "../components/AddedProduct.vue"
-// import SearchProduct from "./SearchProduct.vue"
 import Dropdown from "../components/Dropdown";
 import SearchBar from "../components/SearchBar_Add.vue"
-// import vSelect from 'vue-select'
-
-
 
 function isInt(value) {
   return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
@@ -162,10 +155,8 @@ export default {
   name: "GroupPurchase",
   components: {
     AddedProduct,
-    // SearchProduct,
     SearchBar,
     Dropdown,
-    // vSelect
   },
   props: {
     _postId: String,

@@ -71,7 +71,7 @@
             taste: parseInt(this.inputEvaluation[1]),
             filling: parseInt(this.inputEvaluation[2]),
             convenience: parseInt(this.inputEvaluation[3]),
-            undecided: parseInt(this.inputEvaluation[4])
+            portability: parseInt(this.inputEvaluation[4])
           }
           if (this.reviewKey == "") {
             this.newReview = true
@@ -113,7 +113,7 @@
             this.avgTaste = parseFloat(this.avgEvaluation[1])
             this.avgFilling = parseFloat(this.avgEvaluation[2])
             this.avgConvenience = parseFloat(this.avgEvaluation[3])
-            this.avgUndecided = parseFloat(this.avgEvaluation[4])
+            this.avgPortability = parseFloat(this.avgEvaluation[4])
           }
           else{
             console.log("Change new value")
@@ -133,7 +133,7 @@
             this.avgTaste = parseFloat(this.avgEvaluation[1])
             this.avgFilling = parseFloat(this.avgEvaluation[2])
             this.avgConvenience = parseFloat(this.avgEvaluation[3])
-            this.avgUndecided = parseFloat(this.avgEvaluation[4])
+            this.avgPortability = parseFloat(this.avgEvaluation[4])
           }
           Vue.set(this.myEvaluation, 0, this.inputEvaluation[0]);
           Vue.set(this.myEvaluation, 1, this.inputEvaluation[1]);
@@ -145,7 +145,7 @@
           this.newReview = true;
         }
         else {
-          alert("Please give the scores between 1-5!");
+          alert("Please select a score for all five metrics");
           console.log("Missing content")
         }
         
@@ -194,12 +194,12 @@
           Vue.set(this.myEvaluation, 1, myValue[key].taste);
           Vue.set(this.myEvaluation, 2, myValue[key].filling);
           Vue.set(this.myEvaluation, 3, myValue[key].convenience);
-          Vue.set(this.myEvaluation, 4, myValue[key].undecided);
+          Vue.set(this.myEvaluation, 4, myValue[key].portability);
           Vue.set(this.inputEvaluation, 0, myValue[key].ce);
           Vue.set(this.inputEvaluation, 1, myValue[key].taste);
           Vue.set(this.inputEvaluation, 2, myValue[key].filling);
           Vue.set(this.inputEvaluation, 3, myValue[key].convenience);
-          Vue.set(this.inputEvaluation, 4, myValue[key].undecided);
+          Vue.set(this.inputEvaluation, 4, myValue[key].portability);
           this.componentKey = !this.componentKey
         }
       }      
@@ -214,7 +214,7 @@
           evalArr[1] = evalArr[1] + parseInt(myValue[key].taste);
           evalArr[2] = evalArr[2] + parseInt(myValue[key].filling);
           evalArr[3] = evalArr[3] + parseInt(myValue[key].convenience);
-          evalArr[4] = evalArr[4] + parseInt(myValue[key].undecided);
+          evalArr[4] = evalArr[4] + parseInt(myValue[key].portability);
           count = count + 1;
         }
       }
@@ -286,12 +286,12 @@
               :myTaste = "parseInt(myEvaluation[1])"
               :myFilling = "parseInt(myEvaluation[2])"
               :myConvenience = "parseInt(myEvaluation[3])"
-              :myUndecided = "parseInt(myEvaluation[4])"
+              :myPortability = "parseInt(myEvaluation[4])"
               :avgCe = "parseFloat(avgEvaluation[0])"
               :avgTaste = "parseFloat(avgEvaluation[1])"
               :avgFilling = "parseFloat(avgEvaluation[2])"
               :avgConvenience = "parseFloat(avgEvaluation[3])"
-              :avgUndecided = "parseFloat(avgEvaluation[4])"
+              :avgPortability= "parseFloat(avgEvaluation[4])"
               :key="componentKey"
             />
           </div>
@@ -322,7 +322,7 @@
               </tr>
               <tr>
                 <td>{{avgEvaluation[4]}}</td>
-                <td>undecided</td>
+                <td>portability</td>
                 <td>{{myEvaluation[4]}}</td>
               </tr>
             </table>
@@ -335,58 +335,106 @@
           </div>
           <table id="evalTable">
             <tr>
+              <td></td>
+              <td></td>
+              <td class="evalRadio">1</td>
+              <td class="evalRadio">2</td>
+              <td class="evalRadio">3</td>
+              <td class="evalRadio">4</td>
+              <td class="evalRadio">5</td>
+            <tr>
               <td class="evalHead">Cost-effective :</td>
               <td class="evalContent">How beneficial is the product compared to its price?</td>
               <td>
-                <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[0]"
-                  type="number"
-                />
+                <input type="radio" value=1 v-model="inputEvaluation[0]">
+              </td>
+              <td>
+                <input type="radio" value=2 v-model="inputEvaluation[0]">
+              </td>
+              <td>
+                <input type="radio" value=3 v-model="inputEvaluation[0]">
+              </td>
+              <td>
+                <input type="radio" value=4 v-model="inputEvaluation[0]">
+              </td>
+              <td>
+                <input type="radio" value=5 v-model="inputEvaluation[0]">
               </td>
             </tr>
             <tr>
               <td class="evalHead">Taste :</td>
               <td class="evalContent">How good is the taste of this product?</td>
               <td>
-                <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[1]"
-                  type="number"
-                />
+                <input type="radio" value=1 v-model="inputEvaluation[1]">
+              </td>
+              <td>
+                <input type="radio" value=2 v-model="inputEvaluation[1]">
+              </td>
+              <td>
+                <input type="radio" value=3 v-model="inputEvaluation[1]">
+              </td>
+              <td>
+                <input type="radio" value=4 v-model="inputEvaluation[1]">
+              </td>
+              <td>
+                <input type="radio" value=5 v-model="inputEvaluation[1]">
               </td>
             </tr>
             <tr>
               <td class="evalHead">Filling :</td>
               <td class="evalContent">How much full does it feel after having this product?</td>
               <td>
-                <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[2]"
-                  type="number"
-                />
+                <input type="radio" value=1 v-model="inputEvaluation[2]">
+              </td>
+              <td>
+                <input type="radio" value=2 v-model="inputEvaluation[2]">
+              </td>
+              <td>
+                <input type="radio" value=3 v-model="inputEvaluation[2]">
+              </td>
+              <td>
+                <input type="radio" value=4 v-model="inputEvaluation[2]">
+              </td>
+              <td>
+                <input type="radio" value=5 v-model="inputEvaluation[2]">
               </td>
             </tr>
             <tr>
               <td class="evalHead">Convenience :</td>
               <td class="evalContent">How convenient is it to eat this product?</td>
               <td>
-                <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[3]"
-                  type="number"
-                />
+                <input type="radio" value=1 v-model="inputEvaluation[3]">
+              </td>
+              <td>
+                <input type="radio" value=2 v-model="inputEvaluation[3]">
+              </td>
+              <td>
+                <input type="radio" value=3 v-model="inputEvaluation[3]">
+              </td>
+              <td>
+                <input type="radio" value=4 v-model="inputEvaluation[3]">
+              </td>
+              <td>
+                <input type="radio" value=5 v-model="inputEvaluation[3]">
               </td>
             </tr>
             <tr>
-              <td class="evalHead">Undecided :</td>
-              <td class="evalContent">Undecided</td>
+              <td class="evalHead">Portability :</td>
+              <td class="evalContent">How portable is the product to carry around?</td>
               <td>
-                <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[4]"
-                  type="number"
-                />
+                <input type="radio" value=1 v-model="inputEvaluation[4]">
+              </td>
+              <td>
+                <input type="radio" value=2 v-model="inputEvaluation[4]">
+              </td>
+              <td>
+                <input type="radio" value=3 v-model="inputEvaluation[4]">
+              </td>
+              <td>
+                <input type="radio" value=4 v-model="inputEvaluation[4]">
+              </td>
+              <td>
+                <input type="radio" value=5 v-model="inputEvaluation[4]">
               </td>
             </tr>
           </table>
@@ -586,11 +634,8 @@
 
   #evalTable {
     border-collapse: collapse;
-    margin-left: 112px;
+    margin-left: 114px;
     float:left;
-  }
-  #evalTable td {
-    padding-bottom: 4px;
   }
   .evalHead {
     width: 120px;
@@ -602,8 +647,12 @@
     text-align: left;
     width: 375px;
   }
+  .evalRadio {
+    font-size: 10px;
+    text-align: center;
+  }
   .ratingValue {
-    width: 24px;
+    width: 36px;
     height: 15px;
   }
 
@@ -621,8 +670,8 @@
     background-color: #2f8542;
   }
   .submitBtn {
-    margin-right: 100px;
-    margin-top: 90px;
+    margin-right: 22px;
+    margin-top: 15px;
     width: 100px;
     height: 37px;
     float: right;
