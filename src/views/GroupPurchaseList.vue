@@ -24,7 +24,6 @@
         </ul>
         <p style="padding: 80px; font-size:20px" v-else>
             Nothing left in the list.
-            Nothing left in the list.
         </p>
     </div>
 </template>
