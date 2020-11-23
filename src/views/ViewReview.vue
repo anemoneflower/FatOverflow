@@ -390,7 +390,7 @@
               </td>
             </tr>
           </table>
-          <button v-on:click="createReview" class="submitBtn btns">
+          <button v-on:click="createReview" class="submitBtn">
             Submit
           </button>
         </div>
@@ -578,7 +578,7 @@
   }
 
   .instruct {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     margin-left: 60px;
     text-align: left;
   }
@@ -621,10 +621,23 @@
   }
   .submitBtn {
     margin-right: 100px;
-    margin-top: 84px;
+    margin-top: 90px;
     width: 100px;
     height: 37px;
     float: right;
+    outline: none;
+    background-color: white;
+    color: #48C964;
+    border-radius: 14px;
+    border: 2px solid #48C964;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 6px 13px 6px 13px;
+    cursor: pointer;
+  }
+  .submitBtn:hover {
+    background-color: #48C964;
+    color: white;
   }
 
 </style>

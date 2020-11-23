@@ -61,7 +61,7 @@
     </div>
     <div class="column_right">
       <div class="rowDiv" style="height:7px">
-        <button v-on:click="createPurchase" class="submitBtn btns">
+        <button v-on:click="createPurchase" class="submitBtn">
           Submit
         </button>
         <a class="subTitle">Products</a>
@@ -461,8 +461,20 @@ export default {
   margin-left: 110px;
   width: 100px;
   height: 40px;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: bold;
   position: absolute;
+  outline: none;
+  background-color: white;
+  color: #48C964;
+  border-radius: 14px;
+  border: 2px solid #48C964;
+  padding: 6px 13px 6px 13px;
+  cursor: pointer;
+}
+.submitBtn:hover {
+  background-color: #48C964;
+  color: white;
 }
 .glass {
   height: 28px;

@@ -10,7 +10,7 @@
       {{ purchaseTitle }}
     </a>  
     <div style="display: flex; width: 650px; left: 50%; margin-left: -325px; margin-top: 50px; position: absolute;">
-      <button v-on:click="submit_purchase" class="submitBtn btns">
+      <button v-on:click="submit_purchase" class="submitBtn">
         Submit
       </button>
       <div class="inputLayout">
@@ -347,8 +347,20 @@ img {
   margin-left: 730px;
   width: 100px;
   height: 40px;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: bold;
   position: absolute;
+  outline: none;
+  background-color: white;
+  color: #48C964;
+  border-radius: 14px;
+  border: 2px solid #48C964;
+  padding: 6px 13px 6px 13px;
+  cursor: pointer;
+}
+.submitBtn:hover {
+  background-color: #48C964;
+  color: white;
 }
 .inputLayout {
   margin-top:0;

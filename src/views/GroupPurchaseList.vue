@@ -184,10 +184,11 @@ export default {
         height: 40px;
         width: 220px;
         border-radius: 15px;
-        background-color: #48C964;
-        color: white;
-        border: 0px;
+        background-color: white;
+        color: #48C964;
+        border: 2px solid #48C964;
         font-size: 18px;
+        font-weight: 600;
         margin-top: 10px;
         margin-left: 480px;
         /* font-weight: bold; */
@@ -196,8 +197,8 @@ export default {
         text-decoration: none;
     }
     #mgpbtn:hover {
-        background-color: #43be5d;
-        color: #f5f5f5;
+        background-color: #48C964;
+        color: white;
     }
 
 
