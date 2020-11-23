@@ -335,18 +335,29 @@
           </div>
           <table id="evalTable">
             <tr>
+              <td></td>
+              <td></td>
+              <td class="evalRadio">1</td>
+              <td class="evalRadio">2</td>
+              <td class="evalRadio">3</td>
+              <td class="evalRadio">4</td>
+              <td class="evalRadio">5</td>
+            <tr>
               <td class="evalHead">Cost-effective :</td>
               <td class="evalContent">How beneficial is the product compared to its price?</td>
               <td>
-                <!-- <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[0]"
-                  type="number"
-                /> -->
                 <input type="radio" value=1 v-model="inputEvaluation[0]">
+              </td>
+              <td>
                 <input type="radio" value=2 v-model="inputEvaluation[0]">
+              </td>
+              <td>
                 <input type="radio" value=3 v-model="inputEvaluation[0]">
+              </td>
+              <td>
                 <input type="radio" value=4 v-model="inputEvaluation[0]">
+              </td>
+              <td>
                 <input type="radio" value=5 v-model="inputEvaluation[0]">
               </td>
             </tr>
@@ -354,15 +365,18 @@
               <td class="evalHead">Taste :</td>
               <td class="evalContent">How good is the taste of this product?</td>
               <td>
-                <!-- <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[1]"
-                  type="number"
-                /> -->
                 <input type="radio" value=1 v-model="inputEvaluation[1]">
+              </td>
+              <td>
                 <input type="radio" value=2 v-model="inputEvaluation[1]">
+              </td>
+              <td>
                 <input type="radio" value=3 v-model="inputEvaluation[1]">
+              </td>
+              <td>
                 <input type="radio" value=4 v-model="inputEvaluation[1]">
+              </td>
+              <td>
                 <input type="radio" value=5 v-model="inputEvaluation[1]">
               </td>
             </tr>
@@ -370,15 +384,18 @@
               <td class="evalHead">Filling :</td>
               <td class="evalContent">How much full does it feel after having this product?</td>
               <td>
-                <!-- <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[2]"
-                  type="number"
-                /> -->
                 <input type="radio" value=1 v-model="inputEvaluation[2]">
+              </td>
+              <td>
                 <input type="radio" value=2 v-model="inputEvaluation[2]">
+              </td>
+              <td>
                 <input type="radio" value=3 v-model="inputEvaluation[2]">
+              </td>
+              <td>
                 <input type="radio" value=4 v-model="inputEvaluation[2]">
+              </td>
+              <td>
                 <input type="radio" value=5 v-model="inputEvaluation[2]">
               </td>
             </tr>
@@ -386,15 +403,18 @@
               <td class="evalHead">Convenience :</td>
               <td class="evalContent">How convenient is it to eat this product?</td>
               <td>
-                <!-- <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[3]"
-                  type="number"
-                /> -->
                 <input type="radio" value=1 v-model="inputEvaluation[3]">
+              </td>
+              <td>
                 <input type="radio" value=2 v-model="inputEvaluation[3]">
+              </td>
+              <td>
                 <input type="radio" value=3 v-model="inputEvaluation[3]">
+              </td>
+              <td>
                 <input type="radio" value=4 v-model="inputEvaluation[3]">
+              </td>
+              <td>
                 <input type="radio" value=5 v-model="inputEvaluation[3]">
               </td>
             </tr>
@@ -402,18 +422,19 @@
               <td class="evalHead">Portability :</td>
               <td class="evalContent">How portable is the product to carry around?</td>
               <td>
-                <!-- <input
-                  class="ratingValue"
-                  v-model="inputEvaluation[4]"
-                  type="number"
-                /> -->
-              <!-- <fieldset id="fieldGroup"> -->
                 <input type="radio" value=1 v-model="inputEvaluation[4]">
+              </td>
+              <td>
                 <input type="radio" value=2 v-model="inputEvaluation[4]">
+              </td>
+              <td>
                 <input type="radio" value=3 v-model="inputEvaluation[4]">
+              </td>
+              <td>
                 <input type="radio" value=4 v-model="inputEvaluation[4]">
+              </td>
+              <td>
                 <input type="radio" value=5 v-model="inputEvaluation[4]">
-              <!-- </fieldset> -->
               </td>
             </tr>
           </table>
@@ -613,11 +634,8 @@
 
   #evalTable {
     border-collapse: collapse;
-    margin-left: 112px;
+    margin-left: 114px;
     float:left;
-  }
-  #evalTable td {
-    padding-bottom: 4px;
   }
   .evalHead {
     width: 120px;
@@ -628,6 +646,10 @@
     padding-left: 5px;
     text-align: left;
     width: 375px;
+  }
+  .evalRadio {
+    font-size: 10px;
+    text-align: center;
   }
   .ratingValue {
     width: 36px;
@@ -648,8 +670,8 @@
     background-color: #2f8542;
   }
   .submitBtn {
-    margin-right: 100px;
-    margin-top: 90px;
+    margin-right: 22px;
+    margin-top: 15px;
     width: 100px;
     height: 37px;
     float: right;
