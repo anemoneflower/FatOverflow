@@ -1,12 +1,15 @@
 <template>
     <div class = 'card-post'>
         <div class="square" @click.self="goGp()">
-            <div class="closeTag" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===true)" @click.self="goGp()">
-                <a>* Closed *</a>
-            </div>
             <div class="board-info" @click.self="goGp()">
                 <a class="title" >{{gp.title}}</a>
-                <a class="cDate">Due: {{expressDate(gp.closedDate)}}</a>
+                <div class="closeTag" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===true)" @click.self="goGp()">
+<!--                    <button class="cbtn">Closed</button>-->
+                    <a>CLOSED</a>
+                </div>
+                <div class="cDate" v-else>
+                    <a class="cDate" >Due: {{expressDate(gp.closedDate)}}</a>
+                </div>
             </div>
             <div class="representative" @click.self="goGp()">
                 <div class="site">{{gp.website}}</div>
@@ -131,14 +134,14 @@ export default {
 
 <style scoped>
 .card-post {
-  width: 1200px;
+  width: 1000px;
   display: flex;
   justify-content: center;
   padding: 10px;
   margin: auto;
 }
 .square {
-  width: 1200px;
+  width: 1000px;
   height: 180px;
   background: #fff;
   border-radius: 15px;
@@ -169,7 +172,7 @@ a:link {
   margin: auto;
   padding-top: 30px;
   border-radius: 15px 15px 0px 0px;
-  width: 1140px;
+  width: 940px;
   position: absolute;
   padding-left: 30px;
   padding-right: 30px;
@@ -196,7 +199,7 @@ a:link {
 
 .representative {
   margin: auto;
-  width: 1140px;
+  width: 940px;
   margin-top: 70px;
   padding-left: 30px;
   padding-right: 30px;
@@ -299,11 +302,28 @@ a:link {
   background-color: #43be5d;
   color: #f5f5f5;
 }
+
+.cbtn{
+    background-color: #c4c4c4;
+    border: none;
+    color: white;
+    padding: 6px 16px 6px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    outline: none;
+}
+
 .closeTag {
-  position: absolute;
-  z-index: 1;
+  /*position: absolute;*/
+  /*z-index: 1;*/
   font-weight: bold;
-  font-size: 15px;
-  margin: 6px 0px 0px 10px;
+  font-size: 23px;
+    color: #d91e1e;
+    float: right;
 }
 </style>

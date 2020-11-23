@@ -36,7 +36,6 @@
         <button
                 class="closedButton"
                 v-else
-                id = "cbtn"
                 disabled
         >Closed</button>
           <p class="currentOrderTitle">
@@ -184,7 +183,7 @@ export default {
   border: none;
   color: white;
   padding: 6px 13px 6px 13px;
-  text-align: center center;
+  text-align: center;
   text-decoration: none;
   display: inline-block;
   border-radius: 14px;
