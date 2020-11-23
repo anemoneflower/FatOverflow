@@ -25,7 +25,7 @@
       </li>
       <!--      <li  v-if="visibleOptions" >-->
       <div class="options" ref="optionsList" @focusout="selectAction = false">
-        <ul>
+        <ul v-if="visibleOptions">
           <li
             id="auto"
             @focuson="selectAction = true"
@@ -33,6 +33,7 @@
             :key="index"
             v-for="(match, index) in matches"
             @mousedown="foodSelected(index), (visibleOptions = true)"
+            @mouseup="(visibleOptions = false)"
             @mouseenter="hover(index)"
             :class="{ selected: selected == index }"
             v-text="match[0]"
@@ -142,7 +143,6 @@ export default {
       this.keyDown = true;
       if (this.selected < this.matches.length - 1) {
         this.selected += 1;
-        // this.title = this.matches[this.selected];
         this.scroll();
       }
     },
@@ -153,7 +153,10 @@ export default {
       this.searchData = this.matches[this.selected][0];
       this.selectedFood = this.matches[this.selected][0];
       this.selectedKey = this.matches[this.selected][1];
+      this.visibleOptions = false;
       this.searchResult();
+      this.onClickItem();
+      this.onClickItem_key();
     },
     initialCount() {
       this.selected = 0;
