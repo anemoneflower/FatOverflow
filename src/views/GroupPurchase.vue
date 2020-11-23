@@ -160,8 +160,8 @@ export default {
   text-decoration: none;
   display: inline-block;
   border-radius: 14px;
-  font-size: 13px;
-  margin: 5px 2px;
+  font-size: 16px;
+  margin: 4px 2px;
   cursor: pointer;
   float: right;
   margin-right: 50px;
