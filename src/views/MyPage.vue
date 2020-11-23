@@ -61,13 +61,13 @@
             console.log(uid);
 
             const snapshot = await db.ref('users/'+uid).once("value");
+            const gpSnapshot = await db.ref('/groupPurchase').once("value");
             let myValue = snapshot.val()&&snapshot.val().gpList;
-
             let keyList = Object.keys(myValue);
+
             for(let i=keyList.length; i>0 ; i--){
                 let myKey = keyList[i-1];
                 let gp = myValue[myKey];
-                const gpSnapshot = await db.ref('/groupPurchase').once("value");
                 let gpValue = gpSnapshot.val();
                 gpValue[myKey].key = myKey;
                 console.log(myKey);

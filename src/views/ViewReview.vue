@@ -7,10 +7,6 @@
   export default {
     name: 'modal',
     props: {
-      userId: {
-        type: String,
-        default: "unknown_user_id"
-      },
       foodName: {
         type: String,
         default: "unknown food name"
@@ -25,7 +21,7 @@
       },
       website: {
         type: String,
-        default: "unknown image url"
+        default: "unknown website url"
       }
     },
     components: {
