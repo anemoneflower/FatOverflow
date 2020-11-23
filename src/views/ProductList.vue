@@ -8,7 +8,7 @@
                 <button id="reviewbtn">Products</button>
             </div>
         </div>
-        <div class="products" v-if="products.length">
+        <div class="products" v-if="products.length>0">
             <div
               v-for="(product, index) in products"
               :key="index"
@@ -30,6 +30,9 @@
                 <!--                </router-link>-->
             </div>
         </div>
+        <p style="padding: 80px; font-size:20px" v-else-if="foodEmpty===false">
+            Loading results...
+        </p>
         <p style="padding: 80px; font-size:20px" v-else>
             Nothing left in the list.
         </p>
@@ -55,7 +58,8 @@
                 products: [],
                 productKeys: [],
                 showModalList: [],
-                showPopup: false
+                showPopup: false,
+                foodEmpty: false
             };
         },
         async mounted() {
@@ -88,6 +92,12 @@
                 })
             }
             this.products = products;
+            if(this.products.length>0){
+                this.foodEmpty = false;
+            }
+            else{
+                this.foodEmpty = true;
+            }
             this.productKeys = productKeys;
             this.showModalList = showModalList;
         },
