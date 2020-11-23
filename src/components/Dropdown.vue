@@ -3,7 +3,7 @@
         <li
                 @click="toggleMenu()"
                 class="dropdown-toggle"
-                v-if="selectedOption !== undefined"
+                v-if="selectedOption !== ''"
         >
             {{ selectedOption }}
             <span class="caret"></span>
@@ -12,7 +12,7 @@
         <li
                 @click="toggleMenu()"
                 class="dropdown-toggle dropdown-toggle-placeholder"
-                v-if="selectedOption === undefined"
+                v-if="selectedOption === ''"
         >
             {{ placeholderText }}
             <span class="caret"></span>
@@ -33,7 +33,7 @@
         name: "Dropdown",
         data() {
             return {
-                selectedOption: 'Please select item you want to purchase.',
+                selectedOption: '',
                 showMenu:
                     false,
             }
