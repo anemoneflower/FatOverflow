@@ -130,17 +130,17 @@ export default {
             // TODO: https://stackoverflow.com/questions/53788975/vue-router-how-to-get-previous-page-url/53789212
         },
         submit: function () {
-            console.log("submit_purchase!");
-            console.log(this.selectedOptions);
-            console.log(this.quantity);
-            console.log(this.note);
+            // console.log("submit_purchase!");
+            // console.log(this.selectedOptions);
+            // console.log(this.quantity);
+            // console.log(this.note);
             this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
             var date = Date().toString().split(" ");
             date.splice(0, 1);
             date.splice(0, 0, date[1]);
             date.splice(2, 1);
             date.splice(4);
-            console.log(date);
+            // console.log(date);
             var foodObj = {};
             for (var i=0; i<this.selectedOptions.length; i++){
                 if ((this.selectedOptions[i].quantity > 0) && (this.selectedOptions[i].item !== 'Please select item you want to purchase.')){
@@ -150,8 +150,8 @@ export default {
                   return
                 }
             }
-            console.log("foodObj:");
-            console.log(foodObj);
+            // console.log("foodObj:");
+            // console.log(foodObj);
             if(Object.keys(foodObj).length !== 0) {
               var purchase = {
                 date: date.join(" "),
@@ -163,11 +163,11 @@ export default {
               };
               // TODO: change after applying group purchase DB
               var ref = db.ref("groupPurchase").child(this.gpKey).child("/participant");
-              console.log("ref: " + ref);
+              // console.log("ref: " + ref);
               // var purchaseKey = ref.push().key;
               let userKey = firebase.auth().currentUser.uid;
 
-              console.log(purchase);
+              // console.log(purchase);
 
               ref.child(userKey).set(purchase);
 

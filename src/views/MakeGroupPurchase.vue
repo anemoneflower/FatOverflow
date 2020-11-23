@@ -291,6 +291,13 @@ export default {
 
 
       console.log(createPurchaseKey)
+      this.$notify({
+                group: 'foo',
+                title: 'Successfully created group purchase!',
+                // text: 'Hello user! This is a notification!',
+                duration: 1000,
+                type: 'success'
+              });
       this.$router.push({path:'gp',query:{GP:createPurchaseKey}});
     },
     isValidDate: function() {
