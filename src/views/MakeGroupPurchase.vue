@@ -6,8 +6,7 @@
     <div class="outer">
       <div class="inner"></div>
     </div>
-    <div style="position:fixed; z-index:5; margin-top:-80px;">
-      <br><br>
+    <div style="position:fixed; z-index:5; margin-top:-45px; margin-left:270px;">
       <p 
         class="warningMsg"
         v-if="showWarning"
