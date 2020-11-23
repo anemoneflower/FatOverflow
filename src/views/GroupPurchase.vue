@@ -50,17 +50,21 @@
 <!--&lt;!&ndash;            <ordered-block>sasdfs</ordered-block>&ndash;&gt;-->
 
 <!--          </div>-->
-          <div class="paBlock" v-if="participants != null">
-            <div class="orderBlock" v-for="(p, key) in participants" v-bind:key="key">
-              <div v-for="(pp, key) in p.food" v-bind:key="key">
+          <div v-if="participants != null">
+          <div class="paBlock"
+            v-for="(p, key) in participants" v-bind:key="key"
+          >
+            <div class="orderBlock" v-for="(pp, key) in p.food" v-bind:key="key">
+              <div>
                 <div class="orderLeft">
                   <p class="orderLeftText">{{pp.name}}, {{pp.quantity}}</p>
+                <p class="orderRightText">ID: {{p.userName}} </p>
                 </div>
               </div>
-              <div>
-                <p class="orderRightText">ID: {{p.userName}} </p>
+            <div>
               </div>
             </div>
+          </div>
           </div>
           <div class="orderBlock" v-else>
             There is no participant.
