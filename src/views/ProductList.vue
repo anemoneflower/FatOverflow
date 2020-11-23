@@ -18,7 +18,6 @@
                 <ProductCard 
                   :product="product" 
                   v-on:click.native="showModal(index)"
-                  v-if="!showPopup"
                 />
                 <ViewReview 
                   v-if="showModalList[index]"
