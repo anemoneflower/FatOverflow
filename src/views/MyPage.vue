@@ -154,12 +154,30 @@
         methods : {
             enableClosed() {
                 this.gpList = this.closedList;
+                if(this.gpList.length>0){
+                    this.gpEmpty = false;
+                }
+                else{
+                    this.gpEmpty = true;
+                }
             },
             enableOpened() {
                 this.gpList = this.openedList;
+                if(this.gpList.length>0){
+                    this.gpEmpty = false;
+                }
+                else{
+                    this.gpEmpty = true;
+                }
             },
             enableParticipate() {
                 this.gpList = this.participatingList;
+                if(this.gpList.length>0){
+                    this.gpEmpty = false;
+                }
+                else{
+                    this.gpEmpty = true;
+                }
             }
         }
 
