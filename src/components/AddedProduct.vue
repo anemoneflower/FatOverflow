@@ -66,7 +66,7 @@ export default {
   height: 75px;
   background: #fff;
   border-radius: 15px;
-  box-shadow: 0px 20px 50px #d9dbdf;
+  box-shadow: 1px 20px 10px #d9dbdf;
   float: left;
 }
 /* .square:hover {
