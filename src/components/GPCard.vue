@@ -24,7 +24,7 @@
                             :key = "key"
                             v-for="(food, key, index) in gp.food"
                     >
-                        <PurchaseTag :food="food" v-if="index<3"></PurchaseTag>
+                        <PurchaseTag :food="food" v-if="index<2"></PurchaseTag>
                         <PurchaseTag :food="overflow1" v-else-if="index===3"></PurchaseTag>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                             :key = "food.key"
                             v-for="(food, index) in registeredFood"
                     >
-                        <Hashtag :food="food" v-if="index<3"></Hashtag>
+                        <Hashtag :food="food" v-if="index<2"></Hashtag>
                         <Hashtag :food="overflow2" v-else-if="index===3"></Hashtag>
                     </div>
                 </div>

@@ -134,11 +134,14 @@ export default {
         display: grid;
         grid-template-columns: auto auto auto;
         justify-content: start;
-        padding-left: 12%;
+        left: 50%;
+        margin-left: -786px;
         padding-top: 5px;
         z-index:2;
         background-color: #fff;
         width:100%;
+        padding-left:300px;
+        padding-right:300px;
     }
     #gpbtn {
         height: 40px;
@@ -187,7 +190,7 @@ export default {
         border: 0px;
         font-size: 18px;
         margin-top: 10px;
-        margin-left: 640px;
+        margin-left: 480px;
         /* font-weight: bold; */
         cursor: pointer;
         outline: none;
