@@ -2,7 +2,7 @@
     <div class = 'card-post'>
         <div class="square" @click.self="goGp()">
             <div class="board-info" @click.self="goGp()">
-                <a class="title" >{{gp.title}} <a v-if="(this.opened===true)" class="owner">Owner</a></a>
+                <a class="title" >{{gp.title}} <a v-if="(this.opened===true)||(gp.opened===true)" class="owner">Owner</a></a>
                 <div class="closeTag" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===true)" @click.self="goGp()">
 <!--                    <button class="cbtn">Closed</button>-->
                     <a>CLOSED</a>
@@ -86,25 +86,22 @@ export default {
         };
     },
     mounted() {
-        for (var key in this.gp.registeredFood) {
-            console.log(this.gp.registeredFood[key].foodName);
-            (this.registeredFood).push(this.gp.registeredFood[key]);
-            // console.log(obj[key]);
-        }
-
         let userKey = firebase.auth().currentUser.uid;
-
-        firebase.database().ref('users/'+userKey+'/gpList/'+this.gp.key).once("value",snapshot=>{
+        firebase.database().ref('groupPurchase/'+this.gp.key+'/userKey').once("value",snapshot=>{
             var myValue = snapshot.val();
-            // console.log("VALUE");
-            // console.log(myValue);
-            if(myValue!==null){
-                if(myValue.participate===false){
-                    this.opened=true;
-                }
+            if(myValue===userKey){
+                this.opened = true;
             }
         })
 
+        for (var key in this.gp.registeredFood) {
+            console.log(this.gp.registeredFood[key].foodName);
+            let rf = this.gp.registeredFood[key];
+            rf.key = key;
+            (this.registeredFood).push(rf);
+        }
+        console.log('registeredFood');
+        console.log(this.registeredFood);
 
     },
     methods: {

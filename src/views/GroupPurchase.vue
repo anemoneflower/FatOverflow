@@ -20,7 +20,7 @@
                     :key = "food.key"
                     v-for="food in registeredFood"
             >
-              <Hashtag :food="food"></Hashtag>
+              <Hashtag :food="food" enableClick="true"></Hashtag>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default {
     let myValue = snapshot.val();
     this.gp = myValue;
     for (var key in this.gp.registeredFood) {
-      console.log(this.gp.registeredFood[key].foodName);
+      // console.log(this.gp.registeredFood[key].foodName);
       (this.registeredFood).push(this.gp.registeredFood[key]);
       // console.log(obj[key]);
     }
