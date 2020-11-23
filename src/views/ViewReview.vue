@@ -233,7 +233,7 @@
         <slot name="header">
            <button
               type="button"
-              class="closeBtn"
+              class="closeBtn2"
               @click="close"
             >
               x
@@ -464,7 +464,7 @@
     background: transparent;
   }
 
-  .closeBtn {
+  .closeBtn2 {
     color: white;
     background: #d83737;
     border: none;
@@ -476,7 +476,7 @@
     margin-top: 10px;
     margin-left: 414px;
   }
-  .closeBtn:hover {
+  .closeBtn2:hover {
   background-color: #ce3030;
   color: #f5f5f5;
 }
