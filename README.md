@@ -20,6 +20,7 @@ KAIST students in campus who gained weight during Covid-19 have difficulty in lo
 #### Firebase (8.4.2)
   * Realtime database
   * Storage
+  * Authentication
 
 ## Views & Components in ./src
 __App.vue__: manage global components like NavBar, SearchBar, Sign In/Out buttions   
