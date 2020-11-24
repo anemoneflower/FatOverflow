@@ -188,7 +188,7 @@ export default {
               });
 
               this.$notify({
-                group: 'error',
+                group: 'success',
                 title: 'Successfully submitted your purchase!',
                 // text: 'Hello user! This is a notification!',
                 duration: 1000,
