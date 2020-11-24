@@ -271,8 +271,16 @@
                 this.bank = '';
                 this.name1 = '';
                 this.name2 = '';
+                this.name3='';
                 this.money = '';
                 this.account = '';
+                this.go_at_h ='';
+                this.go_at_m = '';
+                this.come_at_h ='';
+                this.come_at_m ='';
+                this.go_in_mm= '';
+                this.go_in_dd= '';
+                this.user1= '';
             },
             save_at(txt, input1, input2, i3, i4){
                 console.log('Entered save_come_at method');
@@ -325,6 +333,7 @@
                 db.ref("groupPurchase/"+this.gpKey+"/chat").child(key).update({
                     _key: key
                 });
+                this.refresh_inputs();
                 // this.updateChats();
 
             },
