@@ -5,7 +5,7 @@ Jaeyub Song (@jsong0327, jsong0327@kaist.ac.kr)
 Junyoung Choi (@Juny0ung, joonchoi518@kaist.ac.kr)  
 
 ## WebPage URL
-(추가해야함)
+https://fatoverflow-96acc.web.app/
 
 ## Project Summary
 KAIST students in campus who gained weight during Covid-19 have difficulty in losing weight as it is hard to eat healthy food in campus. Our team tackled the problem by providing platform for group purchase of diet foods by allowing people to create or join posts gathering people interested in purchasing the same products. Our application is unique in that it shows ratings with diet-food specific metrics gathered from the crowd to help food selection and encourage more group purchases, and provides real-time button-based chatroom for efficient communication among people participating in the same group purchase.   
@@ -20,6 +20,7 @@ KAIST students in campus who gained weight during Covid-19 have difficulty in lo
 #### Firebase (8.4.2)
   * Realtime database
   * Storage
+  * Authentication
 
 ## Views & Components in ./src
 __App.vue__: manage global components like NavBar, SearchBar, Sign In/Out buttions   
