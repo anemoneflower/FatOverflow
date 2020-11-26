@@ -54,7 +54,7 @@
         <textarea
           class="commentInput inputBorder"
           v-model="note"
-          placeholder="(Optional) please write some information. that may be useful for participants of the group purchase. For example, description of the products, planned ordering date, etc"
+          placeholder="(Optional) Please write some information that may be useful for participants of the group purchase. For example, description of the products, planned ordering date, etc."
         ></textarea>
       </div>
     </div>
