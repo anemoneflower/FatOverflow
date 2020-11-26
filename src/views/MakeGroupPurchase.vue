@@ -19,28 +19,26 @@
           class="titleInput inputBorder"
           v-model="postTitle"
           type="text"
-          placeholder="Title"
+          placeholder="Type in the title of the post. ex) Group buy for Harim Chicken Breast"
         />
       </div>
       <div class="rowDiv">
-        <div style="width: 250px; height: 50px; float:left;">
-          <a class="subTitle" style="margin-left:10%">Website</a>
+        <a class="subTitle">Product url</a>
           <input
-            class="websiteInput inputBorder"
+            class="titleInput inputBorder"
             v-model="website"
             type="text"
-            placeholder="Website"
+            placeholder="Type in the url of products for group purchase"
           />
-        </div>
-        <div style="width: 250px; height: 50px; float:right;">
-          <a class="subTitle">Due Date</a>
+      </div>
+      <div class="rowDiv">
+        <a class="subTitle">Due Date</a>
           <input
-            class="dateInput inputBorder"
+            class="titleInput inputBorder"
             v-model="date"
             type="text"
-            placeholder="Due date in format YYYY/MM/DD"
+            placeholder="Type in the closing date of this post in format YYYY/MM/DD"
           />
-        </div>
       </div>
       <div class="rowDiv" style="height: 60px">
         <a class="subTitle">Shipping Place</a>
