@@ -54,7 +54,9 @@
       makeGroupPurchase: function() {
         this.$router.push({path:'/mgp', query:{foodName: this.foodName, foodKey: this.foodKey, imgUrl: this.imgUrl}});
       },
+      seeGroupPurchase: function() {
 
+      },
       createReview: function() {
         if (this.uid == "") {
           // alert("You should sign in in order to write a review")
@@ -286,13 +288,18 @@
               x
             </button>
           <div id="modalTitle">Review for {{foodName}}</div>
-          <button v-on:click="makeGroupPurchase" class="submitBtn">
-            Make Group Purchase
-          </button>
           <div id="modalWebsite">
             <a class="website" v-bind:href="website" target="_blank">
               {{limitUrlLength(website)}}
             </a>
+          </div>
+          <div class="rightBtns">
+            <button v-on:click="makeGroupPurchase" class="mgpBtn" style="margin-top:5px;">
+              Make Group Purchase with This Product
+            </button>
+            <button v-on:click="seeGroupPurchase" class="mgpBtn" style="margin-top:10px;">
+              See Group Purchases with This Product
+            </button>
           </div>
           <img class="thumbnail2" :src="imgUrl"/>
           <!-- <button
@@ -523,7 +530,7 @@
   }
 
   #modalTitle {
-    margin: 30px 0px 0px 35px;
+    margin: 30px 0px 0px 15px;
     font-size:30px;
     font-weight:bold;
     color: #4AAE9B;
@@ -531,9 +538,9 @@
   }
 
   #modalWebsite {
-    margin-left: 50px;
+    margin-left: 30px;
     color: rgb(148, 148, 148);
-    font-size: 23px;
+    font-size: 21px;
     display: flex;
   }
 
@@ -545,6 +552,7 @@
 
   .modal-header {
     padding: 0 15px;
+    z-index:11;
     /*justify-content: space-between;*/
   }
 
@@ -557,6 +565,7 @@
     position: relative;
     padding: 5px 10px;
     margin-top: -165px;
+    z-index: 10;
   }
 
   .btn-close {
@@ -608,7 +617,7 @@
     height: 180px;
     width: 180px;
     overflow: hidden;
-    margin: -20px 95px 0 0;
+    margin: -20px 12px 0 0;
     float: right;
     border-radius:12px;
   }
@@ -623,13 +632,13 @@
   }
 
   .columnLeft {
-    margin-left: 72px;
+    margin-left: 50px;
     float:left;
   }
 
   .columnRight {
-    margin-top: 170px;
-    margin-right: 62px;
+    margin-top: 190px;
+    margin-right: 100px;
     float: right;
   }
 
@@ -667,7 +676,7 @@
 
   #evalTable {
     border-collapse: collapse;
-    margin-left: 114px;
+    margin-left: 130px;
     float:left;
   }
   .evalHead {
@@ -703,24 +712,49 @@
     background-color: #2f8542;
   }
   .submitBtn {
-    margin-right: 22px;
-    margin-top: 15px;
-    width: 220px;
-    height: 37px;
+    margin-right: 115px;
+    margin-top: 5px;
+    width: 123px;
+    height: 34px;
     float: right;
     outline: none;
-    background-color: white;
-    color: #48C964;
+    background-color: #48C964;
+    color: #fff;
     border-radius: 14px;
-    border: 2px solid #48C964;
+    border: 0px;
     font-size: 18px;
     font-weight: bold;
     padding: 6px 13px 6px 13px;
     cursor: pointer;
   }
   .submitBtn:hover {
+    background-color: #43be5d;
+    color: #f5f5f5;
+  }
+
+  .rightBtns {
+    float: right;
+    width: 180px;
+    margin-right: 10px;
+    margin-top: -20px;
+  }
+
+  .mgpBtn {
+    width: 180px;
+    height: 45px;
+    outline: none;
     background-color: #48C964;
-    color: white;
+    color: #fff;
+    border-radius: 14px;
+    border: 0px;
+    font-size: 14px;
+    font-weight:lighter;
+    padding: 6px 13px 6px 13px;
+    cursor: pointer;
+  }
+  .mgpBtn:hover {
+    background-color: #43be5d;
+    color: #f5f5f5;
   }
 
 </style>
