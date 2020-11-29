@@ -7,7 +7,7 @@
           id="input"
           type="text"
           v-model="searchData"
-          placeholder="Search what you want to eat."
+          placeholder="Search the product to add."
           @keydown.up="keyup"
           @keydown.down="keydown"
           @keydown.enter="enter"
@@ -42,9 +42,9 @@
       </div>
       <!--      </li>-->
     </ul>
-      <button v-on:click="onClickAdd" class="submitBtn btns" style="float:left; margin-left:2%; margin-top: 4px;">
+      <!-- <button v-on:click="onClickAdd" class="submitBtn btns" style="float:left; margin-left:2%; margin-top: 4px;">
         Add Product
-      </button>
+      </button> -->
   </div>
 </template>
 
@@ -56,7 +56,7 @@ export default {
     return {
       selectedFood: "",
       searchData: "",
-      visibleOptions: true,
+      visibleOptions: false,
       selected: 0,
       selectedKey: "",
       selectedImg: "",
@@ -104,9 +104,9 @@ export default {
       this.selectedKey = curMatch[1];
       this.selectedImg = curMatch[2];
       this.searchResult();
-      this.onClickItem();
       this.onClickItem_key();
       this.onClickItem_img();
+      this.onClickItem();
     },
     searchResult() {
       // if(this.searchData==""){
@@ -118,6 +118,9 @@ export default {
     onClickItem: function() {
       console.log("onClickButton pressed")
       this.$emit('clickedItem', this.searchData);
+      this.searchData = "";
+      this.selectedKey = "";
+      this.selectedImg = "";
     },
     onClickItem_key: function() {
       console.log("onClickButton_key pressed")
@@ -174,9 +177,9 @@ export default {
   },
   computed: {
     matches() {
-      if (this.searchData == "") {
-        return [];
-      }
+      // if (this.searchData == "") {
+      //   return [];
+      // }
       if (this.visibleOptions == false && this.selectAction == false) {
         return [];
       }
