@@ -96,6 +96,8 @@
         color: #f2803c;
         font-size: 15px;
         font-weight: 400;
+        overflow:hidden;
+        text-overflow: ellipsis;
     }
 
     .rating {
