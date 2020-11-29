@@ -148,9 +148,12 @@ export default {
     console.log(this.uid)
 
     let query = this.$route.query;
-    if (query.title != undefined) {
+    if (query.foodName != undefined) {
       console.log("query is not undefined")
       this.productList.push({title: query.foodName, key: query.foodKey, img: query.imgUrl})
+    }
+    else {
+      console.log("query is undefined")
     }
   },
   data() {
