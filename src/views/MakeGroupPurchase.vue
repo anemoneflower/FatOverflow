@@ -234,7 +234,7 @@ export default {
       console.log(this.date);
       // this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
       console.log(this.note)
-      const dueDate = this.date.split("/").join("")
+      const dueDate = this.date.split("-").join("")
       console.log(dueDate);
 
       const tmpDate = new Date()
