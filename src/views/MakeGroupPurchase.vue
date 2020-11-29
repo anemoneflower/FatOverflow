@@ -269,8 +269,22 @@ export default {
         review : false
       });
 
+      let chatref = db.ref("groupPurchase").child(createPurchaseKey).child("/chat");
+      let d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+      let msg = '"'+this.userName+'" created purchase.';
 
-      console.log(createPurchaseKey)
+      let logKey = chatref.push({
+        content: msg.replace(/(\r\n|\n|\r)/gm, "<br>"),
+        time: d,
+        username: "",
+        userkey: this.uid,
+      }).key;
+      chatref.child(logKey).update({
+        _key: logKey
+      });
+
+
+      console.log(createPurchaseKey);
       this.$notify({
                 group: 'success',
                 title: 'Successfully created!',
