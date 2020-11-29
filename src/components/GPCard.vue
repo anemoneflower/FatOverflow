@@ -2,7 +2,7 @@
     <div class = 'card-post'>
         <div class="square" @click.self="goGp()">
             <div class="board-info" @click.self="goGp()">
-                <a class="title" @click.self="goGp()">{{gp.title}} <a v-if="(this.opened===true)||(gp.opened===true)" class="owner">Owner</a></a>
+                <a class="title" @click.self="goGp()">{{gp.title}} <a v-if="this.opened" class="owner">Owner</a></a>
                 <div class="closeTag" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===true)" @click.self="goGp()">
 <!--                    <button class="cbtn">Closed</button>-->
                     <a>CLOSED</a>
@@ -28,10 +28,10 @@
                         <PurchaseTag :food="overflow1" v-else-if="index===3" @click.self="goGp()"></PurchaseTag>
                     </div>
                 </div>
-                <div class="hashtag" v-else-if="(registeredFood.length>0)" @click.self="goGp()">
+                <div class="hashtag" v-else-if="(changeFood.length>0)" @click.self="goGp()">
                     <div
                             :key = "food.key"
-                            v-for="(food, index) in registeredFood"
+                            v-for="(food, index) in changeFood"
                             @click.self="goGp()">
                         <Hashtag :food="food" v-if="index<2" @click.self="goGp()"></Hashtag>
                         <Hashtag :food="overflow2" v-else-if="index===3" @click.self="goGp()"></Hashtag>
@@ -89,10 +89,12 @@ export default {
         };
     },
     async mounted() {
+        this.opened = false;
+        // this.gp.opened
         if(this.gp.title.length > 46){
             this.gp.title = this.gp.title.slice(0, 46) + "..."
         }
-        if(this.gp.opened===undefined){
+        // if(this.gp.opened===undefined){
             if (firebase.auth().currentUser == null) {
               return;
             }
@@ -105,7 +107,7 @@ export default {
             else{
                 this.opened = false;
             }
-        }
+        // }
 
 
         for (var key in this.gp.registeredFood) {
@@ -173,6 +175,35 @@ export default {
             });
 
             window.location.reload();
+        }
+    },
+    watch : {
+        gp: async function(){
+            if (firebase.auth().currentUser == null) {
+                this.opened = false;
+            }
+            let userKey = firebase.auth().currentUser.uid;
+
+            const snapshot = await firebase.database().ref('groupPurchase/'+this.gp.key+'/userKey').once("value")
+            let myValue = snapshot.val();
+            if(myValue===userKey){
+                this.opened = true;
+            }
+            else {
+                this.opened = false;
+            }
+        }
+    },
+    computed : {
+        changeFood() {
+            let foodList = [];
+            for (var key in this.gp.registeredFood) {
+                console.log(this.gp.registeredFood[key].foodName);
+                let rf = this.gp.registeredFood[key];
+                rf.key = key;
+                foodList.push(rf);
+            }
+            return foodList
         }
     }
 }
