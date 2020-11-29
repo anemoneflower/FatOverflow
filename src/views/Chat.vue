@@ -14,7 +14,17 @@
                 <div id="chatBox" class="inputBorder">
                     <div class="post-list" v-for="post in chats" :key="post._key">
                         <!--                        check if user === owner-->
-                        <div class="rightText" v-if="ownerKey===post.userkey && ownerKey===userKey">
+                        <div class="centerText" style="padding-top: 13px" v-if="''===post.userkey">
+                            <div class="announcestamp">
+                                <div>
+                                    {{post.content}}
+                                </div>
+                                <div style="fontsize:10px">
+                                    {{getDate(post.time)}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightText" v-else-if="ownerKey===post.userkey && ownerKey===userKey">
                             <div class="namestamp">
                                 {{getName(post.username)}}
                             </div>
@@ -461,6 +471,18 @@
         color: #fff;
         border-radius: 16px;
     }
+    .announcestamp{
+        background-color: #DCDCDC;
+        font-family: 'Goyang';
+        font-size: 13px;
+        text-align: center;
+        padding: 2px 0px 2px 0px;
+        font-weight: 400;
+        color: #fff;
+        border-radius: 20px;
+        width: 300px;
+        margin-left: 150px;
+    }
     .btn{
         display: inline-block;
         color: #fff;
@@ -636,6 +658,9 @@
     .leftText {
         float: left;
         text-align: left;
+    }
+    .centerText {
+        text-align: center;
     }
 
     .message {
