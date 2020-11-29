@@ -9,7 +9,7 @@
         <p class="userName">
           by {{gp.userName}}
         </p>
-        <p  class="due">
+        <p  class="due" v-if="gp.closedDate != null">
           Due: {{gp.closedDate.slice(0, 4)}}. {{gp.closedDate.slice(4, 6)}}. {{gp.closedDate.slice(6, 8)}}
         </p>
         <div style="width: 550px">
