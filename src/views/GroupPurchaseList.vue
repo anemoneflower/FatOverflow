@@ -29,7 +29,7 @@
 <!--            <GPCard></GPCard>-->
 <!--            <GPCard></GPCard>-->
         </ul>
-        <p style="padding: 80px; font-size:20px" v-else-if = "gpEmpty">
+        <p style="padding: 80px; font-size:20px" v-else-if = "gpEmpty==false">
             Loading results...
         </p>
         <p style="padding: 80px; font-size:20px" v-else>
@@ -52,7 +52,7 @@ export default {
     data(){
         return{
             gpList: [],
-            gpEmpty: true,
+            gpEmpty: false,
             selected:'Latest',
             ascending : [],
             descending : [],
