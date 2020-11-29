@@ -106,6 +106,14 @@
                             </tr>
                             <tr>
                                 <td class="message">
+                                    {{this.ordermsg}}
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="order_msg">send</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="message">
                                     "<input class="userInput" type="text" placeholder="Username" v-model="name3">", OK
                                 </td>
                                 <td>
@@ -183,7 +191,8 @@
                 go_at_m: '',
                 come_at_m:'',
                 go_in_mm: '',
-                go_in_dd: ''
+                go_in_dd: '',
+                ordermsg: "I ordered the products!"
             }
         },
         async created () {
@@ -238,42 +247,6 @@
             isSignin() {
                 return this.user1!==null
             },
-            // updateChats() {
-            //     let chatref = db.ref("groupPurchase/"+this.gpKey+"/chat");
-            //     let c = chatref.once("value", function(snapshot) {
-            //
-            //         var myValue = snapshot.val();
-            //         if(myValue===null) return null
-            //         var keyList = Object.keys(myValue);
-            //
-            //         var chats = [];
-            //         for (var i = 0; i < keyList.length; i++) {
-            //             var v = myValue[keyList[i]];
-            //             chats.push(v);
-            //             console.log("data: ", v);
-            //         }
-            //         console.log("Firebase: ");
-            //         console.log(chats);
-            //         return chats;
-            //     });
-            //     if(c===null)return;
-            //     c.then((c)=>{
-            //         var v = c.val();
-            //         console.log(v);
-            //         var k = Object.keys(v);
-            //         console.log("KKKKKKK");
-            //         console.log(k);
-            //         this.chats = [];
-            //         for(var i=0; i<k.length; i++){
-            //             var ch = v[k[i]];
-            //             this.chats.push(ch);
-            //         }
-            //         console.log("Chats: ");
-            //         console.log(this.chats);
-            //         // this.initChats();
-            //         this.refresh_inputs();
-            //     });
-            // },
             refresh_inputs(){
                 this.come_at = '';
                 this.go_at = '';
@@ -417,6 +390,20 @@
                 });
                 // this.updateChats();
                 // this.initChats();
+                this.refresh_inputs();
+            },
+            order_msg(){
+                console.log('Entered order_msg method');
+                var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+                var key = db.ref("groupPurchase/"+this.gpKey+"/chat").push({
+                    content: this.ordermsg.replace(/(\r\n|\n|\r)/gm, "<br>"),
+                    time: d,
+                    username: this.userName,
+                    userkey: this.userKey,
+                }).key;
+                db.ref("groupPurchase/"+this.gpKey+"/chat").child(key).update({
+                    _key: key
+                });
                 this.refresh_inputs();
             },
             getName(namesrc) {
