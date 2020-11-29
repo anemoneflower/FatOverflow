@@ -33,7 +33,7 @@
       </div>
       <div class="rowDiv">
         <a class="subTitle">Order Date</a>
-        (Please select the ordering date of this product)
+        <a style="font-size:13px; font-weight:300; margin-left:-160px;">(Please select the ordering date of this product)</a>
         <br>
           <!-- <input
             class="titleInput inputBorder"

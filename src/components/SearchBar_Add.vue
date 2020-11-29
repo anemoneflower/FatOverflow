@@ -203,7 +203,7 @@ export default {
 .popover {
   margin: 0 auto;
   padding: 0;
-  width: 300px;
+  width: 430px;
   border: 1px solid #dcdcdc;
   position: relative;
   left: 0;
@@ -228,14 +228,14 @@ export default {
   cursor: pointer;
 }
 #input {
-  width: 240px;
+  width: 370px;
   outline: none;
   border: none;
   height: 40px;
   font-size: 16px;
 }
 .options {
-  width: 250px;
+  width: 380px;
   padding: none;
   position: relative;
   left: 30px;
