@@ -89,6 +89,9 @@ export default {
         };
     },
     async mounted() {
+        if(this.gp.title.length > 46){
+            this.gp.title = this.gp.title.slice(0, 46) + "..."
+        }
         if(this.gp.opened===undefined){
             if (firebase.auth().currentUser == null) {
               return;
