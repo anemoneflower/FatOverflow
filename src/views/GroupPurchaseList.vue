@@ -10,11 +10,15 @@
             <div class = "mgp">
                  <button id="mgpbtn" @click="goMgp()">Make Group Purchase</button>
             </div>
+            <select v-model="selected">
+                <option v-for="option in options" v-bind:key="option.index">
+                    {{ option }}
+                </option>
+            </select>
         </div>
-
-        <ul class="gpList" v-if="(gpList.length>0)">
+        <ul class="gpList" v-if="changeOrder.length>0">
             <GPCard
-                    v-for="gp in gpList"
+                    v-for="gp in changeOrder"
                     :key = "gp.index"
                     :gp = "gp"
             ></GPCard>
@@ -36,6 +40,7 @@
 <script>
 import GPCard from "../components/GPCard.vue"
 import firebase from "firebase";
+// import Dropdown from "../components/Dropdown";
 
 export default {
     components: {
@@ -44,11 +49,16 @@ export default {
     data(){
         return{
             gpList: [],
-            gpEmpty: true
+            gpEmpty: true,
+            selected:'Latest',
+            ascending : [],
+            descending : [],
+            options:[ 'Latest', 'Deadline ascending order', 'Deadline descending order'],
+            // selectedList: [gpList, ascending, descending],
             // gp: selectedGp[0]
         };
     },
-    mounted() {
+    async mounted() {
         let user = firebase.auth().currentUser;
         if (user == null) {
         //   alert("Please sign in to go to group purchase.");
@@ -62,12 +72,13 @@ export default {
           this.$router.push("/");
         }
         let query = this.$route.query.result;
+        const snapshot = await firebase.database().ref("/groupPurchase").once("value");
         // this.gpEmpty = false;
         if (query === undefined) {
-            firebase
-                .database()
-                .ref("/groupPurchase")
-                .once("value",snapshot => {
+            // firebase
+            //     .database()
+            //     .ref("/groupPurchase")
+            //     .once("value",snapshot => {
                     let myValue = snapshot.val();
                     if (myValue == null) {
                         this.gpEmpty = true;
@@ -86,14 +97,14 @@ export default {
                             (this.gpList).push(gp);
                         }
                     }
-                })
+                // })
         }
         else {
             //TODO: DB wording 바꾸기
-            firebase
-                .database()
-                .ref("/groupPurchase")
-                .once("value",snapshot => {
+            // firebase
+            //     .database()
+            //     .ref("/groupPurchase")
+            //     .once("value",snapshot => {
                     let myValue = snapshot.val();
                     if (myValue == null) {
                         this.gpEmpty = true;
@@ -140,7 +151,7 @@ export default {
                     for (let k=0;k<content.length;k++){
                         (this.gpList).push(content[k]);
                     }
-                })
+                // })
         }
         if(this.gpList.length>0){
             this.gpEmpty = false;
@@ -148,7 +159,22 @@ export default {
         else{
             this.gpEmpty = true;
         }
+        this.ascending = [...this.gpList];
+        this.ascending.sort(function(a, b) {
+            return parseInt(a.closedDate) - parseInt(b.closedDate);
+        });
+        this.descending = [...this.gpList];
+        this.descending.sort(function(a, b) {
+            return parseInt(b.closedDate) - parseInt(a.closedDate);
+        });
+
+        console.log("ASCENDING");
+        console.log(this.ascending);
+        console.log("DESCENDING");
+        console.log(this.descending);
         console.log("LEN" + this.gpList.length);
+        console.log(this.selectedList);
+        console.log(this.selectedList[this.options.indexOf("Deadline ascending order")]);
 
     },
     methods: {
@@ -163,6 +189,19 @@ export default {
         },
         goMgp() {
           this.$router.push({path:'/mgp'});
+        }
+    },
+    computed: {
+        changeOrder: function () {
+            if (this.selected==this.options[0]){
+                return this.gpList
+            }
+            else if(this.selected==this.options[1]){
+                return this.ascending
+            }
+            else{
+                return this.descending
+            }
         }
     }
 }
