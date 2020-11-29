@@ -183,9 +183,9 @@ export default {
 }
 
 .participateButton {
-  background-color: white; /* Green */
-  border: 2px solid #48C964;
-  color: #48C964;
+  background-color: #48C964; /* Green */
+  border: 0px;
+  color: #fff;
   padding: 6px 13px 6px 13px;
   text-align: center center;
   text-decoration: none;
@@ -201,8 +201,8 @@ export default {
 }
 
 .participateButton:hover {
-  background-color: #48C964;
-  color: white;
+  background-color: #43be5d;
+  color: #f5f5f5;
 }
 
 .closedButton {
