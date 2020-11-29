@@ -43,6 +43,14 @@
           }
           return "../assets/placeholder.png"
       },
+      limitUrlLength: function(url) {
+        if (url.length > 30) {
+          return url.slice(0, 30) + "..."
+        }
+        else {
+          return url
+        }
+      }, 
       makeGroupPurchase: function() {
         this.$router.push({path:'/mgp', query:{foodName: this.foodName, foodKey: this.foodKey, imgUrl: this.imgUrl}});
       },
@@ -281,7 +289,11 @@
           <button v-on:click="makeGroupPurchase" class="submitBtn">
             Make Group Purchase
           </button>
-          <div id="modalWebsite">{{website}}</div>
+          <div id="modalWebsite">
+            <a class="website" v-bind:href="website" target="_blank">
+              {{limitUrlLength(website)}}
+            </a>
+          </div>
           <img class="thumbnail2" :src="imgUrl"/>
           <!-- <button
             type="button"
