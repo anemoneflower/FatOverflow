@@ -235,6 +235,8 @@ a:link {
   margin-left: 5px;
   width: 500px;
   text-align: left;
+  overflow:hidden;
+  text-overflow: ellipsis;
 }
 
 .cDate {
