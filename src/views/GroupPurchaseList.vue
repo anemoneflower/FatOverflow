@@ -89,8 +89,8 @@ export default {
                         let myKey = keyList[i-1];
                         let gp = myValue[myKey];
                         gp.key = myKey;
-                        console.log("KKKKKKKKKK");
-                        console.log(myKey);
+                        // console.log("KKKKKKKKKK");
+                        // console.log(myKey);
                         // this.gpList = [];
                         // this.gpEmpty = false;
                         if(gp.isClosed===false){
@@ -168,13 +168,6 @@ export default {
             return parseInt(b.closedDate) - parseInt(a.closedDate);
         });
 
-        console.log("ASCENDING");
-        console.log(this.ascending);
-        console.log("DESCENDING");
-        console.log(this.descending);
-        console.log("LEN" + this.gpList.length);
-        console.log(this.selectedList);
-        console.log(this.selectedList[this.options.indexOf("Deadline ascending order")]);
 
     },
     methods: {

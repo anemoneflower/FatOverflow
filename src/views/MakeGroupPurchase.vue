@@ -33,11 +33,19 @@
       </div>
       <div class="rowDiv">
         <a class="subTitle">Order Date</a>
-          <input
+        (Please select the ordering date of this product)
+        <br>
+          <!-- <input
             class="titleInput inputBorder"
             v-model="date"
             type="text"
             placeholder="Type in the closing date of this post in format YYYY/MM/DD"
+          /> -->
+          <datepicker 
+            input-style="width: 450px"
+            :readonly="true" 
+            format="YYYY-MM-DD" 
+            :input-attr="{ 'id': 'datePickerInput' }"
           />
       </div>
       <div class="rowDiv" style="height: 60px">
@@ -104,6 +112,7 @@ import firebase from "firebase";
 import AddedProduct from "../components/AddedProduct.vue"
 import Dropdown from "../components/Dropdown";
 import SearchBar from "../components/SearchBar_Add.vue"
+import datepicker from 'vue-date-picker'
 
 function isInt(value) {
   return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
@@ -114,6 +123,7 @@ export default {
     AddedProduct,
     SearchBar,
     Dropdown,
+    datepicker
   },
   props: {
     _postId: String,
@@ -135,6 +145,11 @@ export default {
     this.userName = firebase.auth().currentUser.displayName;
     console.log("uid is");
     console.log(this.uid)
+
+    let query = this.$route.query;
+    if (query != undefined) {
+      this.productList.push({title: query.foodName, key: query.foodKey, img: query.imgUrl})
+    }
   },
   data() {
     return {
@@ -179,6 +194,7 @@ export default {
     },
     createPurchase: function() {
       // Check validity of input
+      this.date = document.getElementById('datePickerInput').value
       if (this.postTitle != "" 
         && this.website != "" 
         && this.date != ""
@@ -194,7 +210,7 @@ export default {
             // alert("Please put the date in correct format yyyy/mm/dd")
             this.$notify({
                 group: 'error',
-                title: 'Please put the date in correct format: yyyy/mm/dd',
+                title: 'Please put a valid date',
                 // text: 'Hello user! This is a notification!',
                 duration: 5000,
                 type: 'error'
@@ -223,7 +239,7 @@ export default {
       console.log(this.date);
       // this.note = this.note.replace(/(\r\n|\n|\r)/gm, "<br>");
       console.log(this.note)
-      const dueDate = this.date.split("/").join("")
+      const dueDate = this.date.split("-").join("")
       console.log(dueDate);
 
       const tmpDate = new Date()
@@ -295,8 +311,8 @@ export default {
       this.$router.push({path:'gp',query:{GP:createPurchaseKey}});
     },
     isValidDate: function() {
-      if (this.date.includes('/')) {
-        let tmpDate = this.date.split("/");
+      if (this.date.includes('-')) {
+        let tmpDate = this.date.split("-");
         console.log(tmpDate);
         if (tmpDate.length == 3 && this.date.length == 10) {
           if ( isInt(tmpDate[0]) 
@@ -325,6 +341,20 @@ export default {
       console.log("OnClickItem called")
       console.log(value);
       this.searchBarName = value;
+      let duplicateExist = false;
+      for (let i = 0; i < this.productList.length; i++) {
+        if (this.searchBarKey == this.productList[i].key) {
+          console.log("duplicate exists")
+          duplicateExist = true;
+          break;
+        }
+      }
+      if (duplicateExist == false) {
+        this.productList.push({title: this.searchBarName, key: this.searchBarKey, img: this.searchBarImg})
+        console.log("OnClickAdd called");
+        console.log("Searchbar data is")
+        console.log(JSON.stringify(this.productList))
+      }
     },
     onClickItem_key (value) {
       console.log("OnClickItem_key called")
@@ -561,4 +591,9 @@ export default {
 .adds::-webkit-scrollbar-track {
     background-color: none;
 }
+
+.datePickerStyle {
+  width: 450px
+}
+
 </style>
