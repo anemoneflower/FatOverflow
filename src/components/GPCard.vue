@@ -85,7 +85,7 @@ export default {
             overflow2: {
                 foodName: "More... "
             },
-            opened: false
+            opened: false,
         };
     },
     async mounted() {
@@ -178,15 +178,13 @@ export default {
         }
     },
     watch : {
-        gp: async function(){
+        gp: function(){
             if (firebase.auth().currentUser == null) {
                 this.opened = false;
             }
             let userKey = firebase.auth().currentUser.uid;
-
-            const snapshot = await firebase.database().ref('groupPurchase/'+this.gp.key+'/userKey').once("value")
-            let myValue = snapshot.val();
-            if(myValue===userKey){
+            
+            if(this.gp.userKey===userKey){
                 this.opened = true;
             }
             else {
