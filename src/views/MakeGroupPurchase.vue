@@ -19,7 +19,7 @@
           class="titleInput inputBorder"
           v-model="postTitle"
           type="text"
-          placeholder="Type in the title of the post. ex) Group buy for Harim Chicken Breast"
+          placeholder="   Type in the title of the post. ex) Group buy for Harim Chicken Breast"
         />
       </div>
       <div class="rowDiv">
@@ -28,12 +28,12 @@
             class="titleInput inputBorder"
             v-model="website"
             type="text"
-            placeholder="Type in the url of products for group purchase"
+            placeholder="   Type in the url of products for group purchase"
           />
       </div>
       <div class="rowDiv">
         <a class="subTitle">Order Date</a>
-        <a style="font-size:13px; font-weight:300; margin-left:-160px;">(Please select when you will order the product(s))</a>
+<!--        <a style="font-size:13px; font-weight:300; margin-left:-160px;">(Please select when you will order the product(s))</a>-->
         <br>
           <!-- <input
             class="titleInput inputBorder"
@@ -41,11 +41,12 @@
             type="text"
             placeholder="Type in the closing date of this post in format YYYY/MM/DD"
           /> -->
-          <datepicker 
-            input-style="width: 450px"
+          <datepicker
+            input-style="width: 455px; height: 34px; color: #808080; border-radius: 3px"
             :readonly="true" 
             format="YYYY-MM-DD" 
             :input-attr="{ 'id': 'datePickerInput' }"
+            value="Please select when you will order the product(s)"
           />
       </div>
       <div class="rowDiv" style="height: 60px">
