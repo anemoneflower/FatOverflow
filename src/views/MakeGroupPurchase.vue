@@ -325,6 +325,20 @@ export default {
       console.log("OnClickItem called")
       console.log(value);
       this.searchBarName = value;
+      let duplicateExist = false;
+      for (let i = 0; i < this.productList.length; i++) {
+        if (this.searchBarKey == this.productList[i].key) {
+          console.log("duplicate exists")
+          duplicateExist = true;
+          break;
+        }
+      }
+      if (duplicateExist == false) {
+        this.productList.push({title: this.searchBarName, key: this.searchBarKey, img: this.searchBarImg})
+        console.log("OnClickAdd called");
+        console.log("Searchbar data is")
+        console.log(JSON.stringify(this.productList))
+      }
     },
     onClickItem_key (value) {
       console.log("OnClickItem_key called")
