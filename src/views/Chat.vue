@@ -292,7 +292,10 @@
                 this.user1= '';
             },
             save_at(txt, input1, input2, i3, i4){
-                if(this.ban_troll()) return;
+                if(this.ban_troll()) {
+                    this.update_submit_time();
+                    return;
+                }
                 console.log('Entered save_come_at method');
                 if(txt==='') return;
                 if(input1==='') return;
@@ -349,8 +352,10 @@
 
             },
             async save_account(){
-                if(this.ban_troll()) return;
-                console.log('Entered save_go_at method');
+                if(this.ban_troll()) {
+                    this.update_submit_time();
+                    return;
+                }                console.log('Entered save_go_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 if((this.bank==='')||(this.account===''))return;
                 var t = "Account is "+this.bank+'bank '+this.account;
@@ -369,8 +374,10 @@
                 this.update_submit_time();
             },
             async save_txt(txt){
-                if(this.ban_troll()) return;
-                console.log('Entered save_come_at method');
+                if(this.ban_troll()) {
+                    this.update_submit_time();
+                    return;
+                }                console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 // var t = "Come at "+this.come_at;
                 if(txt==='')return;
@@ -389,8 +396,10 @@
                 // this.initChats();
             },
             async save_both(){
-                if(this.ban_troll()) return;
-                console.log('Entered save_come_at method');
+                if(this.ban_troll()) {
+                    this.update_submit_time();
+                    return;
+                }                console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 if((this.name==='')||(this.money==='')) return ;
                 var t = `"`+this.name2+`", you need to give me `+this.money+' won!';
@@ -409,8 +418,10 @@
                 this.update_submit_time();
             },
             async save_ok(b) {
-                if(this.ban_troll()) return;
-                console.log('Entered send_ok method');
+                if(this.ban_troll()) {
+                    this.update_submit_time();
+                    return;
+                }                console.log('Entered send_ok method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var t = `"`;
                 if(b===this.name3){
@@ -436,8 +447,10 @@
                 this.update_submit_time();
             },
             order_msg(){
-                if(this.ban_troll()) return;
-                console.log('Entered order_msg method');
+                if(this.ban_troll()) {
+                    this.update_submit_time();
+                    return;
+                }                console.log('Entered order_msg method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var key = db.ref("groupPurchase/"+this.gpKey+"/chat").push({
                     content: this.ordermsg.replace(/(\r\n|\n|\r)/gm, "<br>"),
