@@ -32,12 +32,20 @@
           />
       </div>
       <div class="rowDiv">
-        <a class="subTitle">Due Date</a>
-          <input
+        <a class="subTitle">Order Date</a>
+        (Please select the ordering date of this product)
+        <br>
+          <!-- <input
             class="titleInput inputBorder"
             v-model="date"
             type="text"
             placeholder="Type in the closing date of this post in format YYYY/MM/DD"
+          /> -->
+          <datepicker 
+            input-style="width: 450px"
+            :readonly="true" 
+            format="YYYY-MM-DD" 
+            :input-attr="{ 'id': 'datePickerInput' }"
           />
       </div>
       <div class="rowDiv" style="height: 60px">
@@ -104,6 +112,7 @@ import firebase from "firebase";
 import AddedProduct from "../components/AddedProduct.vue"
 import Dropdown from "../components/Dropdown";
 import SearchBar from "../components/SearchBar_Add.vue"
+import datepicker from 'vue-date-picker'
 
 function isInt(value) {
   return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
@@ -114,6 +123,7 @@ export default {
     AddedProduct,
     SearchBar,
     Dropdown,
+    datepicker
   },
   props: {
     _postId: String,
@@ -179,6 +189,7 @@ export default {
     },
     createPurchase: function() {
       // Check validity of input
+      this.date = document.getElementById('datePickerInput').value
       if (this.postTitle != "" 
         && this.website != "" 
         && this.date != ""
@@ -194,7 +205,7 @@ export default {
             // alert("Please put the date in correct format yyyy/mm/dd")
             this.$notify({
                 group: 'error',
-                title: 'Please put the date in correct format: yyyy/mm/dd',
+                title: 'Please put a valid date',
                 // text: 'Hello user! This is a notification!',
                 duration: 5000,
                 type: 'error'
@@ -295,8 +306,8 @@ export default {
       this.$router.push({path:'gp',query:{GP:createPurchaseKey}});
     },
     isValidDate: function() {
-      if (this.date.includes('/')) {
-        let tmpDate = this.date.split("/");
+      if (this.date.includes('-')) {
+        let tmpDate = this.date.split("-");
         console.log(tmpDate);
         if (tmpDate.length == 3 && this.date.length == 10) {
           if ( isInt(tmpDate[0]) 
@@ -575,4 +586,9 @@ export default {
 .adds::-webkit-scrollbar-track {
     background-color: none;
 }
+
+.datePickerStyle {
+  width: 450px
+}
+
 </style>
