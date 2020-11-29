@@ -290,7 +290,7 @@
           <div id="modalTitle">Review for {{foodName}}</div>
           <div id="modalWebsite">
             <a class="website" v-bind:href="website" target="_blank">
-              {{limitUrlLength(website)}}
+              {(website)}
             </a>
           </div>
           <div class="rightBtns">
