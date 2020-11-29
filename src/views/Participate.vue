@@ -169,10 +169,25 @@ export default {
                 // isConfirmed: false
               };
               // TODO: change after applying group purchase DB
-              var ref = db.ref("groupPurchase").child(this.gpKey).child("/participant");
-              // console.log("ref: " + ref);
-              // var purchaseKey = ref.push().key;
+              let ref = db.ref("groupPurchase").child(this.gpKey).child("/participant");
+              let chatref = db.ref("groupPurchase").child(this.gpKey).child("/chat");
+
               let userKey = firebase.auth().currentUser.uid;
+              let userName = firebase.auth.currentUser.displayName;
+              let d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
+              let msg = "User "+userName+" entered purchase.";
+
+              let logKey = chatref.push({
+                content: msg.replace(/(\r\n|\n|\r)/gm, "<br>"),
+                time: d,
+                username: "",
+                userkey: userKey,
+              }).key;
+              chatref.child(logKey).update({
+                _key: logKey
+              });
+
+              // let content = ("User")
 
               // console.log(purchase);
 
@@ -186,6 +201,8 @@ export default {
                 food : foodObj,
                 review: false
               });
+
+
 
               this.$notify({
                 group: 'success',
