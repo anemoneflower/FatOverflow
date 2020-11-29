@@ -542,6 +542,9 @@
     color: rgb(148, 148, 148);
     font-size: 21px;
     display: flex;
+    width: 440px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
 
