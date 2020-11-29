@@ -147,7 +147,8 @@ export default {
     console.log(this.uid)
 
     let query = this.$route.query;
-    if (query != undefined) {
+    if (query.title != undefined) {
+      console.log("query is not undefined")
       this.productList.push({title: query.foodName, key: query.foodKey, img: query.imgUrl})
     }
   },
@@ -202,7 +203,18 @@ export default {
         && this.productList.length != 0
         ) {
         if (this.isValidDate(this.date)) {
-          this.submit();
+          if (this.notPastDate()) {
+            this.submit();
+          }
+          else {
+            this.$notify({
+                group: 'error',
+                title: 'Please put a valid order date',
+                // text: 'Hello user! This is a notification!',
+                duration: 5000,
+                type: 'error'
+              });          
+          }
         }
         else {
             // this.showWarning = true;
@@ -332,6 +344,29 @@ export default {
         }
       }
       return false;
+    },
+    notPastDate: function() {
+      const curDate = new Date()
+      const day = curDate.getDate()
+      const month = curDate.getMonth() + 1
+      const year = curDate.getFullYear()
+      const tmpDate = this.date.split("-");
+      console.log("curDate is")
+      console.log(curDate)
+      if (parseInt(tmpDate[0]) < year) {
+        return false;
+      }
+
+      if (parseInt(tmpDate[0]) == year && parseInt(tmpDate[1]) < month) {
+        return false;
+      }  
+
+      if (parseInt(tmpDate[0]) == year 
+          && parseInt(tmpDate[1]) == month 
+          && parseInt(tmpDate[2]) < day ) {
+        return false;
+      }  
+      return true;
     },
     // addProduct: function() {
     //   console.log("Add product");
