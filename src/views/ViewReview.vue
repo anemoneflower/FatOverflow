@@ -55,7 +55,7 @@
         this.$router.push({path:'/mgp', query:{foodName: this.foodName, foodKey: this.foodKey, imgUrl: this.imgUrl}});
       },
       seeGroupPurchase: function() {
-
+        this.$router.push({path:'/gplist',query:{result:this.foodName}});
       },
       createReview: function() {
         if (this.uid == "") {
