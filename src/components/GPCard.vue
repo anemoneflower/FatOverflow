@@ -163,7 +163,7 @@ export default {
                 content: msg.replace(/(\r\n|\n|\r)/gm, "<br>"),
                 time: d,
                 username: "",
-                userkey: userKey,
+                userkey: "",
             }).key;
             chatref.child(logKey).update({
                 _key: logKey
