@@ -43,6 +43,10 @@
           }
           return "../assets/placeholder.png"
       },
+      makeGroupPurchase: function() {
+        this.$router.push({path:'/mgp', query:{foodName: this.foodName, foodKey: this.foodKey, imgUrl: this.imgUrl}});
+      },
+
       createReview: function() {
         if (this.uid == "") {
           // alert("You should sign in in order to write a review")
@@ -274,6 +278,9 @@
               x
             </button>
           <div id="modalTitle">Review for {{foodName}}</div>
+          <button v-on:click="makeGroupPurchase" class="submitBtn">
+            Make Group Purchase
+          </button>
           <div id="modalWebsite">{{website}}</div>
           <img class="thumbnail2" :src="imgUrl"/>
           <!-- <button
@@ -686,7 +693,7 @@
   .submitBtn {
     margin-right: 22px;
     margin-top: 15px;
-    width: 100px;
+    width: 220px;
     height: 37px;
     float: right;
     outline: none;

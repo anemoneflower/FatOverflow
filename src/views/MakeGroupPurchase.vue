@@ -145,6 +145,11 @@ export default {
     this.userName = firebase.auth().currentUser.displayName;
     console.log("uid is");
     console.log(this.uid)
+
+    let query = this.$route.query;
+    if (query != undefined) {
+      this.productList.push({title: query.foodName, key: query.foodKey, img: query.imgUrl})
+    }
   },
   data() {
     return {
