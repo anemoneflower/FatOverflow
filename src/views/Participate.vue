@@ -175,7 +175,7 @@ export default {
               let userKey = firebase.auth().currentUser.uid;
               let userName = firebase.auth.currentUser.displayName;
               let d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
-              let msg = "User "+userName+" entered purchase.";
+              let msg = '"'+userName+'" entered purchase.';
 
               let logKey = chatref.push({
                 content: msg.replace(/(\r\n|\n|\r)/gm, "<br>"),
