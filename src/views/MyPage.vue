@@ -188,8 +188,7 @@
 
 <style scoped>
     .router-link-active{
-        background-color: #48C964;
-        color: white;
+        border-bottom: 4px solid #48C964;
     }
     .head{
         position: fixed;
@@ -208,10 +207,11 @@
     button{
         height: 40px;
         width: 150px;
-        border-radius: 15px;
-        background-color: #adf5bc;
-        color: #8B8B8B;
+        border-radius: 2px;
+        background-color: #fff;
+        color: #000;
         border: 0px;
+        border-bottom: 4px solid #fff;
         font-size: 18px;
         margin-top: 10px;
         margin-right: 15px;
@@ -219,6 +219,11 @@
         cursor: pointer;
         outline: none;
         text-decoration: none;
+    }
+    button:hover {
+        border-bottom: 4px solid #48c964;
+        background-color: #adf5bc;
+        color: #818181;
     }
     .gpList {
         position: relative;

@@ -10,7 +10,7 @@
             <div class = "mgp">
                  <button id="mgpbtn" @click="goMgp()">Make Group Purchase</button>
             </div>
-            <select v-model="selected">
+            <select v-model="selected" class="sortCri">
                 <option v-for="option in options" v-bind:key="option.index">
                     {{ option }}
                 </option>
@@ -221,7 +221,7 @@ export default {
         padding-left:300px;
         padding-right:300px;
     }
-    #gpbtn {
+    /* #gpbtn {
         height: 40px;
         width: 150px;
         border-radius: 15px;
@@ -231,7 +231,6 @@ export default {
         font-size: 18px;
         margin-top: 10px;
         margin-right: 15px;
-        /* font-weight: bold; */
         cursor: pointer;
         outline: none;
         text-decoration: none;
@@ -249,7 +248,6 @@ export default {
         border: 0px;
         font-size: 18px;
         margin-top: 10px;
-        /* font-weight: bold; */
         cursor: pointer;
         outline: none;
         text-decoration: none;
@@ -257,29 +255,71 @@ export default {
     #reviewbtn:hover {
         background-color: #99e5aa;
         color: #818181;
+    } */
+
+    #gpbtn {
+        height: 40px;
+        width: 150px;
+        background-color: #fff;
+        color: #000;
+        border: 0px;
+        border-radius: 2px;
+        border-bottom: 4px solid #48C964;
+        font-size: 18px;
+        margin-top: 10px;
+        margin-right: 15px;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+    }
+    #gpbtn:hover {
+        background-color: #adf5bc;
+        color: #818181;
+    }
+    #reviewbtn{
+        height: 40px;
+        width: 120px;
+        border-radius: 2px;
+        background-color: #fff;
+        color: #000;
+        border: 0px;
+        border-bottom: 4px solid #fff;
+        font-size: 18px;
+        margin-top: 10px;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+    }
+    #reviewbtn:hover {
+        border-bottom: 4px solid #48c964;
+        background-color: #adf5bc;
+        color: #818181;
     }
 
     #mgpbtn{
         height: 40px;
-        width: 220px;
+        width: 215px;
         border-radius: 15px;
-        background-color: white;
-        color: #48C964;
-        border: 2px solid #48C964;
+        background-color: #48C964;
+        color: white;
+        border: 0px;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: bold;
         margin-top: 10px;
-        margin-left: 480px;
-        /* font-weight: bold; */
+        margin-left: 510px;
         cursor: pointer;
         outline: none;
         text-decoration: none;
     }
     #mgpbtn:hover {
-        background-color: #48C964;
-        color: white;
+        background-color: #43be5d;
+        color: #f5f5f5;
     }
 
+    .sortCri {
+        width: 150px;
+        outline: none;
+    }
 
     .gpList {
         position: relative;

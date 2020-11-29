@@ -400,16 +400,16 @@ img {
   font-weight: bold;
   position: absolute;
   outline: none;
-  background-color: white;
-  color: #48C964;
+  background-color: #48C964;
+  color: #fff;
   border-radius: 14px;
-  border: 2px solid #48C964;
+  border: 0px;
   padding: 6px 13px 6px 13px;
   cursor: pointer;
 }
 .submitBtn:hover {
-  background-color: #48C964;
-  color: white;
+  background-color: #43be5d;
+  color: #f5f5f5;
 }
 .inputLayout {
   margin-top:0;
