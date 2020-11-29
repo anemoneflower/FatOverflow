@@ -2,7 +2,7 @@
     <div class = 'card-post'>
         <div class="square" @click.self="goGp()">
             <div class="board-info" @click.self="goGp()">
-                <a class="title" @click.self="goGp()">{{gp.title}} <a v-if="this.opened" class="owner">Owner</a></a>
+                <a class="title" @click.self="goGp()">{{gp.title}} <a v-if="(this.opened)||(this.gp.opened)" class="owner">Owner</a></a>
                 <div class="closeTag" v-if="(gp.isClosed!==undefined)&&(gp.isClosed===true)" @click.self="goGp()">
 <!--                    <button class="cbtn">Closed</button>-->
                     <a>CLOSED</a>
@@ -89,12 +89,12 @@ export default {
         };
     },
     async mounted() {
-        this.opened = false;
+        // this.opened = false;
         // this.gp.opened
         if(this.gp.title.length > 46){
             this.gp.title = this.gp.title.slice(0, 46) + "..."
         }
-        // if(this.gp.opened===undefined){
+        if(this.gp.opened===undefined){
             if (firebase.auth().currentUser == null) {
               return;
             }
@@ -107,7 +107,7 @@ export default {
             else{
                 this.opened = false;
             }
-        // }
+        }
 
 
         for (var key in this.gp.registeredFood) {
@@ -183,7 +183,7 @@ export default {
                 this.opened = false;
             }
             let userKey = firebase.auth().currentUser.uid;
-            
+
             if(this.gp.userKey===userKey){
                 this.opened = true;
             }
