@@ -117,7 +117,15 @@
                                     "<input class="userInput" type="text" placeholder="Username" v-model="name3">", OK
                                 </td>
                                 <td>
-                                    <button class="sendBtn" v-on:click="save_ok">send</button>
+                                    <button class="sendBtn" v-on:click="save_ok(name3)">send</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="message">
+                                    "<input class="userInput" type="text" placeholder="Username" v-model="name4">", NO
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="save_ok(name4)">send</button>
                                 </td>
                             </tr>
                         </table>
@@ -145,10 +153,18 @@
                             </tr>
                             <tr>
                                 <td class="message">
-                                    OK!
+                                    OK
                                 </td>
                                 <td>
                                     <button class="sendBtn" v-on:click="save_txt('OK')">send</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="message">
+                                    NO
+                                </td>
+                                <td>
+                                    <button class="sendBtn" v-on:click="save_txt('NO')">send</button>
                                 </td>
                             </tr>
                         </table>
@@ -187,6 +203,7 @@
                 user1: '',
                 come_at_h:'',
                 name3:'',
+                name4:'',
                 go_at_h:'',
                 go_at_m: '',
                 come_at_m:'',
@@ -374,11 +391,18 @@
                 // this.initChats();
                 this.refresh_inputs();
             },
-            async save_ok() {
+            async save_ok(b) {
                 console.log('Entered send_ok method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
-                if(this.name3==='')return ;
-                var t = `"`+this.name3+`", OK `;
+                var t = `"`;
+                if(b===this.name3){
+                    if(this.name3==='')return ;
+                    t = t+this.name3+`", OK `;
+                }
+                else{
+                    if(this.name4==='')return ;
+                    t = t+this.name4+`", NO `;
+                }
                 var key = db.ref("groupPurchase/"+this.gpKey+"/chat").push({
                     content: t.replace(/(\r\n|\n|\r)/gm, "<br>"),
                     time: d,
