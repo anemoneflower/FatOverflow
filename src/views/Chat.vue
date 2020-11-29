@@ -272,6 +272,7 @@
                 this.name1 = '';
                 this.name2 = '';
                 this.name3='';
+                this.name4='';
                 this.money = '';
                 this.account = '';
                 this.go_at_h ='';
