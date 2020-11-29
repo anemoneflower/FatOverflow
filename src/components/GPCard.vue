@@ -233,6 +233,8 @@ a:link {
   font-size: 17px;
   color: #cbcbcb;
   margin-left: 5px;
+  width: 500px;
+  text-align: left;
 }
 
 .cDate {

@@ -5,9 +5,6 @@
         <p class="postTitle">
           {{ gp.title }}
         </p>
-        <p class="website">
-          {{gp.website}}
-        </p>
         <p class="userName">
           by {{gp.userName}}
         </p>
@@ -23,6 +20,11 @@
               <Hashtag :food="food" enableClick="true"></Hashtag>
             </div>
           </div>
+        </div>
+        <div style="width: 550px; display:flex;">
+          <a class="website" href="" target="_blank">
+            {{gp.website}}
+          </a>
         </div>
         <div style="width:550px; display:flex;">
           <p class="content">
@@ -246,15 +248,16 @@ textarea {
 
 .website {
   text-align: left;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 8px;
-  font-size: 13px;
+  font-size: 15px;
   color: #9D9D9D;
   word-break:break-all;
+  width: 500px;
 }
 
 .due {
-  margin-top: 5px;
+  margin-top: 10px;
   margin-left: 8px;
   font-size: 15px;
   text-align: left;
@@ -271,7 +274,7 @@ textarea {
 
 .content {
   display: flex;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 5px;
   text-align: left;
   font-size: 16px;
