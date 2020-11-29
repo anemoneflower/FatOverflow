@@ -53,10 +53,10 @@ export default {
         return{
             gpList: [],
             gpEmpty: false,
-            selected:'Latest',
+            selected:'Newest',
             ascending : [],
             descending : [],
-            options:[ 'Latest', 'Deadline ascending order', 'Deadline descending order'],
+            options:[ 'Newest', 'Order date - early to late', 'Order date -  late to early'],
             // selectedList: [gpList, ascending, descending],
             // gp: selectedGp[0]
         };

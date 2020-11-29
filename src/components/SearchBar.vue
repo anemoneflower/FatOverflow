@@ -4,6 +4,7 @@
       <li>
         <input
           id="input"
+          autocomplete="off"
           type="text"
           v-model="searchData"
           placeholder="Search what you want to eat."
