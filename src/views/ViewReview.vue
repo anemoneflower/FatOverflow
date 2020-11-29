@@ -43,6 +43,18 @@
           }
           return "../assets/placeholder.png"
       },
+      limitUrlLength: function(url) {
+        if (url.length > 30) {
+          return url.slice(0, 30) + "..."
+        }
+        else {
+          return url
+        }
+      }, 
+      makeGroupPurchase: function() {
+        this.$router.push({path:'/mgp', query:{foodName: this.foodName, foodKey: this.foodKey, imgUrl: this.imgUrl}});
+      },
+
       createReview: function() {
         if (this.uid == "") {
           // alert("You should sign in in order to write a review")
@@ -274,7 +286,14 @@
               x
             </button>
           <div id="modalTitle">Review for {{foodName}}</div>
-          <div id="modalWebsite">{{website}}</div>
+          <button v-on:click="makeGroupPurchase" class="submitBtn">
+            Make Group Purchase
+          </button>
+          <div id="modalWebsite">
+            <a class="website" v-bind:href="website" target="_blank">
+              {{limitUrlLength(website)}}
+            </a>
+          </div>
           <img class="thumbnail2" :src="imgUrl"/>
           <!-- <button
             type="button"
@@ -686,7 +705,7 @@
   .submitBtn {
     margin-right: 22px;
     margin-top: 15px;
-    width: 100px;
+    width: 220px;
     height: 37px;
     float: right;
     outline: none;
