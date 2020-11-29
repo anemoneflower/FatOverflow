@@ -293,6 +293,13 @@
             },
             save_at(txt, input1, input2, i3, i4){
                 if(this.ban_troll()) {
+                    this.$notify({
+                        group: 'error',
+                        title: "Please don't send too many messages at once",
+                        // text: 'Hello user! This is a notification!',
+                        duration: 5000,
+                        type: 'error'
+                    });
                     this.update_submit_time();
                     return;
                 }
@@ -353,6 +360,13 @@
             },
             async save_account(){
                 if(this.ban_troll()) {
+                    this.$notify({
+                        group: 'error',
+                        title: "Please don't send too many messages at once",
+                        // text: 'Hello user! This is a notification!',
+                        duration: 5000,
+                        type: 'error'
+                    });
                     this.update_submit_time();
                     return;
                 }                console.log('Entered save_go_at method');
@@ -375,6 +389,13 @@
             },
             async save_txt(txt){
                 if(this.ban_troll()) {
+                    this.$notify({
+                        group: 'error',
+                        title: "Please don't send too many messages at once",
+                        // text: 'Hello user! This is a notification!',
+                        duration: 5000,
+                        type: 'error'
+                    });
                     this.update_submit_time();
                     return;
                 }                console.log('Entered save_come_at method');
@@ -397,6 +418,13 @@
             },
             async save_both(){
                 if(this.ban_troll()) {
+                    this.$notify({
+                        group: 'error',
+                        title: "Please don't send too many messages at once",
+                        // text: 'Hello user! This is a notification!',
+                        duration: 5000,
+                        type: 'error'
+                    });
                     this.update_submit_time();
                     return;
                 }                console.log('Entered save_come_at method');
@@ -419,6 +447,13 @@
             },
             async save_ok(b) {
                 if(this.ban_troll()) {
+                    this.$notify({
+                        group: 'error',
+                        title: "Please don't send too many messages at once",
+                        // text: 'Hello user! This is a notification!',
+                        duration: 5000,
+                        type: 'error'
+                    });
                     this.update_submit_time();
                     return;
                 }                console.log('Entered send_ok method');
@@ -448,6 +483,13 @@
             },
             order_msg(){
                 if(this.ban_troll()) {
+                    this.$notify({
+                        group: 'error',
+                        title: "Please don't send too many messages at once",
+                        // text: 'Hello user! This is a notification!',
+                        duration: 5000,
+                        type: 'error'
+                    });
                     this.update_submit_time();
                     return;
                 }                console.log('Entered order_msg method');
