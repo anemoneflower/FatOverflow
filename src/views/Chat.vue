@@ -297,7 +297,7 @@
                         group: 'error',
                         title: "Please don't send too many messages at once",
                         // text: 'Hello user! This is a notification!',
-                        duration: 5000,
+                        duration: 500,
                         type: 'error'
                     });
                     this.update_submit_time();
@@ -364,7 +364,7 @@
                         group: 'error',
                         title: "Please don't send too many messages at once",
                         // text: 'Hello user! This is a notification!',
-                        duration: 5000,
+                        duration: 500,
                         type: 'error'
                     });
                     this.update_submit_time();
@@ -393,7 +393,7 @@
                         group: 'error',
                         title: "Please don't send too many messages at once",
                         // text: 'Hello user! This is a notification!',
-                        duration: 5000,
+                        duration: 500,
                         type: 'error'
                     });
                     this.update_submit_time();
@@ -422,7 +422,7 @@
                         group: 'error',
                         title: "Please don't send too many messages at once",
                         // text: 'Hello user! This is a notification!',
-                        duration: 5000,
+                        duration: 500,
                         type: 'error'
                     });
                     this.update_submit_time();
@@ -451,7 +451,7 @@
                         group: 'error',
                         title: "Please don't send too many messages at once",
                         // text: 'Hello user! This is a notification!',
-                        duration: 5000,
+                        duration: 500,
                         type: 'error'
                     });
                     this.update_submit_time();
@@ -487,7 +487,7 @@
                         group: 'error',
                         title: "Please don't send too many messages at once",
                         // text: 'Hello user! This is a notification!',
-                        duration: 5000,
+                        duration: 500,
                         type: 'error'
                     });
                     this.update_submit_time();
