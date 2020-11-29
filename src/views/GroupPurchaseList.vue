@@ -57,6 +57,7 @@ export default {
             ascending : [],
             descending : [],
             options:[ 'Newest', 'Order date - early to late', 'Order date -  late to early'],
+            change: false
             // selectedList: [gpList, ascending, descending],
             // gp: selectedGp[0]
         };
