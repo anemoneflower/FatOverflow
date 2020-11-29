@@ -1,16 +1,19 @@
 <template>
     <div>
         <div class="head">
-            <select v-model="selected" class="sortCri">
-                <option v-for="option in options" v-bind:key="option.index">
-                    {{ option }}
-                </option>
-            </select>
             <div class = "gpbtn">
                 <button id="gpbtn">Group Purchase</button>
             </div>
             <div class = "reviewbtn">
                  <button id="reviewbtn" @click="goProducts()">Products</button>
+            </div>
+            <div>
+                <a style="font-size:15px; margin-left:10px;">Sorted by</a>
+                <select v-model="selected" class="sortCri">
+                    <option v-for="option in options" v-bind:key="option.index">
+                        {{ option }}
+                    </option>
+                </select>
             </div>
             <div class = "mgp">
                  <button id="mgpbtn" @click="goMgp()">Make Group Purchase</button>
@@ -206,7 +209,7 @@ export default {
         grid-template-columns: auto auto auto auto;
         justify-content: start;
         left: 50%;
-        margin-left: -950px;
+        margin-left: -786px;
         padding-top: 5px;
         z-index:2;
         background-color: #fff;
@@ -299,7 +302,7 @@ export default {
         font-size: 18px;
         font-weight: bold;
         margin-top: 10px;
-        margin-left: 510px;
+        margin-left: 285px;
         cursor: pointer;
         outline: none;
         text-decoration: none;
@@ -313,14 +316,17 @@ export default {
         width: 150px;
         outline: none;
         background-color:#fff;
-        margin-right: 14px;
-        margin-top: 25px;
-        height: 22px;   
+        margin-left: 5px;
+        margin-top: 12px;
+        height: 31px;   
         font-size: 15px;
         border-radius: 5px;
         border: 1px solid #8c8c8c;
         cursor: pointer;
         padding: 2px 2px 2px 4px;
+    }
+    .sortCri:hover {
+        background-color: #f8f8f8;
     }
 
     .gpList {
