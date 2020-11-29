@@ -1,7 +1,7 @@
 <template>
   <div class="main" style="margin-top: 150px">
     <div class="row2">
-      <button v-on:click="searchData">Back to the list</button>
+      <button v-on:click="searchData" class="backButton">Back to the list</button>
       <div class="column_left">
         <p class="postTitle">
           {{ gp.title }}
@@ -10,7 +10,7 @@
           by {{gp.userName}}
         </p>
         <p  class="due">
-          Due: {{gp.closedDate.slice(0, 4)}}. {{gp.closedDate.slice(4, 6)}}. {{gp.closedDate.slice(6, 8)}}
+          Order Date: {{gp.closedDate.slice(0, 4)}}. {{gp.closedDate.slice(4, 6)}}. {{gp.closedDate.slice(6, 8)}}
         </p>
         <div style="width: 550px">
           <div class="hashtag" v-if="(registeredFood.length>0)">
@@ -214,6 +214,28 @@ export default {
   color: #f5f5f5;
 }
 
+.backButton {
+  background-color: #fff; /* Green */
+  border: 2px solid #48C964;
+  color: #48C964;
+  padding: 6px 13px 6px 13px;
+  text-align: center center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 14px;
+  font-size: 15px;
+  margin: -25px 2px 25px -10px;
+  cursor: pointer;
+  margin-right: 50px;
+  outline: none;
+  display: flex;
+}
+
+.backButton:hover {
+  background-color: #48C964;
+  color: #fff;
+}
+
 .closedButton {
   background-color: #636b6f; /* Green */
   border: none;
@@ -256,7 +278,7 @@ textarea {
 
 .userName {
   float: right;
-  margin-top: -30px;
+  margin-top: 5px;
   margin-right: 30px;
   font-size: 17px;
   word-break:break-all;

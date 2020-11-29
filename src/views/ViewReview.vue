@@ -547,6 +547,9 @@
     text-overflow: ellipsis;
   }
 
+  .website {
+    color: #949494;
+  }
 
   .modal-footer {
     padding: 15px;
