@@ -1,6 +1,11 @@
 <template>
     <div>
         <div class="head">
+            <select v-model="selected" class="sortCri">
+                <option v-for="option in options" v-bind:key="option.index">
+                    {{ option }}
+                </option>
+            </select>
             <div class = "gpbtn">
                 <button id="gpbtn">Group Purchase</button>
             </div>
@@ -10,11 +15,6 @@
             <div class = "mgp">
                  <button id="mgpbtn" @click="goMgp()">Make Group Purchase</button>
             </div>
-            <select v-model="selected" class="sortCri">
-                <option v-for="option in options" v-bind:key="option.index">
-                    {{ option }}
-                </option>
-            </select>
         </div>
         <ul class="gpList" v-if="changeOrder.length>0">
             <GPCard
@@ -210,10 +210,10 @@ export default {
     .head{
         position: fixed;
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: auto auto auto auto;
         justify-content: start;
         left: 50%;
-        margin-left: -786px;
+        margin-left: -950px;
         padding-top: 5px;
         z-index:2;
         background-color: #fff;
@@ -319,6 +319,15 @@ export default {
     .sortCri {
         width: 150px;
         outline: none;
+        background-color:#fff;
+        margin-right: 14px;
+        margin-top: 25px;
+        height: 22px;   
+        font-size: 15px;
+        border-radius: 5px;
+        border: 1px solid #8c8c8c;
+        cursor: pointer;
+        padding: 2px 2px 2px 4px;
     }
 
     .gpList {
