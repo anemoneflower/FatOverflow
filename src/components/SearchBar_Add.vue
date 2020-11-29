@@ -7,7 +7,7 @@
           id="input"
           type="text"
           v-model="searchData"
-          placeholder="Search the product to add."
+          placeholder="Choose the product to add."
           @keydown.up="keyup"
           @keydown.down="keydown"
           @keydown.enter="enter"
