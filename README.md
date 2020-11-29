@@ -16,6 +16,7 @@ KAIST students in campus who gained weight during Covid-19 have difficulty in lo
   * vuex  
   * router  
   * vue-notification
+  * vue-date-picker
 
 #### Firebase (8.4.2)
   * Realtime database
