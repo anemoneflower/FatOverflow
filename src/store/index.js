@@ -11,7 +11,8 @@ const store = new Vuex.Store({
             data: null
         },
         previousUrl: '/',
-        chatList: []
+        chatList: [],
+        searchData: ''
     },
     //provide a way of accessing data stored in the state.
     getters: {
@@ -26,6 +27,9 @@ const store = new Vuex.Store({
         },
         uid(state){
             return state.user.data.uid
+        },
+        searchData(state){
+            return state.searchData
         }
     },
     //Mutations allows us to be able to make changes to our state.
@@ -47,6 +51,9 @@ const store = new Vuex.Store({
         },
         STORE_CHAT_LIST(state, list) {
             state.chatList = list;
+        },
+        storeSearchData(state, value) {
+            state.searchData = value;
         }
     },
     actions: {

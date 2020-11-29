@@ -1,6 +1,7 @@
 <template>
   <div class="main" style="margin-top: 150px">
     <div class="row2">
+      <button v-on:click="searchData">Back to the list</button>
       <div class="column_left">
         <p class="postTitle">
           {{ gp.title }}
@@ -70,7 +71,6 @@
             There is no participant.
           </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -150,7 +150,15 @@ export default {
         this.$router.push("/participate/"+this.$route.query.GP);
       }
     },
-
+    searchData(){
+      let d = this.$store.state.searchData;
+      if(d===''){
+        this.$router.push({path:'/gplist'});
+      }
+      else {
+        this.$router.push({path:'/gplist',query:{result:d}});
+      }
+    }
   }
 };
 
