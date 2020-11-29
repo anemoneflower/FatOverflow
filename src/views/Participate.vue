@@ -173,7 +173,7 @@ export default {
               let chatref = db.ref("groupPurchase").child(this.gpKey).child("/chat");
 
               let userKey = firebase.auth().currentUser.uid;
-              let userName = firebase.auth.currentUser.displayName;
+              let userName = firebase.auth().currentUser.displayName;
               let d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
               let msg = '"'+userName+'" entered purchase.';
 
@@ -181,7 +181,7 @@ export default {
                 content: msg.replace(/(\r\n|\n|\r)/gm, "<br>"),
                 time: d,
                 username: "",
-                userkey: userKey,
+                userkey: "",
               }).key;
               chatref.child(logKey).update({
                 _key: logKey

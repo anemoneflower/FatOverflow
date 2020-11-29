@@ -135,6 +135,7 @@ export default {
     // for (var key in this.gp.participant) {
     //
     // }
+    console.log(this.gp.website);
     if((this.gp.website.slice(0, 8) !== "https://") && (this.gp.website.slice(0, 7) !== "http://")){
       this.gplink = "https://"+this.gp.website
     }else{

@@ -277,7 +277,7 @@ export default {
         content: msg.replace(/(\r\n|\n|\r)/gm, "<br>"),
         time: d,
         username: "",
-        userkey: this.uid,
+        userkey: "",
       }).key;
       chatref.child(logKey).update({
         _key: logKey

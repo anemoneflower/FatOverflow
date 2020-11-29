@@ -156,14 +156,14 @@ export default {
             userref.remove();
 
             let chatref = firebase.database().ref("groupPurchase").child(this.gp.key).child("/chat");
-            let userName = firebase.auth.currentUser.displayName;
+            let userName = firebase.auth().currentUser.displayName;
             let d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
             let msg = '"'+userName+'" canceled purchase.';
             let logKey = chatref.push({
                 content: msg.replace(/(\r\n|\n|\r)/gm, "<br>"),
                 time: d,
                 username: "",
-                userkey: userKey,
+                userkey: "",
             }).key;
             chatref.child(logKey).update({
                 _key: logKey
