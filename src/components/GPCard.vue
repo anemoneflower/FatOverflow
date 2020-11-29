@@ -8,7 +8,7 @@
                     <a>CLOSED</a>
                 </div>
                 <div class="cDate" v-else @click.self="goGp()">
-                    <a class="cDate" >Due: {{expressDate(gp.closedDate)}}</a>
+                    <a class="cDate" >Order Date: {{expressDate(gp.closedDate)}}</a>
                 </div>
             </div>
             <div class="representative" @click.self="goGp()">
@@ -286,7 +286,7 @@ a:link {
   float: left;
   text-align: left;
   font-size: 25px;
-  width: 700px;
+  width: 666px;
   color: #9D9D9D;
   text-decoration: none;
   text-overflow: ellipsis;

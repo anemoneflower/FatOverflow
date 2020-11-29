@@ -32,7 +32,7 @@
           />
       </div>
       <div class="rowDiv">
-        <a class="subTitle">Due Date</a>
+        <a class="subTitle">Order Date</a>
           <input
             class="titleInput inputBorder"
             v-model="date"
