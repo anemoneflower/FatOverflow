@@ -22,7 +22,7 @@
           </div>
         </div>
         <div style="width: 550px; display:flex;">
-          <a class="website" href="" target="_blank">
+          <a class="website" v-bind:href="gplink" target="_blank">
             {{gp.website}}
           </a>
         </div>
@@ -98,6 +98,7 @@ export default {
       // content:"I am looking for people who are willing to buy lunch boxes and meal plans from this website. The products that slimcook provides are very calori-friendly and always come with fresh ingredients, so I guarantee that you will enjoy them as much as I do.\n\nAs this website requires at least 10 items for free shipping, I will wit untiol we have at least 10 items to order together.",
       // postKey: "-MMPFFDBm2EZw2-Wuwob"
       gp:"",
+      gplink:"",
       registeredFood:[],
       participants:{},
       cnt:0,
@@ -134,6 +135,12 @@ export default {
     // for (var key in this.gp.participant) {
     //
     // }
+    if((this.gp.website.slice(0, 8) !== "https://") && (this.gp.website.slice(0, 7) !== "http://")){
+      this.gplink = "https://"+this.gp.website
+    }else{
+      this.gplink = this.gp.website
+    }
+
     if(this.gp.userKey===uid){
       this.isUser = true;
     }
