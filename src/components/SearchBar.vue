@@ -3,7 +3,6 @@
     <ul class="popover">
       <li>
         <input
-          autocomplete="off"
           id="input"
           type="text"
           v-model="searchData"
@@ -66,13 +65,27 @@ export default {
       }
     }
   },
+  watch: {
+    // '$route' (next) {
+    //   if(next.name === 'MakeGroupPurchase'){
+    //     this.searchData = ''
+    //     // console.log('MGPMGPMGPMGP');
+    //   }
+    //   // console.log(next);
+    // }
+  },
   created() {
     this.selectAction = false;
   },
   mounted(){
     let query = this.$route.query.result;
+
     if (query!==undefined){
       this.searchData = query;
+      this.$store.commit('storeSearchData',this.searchData);
+    }
+    else {
+      this.$store.commit('storeSearchData','');
     }
     this.visibleOptions = false;
     firebase
@@ -108,6 +121,7 @@ export default {
       //   this.$router.push({path:'/gplist',query:{result:this.searchData}});
       //   window.location.reload();
       // }
+
       if(path==='/products'){
         this.$router.push({path:'/products',query:{result:this.searchData}});
         window.location.reload();
