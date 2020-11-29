@@ -209,7 +209,8 @@
                 come_at_m:'',
                 go_in_mm: '',
                 go_in_dd: '',
-                ordermsg: "I ordered the products!"
+                ordermsg: "I ordered the products!",
+                last_send: 0,
             }
         },
         async created () {
@@ -241,6 +242,14 @@
             this.initChats();
         },
         methods: {
+            ban_troll(){
+                var d = Date.now();
+                return (d - this.last_send) < 1000;
+            },
+            update_submit_time(){
+                var d = Date.now();
+                this.last_send = d;
+            },
             onchange(snapshot){
                 var myValue = snapshot.val();
                 if(myValue===null) return;
@@ -249,7 +258,6 @@
                 for (var i = 0; i < keyList.length; i++) {
                     var v = myValue[keyList[i]];
                     chats.push(v);
-                    console.log("data: ", v);
                 }
                 console.log("Firebase: ");
                 console.log(chats);
@@ -284,6 +292,7 @@
                 this.user1= '';
             },
             save_at(txt, input1, input2, i3, i4){
+                if(this.ban_troll()) return;
                 console.log('Entered save_come_at method');
                 if(txt==='') return;
                 if(input1==='') return;
@@ -335,10 +344,12 @@
                     _key: key
                 });
                 this.refresh_inputs();
+                this.update_submit_time();
                 // this.updateChats();
 
             },
             async save_account(){
+                if(this.ban_troll()) return;
                 console.log('Entered save_go_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 if((this.bank==='')||(this.account===''))return;
@@ -355,8 +366,10 @@
                 // this.updateChats();
                 // this.initChats();
                 this.refresh_inputs();
+                this.update_submit_time();
             },
             async save_txt(txt){
+                if(this.ban_troll()) return;
                 console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 // var t = "Come at "+this.come_at;
@@ -372,9 +385,11 @@
                 });
                 // await this.updateChats();
                 this.refresh_inputs();
+                this.update_submit_time();
                 // this.initChats();
             },
             async save_both(){
+                if(this.ban_troll()) return;
                 console.log('Entered save_come_at method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 if((this.name==='')||(this.money==='')) return ;
@@ -391,8 +406,10 @@
                 // this.updateChats();
                 // this.initChats();
                 this.refresh_inputs();
+                this.update_submit_time();
             },
             async save_ok(b) {
+                if(this.ban_troll()) return;
                 console.log('Entered send_ok method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var t = `"`;
@@ -416,8 +433,10 @@
                 // this.updateChats();
                 // this.initChats();
                 this.refresh_inputs();
+                this.update_submit_time();
             },
             order_msg(){
+                if(this.ban_troll()) return;
                 console.log('Entered order_msg method');
                 var d = Date(Date.now()).toString().split(" ").splice(0, 5).join(' ');
                 var key = db.ref("groupPurchase/"+this.gpKey+"/chat").push({
@@ -430,6 +449,7 @@
                     _key: key
                 });
                 this.refresh_inputs();
+                this.update_submit_time();
             },
             getName(namesrc) {
                 if(namesrc === '') {
